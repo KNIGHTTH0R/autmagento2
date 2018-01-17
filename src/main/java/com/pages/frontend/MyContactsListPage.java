@@ -107,16 +107,19 @@ public class MyContactsListPage extends AbstractPage {
 	// Assert.assertTrue("Contact was not found!!!", found);
 	// }
 
-	public void openContactDetailsPage(String contactEmail) {
+	public void openContactDetailsPage(String firstname,String lastName) {
 		List<WebElement> contactsList = getDriver().findElements(By.cssSelector("form#contacts-form tbody tr"));
+		System.out.println("firstname "+firstname);
+		System.out.println("contactsList" +contactsList.size());
 		WebElement link = null;
 		boolean found = false;
 		for (WebElement contact : contactsList) {
-			if (contact.findElement(By.cssSelector("td:nth-child(4) a")).getText()
-					.contentEquals(contactEmail.toUpperCase())) {
+			System.out.println("textttul"+contact.findElement(By.cssSelector("td:nth-child(2)")).getText());
+			if (contact.findElement(By.cssSelector("td:nth-child(2)")).getText()
+					.contains(firstname.toUpperCase()) ) {
 				found = true;
-				link = contact.findElement(By.cssSelector("td:nth-child(3) a"));
-
+				link = contact.findElement(By.cssSelector("td:nth-child(2) a"));
+				break;
 			}
 		}
 		if (found) {

@@ -6,8 +6,11 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.connectors.http.OrderInfoMagCalls;
+import com.jayway.restassured.response.Header;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.steps.external.navision.NavisionHomeSteps;
@@ -30,7 +33,6 @@ import net.thucydides.core.annotations.WithTag;
 @RunWith(SerenityRunner.class)
 public class US23001PayAndImportOrderInNavisionTest extends BaseTest {
 
-	
 	@Steps
 	public NavisionHomeSteps navisionSteps;
 	@Steps
@@ -54,16 +56,30 @@ public class US23001PayAndImportOrderInNavisionTest extends BaseTest {
 	public void us23001PayAndImportOrderInNavisionTest() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		
 
-		
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderModel.getOrderId());
 		ordersSteps.openOrder(orderModel.getOrderId());
 		ordersSteps.markOrderAsPaid();
-		
+
 		navisionSteps.performLoginIntoNavisonWebClient();
-		DBorderModel=OrderInfoMagCalls.getOrderInfo(orderModel.getOrderId());
-		navisionSteps.performOrderImport(DBorderModel.getOrderId());
+		
+		
+	
+		
+		System.out.println("sunt ok");
+
+//	/	DBorderModel = OrderInfoMagCalls.getOrderInfo(orderModel.getOrderId());
+		navisionSteps.performOrderImport(orderModel.getOrderId());
+		
+		
+		
+		
+	
+
+		
+		
+
 	}
+
 }

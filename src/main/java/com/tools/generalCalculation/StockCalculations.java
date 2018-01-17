@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.Assert;
 
+import com.connectors.http.NavisionProductListCalls;
 import com.tools.data.navision.SyncInfoModel;
 
 /**
@@ -108,7 +109,7 @@ public class StockCalculations {
 	}
 	
 	public static List<SyncInfoModel> calculateNewStockAfterSyncAndTransfer(List<SyncInfoModel> initialList,
-			List<String> quantities,List<String> transferQty) {
+			List<String> quantities,List<String> transferQty) throws Exception {
 
 		List<SyncInfoModel> finalList = new ArrayList<SyncInfoModel>();
 
@@ -121,7 +122,8 @@ public class StockCalculations {
 			product.setEarliestAvailability(product.getEarliestAvailability());
 			product.setIsDiscontinued(product.getIsDiscontinued());
 			product.setMaxPercentToBorrow(product.getMaxPercentToBorrow());
-			product.setMinumimQuantity(calculateMinimumQty(product, transferQty.get(index)));
+	//		product.setMinumimQuantity(calculateMinimumQty(product, transferQty.get(index)));
+			product.setMinumimQuantity(calculateMinimumQty1(product.getSku()));
 			product.setPendingQuantity(product.getPendingQuantity());
 
 			finalList.add(product);
@@ -149,7 +151,7 @@ public class StockCalculations {
 	}
 
 	public static List<SyncInfoModel> calculateStockAfterTransferQuantity(List<SyncInfoModel> initialList,
-			List<String> boughtProductsQuantities) {
+			List<String> boughtProductsQuantities) throws Exception {
 
 		List<SyncInfoModel> finalList = new ArrayList<SyncInfoModel>();
 		int counter=0;
@@ -159,7 +161,10 @@ public class StockCalculations {
 			product.setEarliestAvailability(product.getEarliestAvailability());
 			product.setIsDiscontinued(product.getIsDiscontinued());
 			product.setMaxPercentToBorrow(product.getMaxPercentToBorrow());
-			product.setMinumimQuantity(calculateMinimumQty(product, boughtProductsQuantities.get(counter)));
+			System.out.println("avem ceva aici ?: "+product.getSku());
+		//	product.setMinumimQuantity(calculateMinimumQty(product, boughtProductsQuantities.get(counter)));
+			product.setMinumimQuantity(calculateMinimumQty1(product.getSku()));
+
 			product.setPendingQuantity(product.getPendingQuantity());
 			counter++;
 			finalList.add(product);
@@ -168,28 +173,39 @@ public class StockCalculations {
 		return finalList;
 	}
 
-	private static String calculateMinimumQty(SyncInfoModel product, String transferQty) {
+	private static String calculateMinimumQty(SyncInfoModel product, String transferQty)  {
 		//need navision formula
-		
 		double transferValue = Double.parseDouble(transferQty) * 0.5;
 		System.out.println("transferValue"+transferValue);
 		System.out.println("product.getMinumimQuantity()"+ product.getMinumimQuantity());
 		double newMinQty = Double.parseDouble(product.getMinumimQuantity()) + transferValue;
-		//double roudedValue=Math.round(newMinQty);
 		BigDecimal roudedValue = BigDecimal.valueOf(newMinQty).setScale(0, RoundingMode.HALF_DOWN);
+		
 		
 		return String.valueOf(roudedValue);
 		
 		
-//		double transferValue = Double.parseDouble(transferQty);
-//		double newMinQty = Double.parseDouble(product.getMinumimQuantity()) + transferValue;
-//
-//		BigDecimal trasVal = BigDecimal.valueOf(transferValue).multiply(BigDecimal.valueOf(0.5));
-//		BigDecimal newMinVal = BigDecimal.valueOf(newMinQty).add(trasVal);
-//
-//		//int roundedValue=newMinVal.ROUND_HALF_UP;
+
+	}
+	
+	private static String calculateMinimumQty1(String skuProduct) throws Exception {
+		//need navision formula
+	/*	double transferValue = Double.parseDouble(transferQty) * 0.5;
+		System.out.println("transferValue"+transferValue);
+		System.out.println("product.getMinumimQuantity()"+ product.getMinumimQuantity());
+		double newMinQty = Double.parseDouble(product.getMinumimQuantity()) + transferValue;
+		BigDecimal roudedValue = BigDecimal.valueOf(newMinQty).setScale(0, RoundingMode.HALF_DOWN);*/
+
+		String[] skuParts = skuProduct.split("-");
+		SyncInfoModel itemInfo =NavisionProductListCalls.getItemInfo(skuParts[0],skuParts.length == 1 ? "" : skuParts[1]);
 		
-	//	return String.valueOf(newMinVal);
+		double transferValue = Double.parseDouble(itemInfo.getQs()) * 0.8 * -1;
+		BigDecimal roudedValue = BigDecimal.valueOf(transferValue).setScale(0, RoundingMode.HALF_DOWN);
+		
+		return String.valueOf(roudedValue);
+		
+		
+
 	}
 	
 	
@@ -238,6 +254,7 @@ public class StockCalculations {
 	}
 
 	private static String addPendingStockToStock(SyncInfoModel product) {
+		System.out.println("aici ceva nu e ok: "+product.getQuantity()+"  "+product.getPendingQuantity());
 		return String
 				.valueOf(Double.parseDouble(product.getQuantity()) + Double.parseDouble(product.getPendingQuantity()));
 	}
@@ -301,8 +318,8 @@ public class StockCalculations {
 	}
 
 	
-	public static void main(String args[]) {
-		// System.out.println(StockCalculations.determineQuantity("59"));
+	public static void main(String args[]) throws Exception {
+	//	 System.out.println(StockCalculations.calculateMinimumQty1());
 		// System.out.println(StockCalculations.calculateStockToDoubleAfterSync("4","6","-3"));
 		//System.out.println(StockCalculations.calculateMinimumQty("204","7"));
 	}

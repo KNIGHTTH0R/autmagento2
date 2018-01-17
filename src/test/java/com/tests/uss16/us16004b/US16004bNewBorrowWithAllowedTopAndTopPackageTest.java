@@ -108,7 +108,7 @@ public class US16004bNewBorrowWithAllowedTopAndTopPackageTest extends BaseTest {
 	public CustomerFormModel stylistData;
 	public CustomerFormModel contactData;
 	private ProductDetailedModel genProduct1;
-	public String customerEmail;
+	public String customerEmail,customerFirstName,customerLastName;
 //	private ProductDetailedModel genProduct1;
 //	private ProductDetailedModel genProduct1;
 //	private ProductDetailedModel genProduct1;
@@ -150,6 +150,8 @@ public class US16004bNewBorrowWithAllowedTopAndTopPackageTest extends BaseTest {
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss16" + File.separator + "us16003.properties");
 			prop.load(input);
 			customerEmail = prop.getProperty("customerUsername");
+			customerFirstName = prop.getProperty("customerFirstName");
+			customerLastName=prop.getProperty("customerLastName");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -230,7 +232,7 @@ public class US16004bNewBorrowWithAllowedTopAndTopPackageTest extends BaseTest {
 		//	loungeSteps.verifyBorrowBlockMessage(ContextConstants.ALLOWED_MESSAGE);
 		
 		loungeSteps.goToContactsList();
-		myContactsListSteps.openContactDetailsPage(customerEmail);
+		myContactsListSteps.openContactDetailsPage(customerFirstName,customerLastName);
 	 
 		//contactDetailsSteps.checkBlockLinesForRegisterContact();
 		contactDetailsSteps.checkBlockLinesForContacts();// maybe is not aplicable here and should be deleted 
@@ -240,7 +242,7 @@ public class US16004bNewBorrowWithAllowedTopAndTopPackageTest extends BaseTest {
 		contactDetailsSteps.validateProductWishListBlock(productsWishList, grabbedProductsWishList);
 		
 		contactDetailsSteps.clickBackToContactsbutton();
-		myContactsListSteps.openContactDetailsPage(contactData.getEmailName());
+		myContactsListSteps.openContactDetailsPage(contactData.getFirstName(),contactData.getLastName());
 		contactDetailsSteps.checkBlockLinesForContacts();
 		//contactDetailsSteps.checkBlockLinesForNotRegisterContact();
 		

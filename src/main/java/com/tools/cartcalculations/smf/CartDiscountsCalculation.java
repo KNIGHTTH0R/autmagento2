@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.connectors.http.MagentoProductCalls;
 import com.tools.constants.ConfigConstants;
@@ -164,19 +165,43 @@ public class CartDiscountsCalculation {
 		return cartProducts;
 
 	}
+	
+	public static List<BasicProductModel> productsPriceWithBuy3Get1(List<BasicProductModel> productsList,List<BasicProductModel> productsList2
+			) {
 
-	public static List<BasicProductModel> calculateProductsfor25Discount(List<BasicProductModel> productsList,
-			String jewelryDiscount) {
+		List<BasicProductModel> cartProducts = new ArrayList<BasicProductModel>();
 
 		
-		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_25);
+		for (BasicProductModel product : productsList) {
+		//	Optional<BasicProductModel> element=productsList2.stream().filter(o -> o.getName().equals(product.get)).findFirst();
+			BasicProductModel newProduct = new BasicProductModel();
+
+			/*newProduct.setDiscountClass(product.getDiscountClass());
+			newProduct.setName(product.getName());
+			newProduct.setUnitPrice(product.getUnitPrice());
+			newProduct.setProdCode(product.getProdCode());
+			newProduct.setQuantity(product.getQuantity());
+			newProduct.setProductsPrice(product.getProductsPrice());
+			newProduct.setPriceIP(product.getPriceIP());*/
+			cartProducts.add(newProduct);
+		}
+
+		return cartProducts;
+
+	}
+
+	public static List<BasicProductModel> calculateProductsfor25Discount(List<BasicProductModel> products,
+			String jewelryDiscount) {
+
+		List<BasicProductModel> productList=getOnly25Products(products);
+		BigDecimal sum25 = calculateDiscountAskingPriceSum(productList, ConfigConstants.DISCOUNT_25);
 
 		List<BasicProductModel> cartProducts = new ArrayList<BasicProductModel>();
 
 		BigDecimal delta = BigDecimal.ZERO;
 
 		
-		for (BasicProductModel product : productsList) {
+		for (BasicProductModel product : productList) {
 			
 			BasicProductModel newProduct = new BasicProductModel();
 
@@ -186,6 +211,7 @@ public class CartDiscountsCalculation {
 			newProduct.setProdCode(product.getProdCode());
 			newProduct.setQuantity(product.getQuantity());
 			newProduct.setProductsPrice(product.getProductsPrice());
+			newProduct.setFinalPriceWithBuy3(product.getFinalPriceWithBuy3());
 			newProduct
 					.setPriceIP(calculateIpForEachProduct(BigDecimal.valueOf(Double.parseDouble(product.getPriceIP())),
 							BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), sum25));
@@ -204,6 +230,16 @@ public class CartDiscountsCalculation {
 
 		return cartProducts;
 
+	}
+
+	private static List<BasicProductModel> getOnly25Products(List<BasicProductModel> products) {
+		List<BasicProductModel> productList=new ArrayList<BasicProductModel>();
+		for (BasicProductModel product : products) {
+			if(product.getDiscountClass().contentEquals(ConfigConstants.DISCOUNT_25)){
+				productList.add(product);
+			}
+		}
+		return productList;
 	}
 
 	public static List<BasicProductModel> calculateAskingPriceWithActiveDiscountRule(
@@ -442,7 +478,7 @@ public class CartDiscountsCalculation {
 	
 	
 	public static void main(String[] args) {
-		genProduct1 = MagentoProductCalls.createProductModelBeta();
+		/*genProduct1 = MagentoProductCalls.createProductModelBeta();
 		genProduct1.setIp("84");
 		genProduct1.setPrice("49.90");
 		
@@ -471,7 +507,7 @@ public class CartDiscountsCalculation {
 	
 		List<BasicProductModel> cartProductsBeta=calculateProductsfor25Discount(productsList25Beta,"100");
 		
-		System.out.println(""+cartProductsBeta.get(0).getFinalPrice());
+		System.out.println(""+cartProductsBeta.get(0).getFinalPrice());*/
 		
 		
 	}

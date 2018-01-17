@@ -96,7 +96,7 @@ public class StylistInventoryReturnTopPackageTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.clickGoToStylistInventory();
 		stylistInventorySteps.openReturnSection();
-		stylistInventorySteps.validateReturnedProducts(billOfMaterial, stylistInventorySteps.grabProductsData());
+		stylistInventorySteps.validateReturnedProducts(billOfMaterial, stylistInventorySteps.grabProductsData(),"xxxx");
 		customVerification.printErrors();
 	}
 

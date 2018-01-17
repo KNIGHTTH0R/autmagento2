@@ -32,8 +32,8 @@ import com.tests.us3.us30012.US30012SfmSpecialPriceProductTest;
 	US30010Suite.class,
 	US30011Suite.class,
 	US30012SfmSpecialPriceProductTest.class,
-//	US4001Suite.class,
-//	US4002Suite.class,
+	US4001Suite.class,
+	US4002Suite.class,
 	
 })
 @RunWith(Suite.class)

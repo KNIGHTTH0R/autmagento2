@@ -37,7 +37,7 @@ public class ConfirmationSteps extends AbstractSteps {
 	}
 
 	public List<CartProductModel> grabProductsList() {
-		waitABit(TimeConstants.TIME_CONSTANT);
+	//	waitABit(TimeConstants.TIME_CONSTANT);
 		return confirmationPage().grabProductsList();
 	}
 	
@@ -96,9 +96,9 @@ public class ConfirmationSteps extends AbstractSteps {
 	}
 
 	public ShippingModel grabConfirmationTotals() {
-		waitABit(TimeConstants.TIME_CONSTANT);
-		getDriver().navigate().to(getDriver().getCurrentUrl());
-		waitABit(TimeConstants.TIME_CONSTANT);
+	//	waitABit(TimeConstants.TIME_CONSTANT);
+		/*getDriver().navigate().to(getDriver().getCurrentUrl());
+		waitABit(TimeConstants.TIME_CONSTANT);*/
 		return confirmationPage().grabConfirmationTotals();
 	}
 

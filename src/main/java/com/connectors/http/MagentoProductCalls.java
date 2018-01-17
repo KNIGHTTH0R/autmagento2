@@ -28,7 +28,8 @@ import com.tools.utils.FormatterUtils;
 public class MagentoProductCalls {
 
 	public static void main(String args[]) {
-		SyncInfoModel model = MagentoProductCalls.getMagProductInfo("1292");
+		
+		SyncInfoModel model = MagentoProductCalls.getMagProductInfo("R065SV-18");
 		System.out.println(model);
 //		System.out.println(model.getQuantity());
 //		System.out.println(model.getPendingQuantity());

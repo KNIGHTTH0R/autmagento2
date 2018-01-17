@@ -14,6 +14,7 @@ public class SyncInfoModel {
 	private String pendingQuantity;
 	private String safetyQuantity;
 	private String qtyOnOrder;
+	private String qs;
 
 	public SyncInfoModel() {
 		sku = "null";
@@ -28,9 +29,22 @@ public class SyncInfoModel {
 		simpleQty="null";
 		safetyQuantity="null";
 		qtyOnOrder="null";
+		
 	}
 	
 	
+	
+	public String getQs() {
+		return qs;
+	}
+
+
+
+	public void setQs(String qs) {
+		this.qs = qs;
+	}
+
+
 
 	public String getSimpleQty() {
 		return simpleQty;

@@ -110,7 +110,7 @@ public class US16004aNewBorrowWithDefaultTopAndTopPackageTest extends BaseTest {
 	public String stylistEmail, stylistPassword;
 	public CustomerFormModel stylistData;
 	public CustomerFormModel contactData;
-	public String customerEmail;
+	public String customerLastName,customerFirstName;
 	private ProductDetailedModel genProduct1;
 	
 	private static UrlModel urlModel = new UrlModel();
@@ -156,7 +156,8 @@ public class US16004aNewBorrowWithDefaultTopAndTopPackageTest extends BaseTest {
 		try {
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss16" + File.separator + "us16003.properties");
 			prop.load(input);
-			customerEmail = prop.getProperty("customerUsername");
+			customerFirstName = prop.getProperty("customerFirstName");
+			customerLastName=prop.getProperty("customerLastName");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -178,7 +179,7 @@ public class US16004aNewBorrowWithDefaultTopAndTopPackageTest extends BaseTest {
 
 	@Test
 	public void us16004aNewBorrowWithDefaultTopAndTopPackageTest() {
-		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
+	/*	backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 //		backEndSteps.clickOnSystemConfiguration();
 //		borrowSystemConfigurationSteps.goToBorrowTab();
 //		borrowSystemConfigurationSteps.selectDisabledBorrowOption("Nein");
@@ -191,7 +192,7 @@ public class US16004aNewBorrowWithDefaultTopAndTopPackageTest extends BaseTest {
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
 		backEndSteps.selectTopStatus(ContextConstants.USE_DEFAULT);
-		backEndSteps.selectAllowedToBorrow(ContextConstants.TOP_PACKAGE);
+		backEndSteps.selectAllowedToBorrow(ContextConstants.TOP_PACKAGE);*/
 
 		customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);
 		if (!headerSteps.succesfullLogin()) {
@@ -229,7 +230,7 @@ public class US16004aNewBorrowWithDefaultTopAndTopPackageTest extends BaseTest {
 		// loungeSteps.verifyBorrowBlockMessage(ContextConstants.ALLOWED_MESSAGE);
 
 		loungeSteps.goToContactsList();
-		myContactsListSteps.openContactDetailsPage(customerEmail);
+		myContactsListSteps.openContactDetailsPage(customerFirstName,customerLastName);
 
 		// contactDetailsSteps.checkBlockLinesForRegisterContact();
 		contactDetailsSteps.checkBlockLinesForContacts();
@@ -239,7 +240,7 @@ public class US16004aNewBorrowWithDefaultTopAndTopPackageTest extends BaseTest {
 		contactDetailsSteps.validateProductWishListBlock(productsWishList, grabbedProductsWishList);
 
 		contactDetailsSteps.clickBackToContactsbutton();
-		myContactsListSteps.openContactDetailsPage(contactData.getEmailName());
+		myContactsListSteps.openContactDetailsPage(contactData.getFirstName(),contactData.getLastName());
 		contactDetailsSteps.checkBlockLinesForContacts();
 
 		// contactDetailsSteps.checkBlockLinesForNotRegisterContact();

@@ -28,8 +28,8 @@ public class MyContactsListSteps extends AbstractSteps {
 	}
 	
 	@Step
-	public void openContactDetailsPage(String emailName) {
-		myContactsListPage().openContactDetailsPage(emailName);
+	public void openContactDetailsPage(String emailName,String lastName) {
+		myContactsListPage().openContactDetailsPage(emailName,lastName);
 		
 	}
 	

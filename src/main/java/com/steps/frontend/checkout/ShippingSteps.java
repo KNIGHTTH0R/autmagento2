@@ -19,7 +19,7 @@ public class ShippingSteps extends AbstractSteps {
 	private static final long serialVersionUID = 8727875042758615102L;
 
 	public ShippingModel grabSurveyData() {
-		waitABit(TimeConstants.TIME_CONSTANT);
+	//	waitABit(TimeConstants.TIME_CONSTANT);
 		return surveyPage().grabSurveyData();
 	}
 
@@ -46,11 +46,11 @@ public class ShippingSteps extends AbstractSteps {
 	@Step
 	public void goToPaymentMethod() {
 		surveyPage().clickGoToPaymentMethod();
-		waitABit(TimeConstants.TIME_CONSTANT);
+		//waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	public List<CartProductModel> grabProductsList() {
-		waitABit(TimeConstants.TIME_MEDIUM);
+	//	waitABit(TimeConstants.TIME_MEDIUM);
 		return surveyPage().grabProductsList();
 	}
 
@@ -121,7 +121,7 @@ public class ShippingSteps extends AbstractSteps {
 
 	@Step
 	public void selectAddress(String address) {
-		waitABit(3000);
+		//waitABit(3000);
 		billingFormPage().selectAdressDropdown(address);
 		// billingFormPage().verifyThatYouCannotBillOnRestrictedCountries();
 	}

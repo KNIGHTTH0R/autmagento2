@@ -63,7 +63,7 @@ public class StylistInventoryReturnCustomPackageTest extends BaseTest {
 		username = stylistData.getEmailName();
 		password = stylistData.getPassword();
 		
-		orderIncrementId = MongoReader.grabOrderModels("US16004aPlaceBarrowOrderDefaultTopAndTopPackageTest" +  SoapKeys.GRAB).get(0).getOrderId();
+		orderIncrementId = MongoReader.grabOrderModels("US16004aPlaceBarrowOrderDefaultTopAndCustomPackageTest" +  SoapKeys.GRAB).get(0).getOrderId();
 		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo(orderIncrementId);
 		customerId= dbmodel.getCustomerId();
 		billOfMaterial = NavisionBillOfMaterialCalls.getItemsList("yyy");
@@ -73,13 +73,13 @@ public class StylistInventoryReturnCustomPackageTest extends BaseTest {
 			String[] sku = navOrderLinesModel.getNo().toString().split("-");
 			if (navOrderLinesModel.toString().contains("-")) {
 				StylistInvetoryUpdateModel model = StylistInventoryUpdateReturnCalls.getReturnUpdateInfo(customerId,
-						orderIncrementId, sku[0], sku[1],"yyy");
+						orderIncrementId, sku[0], sku[1],"yyyy");
 				System.out.println("model: " + model.getResult());
 				CustomVerification.verifyTrue("Failure:The result is not as expected", model.getResult().contentEquals("1"));
 				
 			} else {
 				StylistInvetoryUpdateModel model = StylistInventoryUpdateReturnCalls.getReturnUpdateInfo(customerId,
-						orderIncrementId, sku[0], "","yyy");
+						orderIncrementId, sku[0], "","yyyy");
 				CustomVerification.verifyTrue("Failure:The result is not as expected", model.getResult().contentEquals("1"));
 				
 			}
@@ -96,7 +96,7 @@ public class StylistInventoryReturnCustomPackageTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.clickGoToStylistInventory();
 		stylistInventorySteps.openReturnSection();
-		stylistInventorySteps.validateReturnedProducts(billOfMaterial, stylistInventorySteps.grabProductsData());
+		stylistInventorySteps.validateReturnedProducts(billOfMaterial, stylistInventorySteps.grabProductsData(),"yyyy");
 		customVerification.printErrors();
 	}
 

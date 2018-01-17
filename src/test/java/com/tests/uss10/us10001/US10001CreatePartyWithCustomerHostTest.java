@@ -10,12 +10,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyCreationSteps;
+import com.sun.jna.Platform;
 import com.tests.BaseTest;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
@@ -83,7 +87,10 @@ public class US10001CreatePartyWithCustomerHostTest extends BaseTest {
 
 	@Test
 	public void us10001CreatePartyWithCustomerHostTest() {
-		 
+		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+	    desiredCapabilities.setCapability(CapabilityType.BROWSER_NAME, BrowserType.CHROME);
+	    desiredCapabilities.setCapability(CapabilityType.PLATFORM, Platform.LINUX);
+	    desiredCapabilities.setCapability("name", "myTestName");
 		
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {

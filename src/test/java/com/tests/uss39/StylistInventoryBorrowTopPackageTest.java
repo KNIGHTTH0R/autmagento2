@@ -102,7 +102,7 @@ public class StylistInventoryBorrowTopPackageTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.clickGoToStylistInventory();
 		stylistInventorySteps.openBorrowSection();
-		stylistInventorySteps.validateBorrowedProducts(billOfMaterial, stylistInventorySteps.grabProductsData());
+		stylistInventorySteps.validateBorrowedProducts(billOfMaterial, stylistInventorySteps.grabProductsData(),"xxxx");
 		customVerification.printErrors();
 	}
 

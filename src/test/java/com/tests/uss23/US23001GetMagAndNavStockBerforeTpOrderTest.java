@@ -64,33 +64,43 @@ public class US23001GetMagAndNavStockBerforeTpOrderTest extends BaseTest {
 		skuListToBeUpdatedOnStock.addAll(skuListToBeDecreased);
 		skuListToBeUpdatedOnStock.addAll(skuListToBeDecreasedNewTP);
 
-		// navisionSteps.accessNavisonWebClientItemList();
+	//	navisionSteps.accessNavisonWebClientItemList();
 
-		// navisionSteps.syncQtyOnItem("R185SV", "18", "0");
+		/*
+		 *  first method 
+		 navisionSteps.syncQtyOnItem("R185SV", "18", "0");
+		
+		for (int i = 1; i < skuListToBeUpdatedOnStock.size() - 1; i++) {
+			String[] skuParts = skuListToBeUpdatedOnStock.get(i).split("-");
+			System.out.println(skuParts.length == 1 ? "" : skuParts[1]);
+			navisionSteps.syncQtyOnItem(skuParts[0], skuParts.length == 1 ? "" : skuParts[1], "5");
+		}*/
 
-		// for(int i=1;i<skuListToBeUpdatedOnStock.size()-1;i++){
-		// String[] skuParts = skuListToBeUpdatedOnStock.get(i).split("-");
-		// System.out.println(skuParts.length == 1 ? "" : skuParts[1]);
-		// navisionSteps.syncQtyOnItem(skuParts[0], skuParts.length == 1 ? "" :
-		// skuParts[1], "5");
-		// }
+		
+		
+		/*second method for sycronize products before order 
+		 * navision: serch for item - > item journal -? positive / negative adj - > konstele:1100 and qs(min qty), 1000 for qty
+		 * QTY = location 1000- qty on sales order - safety stock
+		 * 
+		 * 
+		 * products with old tp are set at qty=0 and QS is set up( for min qty and earliest date)
+		 * products  with new tp are update with positive qty and and tp flag for each prod is set up in nav
+		 * 
+		 * for (String sku : skuListToBeUpdatedOnStock) {
+			String[] skuParts = sku.split("-");
+			System.out.println(skuParts.length == 1 ? "" : skuParts[1]);
+			navisionSteps.syncQtyOnItem(skuParts[0], skuParts.length == 1 ? "" : skuParts[1], "5");
+		}
 
-		// for (String sku : skuListToBeUpdatedOnStock) {
-		// String[] skuParts = sku.split("-");
-		// System.out.println(skuParts.length == 1 ? "" : skuParts[1]);
-		// navisionSteps.syncQtyOnItem(skuParts[0], skuParts.length == 1 ? "" :
-		// skuParts[1], "5");
-		// }
+		for (String sku : skuListToBeDecreased) {
+			String[] skuParts = sku.split("-");
+			navisionSteps.syncEarliestAvDateOnItem(skuParts[0], skuParts.length == 1 ? "" : skuParts[1], "50");
+		}
 
-//		for (String sku : skuListToBeDecreased) {
-//			String[] skuParts = sku.split("-");
-//			navisionSteps.syncEarliestAvDateOnItem(skuParts[0], skuParts.length == 1 ? "" : skuParts[1], "50");
-//		}
-//
-//		for (String sku : skuListToBeDecreasedNewTP) {
-//			String[] skuParts = sku.split("-");
-//			navisionSteps.checkTermPurchasecheckbox(skuParts[0]);
-//		}
+		for (String sku : skuListToBeDecreasedNewTP) {
+			String[] skuParts = sku.split("-");
+			navisionSteps.checkTermPurchasecheckbox(skuParts[0]);
+		}*/
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.NAVISION_INITIAL_CHANGING_STOCK);

@@ -78,10 +78,7 @@ public class CartBuy3Get1Calculation {
 
 			if (BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).compareTo(BigDecimal.valueOf(Double.parseDouble(nextproduct.getUnitPrice()))) == -1
 					|| BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).compareTo(BigDecimal.valueOf(Double.parseDouble(nextproduct.getUnitPrice()))) == -1) {
-				System.out.println("da am intrat in if initial ");
 				
-				System.out.println("productRemainder.intValue()productRemainder.intValue() " +productRemainder.intValue());
-				System.out.println(" Integer.parseInt(nextproduct.getQuantity()) " + Integer.parseInt(nextproduct.getQuantity()));
 				if (productRemainder.intValue() == 1 && Integer.parseInt(nextproduct.getQuantity()) >= 2) {
 					discount = discount.add(BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP));
 					nextproduct.setQuantity(String.valueOf(BigDecimal.valueOf(Double.parseDouble(nextproduct.getQuantity())).subtract(BigDecimal.valueOf(2)).intValue()));
@@ -100,6 +97,7 @@ public class CartBuy3Get1Calculation {
 			
 			
 			finalPrice1=BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())).subtract(discount);
+			newProduct.setFinalPriceWithBuy3(finalPrice1);
 			System.out.println("step1: "+finalPrice1 );
 			finalPrice=finalPrice1.multiply(BigDecimal.valueOf(Double.parseDouble(product.getDiscountClass())));
 			System.out.println("step2: "+finalPrice1 );

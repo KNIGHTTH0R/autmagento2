@@ -17,9 +17,19 @@ public class BasicProductModel {
 	private String earliestAvailability;
 	private String isMarketing;
 	private BigDecimal isBuy3Get1;
+	private BigDecimal finalPriceWithBuy3;
+	
+	
+	
 
-	
-	
+	public BigDecimal getFinalPriceWithBuy3() {
+		return finalPriceWithBuy3;
+	}
+
+	public void setFinalPriceWithBuy3(BigDecimal finalPriceWithBuy3) {
+		this.finalPriceWithBuy3 = finalPriceWithBuy3;
+	}
+
 	public BigDecimal getIsBuy3Get1() {
 		return isBuy3Get1;
 	}
@@ -146,8 +156,9 @@ public class BasicProductModel {
 				+ unitPrice + ", specialPrice=" + specialPrice + ", productsPrice=" + productsPrice + ", finalPrice="
 				+ finalPrice + ", priceIP=" + priceIP + ", discountClass=" + discountClass + ", deliveryDate="
 				+ deliveryDate + ", earliestAvailability=" + earliestAvailability + ", isMarketing=" + isMarketing
-				+ "]";
+				+ ", isBuy3Get1=" + isBuy3Get1 + ", finalPriceWithBuy3=" + finalPriceWithBuy3 + "]";
 	}
+
 
 	
 	

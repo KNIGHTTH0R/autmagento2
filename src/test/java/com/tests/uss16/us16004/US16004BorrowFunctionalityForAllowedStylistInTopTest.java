@@ -137,7 +137,6 @@ public class US16004BorrowFunctionalityForAllowedStylistInTopTest extends BaseTe
 		System.out.println("customer data "+customerData.getEmailName());
 		System.out.println("customer pass "+customerData.getPassword());
 		
-		
 		contactData= MongoReader.grabCustomerFormModels("US16004AddNewContactToStyleCoachTest").get(0);
 		System.out.println("contact data "+contactData.getEmailName());
 		System.out.println("contact pass "+contactData.getPassword());
@@ -202,7 +201,7 @@ public class US16004BorrowFunctionalityForAllowedStylistInTopTest extends BaseTe
 		//	loungeSteps.verifyBorrowBlockMessage(ContextConstants.ALLOWED_MESSAGE);
 		
 		loungeSteps.goToContactsList();
-		myContactsListSteps.openContactDetailsPage(customerData.getEmailName());
+		myContactsListSteps.openContactDetailsPage(customerData.getFirstName(),customerData.getLastName());
 	 
 		//contactDetailsSteps.checkBlockLinesForRegisterContact();
 		contactDetailsSteps.checkBlockLinesForContacts();// maybe is not aplicable here and should be deleted 
@@ -212,7 +211,7 @@ public class US16004BorrowFunctionalityForAllowedStylistInTopTest extends BaseTe
 		contactDetailsSteps.validateProductWishListBlock(productsWishList, grabbedProductsWishList);
 		
 		contactDetailsSteps.clickBackToContactsbutton();
-		myContactsListSteps.openContactDetailsPage(contactData.getEmailName());
+		myContactsListSteps.openContactDetailsPage(customerData.getFirstName(),customerData.getLastName());
 		contactDetailsSteps.checkBlockLinesForContacts();
 		//contactDetailsSteps.checkBlockLinesForNotRegisterContact();
 		

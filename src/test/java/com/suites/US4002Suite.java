@@ -15,8 +15,8 @@ import com.tests.us4.us4002.US4002ValidateOrderBackOfficeTest;
 	US4002ShopForMyselfWithBuy3GetOneTest.class,
 //	US4002CheckOrderOnStylecoachProfileTest.class,
 
-	US4002ValidateOrderBackOfficeTest.class,
-	US4002DeactivateBuy3Get1Test.class,
+	/*US4002ValidateOrderBackOfficeTest.class,
+	US4002DeactivateBuy3Get1Test.class,*/
 //	US4002ValidateOrderEmailTest.class,
 })
 @RunWith(Suite.class)

@@ -165,7 +165,7 @@ public class NavisionInventorySyncCalls {
 
 	public static void main(String args[]) throws Exception {
 
-		SyncInfoModel item = NavisionInventorySyncCalls.getItemInfo("R185SV", "18");
+		SyncInfoModel item = NavisionInventorySyncCalls.getItemInfo("N105MC", "");
 
 		System.out.println(item.toString());
 

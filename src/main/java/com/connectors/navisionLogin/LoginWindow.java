@@ -9,6 +9,7 @@ public class LoginWindow implements Runnable {
 
 	@Override
 	public void run() {
+		System.out.println("am fost apelat: run()");
 		try {
 			login();
 		} catch (Exception ex) {
@@ -23,7 +24,7 @@ public class LoginWindow implements Runnable {
 
 		// create robot for keyboard operations
 		Robot rb = new Robot();
-
+		System.out.println("am ajuns aici 1");
 		// Enter user name by ctrl-v
 		StringSelection username = new StringSelection("Tinxit");
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(username, null);
@@ -36,6 +37,7 @@ public class LoginWindow implements Runnable {
 		rb.keyPress(KeyEvent.VK_TAB);
 		rb.keyRelease(KeyEvent.VK_TAB);
 		Thread.sleep(2000);
+		System.out.println("am ajuns aici 2");
 
 		// Enter password by ctrl-v
 		StringSelection pwd = new StringSelection("NAV-MAG12#$");
@@ -48,6 +50,7 @@ public class LoginWindow implements Runnable {
 		// press enter
 		rb.keyPress(KeyEvent.VK_ENTER);
 		rb.keyRelease(KeyEvent.VK_ENTER);
+		System.out.println("am ajuns aici 1");
 
 		// wait
 		

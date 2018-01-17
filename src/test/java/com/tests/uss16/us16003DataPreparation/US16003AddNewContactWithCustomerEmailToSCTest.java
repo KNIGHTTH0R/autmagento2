@@ -71,6 +71,8 @@ public class US16003AddNewContactWithCustomerEmailToSCTest extends BaseTest {
 		}
 
 		dataModel = new CustomerFormModel();
+		dataModel.setFirstName("emilian");
+		dataModel.setLastName("melian");
 		addressModel = new AddressModel();
 
 		int size = MongoReader.grabCustomerFormModels("US16003StyleCoachRegistrationTest").size();

@@ -3,6 +3,12 @@ package com.steps.external.navision;
 import net.thucydides.core.annotations.Step;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.connectors.http.ImportInterfaceCalls;
 import com.pages.external.navision.NavisionHomePage;
@@ -44,9 +50,13 @@ public class NavisionHomeSteps extends AbstractSteps {
 	}
 	
 	
-	@Step
-	public void performLoginIntoNavisonWebClient() throws Exception{
-		navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=43%3bh%2fqqAAJ7%2f1AAUABKAF8ATQBJAFgARQBEAF8ATQBBAE4AVQBBAEw%3d&mode=Edit&page=11205257&i=3AF&IsDlg=1");
+	
+	public void performLoginIntoNavisonWebClient() throws Exception {
+		//navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=43%3bh%2fqqAAJ7%2f1AAUABKAF8ATQBJAFgARQBEAF8ATQBBAE4AVQBBAEw%3d&mode=Edit&page=11205257&i=3AF&IsDlg=1");
+		getDriver().manage().window().maximize();
+
+		getDriver().get("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=43%3bh%2fqqAAJ7%2f1AAUABKAF8ATQBJAFgARQBEAF8ATQBBAE4AVQBBAEw%3d&mode=Edit&page=11205257&i=3AF&IsDlg=1");
+		
 		navisionSyncDashboardPage().insertAuthentificationCredentials();
 	}
 
@@ -227,15 +237,17 @@ public class NavisionHomeSteps extends AbstractSteps {
 
 	@Step
 	public void loginToTransferQuantityPage() throws Exception{
-		navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=19%3bbBYAAAJ7BDkAMwA0ADI%3d&mode=View&page=5742&i=19B0&IsDlg=1");
+		navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=21%3bbBYAAAJ7BTEAMwAzADUANQ%3d%3d&mode=View&page=5742&i=3D23&IsDlg=1");
 		navisionSyncDashboardPage().insertAuthentificationCredentials();
 	}
 	
 	@Step
 	public void transferQtyFromQSin1000(String sku,String variantCode,String qty) throws Exception {
-		navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=19%3bbBYAAAJ7BDkAMwA0ADI%3d&mode=View&page=5742&i=19B0&IsDlg=1");
+	//	navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=19%3bbBYAAAJ7BDkAMwA0ADI%3d&mode=View&page=5742&i=19B0&IsDlg=1");
+		navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=21%3bbBYAAAJ7BTEAMwAzADUANQ%3d%3d&mode=View&page=5742&i=3D23&IsDlg=1");
 		navisionSyncDashboardPage().clickOnNewEntry();
 		navisionSyncDashboardPage().completeTransferDetails(sku,variantCode,qty,"QS","1000","TRANS","1100");
+		System.out.println("da e totul inserat cu succes");
 		navisionSyncDashboardPage().insertTranferQty(qty);
 		navisionSyncDashboardPage().selectHomeTab();
 		navisionSyncDashboardPage().clickOnPostMenuBtn();
@@ -255,6 +267,48 @@ public class NavisionHomeSteps extends AbstractSteps {
 		waitABit(40000);
 		System.out.println("am asteptat aici");
 	}
+
+	public void open() {
+		
+		getDriver().get("http://Tinxit:NAV-MAG12#$@185.48.116.231:8080/DynamicsNAV90/WebClient/");
+		getDriver().get("http://185.48.116.231:8080/DynamicsNAV90/WebClient/");
+		
+		 WebDriverWait wait =new WebDriverWait(this.getDriver(), 30);
+		  String url="http://185.48.116.231:8080/DynamicsNAV90/WebClient/";
+		  try {
+		      this.getDriver().get(urlWithAccount(url));
+		    }
+		    catch (Exception ex) {
+		      throw new RuntimeException("home page cannot be opened");
+		    }
+
+		    try {
+		      wait.until(ExpectedConditions.urlContains(url));
+		    }
+		    catch (Exception ex) {
+		      throw new RuntimeException("home page didnt load correctly - " + 
+		                                 "expected url = " + url + 
+		                                 " - " + 
+		                                 "actual url = " + this.getDriver().getCurrentUrl());
+		    }
+		    
+		    
+		    
+	}
+	
+	private String urlWithAccount(String url) {
+	     String username = System.getProperty("Tinxit");
+	     String password = System.getProperty("NAV-MAG12#$");
+
+	     String newUrl = url.replace("http://", 
+	                                 "http://" + 
+	                                 username + 
+	                                 ":" + 
+	                                 password + 
+	                                 "@");
+
+	     return newUrl;
+	  }
 
 	
 	}

@@ -100,7 +100,7 @@ public class US16004cNewBorrowWithDeniedTopAndNotEligibleTest extends BaseTest {
 	
 	
 	public String stylistEmail, stylistPassword;
-	public String customerEmail;
+	public String customerEmail,customerFirstName,customerLastName;
 	public CustomerFormModel stylistData;
 	public CustomerFormModel contactData;
 	
@@ -135,6 +135,8 @@ public class US16004cNewBorrowWithDeniedTopAndNotEligibleTest extends BaseTest {
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss16" + File.separator + "us16003.properties");
 			prop.load(input);
 			customerEmail = prop.getProperty("customerUsername");
+			customerFirstName = prop.getProperty("customerFirstName");
+			customerLastName=prop.getProperty("customerLastName");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -201,7 +203,7 @@ public class US16004cNewBorrowWithDeniedTopAndNotEligibleTest extends BaseTest {
 		//go to contact details and check 
 		
 		loungeSteps.goToContactsList();
-		myContactsListSteps.openContactDetailsPage(customerEmail);
+		myContactsListSteps.openContactDetailsPage(customerFirstName,customerLastName);
 	 
 		//contactDetailsSteps.checkBlockLinesForRegisterContact();
 		contactDetailsSteps.checkBlockLinesForContacts();// maybe is not aplicable here and should be deleted 
@@ -211,7 +213,7 @@ public class US16004cNewBorrowWithDeniedTopAndNotEligibleTest extends BaseTest {
 		contactDetailsSteps.validateProductWishListBlock(productsWishList, grabbedProductsWishList);
 		
 		contactDetailsSteps.clickBackToContactsbutton();
-		myContactsListSteps.openContactDetailsPage(contactData.getEmailName());
+		myContactsListSteps.openContactDetailsPage(contactData.getFirstName(),contactData.getLastName());
 		contactDetailsSteps.checkBlockLinesForContacts();
 		
 		headerSteps.goToShop();

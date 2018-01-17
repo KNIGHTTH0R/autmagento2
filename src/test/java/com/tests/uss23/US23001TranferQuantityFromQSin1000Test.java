@@ -70,14 +70,17 @@ public class US23001TranferQuantityFromQSin1000Test extends BaseTest{
 		
 		System.out.println("changingStockMagentoProducts "+ changingStockMagentoProducts);
 		
-//		for (String id : idListToBeDecreased) {
-//			changingStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
-//		}
+		/*for (String id : idListToBeDecreased) {
+			changingStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
+		}*/
 		
 		///////////////transferul
 		navisionSteps.loginToTransferQuantityPage();
 	
+		System.out.println();
 		for (SyncInfoModel product : changingStockMagentoProducts) {
+			
+
 			String[] skuParts = product.getSku().split("-");
 			navisionSteps.transferQtyFromQSin1000(skuParts[0],skuParts.length == 1 ? "" : skuParts[1],boughtProductsQuantities.get(counter));
 			

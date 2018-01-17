@@ -252,11 +252,18 @@ public class CartTotalsCalculation {
 
 		BigDecimal discountSum = BigDecimal.ZERO;
 		BigDecimal delta = BigDecimal.ZERO;
+		String productsPrice="";
 		
 		for (BasicProductModel cartProductModel : productsList) {
 			if (cartProductModel.getDiscountClass().contains(ConfigConstants.DISCOUNT_25)) {
+				/*if(cartProductModel.getFinalPriceWithBuy3()!=null){
+					productsPrice
+				}*/
+				System.out.println("cartProductModel.getFinalPriceWithBuy3(): "+cartProductModel.getFinalPriceWithBuy3());
+				productsPrice =cartProductModel.getFinalPriceWithBuy3()!=null?cartProductModel.getFinalPriceWithBuy3().toString():cartProductModel.getProductsPrice();
 				BigDecimal[] discountAndRemainder = calculate25DiscountForEachProduct(
-						BigDecimal.valueOf(Double.parseDouble(cartProductModel.getProductsPrice())), jewelryDiscount,
+						//BigDecimal.valueOf(Double.parseDouble(cartProductModel.getProductsPrice())), jewelryDiscount,
+						BigDecimal.valueOf(Double.parseDouble(productsPrice)), jewelryDiscount,
 						sum25Section, delta);
 				discountSum = discountSum.add(discountAndRemainder[0]);
 				delta = discountAndRemainder[1];

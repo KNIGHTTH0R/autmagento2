@@ -72,14 +72,14 @@ public class StylistInventoryBorrowCustomPackageTest extends BaseTest {
 		
 		
 		billOfMaterial = NavisionBillOfMaterialCalls.getItemsList("yyy");
-
+		
 		
 		for (NavOrderLinesModel navOrderLinesModel : billOfMaterial) {
 			String[] sku = navOrderLinesModel.getNo().toString().split("-");
 			if (navOrderLinesModel.toString().contains("-")) {
 
 				StylistInvetoryUpdateModel model = StylistInventoryUpdateBorrowCalls.getBorrowUpdateInfo(customerId,
-						orderIncrementId, sku[0], sku[1]," ");
+						orderIncrementId, sku[0], sku[1],"yyyy");
 				System.out.println("model: " + model.getResult());
 				if (!model.getResult().contentEquals("1")) {
 					System.out.println("ASSSSSSSSERRRRRRRRRRRRRRRRT");
@@ -104,7 +104,7 @@ public class StylistInventoryBorrowCustomPackageTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.clickGoToStylistInventory();
 		stylistInventorySteps.openBorrowSection();
-		stylistInventorySteps.validateBorrowedProducts(billOfMaterial, stylistInventorySteps.grabProductsData());
+		stylistInventorySteps.validateBorrowedProducts(billOfMaterial, stylistInventorySteps.grabProductsData(),"yyyy");
 		customVerification.printErrors();
 	}
 

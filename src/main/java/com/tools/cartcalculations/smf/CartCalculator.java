@@ -207,7 +207,7 @@ public class CartCalculator {
 		allProductsListRecalculated.addAll(calculatedProductsListMarketing);
 		
 		for (BasicProductModel basicProductModel : calculatedProductsList25) {
-			System.out.println("Produ din 25 section: "+basicProductModel);
+			System.out.println("Produs din 25 section: "+basicProductModel);
 		}
 
 		calculatedTotalsDiscounts = CartTotalsCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount, taxClass, shippingValue,
@@ -225,7 +225,7 @@ public class CartCalculator {
 		allProductsList.addAll(productsList50);
 		allProductsList.addAll(productList25AndMmWithBuy3Get1Applied);
 
-		calculatedProductsList25 = CartDiscountsCalculation.calculateProductsfor25Discount(productsList25, jewelryDiscount);
+		calculatedProductsList25 = CartDiscountsCalculation.calculateProductsfor25Discount(productList25AndMmWithBuy3Get1Applied, jewelryDiscount);
 		for (BasicProductModel basicProductModel : calculatedProductsList25) {
 			System.out.println("calculated 25 pr list: "+basicProductModel);
 		}

@@ -65,8 +65,8 @@ public class US23001PayAndImportTermPurchaseOrderTest extends BaseTest {
 		// orderModel.getOrderId());
 
 		navisionSteps.performLoginIntoNavisonWebClient();
-		DBorderModel = OrderInfoMagCalls.getOrderInfo(orderModel.getOrderId());
-		navisionSteps.performOrderImport(DBorderModel.getOrderId());
+	//	DBorderModel = OrderInfoMagCalls.getOrderInfo(orderModel.getOrderId());
+		navisionSteps.performOrderImport(orderModel.getOrderId());
 
 	}
 }

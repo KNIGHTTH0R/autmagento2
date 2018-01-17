@@ -11,12 +11,11 @@ import com.tests.uss23.US23001VerifyMagAndNavStockAfterOrderTest;
 
 
 @SuiteClasses({
-///	US23001GetMagAndNavStockBerforeOrderTest.class,
+	US23001GetMagAndNavStockBerforeOrderTest.class,
 	US23001BuyProductsOnShopforMyselfTest.class,
 	US23001VerifyMagAndNavStockAfterOrderTest.class,
 	US23001PayAndImportOrderInNavisionTest.class,
 })
-
 @RunWith(Suite.class)
 public class US23001PartOneSuite {
 

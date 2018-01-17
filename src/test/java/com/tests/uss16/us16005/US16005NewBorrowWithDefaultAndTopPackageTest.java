@@ -107,7 +107,7 @@ public class US16005NewBorrowWithDefaultAndTopPackageTest extends BaseTest {
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 
-	private String username, password, contact, customerData;
+	private String username, password, contact, customerData,customerFirstName,customerLastName;
 
 	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 	private static UrlModel urlModel = new UrlModel();
@@ -135,6 +135,8 @@ public class US16005NewBorrowWithDefaultAndTopPackageTest extends BaseTest {
 			password = prop.getProperty("password");
 			contact = prop.getProperty("contact");
 			customerData = prop.getProperty("customerUsername");
+			customerFirstName = prop.getProperty("customerFirstName");
+			customerLastName=prop.getProperty("customerLastName");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -200,7 +202,7 @@ public class US16005NewBorrowWithDefaultAndTopPackageTest extends BaseTest {
 		headerSteps.goToLounge();
 		loungeSteps.goToMyBusiness();
 		loungeSteps.goToContactsList();
-		myContactsListSteps.openContactDetailsPage(customerData);
+		myContactsListSteps.openContactDetailsPage(customerFirstName,customerLastName);
 
 		contactDetailsSteps.checkBlockLinesForContacts();
 
@@ -208,9 +210,9 @@ public class US16005NewBorrowWithDefaultAndTopPackageTest extends BaseTest {
 		contactDetailsSteps.validateWishlistCounter(productsWishList.size());
 		contactDetailsSteps.validateProductWishListBlock(productsWishList, grabbedProductsWishList);
 
-		contactDetailsSteps.clickBackToContactsbutton();
+	/*	contactDetailsSteps.clickBackToContactsbutton();
 		myContactsListSteps.openContactDetailsPage(contact);
-		contactDetailsSteps.checkBlockLinesForContacts();
+		contactDetailsSteps.checkBlockLinesForContacts();*/
 
 		// party
 		customerRegistrationSteps.navigate(urlModel.getUrl());

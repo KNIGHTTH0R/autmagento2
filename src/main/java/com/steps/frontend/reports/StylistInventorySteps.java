@@ -39,7 +39,7 @@ public class StylistInventorySteps extends AbstractSteps {
 	}
 
 	@StepGroup
-	public void validateBorrowedProducts(List<NavOrderLinesModel> billOfMaterial, List<StylistInventoryModel> productsData) {
+	public void validateBorrowedProducts(List<NavOrderLinesModel> billOfMaterial, List<StylistInventoryModel> productsData, String packageSku) {
 		for (NavOrderLinesModel billof : billOfMaterial) {
 			StylistInventoryModel compare = findOrder(billof.getNo(), productsData);
 			
@@ -48,18 +48,17 @@ public class StylistInventorySteps extends AbstractSteps {
 						"Failure: Could not validate product " + compare.getProductSku(), compare == null);
 			}else{
 				validateProductSku(billof.getNo(),compare.getProductSku());
-				validatePackageSku("xxxx",compare.getPackageSku());
+				validatePackageSku(packageSku,compare.getPackageSku());
 				validateStatus("Leihen", compare.getStatus());
 				validateQtyBorrowed("1", compare.getQtyBorrowed());
 				validateQtyReturned("0", compare.getQtyReturned());
 			}
 		}
 		
-
 	}
 
 	@StepGroup
-	public void validateReturnedProducts(List<NavOrderLinesModel> billOfMaterial, List<StylistInventoryModel> productsData) {
+	public void validateReturnedProducts(List<NavOrderLinesModel> billOfMaterial, List<StylistInventoryModel> productsData, String packageSku) {
 		for (NavOrderLinesModel billof : billOfMaterial) {
 			StylistInventoryModel compare = findOrder(billof.getNo(), productsData);
 			
@@ -68,7 +67,7 @@ public class StylistInventorySteps extends AbstractSteps {
 						"Failure: Could not validate product " + compare.getProductSku(), compare == null);
 			}else{
 				validateProductSku(billof.getNo(),compare.getProductSku());
-				validatePackageSku("xxxx",compare.getPackageSku());
+				validatePackageSku(packageSku,compare.getPackageSku()); 
 				validateStatus("Retournieren", compare.getStatus());
 				validateQtyBorrowed("0", compare.getQtyBorrowed());
 				validateQtyReturned("1", compare.getQtyReturned());
@@ -98,20 +97,20 @@ public class StylistInventorySteps extends AbstractSteps {
 
 	@Step
 	public void validatePackageSku(String expected, String compare){
-		CustomVerification.verifyTrue("Failure: The package sku does not matck", expected.contains(compare));
+		CustomVerification.verifyTrue("Failure: The package sku does not match", expected.contains(compare));
 	}
 	@Step
 	public void validateStatus(String expected, String compare){
-		CustomVerification.verifyTrue("Failure: The status does not matck", expected.contains(compare));
+		CustomVerification.verifyTrue("Failure: The status does not match", expected.contains(compare));
 	}
 	
 	@Step
 	public void validateQtyBorrowed(String expected, String compare){
-		CustomVerification.verifyTrue("Failure: The QtyBorrowed  does not matck", expected.contains(compare));
+		CustomVerification.verifyTrue("Failure: The QtyBorrowed  does not match", expected.contains(compare));
 	}
 	
 	@Step
 	public void validateQtyReturned(String expected, String compare){
-		CustomVerification.verifyTrue("Failure: The QtyReturned  does not matck", expected.contains(compare));
+		CustomVerification.verifyTrue("Failure: The QtyReturned  does not match", expected.contains(compare));
 	}
 }
