@@ -4,17 +4,17 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com</groupId>
-	<artifactId>PippaJeanAutoTester</artifactId>
+	<artifactId>vdvautotester</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<!-- <packaging>jar</packaging> -->
 
-	<name>Pippa Jean Test Automation </name>
+	<name>VdV Test Automation </name>
 
 	<properties>
 		<serenity.version>1.1.33</serenity.version>
 		<webdriver.driver>firefox</webdriver.driver>
 		<host.remote>http://172.22.0.87:5555/wd/hub</host.remote>
-		<webdriver.base.url>http://staging-aut.pippajean.com/customer/account/login/</webdriver.base.url>
+		<webdriver.base.url>http://vdv-qa.pippajean.com/customer/account/login/</webdriver.base.url>
 		<runSuite>**/DemoSuite.class</runSuite>
 		<outputEncoding>UTF-8</outputEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -60,12 +60,13 @@
 			<version>1.1</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-firefox-driver</artifactId>
-			<!-- <version>2.47.1</version> -->
-			<version>2.53.0</version>
-		</dependency>
+		   <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+		
+		
 		<dependency>
 			<groupId>org.apache.pdfbox</groupId>
 			<artifactId>pdfbox</artifactId>

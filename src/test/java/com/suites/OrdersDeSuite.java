@@ -40,8 +40,7 @@ import com.tests.uss10.uss10008.US10008CreatePartyWithExistingContactHostTest;
 //	US4001Suite.class,
 	US4002Suite.class,
 	
-//	US16001Suite.class,
-	US16002Suite.class,
+
 	
 	US11001Suite.class,
 	US11002Suite.class,

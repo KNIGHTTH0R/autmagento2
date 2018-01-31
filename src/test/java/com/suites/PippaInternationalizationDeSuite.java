@@ -97,7 +97,6 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	
 	//US15004Suite.class,
 	
-	US12001Suite.class,
 	
 //	US13001Suite.class,
 //	US13002Suite.class,
@@ -107,10 +106,8 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 //	US13006Suite.class,
 //	US13007Suite.class,
 	
-	US16001Suite.class,
-	US16002Suite.class,
-//	US16003Suite.class,
-//	US16005Suite.class,
+
+
 //	
 	US17001Suite.class,
 	US17002Suite.class,

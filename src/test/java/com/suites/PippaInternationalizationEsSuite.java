@@ -9,8 +9,7 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 @SuiteClasses({
 	
 	US10CreateAllPartiesSuite.class,
-	US001Suite.class,
-	US002Suite.class,
+	
 	US3001Suite.class,
 	US3003Suite.class,
 	US3004Suite.class,
@@ -60,7 +59,6 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US11003VerifyProductsInPlaceACustomerOrderModal.class,
 	US11004Suite.class,
 	
-	US12001Suite.class,
 	
 	US13001Suite.class,
 	US13002Suite.class,
@@ -70,7 +68,6 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US13006Suite.class,
 	US13007Suite.class,
 	
-	US16001Suite.class,
 	
 	US17001Suite.class,
 	US17002Suite.class,
