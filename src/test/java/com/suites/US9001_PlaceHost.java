@@ -12,7 +12,7 @@ import com.tests.us9.us9001.US9001ValidateOrderEmailTestVDV;
 
 @SuiteClasses({
 	CreateProductsTestHostCart.class,
-	US9001ClosePartyTestVDV.class,
+//	US9001ClosePartyTestVDV.class,
 	US9001PlaceHostOrderWithNoBonnusTestVDV.class,
 	US9001ValidateOrderBackOfficeTestVDV.class,
 //	US9001ValidateOrderEmailTestVDV.class
