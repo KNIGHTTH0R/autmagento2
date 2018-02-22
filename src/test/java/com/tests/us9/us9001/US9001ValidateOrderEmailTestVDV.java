@@ -32,7 +32,7 @@ import com.tools.data.email.EmailCredentialsModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US9.1 Place Host Order With 40% Discount and JB Test", type = "Scenarios")
+@WithTag(name = "US9.1 Place Host Order With Any Bonnus Applied", type = "Scenarios")
 @Story(Application.HostCart.US9_1.class)
 @RunWith(SerenityRunner.class)
 public class US9001ValidateOrderEmailTestVDV extends BaseTest{

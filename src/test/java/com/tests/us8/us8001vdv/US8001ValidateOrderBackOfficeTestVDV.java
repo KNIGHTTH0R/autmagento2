@@ -35,7 +35,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US8.1 Customer Buy With Forthy Discounts And Jb Test", type = "Scenarios")
+@WithTag(name = "US8.1 Customer Buy With Any Bonnus Applied", type = "Scenarios")
 @Story(Application.RegularCart.US8_1.class)
 @RunWith(SerenityRunner.class)
 public class US8001ValidateOrderBackOfficeTestVDV extends BaseTest {

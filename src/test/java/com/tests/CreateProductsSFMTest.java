@@ -29,7 +29,7 @@ import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 
-@WithTag(name = "US3.1 Shop for myself VAT valid and no SMB billing and shipping AT", type = "Scenarios")
+@WithTag(name = "Create products for SFM", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(SerenityRunner.class)
 public class CreateProductsSFMTest extends BaseTest {

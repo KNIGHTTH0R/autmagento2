@@ -35,7 +35,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US9.2b Place Host Order With 40% Discount, JB and Buy 3 get 1 for 50% Test", type = "Scenarios")
+@WithTag(name = "Create party with Customer Host", type = "Scenarios")
 @Story(Application.HostCart.US9_2.class)
 @RunWith(SerenityRunner.class)
 public class US10001CreatePartyWithCustomerHostTestVDV extends BaseTest {

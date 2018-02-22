@@ -33,7 +33,7 @@ import com.tools.data.email.EmailCredentialsModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US3.1 Shop for myself VAT valid and no SMB billing and shipping AT",type = "Scenarios")
+@WithTag(name = "US3.1 Shop for myself with any bonnus applied",type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(SerenityRunner.class)
 public class US3001ValidateOrderEmailTest extends BaseTest{
