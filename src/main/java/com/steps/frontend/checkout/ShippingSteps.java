@@ -18,6 +18,7 @@ public class ShippingSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 8727875042758615102L;
 
+	@Step
 	public ShippingModel grabSurveyData() {
 	//	waitABit(TimeConstants.TIME_CONSTANT);
 		return surveyPage().grabSurveyData();
@@ -69,6 +70,7 @@ public class ShippingSteps extends AbstractSteps {
 		return surveyPage().grabSFMProductsListTp2();
 	}
 	
+	@Step
 	public List<RegularUserCartProductModel> grabRegularProductsList() {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return surveyPage().grabRegularProductsList();

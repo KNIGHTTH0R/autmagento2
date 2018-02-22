@@ -27,6 +27,8 @@ public class CheckoutValidationSteps extends AbstractSteps {
 
 	@Step
 	public void matchName(String productNow, String compare) {
+		//CustomVerification.verifyTrue("Failure: Product name  dont match: expected " + productNow + " - grabbed " + compare, productNow.toLowerCase().contentEquals(compare.toLowerCase()));
+
 	}
 
 	@Step

@@ -219,7 +219,10 @@ public class CartPage extends AbstractPage {
 
 		waitFor(ExpectedConditions.visibilityOfAllElements(totalsTable.findElements(By.tagName("tr"))));
 		List<WebElement> valuesList = totalsTable.findElements(By.cssSelector("tr"));
-
+		
+		resultModel.setJewelryBonus("0");
+		resultModel.setMarketingBonus("0");
+		
 		for (WebElement itemNow : valuesList) {
 			String key = itemNow.findElement(By.cssSelector("td:first-child")).getText();
 

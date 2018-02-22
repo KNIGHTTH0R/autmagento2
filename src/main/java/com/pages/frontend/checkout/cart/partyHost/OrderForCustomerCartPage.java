@@ -96,7 +96,7 @@ public class OrderForCustomerCartPage extends AbstractPage {
 
 		waitFor(ExpectedConditions.visibilityOfAllElements(totalsTable.findElements(By.tagName("tr"))));
 		List<WebElement> valuesList = totalsTable.findElements(By.cssSelector("tr"));
-
+		System.out.println("valuesList: "+valuesList.size());
 		for (WebElement itemNow : valuesList) {
 			String key = itemNow.findElement(By.cssSelector("td:first-child")).getText();
 
@@ -141,10 +141,17 @@ public class OrderForCustomerCartPage extends AbstractPage {
 						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTotalAmount(valueTransformer);
 			}
+			
+			if (key.contains(ContextConstants.IP_PUNKTE)) {
+				valueTransformer = itemNow.findElement(By.cssSelector("td:last-child")).getText();
+				resultModel.setTotalIP(valueTransformer);
+			}
+			
 		}
 
 		HostDataGrabber.hostGrabbedCartTotals = resultModel;
-
+		
+		System.out.println("da am ajuns aici cu bine");
 		return resultModel;
 	}
 

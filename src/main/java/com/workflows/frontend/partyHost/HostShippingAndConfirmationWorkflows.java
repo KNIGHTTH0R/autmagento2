@@ -29,7 +29,8 @@ public class HostShippingAndConfirmationWorkflows {
 	
 	@Step
 	public void validateProducts(String message) {
-
+		System.out.println(" ");
+		System.out.println(message);
 		for (HostBasicProductModel productNow : basicProductsList) {
 			HostCartProductModel compare = findProduct(productNow.getProdCode(),productNow.getQuantity(), cartProductsList);
 
@@ -77,6 +78,8 @@ public class HostShippingAndConfirmationWorkflows {
 	
 	@Step
 	public void verifyShippingTotals(String string) {
+		System.out.println(" ");
+		System.out.println(string);
 		verifyTotalAmount(shippingGrabbedModel.getTotalAmount(), shippingCalculatedModel.getTotalAmount());
 		verifyShippingPrice(shippingGrabbedModel.getShippingPrice(), shippingCalculatedModel.getShippingPrice());
 		verifyDiscountsPrice(shippingGrabbedModel.getDiscountPrice(), shippingCalculatedModel.getDiscountPrice());

@@ -10,7 +10,7 @@ import java.util.List;
 
 import javax.xml.soap.SOAPException;
 
-import com.connectors.PippaDb.PippaDBConnection;
+import com.connectors.PippaDb.VanDelVeldeDBConnection;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.utils.DateUtils;
 
@@ -47,7 +47,7 @@ public class StockAvailabilityCalculations {
 	public static List<ProductDetailedModel> calculateStockAvailabilityData(String fromProductId, String toProductId)
 			throws SOAPException, IOException, SQLException, ParseException {
 
-		List<ProductDetailedModel> getAllProducts = PippaDBConnection.productList(fromProductId, toProductId);
+		List<ProductDetailedModel> getAllProducts = VanDelVeldeDBConnection.productList(fromProductId, toProductId);
 
 		for (ProductDetailedModel product : getAllProducts) {
 
@@ -79,7 +79,7 @@ public class StockAvailabilityCalculations {
 			}
 
 		}
-		backInStockProducts = PippaDBConnection.productBackInStockList();
+		backInStockProducts = VanDelVeldeDBConnection.productBackInStockList();
 		stockReportProducts = joinLists(temporarlyNotAvailableProducts, notLogngerAvailableProduct,
 				lessThanTwentyAvailableProducts, backInStockProducts);
 

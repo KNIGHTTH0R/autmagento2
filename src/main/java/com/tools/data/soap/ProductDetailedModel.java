@@ -59,8 +59,37 @@ public class ProductDetailedModel {
 	private String catalogRowNumber;
 	private String catalogPageNumber;
 	
+	private String productSize;
+	private String color;
+	
+	private String parentProductSku;
 	
 	
+	
+	public String getParentProductSku() {
+		return parentProductSku;
+	}
+
+	public void setParentProductSku(String parentProductSku) {
+		this.parentProductSku = parentProductSku;
+	}
+
+	public String getProductSize() {
+		return productSize;
+	}
+
+	public void setProductSize(String productSize) {
+		this.productSize = productSize;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
 	public String getCatalogRowNumber() {
 		return catalogRowNumber;
 	}

@@ -51,7 +51,6 @@ public class GeneralCartCalculations {
 			if (remainingSum.compareTo(BigDecimal.valueOf(150)) == 1) {
 
 				shipping = BigDecimal.valueOf(0);
-				System.out.println("firt gr" + shipping);
 			} else {
 				shipping = shipping.subtract(remainingSum);
 				shipping = shipping.compareTo(BigDecimal.ZERO) > 0 ? shipping : BigDecimal.ZERO;

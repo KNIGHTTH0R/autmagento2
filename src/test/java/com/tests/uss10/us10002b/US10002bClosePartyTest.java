@@ -6,16 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.PippaDb.PippaDBConnection;
+import com.connectors.PippaDb.VanDelVeldeDBConnection;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -28,6 +23,11 @@ import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US9.2b Place Host Order With 40% Discount, JB and Buy 3 get 1 for 50% Test", type = "Scenarios")
 @Story(Application.HostCart.US9_2.class)
@@ -75,7 +75,7 @@ public class US10002bClosePartyTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 		urlModel = MongoReader.grabUrlModels("US10002bCreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
-		PippaDBConnection.updateDateOnParty(urlModel.getUrl());
+		VanDelVeldeDBConnection.updateDateOnParty(urlModel.getUrl());
 		dateModel = MongoReader.grabDateModels("US10002bCreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
 
 		Long partyCreationTime = Long.parseLong(dateModel.getDate());

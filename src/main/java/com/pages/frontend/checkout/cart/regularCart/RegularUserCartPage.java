@@ -451,6 +451,33 @@ public class RegularUserCartPage extends AbstractPage {
 		return resultList;
 	}
 
+	public List<RegularUserCartProductModel> grabProductsDataNoBonus() {
+		element(cartTable).waitUntilVisible();
+		List<WebElement> entryList = getDriver().findElements(By.cssSelector("div.cart table.cart-table tbody > tr"));
+
+		List<RegularUserCartProductModel> resultList = new ArrayList<RegularUserCartProductModel>();
+
+		for (WebElement webElementNow : entryList) {
+			RegularUserCartProductModel productNow = new RegularUserCartProductModel();
+
+			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()
+					.replace(productNow.getName(), "").trim());
+			productNow.setQuantity(FormatterUtils.parseValueToZeroDecimals(
+					webElementNow.findElement(By.cssSelector("td:nth-child(3) input")).getAttribute("value")));
+			productNow.setUnitPrice(FormatterUtils
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setFinalPrice(FormatterUtils.parseValueToTwoDecimals(
+					webElementNow.findElement(By.cssSelector("td:nth-child(5) span.price")).getText()));
+
+			resultList.add(productNow);
+		}
+		RegularUserDataGrabber.grabbedRegularCartProductsList = resultList;
+
+		return resultList;
+	}
+	
+	
 	public RegularUserCartTotalsModel grabTotals(String voucherCodeLabel) {
 		RegularUserCartTotalsModel resultModel = new RegularUserCartTotalsModel();
 		waitABit(TimeConstants.TIME_CONSTANT);

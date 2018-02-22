@@ -2,7 +2,7 @@ package com.steps.external.academy;
 
 import java.sql.SQLException;
 
-import com.connectors.PippaDb.PippaDBConnection;
+import com.connectors.PippaDb.VanDelVeldeDBConnection;
 import com.tools.CustomVerification;
 import com.tools.requirements.AbstractSteps;
 
@@ -47,7 +47,7 @@ public class AcademySteps extends AbstractSteps {
 			System.out.println("courseNo______________: "+lessonNo);
 			boolean lessonIsComplete=verifyQuizIsComplete(isComplete);
 			verifyAcademyLessonIsCompleteInTrainingPage(lessonNo,lessonIsComplete);
-			validateAcademyLessonIsNotCompleteInShop(PippaDBConnection.completedCoursesInShop());
+			validateAcademyLessonIsNotCompleteInShop(VanDelVeldeDBConnection.completedCoursesInShop());
 		}
 		
 	}

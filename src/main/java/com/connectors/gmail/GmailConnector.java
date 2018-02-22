@@ -174,4 +174,41 @@ public class GmailConnector {
 		}
 		return textContent.toString();
 	}
+	
+	
+	/*private void deleteInbox() {
+		Properties props2 = System.getProperties();
+		Session session2 = Session.getDefaultInstance(props2, null);
+		props2.setProperty(EmailConstants.EMAIL_STORE, protocol);
+
+		Message message[] = null;
+		Message imboxMessage[] = null;
+		Message spamMessage[] = null;
+
+		try {
+
+			Store store = session2.getStore(protocol);
+			store.connect(host, username, password);
+			Folder imboxFolder = store.getFolder("INBOX");
+			imboxFolder.open(Folder.READ_WRITE);
+			
+
+			Message[] msgList = imboxFolder.getMessages();
+			// iterate messages and flag them as deleted
+			for (Message msg : msgList) {
+				msg.setFlag(Flags.Flag.DELETED, true);
+			}
+			
+
+			//close folder with expunge argument true 
+			//in order to delete messages
+			imboxFolder.close(true);
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+*/
+	
 }

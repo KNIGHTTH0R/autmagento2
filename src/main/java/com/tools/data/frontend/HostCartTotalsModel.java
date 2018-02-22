@@ -17,6 +17,7 @@ public class HostCartTotalsModel {
 	private String tax;
 	private String shipping;
 	private String totalAmount;
+	private String totalIP;
 	private Map<String, String> discountList = new HashMap<String, String>();
 
 	public HostCartTotalsModel() {
@@ -24,8 +25,29 @@ public class HostCartTotalsModel {
 		setTax("");
 		setShipping("");
 		setTotalAmount("");
-
+		setTotalIP("");
 	}
+
+	
+	public String getTotalIP() {
+		return totalIP;
+	}
+
+
+	public void setTotalIP(String totalIP) {
+		this.totalIP = totalIP;
+	}
+
+
+	public Map<String, String> getDiscountList() {
+		return discountList;
+	}
+
+
+	public void setDiscountList(Map<String, String> discountList) {
+		this.discountList = discountList;
+	}
+
 
 	public void addDiscount(String key, String value) {
 		discountList.put(key, value);

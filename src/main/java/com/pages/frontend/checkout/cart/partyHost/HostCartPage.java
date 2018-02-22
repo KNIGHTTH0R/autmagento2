@@ -225,6 +225,12 @@ public class HostCartPage extends AbstractPage {
 						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTotalAmount(valueTransformer);
 			}
+			
+			if (key.contains(ContextConstants.IP_PUNKTE)) {
+				valueTransformer = itemNow.findElement(By.cssSelector("td:last-child")).getText();
+				resultModel.setTotalIP(valueTransformer);
+				System.out.println("IP PUNKTE: "+valueTransformer);
+			}
 		}
 
 		HostDataGrabber.hostGrabbedCartTotals = resultModel;

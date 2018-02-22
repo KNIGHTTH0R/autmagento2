@@ -1,5 +1,10 @@
 package com.pages.frontend;
 
+import java.util.List;
+
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.tools.constants.ContextConstants;
@@ -22,11 +27,16 @@ public class ProductDetailsPage extends AbstractPage {
 
 	@FindBy(css = "button#add-to-cart")
 	private WebElement addToCartButton;
+	
+	/*@FindBy(css = ".add-to-cart-buttons.add-to-cart a")
+	private WebElement addToCartButton;
+	*/
+	
 
 	@FindBy(css = "div.product-attributes.clearfix a")
 	private WebElement addToWishlistButton;
 
-	@FindBy(css = "p.product-ids")
+	@FindBy(css = ".product-ids span")
 	private WebElement productCode;
 
 	@FindBy(css = "span[id*='product-price']")
@@ -85,16 +95,39 @@ public class ProductDetailsPage extends AbstractPage {
 
 	public BasicProductModel grabBasicProductData() {
 		BasicProductModel result = new BasicProductModel();
-		element(productName).waitUntilVisible();
+		//element(productName).waitUntilVisible();
 
-		String type = cleanProductCode(productCode.getText());
+	//	String type = cleanProductCode();
 
-		result.setName(productName.getText());
-		result.setProdCode(type);
+		String productName=grabProductNameInfo();
+		System.out.println("product Name="+productName);
+		
+		result.setName(productName);
+		result.setProdCode(productCode.getText());
 		result.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(productPrice.getText()));
 		result.setQuantity(quantityInput.getAttribute("value"));
 
 		return result;
+	}
+	
+	public String grabProductNameInfo(){
+		String productName="";
+		List<WebElement> productTitle= getDriver().findElements(By.cssSelector(".product-title span"));
+		for (WebElement titleSpan : productTitle) {
+			System.out.println("titlul: "+titleSpan.getText());
+			productName+=titleSpan.getText()+" ";
+		}
+		
+		List<WebElement> productStyle= getDriver().findElements(By.cssSelector(".product-style span"));
+		for (WebElement styleSpan : productStyle) {
+			System.out.println("stylul: "+styleSpan.getText());
+			productName+=styleSpan.getText()+" ";
+			break;
+		}
+		
+		System.out.println("productName->:"+productName);
+		return productName;
+		
 	}
 
 	public RegularBasicProductModel grabRegularBasicProductData() {
@@ -149,5 +182,32 @@ public class ProductDetailsPage extends AbstractPage {
 
 	public String getStockStatus() {
 		return stockStatusContainer.getText();
+	}
+
+	public void setProductColor(String productCcolor) {
+		List<WebElement> colorlist = getDriver()
+				.findElements(By.cssSelector(".configurable-swatch-list[id*='color'] li a"));
+
+		for (WebElement color : colorlist) {
+			if (color.getAttribute("title").contains(productCcolor)) {
+				color.click();
+				//
+				waitABit(4000);
+			}
+		}
+	}
+
+	public void setProductSize(String productSize) {
+		// #configurable_swatch_size li a
+		List<WebElement> sizeList = getDriver()
+				.findElements(By.cssSelector(".configurable-swatch-list[id*='size'] li a"));
+
+		for (WebElement size : sizeList) {
+			if (size.getAttribute("title").contains(productSize)) {
+				size.click();
+			}
+		}
+		
+		Assert.assertTrue("Failure: There was not find any product size ",!sizeList.isEmpty() );
 	}
 }

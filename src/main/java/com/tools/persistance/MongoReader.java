@@ -623,7 +623,9 @@ public class MongoReader extends MongoConnector {
 				result.setStockData(stockData);
 				result.setIp(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_IP));
 				result.setPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_PRICE));
-
+				result.setParentProductSku(MongoUtils.checkField(dbObject, MongoTableKeys.PARENT_PRODUCT_SKU));
+				result.setProductSize(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_SIZE));
+				result.setColor(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_COLOR));
 				itemList.add(result);
 			}
 		} catch (Exception e) {

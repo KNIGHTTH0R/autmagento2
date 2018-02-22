@@ -114,8 +114,11 @@ public class HostCartWorkflows {
 
 	@StepGroup
 	public void verifyCartTotals(String message) {
+		System.out.println(" ");
+		System.out.println(message);
 		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
 		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
+		verifyIP(discountTotals.getTotalIP(), discountCalculationModel.getIpPoints());
 	}
 
 	@StepGroup

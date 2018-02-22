@@ -57,96 +57,54 @@ public class CreateProductsTestHostCart extends BaseTest {
 	public void createProductsTest() {
 		
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct1);
+		genProduct1.setPrice("90.00");
+		genProduct1.setIp("76");
+		genProduct1.setSku("0102056NATA080");
+		genProduct1.setName("Marie Jo SOFIA Unterlegter BH natur 80A");
+		genProduct1.setColor("natur");
+		genProduct1.setProductSize("80A");
+		genProduct1.setParentProductSku("marie-jo-sofia-unterlegter-bh-0102056");
 		productsList.add(genProduct1);
 		
 		genProduct2 = MagentoProductCalls.createProductModel();
-		genProduct2.setPrice("49.90");
-		MagentoProductCalls.createApiProduct(genProduct2);
+		genProduct2.setPrice("120.00");
+		genProduct2.setName("Marie Jo SOFIA Unterlegter BH schwarz 75A");
+		genProduct2.setIp("101");
+		genProduct2.setSku("0102056ZWAA075");
+		genProduct2.setColor("schwarz");
+		genProduct2.setProductSize("75A");
+		genProduct2.setParentProductSku("marie-jo-sofia-unterlegter-bh-0102056");
 		productsList.add(genProduct2);
 		
 		genProduct3 = MagentoProductCalls.createProductModel();
-		genProduct3.setPrice("100.00");
-		MagentoProductCalls.createApiProduct(genProduct3);
+		genProduct3.setPrice("79.90");
+		genProduct3.setName("PrimaDonna PERLE Shapewear Body caffé latte 85B");
+		genProduct3.setIp("67");
+		genProduct3.setSku("0462342CALB085");
+		genProduct3.setColor("caffé latte");
+		genProduct3.setProductSize("85B");
+		genProduct3.setParentProductSku("primadonna-perle-shapewear-body-0462342");
 		productsList.add(genProduct3);
 		
-		
-		//3
 		genProduct4 = MagentoProductCalls.createProductModel();
-		genProduct4.setIp("25");
-		genProduct4.setPrice("29.00");
-		MagentoProductCalls.createApiProduct(genProduct4);
+		genProduct4.setPrice("49.90");
+		genProduct4.setIp("42");
+		genProduct4.setSku("0662650VEN36");
+		genProduct4.setName("PrimaDonna DIVINE String venus 36");
+		genProduct4.setColor("venus");
+		genProduct4.setProductSize("36");
+		genProduct4.setParentProductSku("primadonna-divine-string-0662650");
 		productsList.add(genProduct4);
 		
-		//5
 		genProduct5 = MagentoProductCalls.createProductModel();
-		genProduct5.setPrice("5.00");
-		MagentoProductCalls.createApiProduct(genProduct5);
+		genProduct5.setPrice("89.90");
+		genProduct5.setName("PrimaDonna DIVINE Trägerloser BH schwarz 80E");
+		genProduct5.setIp("76");
+		genProduct5.setSku("0262659ZWAE080");
+		genProduct5.setColor("schwarz");
+		genProduct5.setProductSize("80E");
+		genProduct5.setParentProductSku("primadonna-divine-tragerloser-bh-0262659");
 		productsList.add(genProduct5);
-		
-		
-		//6
-		genProduct6 = MagentoProductCalls.createProductModel();
-		genProduct6.setPrice("10.00");
-		genProduct6.setIp("8");
-		MagentoProductCalls.createApiProduct(genProduct6);
-		productsList.add(genProduct6);
-		
-		//19
-		genProduct7 = MagentoProductCalls.createProductModel();
-		genProduct7.setPrice("49.90");
-		genProduct7.setIp("84");
-		MagentoProductCalls.createApiProduct(genProduct7);
-		productsList.add(genProduct7);
-		
-		
-		genProduct8 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct8.setPrice("49.90");
-		MagentoProductCalls.createApiProduct(genProduct8);
-		productsList.add(genProduct8);
-		
-		
-		genProduct9 = MagentoProductCalls.createProductModel();
-		genProduct9.setPrice("100.00");
-		genProduct9.setStockData(
-				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
-		MagentoProductCalls.createApiProduct(genProduct9);
-		productsList.add(genProduct9);
-		
-		
-		genProduct10 =  MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct10.getStockData().setAllowedTermPurchase("1");
-		genProduct10.setPrice("50.00");
-		genProduct10.setIp("0");
-		MagentoProductCalls.createApiProduct(genProduct10);
-		productsList.add(genProduct10);
-		
-		
-		genProduct11 = MagentoProductCalls.createProductModel();
-		genProduct11.setPrice("29.90");
-		genProduct11.setIp("25");
-		genProduct11.setStockData(
-				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
-		MagentoProductCalls.createApiProduct(genProduct11);
-		productsList.add(genProduct11);
-		
-		
-		genProduct12 = MagentoProductCalls.createProductModel();
-		genProduct12.setPrice("89.00");
-		genProduct12.setSpecialPrice("55.00");
-		MagentoProductCalls.createApiProduct(genProduct12);
-		productsList.add(genProduct12);
-		
-		genProduct13 = MagentoProductCalls.createProductModel();
-		genProduct13.setPrice("19.00");
-		MagentoProductCalls.createApiProduct(genProduct13);
-		productsList.add(genProduct13);
-		
-		genProduct14 = MagentoProductCalls.createProductModel();
-		genProduct14.setPrice("24.90");
-		MagentoProductCalls.createApiProduct(genProduct14);
-		productsList.add(genProduct14);
 
 	}
 

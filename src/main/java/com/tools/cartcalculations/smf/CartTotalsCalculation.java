@@ -49,7 +49,7 @@ public class CartTotalsCalculation {
 		tax = tax.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2,
 				BigDecimal.ROUND_HALF_UP);
-
+		System.out.println("tax calculated value= "+tax);
 		result.setSubTotal(String.valueOf(subtotal));
 		System.out.println("jewerlyDiscount" +jewerlyDiscount);
 		result.setJewelryBonus(jewerlyDiscount);

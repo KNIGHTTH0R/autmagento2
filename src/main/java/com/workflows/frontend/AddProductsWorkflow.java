@@ -53,6 +53,23 @@ public class AddProductsWorkflow {
 		return productSteps.setBasicProductAddToCart(qty, productProperty, askingPrice, finalPrice, ipPoints,
 				discountclass);
 	}
+	
+	
+	@StepGroup
+	@Title("Add product to cart")
+	public BasicProductModel setBasicChildProductToCart(ProductDetailedModel model, String qty, String productProperty,
+			String discountclass) {
+		String askingPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
+		String finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, discountclass,
+				CartCalculator.delta);
+		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
+	/*	if (discountclass.equals(ConfigConstants.DISCOUNT_50) || discountclass.equals(ConfigConstants.DISCOUNT_0)) {
+			ipPoints = "0";
+		}*/
+
+		return productSteps.setChildProductAddToCart(model,qty, productProperty, askingPrice, finalPrice, ipPoints,
+				discountclass);
+	}
 
 	
 	public BasicProductModel setBasicProductToCartBeta(ProductDetailedModel model, String qty, String productProperty,

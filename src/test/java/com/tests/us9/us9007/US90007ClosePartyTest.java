@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.PippaDb.PippaDBConnection;
+import com.connectors.PippaDb.VanDelVeldeDBConnection;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -74,7 +74,7 @@ public class US90007ClosePartyTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 		urlModel = MongoReader.grabUrlModels("US9007CreatePartyWithStylistHostTest"+ SoapKeys.GRAB).get(0);
-		PippaDBConnection.updateDateOnParty(urlModel.getUrl());
+		VanDelVeldeDBConnection.updateDateOnParty(urlModel.getUrl());
 	}
 
 	@Test

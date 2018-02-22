@@ -6,16 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.PippaDb.PippaDBConnection;
+import com.connectors.PippaDb.VanDelVeldeDBConnection;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -26,12 +21,13 @@ import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
-import com.tools.data.salesOnSpeed.CustomFields;
-import com.tools.data.salesOnSpeed.Male;
-import com.tools.data.salesOnSpeed.PrimaryPhone;
-import com.tools.data.salesOnSpeed.SalesOnSpeedContactModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US9.4 Place Host Order With Term Purchase Test", type = "Scenarios")
 @Story(Application.HostCart.US9_4.class)
@@ -77,7 +73,7 @@ public class US10001bClosePartyTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 		urlModel = MongoReader.grabUrlModels("US10001bCreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
-		PippaDBConnection.updateDateOnParty(urlModel.getUrl());
+		VanDelVeldeDBConnection.updateDateOnParty(urlModel.getUrl());
 		dateModel = MongoReader.grabDateModels("US10001bCreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 		
 	}

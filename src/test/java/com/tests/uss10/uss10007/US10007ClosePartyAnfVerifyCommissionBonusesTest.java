@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.PippaDb.PippaDBConnection;
+import com.connectors.PippaDb.VanDelVeldeDBConnection;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -88,7 +88,7 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 
 		urlModel = MongoReader.grabUrlModels("US10007CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 	
-		PippaDBConnection.updateDateOnParty(urlModel.getUrl());
+		VanDelVeldeDBConnection.updateDateOnParty(urlModel.getUrl());
 		
 		System.out.println("url: "+urlModel.getUrl());
 		expectedClosedPartyPerformanceModel.setJewelryBonus("35.00");

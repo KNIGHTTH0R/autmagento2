@@ -133,6 +133,13 @@ public class HeaderSteps extends AbstractSteps {
 		footerPage().clickRegistrierungLink();
 
 	}
+	@StepGroup
+	public void navigateToSCRegisterForm() {
+		navigate(MongoReader.getBaseURL()+"/stylist/register/personalinfo/");
+		navigate(MongoReader.getBaseURL()+"/stylist/register/personalinfo/");
+		
+
+	}
 
 	@StepGroup
 	public void navigateToStylecoachRegisterFormUnderContext(String context) {

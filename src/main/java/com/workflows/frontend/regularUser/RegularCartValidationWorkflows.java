@@ -106,7 +106,7 @@ public class RegularCartValidationWorkflows {
 	@Screenshots(onlyOnFailures = true)
 	public void performCartValidations() {
 
-		checkoutValidationSteps.verifySuccessMessage();
+		//checkoutValidationSteps.verifySuccessMessage();
 
 		regularUserCartWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList,
 				RegularUserDataGrabber.grabbedRegularCartProductsList);

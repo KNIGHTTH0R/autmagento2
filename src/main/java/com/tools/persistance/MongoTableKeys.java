@@ -125,6 +125,10 @@ public class MongoTableKeys {
 	public static final String PRODUCT_IP_POINTS = "ipPoints";
 	public static final String PRODUCT_EARLIEST_DATE = "earliestDate";
 	public static final String PRODUCT_DELIVERY_DATE = "deliveryDate";
+	//vdv
+	public static final String PARENT_PRODUCT_SKU = "parentProductSku";
+	public static final String PRODUCT_SIZE = "productSize";
+	public static final String PRODUCT_COLOR= "productColor";
 	public static final String PRODUCT_IN_STOCK = "inStock";
 	public static final String PRODUCT_MIN_QUANTITY = "minQty";
 	public static final String PRODUCT_IS_DISCONTINUED = "isDiscontinued";

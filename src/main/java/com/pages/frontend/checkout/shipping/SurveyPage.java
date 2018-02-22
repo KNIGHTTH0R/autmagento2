@@ -62,8 +62,8 @@ public class SurveyPage extends AbstractPage {
 	 */
 	public ShippingModel grabSurveyData(WebElement element) {
 		ShippingModel result = new ShippingModel();
-		element(element).waitUntilVisible();
-
+		//element(element).waitUntilVisible();
+		waitABit(3000);
 		result.setSubTotal(FormatterUtils.parseValueToTwoDecimals(element.findElement(By.cssSelector("tr:nth-child(1) td.a-right")).getText()));
 		result.setDiscountPrice(FormatterUtils.parseValueToTwoDecimals("-" + element.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
 		result.setShippingPrice(FormatterUtils.parseValueToTwoDecimals(element.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
@@ -145,8 +145,10 @@ public class SurveyPage extends AbstractPage {
 	}
 	
 	public List<CartProductModel> grabProductsList() {
-
-		element(productListContainer).waitUntilVisible();
+		waitABit(2000);
+		scrollPageDown();
+	//	element(productListContainer).waitUntilVisible();
+		waitABit(2000);
 		List<WebElement> entryList = productListContainer.findElements(By.cssSelector("tbody > tr"));
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
 
@@ -163,13 +165,13 @@ public class SurveyPage extends AbstractPage {
 			productNow.setProductsPrice("");
 			productNow.setFinalPrice("");
 			productNow.setPriceIP("");
-
+			
+			System.out.println("Product grabbed: "+productNow.getName());
 			resultList.add(productNow);
 		//	waitABit(2000);
 		}
 
 		DataGrabber.shippingProducts = resultList;
-		System.out.println("grabProductsList in for ");
 		return resultList;
 	}
 

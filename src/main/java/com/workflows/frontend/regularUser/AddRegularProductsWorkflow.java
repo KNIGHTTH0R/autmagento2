@@ -6,6 +6,7 @@ import com.tools.cartcalculations.smf.CartDiscountsCalculation;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 
+import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -28,6 +29,26 @@ public class AddRegularProductsWorkflow {
 	 * @param productProperty
 	 * @return
 	 */
+	
+	
+	@Step
+	@Title("VDV Add product to cart")
+	public RegularBasicProductModel setChildProductToCart(ProductDetailedModel model, String qty, String productProperty) {
+
+	//	searchSteps.navigateToProductPage(model.getParentProductSku());
+		
+		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
+		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
+
+		return productSteps.setRegularBasicProductAddToCart(model,qty, productProperty, finalPrice, ipPoints);
+	//	return null;
+	
+	}
+	
+	
+	
+	
+	
 	@StepGroup
 	@Title("Add product to cart")
 	public RegularBasicProductModel setBasicProductToCart(ProductDetailedModel model, String qty, String productProperty) {

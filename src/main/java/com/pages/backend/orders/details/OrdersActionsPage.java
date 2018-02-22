@@ -70,6 +70,8 @@ public class OrdersActionsPage extends AbstractPage {
 	private WebElement navDocSectionTab;
 
 	public void markOrderAsPaid() {
+		waitABit(2000);
+		//scrollPageDown();
 		element(markAsPaidButton).waitUntilVisible();
 		String onClick = markAsPaidButton.getAttribute("onclick");
 		evaluateJavascript("jQuery.noConflict();");

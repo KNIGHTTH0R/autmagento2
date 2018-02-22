@@ -324,7 +324,10 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.PRODUCT_MIN_QUANTITY, product.getStockData().getMinQty());
 		document.put(MongoTableKeys.PRODUCT_IS_DISCONTINUED, product.getStockData().getIsDiscontinued());
 		document.put(MongoTableKeys.PRODUCT_DELIVERY_DATE, product.getStockData().getEarliestAvailability());
-
+		document.put(MongoTableKeys.PARENT_PRODUCT_SKU, product.getParentProductSku());
+		document.put(MongoTableKeys.PRODUCT_COLOR, product.getColor());
+		document.put(MongoTableKeys.PRODUCT_SIZE, product.getProductSize());
+	
 		table.insert(document);
 	}
 

@@ -42,10 +42,7 @@ public class ProductSteps extends AbstractSteps {
 	public BasicProductModel setBasicProductAddToCart(String qty, String size, String askingPrice, String finalPrice,
 			String ip, String discountClass) {
 		BasicProductModel result = new BasicProductModel();
-		if (!size.contentEquals("0")) {
-			waitABit(TimeConstants.TIME_CONSTANT);
-			setDropDownValue(size);
-		}
+		
 		setQuantity(qty);
 		result = productDetailsPage().grabBasicProductData();
 		result.setDiscountClass(discountClass);
@@ -54,7 +51,28 @@ public class ProductSteps extends AbstractSteps {
 		result.setPriceIP(ip);
 
 		addToCart();
-		// waitABit(TimeConstants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
+		return result;
+	}
+	
+	@StepGroup
+	public BasicProductModel setChildProductAddToCart(ProductDetailedModel model, String qty, String size, String askingPrice, String finalPrice,
+			String ip, String discountClass) {
+		BasicProductModel result = new BasicProductModel();
+	
+		setProductColor(model.getColor());
+		setProductSize(model.getProductSize());
+		setQuantity(qty);
+	
+		result = productDetailsPage().grabBasicProductData();
+		result.setDiscountClass(discountClass);
+		result.setProductsPrice(askingPrice);
+		result.setFinalPrice(finalPrice);
+		result.setPriceIP(ip);
+
+		
+		addToCart();
+		waitABit(TimeConstants.TIME_CONSTANT);
 		return result;
 	}
 	
@@ -252,15 +270,13 @@ public class ProductSteps extends AbstractSteps {
 
 		return result;
 	}
-	@Step
+	
+	//@Step
 	public RegularBasicProductModel setRegularBasicProductAddToCart(ProductDetailedModel model, String qty, String size,
 			String finalPrice, String ipPoints) {
 		RegularBasicProductModel result = new RegularBasicProductModel();
-		if (!size.contentEquals("0")) {
-			setDropDownValue(size);
-		}
 		setQuantity(qty);
-
+		
 		result.setName(model.getName());
 		result.setProdCode(model.getSku());
 		result.setUnitPrice(model.getPrice());
@@ -270,9 +286,12 @@ public class ProductSteps extends AbstractSteps {
 		result.setBunosValue("0");
 		result.setIpPoints(ipPoints);
 
+		setProductColor(model.getColor());
+		setProductSize(model.getProductSize());
+
 		addToCart();
 		waitABit(TimeConstants.TIME_CONSTANT);
-		System.out.println("result:: "+result);
+		
 		return result;
 	}
 
@@ -301,9 +320,38 @@ public class ProductSteps extends AbstractSteps {
 	public HostBasicProductModel setHostBasicProductAddToCart(ProductDetailedModel model, String qty, String size,
 			String finalPrice, String ipPoints) {
 		HostBasicProductModel result = new HostBasicProductModel();
+	/*	if (!size.contentEquals("0")) {
+			setDropDownValue(size);
+		}*/
+		setProductColor(model.getColor());
+		setProductSize(model.getProductSize());
+		setQuantity(qty);
+
+		result.setName(model.getName());
+		result.setProdCode(model.getSku());
+		result.setUnitPrice(model.getPrice());
+		result.setQuantity(qty);
+		result.setFinalPrice(finalPrice);
+		result.setIpPoints(ipPoints);
+		result.setBonusType(ContextConstants.REGULAR_PRICE);
+		result.setBunosValue("0");
+
+		addToCart();
+		waitABit(TimeConstants.TIME_CONSTANT);
+		return result;
+	}
+	
+	
+	@Step
+	public HostBasicProductModel setHostChildBasicProductAddToCart(ProductDetailedModel model, String qty, String size,
+			String finalPrice, String ipPoints) {
+		HostBasicProductModel result = new HostBasicProductModel();
 		if (!size.contentEquals("0")) {
 			setDropDownValue(size);
 		}
+		setProductColor(model.getColor());
+		setProductSize(model.getProductSize());
+		
 		setQuantity(qty);
 
 		result.setName(model.getName());
@@ -353,6 +401,17 @@ public class ProductSteps extends AbstractSteps {
 	public void addToCart() {
 		productDetailsPage().addToCart();
 	}
+	
+	@Step
+	public void setProductColor(String productColor) {
+		productDetailsPage().setProductColor(productColor);
+	}
+
+	@Step
+	public void setProductSize(String productSize) {
+		productDetailsPage().setProductSize(productSize);
+	}
+
 
 	@Step
 	public void addToWishlist() {

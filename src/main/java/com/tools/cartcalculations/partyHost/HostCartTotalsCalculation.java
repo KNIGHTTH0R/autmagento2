@@ -15,6 +15,7 @@ import com.tools.data.frontend.ShippingModel;
 import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.generalCalculation.OrderForCustomerDiscountsCalculation;
 import com.tools.utils.DateUtils;
+import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 
 public class HostCartTotalsCalculation {
@@ -50,7 +51,7 @@ public class HostCartTotalsCalculation {
 		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
 		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));
 		result.setTax(String.valueOf(tax));
-		result.setIpPoints(String.valueOf(ipPoints));
+		result.setIpPoints(String.valueOf(ipPoints.setScale(0)));
 		result.addSegment(ConfigConstants.JEWELRY_BONUS, String.valueOf(jewerlyDiscount));
 		result.addSegment(ConfigConstants.DISCOUNT_40_BONUS, String.valueOf(forthyDiscount));
 		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(buy3Get1));
@@ -91,7 +92,10 @@ public class HostCartTotalsCalculation {
 		}
 		totalAmount = calculateTotalAmount(subtotal, jewerlyDiscount, forthyDiscount, buy3Get1, voucherVal);
 
-		shippingValue = GeneralCartCalculations.calculateNewShipping(subtotal,
+		/*shippingValue = GeneralCartCalculations.calculateNewShipping(subtotal,
+				BigDecimal.valueOf(Double.parseDouble(voucherValue)),
+				BigDecimal.valueOf(Double.parseDouble(shippingValue)));*/
+		shippingValue = GeneralCartCalculations.calculateNewShipping1(subtotal,
 				BigDecimal.valueOf(Double.parseDouble(voucherValue)),
 				BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 
@@ -102,7 +106,7 @@ public class HostCartTotalsCalculation {
 		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
 		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));
 		result.setTax(String.valueOf(tax));
-		result.setIpPoints(String.valueOf(ipPoints));
+		result.setIpPoints(String.valueOf(ipPoints.setScale(0)));
 		result.addSegment(ConfigConstants.JEWELRY_BONUS, String.valueOf(jewerlyDiscount));
 		result.addSegment(ConfigConstants.DISCOUNT_40_BONUS, String.valueOf(forthyDiscount));
 		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(buy3Get1));
@@ -234,13 +238,13 @@ public class HostCartTotalsCalculation {
 				Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_SHIPPING))));
 
 		String newShippingValue = GeneralCartCalculations
-				.calculateNewShipping(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSubTotal())),
+				.calculateNewShipping1(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSubTotal())),
 						BigDecimal.valueOf(Double.parseDouble(
 								discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_SHIPPING))),
 				BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 
 		result.setDiscountPrice(discountCalculation.toString());
-		result.setShippingPrice(shippingValue);
+		result.setShippingPrice(newShippingValue);
 
 		// totals calculation
 		BigDecimal totalAmountCalculation = BigDecimal.ZERO;

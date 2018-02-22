@@ -47,111 +47,47 @@ public class CreateProductsSFMTest extends BaseTest {
 	private ProductDetailedModel genProduct11 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct12 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct13 = new ProductDetailedModel();
-	
-    String voucherValue;
-	
+
+	String voucherValue;
+
 	@Steps
 	public AddProductsWorkflow addProductsWorkflow;
 	public static List<ProductDetailedModel> productsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
 	public void setUp() throws Exception {
-	
+
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 
 	@Test
 	public void createProductsTest() {
 		// products for Shop for myself cart- us3001
-		//and regular cart-us8001, us8002,us8003,us8004
-	
-		
+		// and regular cart-us8001, us8002,us8003,us8004
+
+		//// vdv
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("49.90");
-		MagentoProductCalls.createApiProduct(genProduct1);
+		genProduct1.setIp("42");
+		genProduct1.setSku("0662650VEN36");
+		genProduct1.setName("PrimaDonna DIVINE String venus 36");
+		genProduct1.setColor("venus");
+		genProduct1.setProductSize("36");
+		genProduct1.setParentProductSku("primadonna-divine-string-0662650");
 		productsList.add(genProduct1);
-
-		//1
+		
 		genProduct2 = MagentoProductCalls.createProductModel();
-		genProduct2.setIp("25");
-		genProduct2.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct2);
+		genProduct2.setPrice("89.90");
+		genProduct2.setName("PrimaDonna DIVINE Trägerloser BH schwarz 80E");
+		genProduct2.setIp("76");
+		genProduct2.setSku("0262659ZWAE080");
+		genProduct2.setColor("schwarz");
+		genProduct2.setProductSize("80E");
+		genProduct2.setParentProductSku("primadonna-divine-tragerloser-bh-0262659");
 		productsList.add(genProduct2);
 		
-		//2
-		genProduct3 = MagentoProductCalls.createMarketingProductModel();
-		genProduct3.setIp("0");
-		genProduct3.setPrice("229.00");
-		MagentoProductCalls.createApiProduct(genProduct3);
-		productsList.add(genProduct3);
-		
-		//19
-		genProduct4 = MagentoProductCalls.createProductModel();
-		genProduct4.setPrice("49.90");
-	//	genProduct1.setSpecialPrice("40.00");
-		genProduct4.setIp("84");
-		MagentoProductCalls.createApiProduct(genProduct4);
-		productsList.add(genProduct4);
-
-		//20
-		genProduct5 = MagentoProductCalls.createProductModel();
-		genProduct5.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct5);
-		productsList.add(genProduct5);
-		
-		//21
-		genProduct6 = MagentoProductCalls.createProductModel();
-		genProduct6.setPrice("49.50");
-		MagentoProductCalls.createApiProduct(genProduct6);
-		productsList.add(genProduct6);
-
-		//22
-		genProduct7 = MagentoProductCalls.createProductModel();
-		genProduct7.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct7);
-		productsList.add(genProduct7);
-		
-		//25
-		genProduct8 = MagentoProductCalls.createProductModel();
-		genProduct8.setPrice("49.90");
-		MagentoProductCalls.createApiProduct(genProduct8);
-		productsList.add(genProduct8);
-		
-		//26
-		genProduct9 = MagentoProductCalls.createProductModel();
-		genProduct9.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct9);
-		productsList.add(genProduct9);
-		
-		
-		//27
-		genProduct10 = MagentoProductCalls.createProductModel();
-		genProduct10.setPrice("49.90");
-		MagentoProductCalls.createApiProduct(genProduct10);
-		productsList.add(genProduct10);
-
 		
 
-		
-		//28
-		genProduct11 = MagentoProductCalls.createProductModel();
-		genProduct11.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct11);
-		productsList.add(genProduct1);
-		
-		//29
-		genProduct12 = MagentoProductCalls.createProductModel();
-		genProduct12.setPrice("49.00");
-		MagentoProductCalls.createApiProduct(genProduct12);
-		productsList.add(genProduct12);
-		
-		//30
-		genProduct13 = MagentoProductCalls.createProductModel();
-		genProduct13.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct13);
-		productsList.add(genProduct13);
-		
-		
 	}
 
 	@After
@@ -161,5 +97,4 @@ public class CreateProductsSFMTest extends BaseTest {
 		}
 	}
 
-	}
-
+}

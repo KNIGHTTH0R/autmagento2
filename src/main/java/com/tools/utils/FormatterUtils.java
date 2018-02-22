@@ -1,6 +1,7 @@
 package com.tools.utils;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,9 +13,6 @@ import com.tools.constants.Separators;
 import com.tools.data.IpOverViewSummaryModel;
 
 public class FormatterUtils {
-	
-	
-	
 
 	/**
 	 * This is a helper method to aproximate the (local time RO) of a form
@@ -104,15 +102,20 @@ public class FormatterUtils {
 	}
 
 	public static void main(String[] args) {
-		//System.out.println(FormatterUtils.incrementSingleTpOrderId("10026526800", 2));
-		System.out.println(FormatterUtils.getCustomDate("yyyy-MM-dd", 100000));
+		// System.out.println(FormatterUtils.incrementSingleTpOrderId("10026526800",
+		// 2));
+	//	System.out.println(FormatterUtils.getIntegerNumberFromString("311.0"));
+		BigDecimal ipPoints = BigDecimal.ZERO;
+		ipPoints=BigDecimal.valueOf(311.0);
+		
+		System.out.println(ipPoints.setScale(0));
 	}
 
 	public static String incrementSingleTpOrderId(String orderId, int incrementNumber) {
 
 		String digitPart = FormatterUtils.getIntegerNumberFromString(orderId);
 		String orderWithIncrement = digitPart.substring(0, digitPart.length() - 1) + incrementNumber;
-		
+
 		return orderWithIncrement;
 	}
 
@@ -185,11 +188,10 @@ public class FormatterUtils {
 	public static BigDecimal parseValueToBigDecimal(String value) {
 		return BigDecimal.valueOf(Double.parseDouble(parseValue(value, 0)));
 	}
-	
+
 	public static double parseValueToDouble(String value) {
-		return  Double.parseDouble(value);
+		return Double.parseDouble(value);
 	}
-	
 
 	public static String cleanString(String unitPrice) {
 		String result = unitPrice;
@@ -254,11 +256,5 @@ public class FormatterUtils {
 		return roudValue;
 	}
 
-	
-	
-//	 public static void main(String[] args) {
-//	 System.out.println(FormatterUtils.getIntegerNumberFromString("qa-int0000183500"));
-//	 System.out.println(FormatterUtils.getNotDigitsFromString("qa-int0000183500"));
-//	 System.out.println(FormatterUtils.incrementOrderId("qa-int0000183500",2));
-//	 }
+
 }

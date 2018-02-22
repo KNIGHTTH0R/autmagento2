@@ -135,17 +135,22 @@ public class RegularCartTotalsCalculation {
 				forthyDiscount.setScale(2, RoundingMode.HALF_UP);
 			}
 		}
-		totalAmount = calculateTotalAmount(subtotal, jewerlyDiscount, forthyDiscount, buy3Get1, voucherPrice);
 
+		totalAmount = calculateTotalAmount(subtotal, jewerlyDiscount, forthyDiscount, buy3Get1, voucherPrice);
+		System.out.println("totalAmount-> " + totalAmount);
 		shippingValue = GeneralCartCalculations.calculateNewShipping(subtotal,
 				BigDecimal.valueOf(Double.parseDouble(voucherValue)),
 				BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+		System.out.println("shippingValue-> " + shippingValue);
 
+		if (totalAmount.compareTo(BigDecimal.valueOf(150)) > 0) {
+			shippingValue = "0";
+		}
 		tax = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 		tax = tax.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2,
 				BigDecimal.ROUND_HALF_UP);
-
+		System.out.println("tax-> " + tax);
 		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
 		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));
 		result.setTax(String.valueOf(tax));
@@ -160,6 +165,15 @@ public class RegularCartTotalsCalculation {
 		}
 
 		return result;
+	}
+
+	public static void main(String[] args) {
+		String shipping="3.9";
+		BigDecimal totalAmount=BigDecimal.valueOf(297.6);
+		if (totalAmount.compareTo(BigDecimal.valueOf(150)) > 0) {
+			shipping = "0";
+		}
+		System.out.println(shipping);
 	}
 
 	public static RegularCartCalcDetailsModel calculateTotalsWithBuy3Get1Active(
@@ -276,13 +290,14 @@ public class RegularCartTotalsCalculation {
 						.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_SHIPPING))));
 
 		String newShippingValue = GeneralCartCalculations
-				.calculateNewShipping(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSubTotal())),
+				.calculateNewShipping1(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSubTotal())),
 						BigDecimal.valueOf(Double.parseDouble(
 								discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_SHIPPING))),
-						BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+				BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 
 		result.setDiscountPrice(discountCalculation.toString());
-		result.setShippingPrice(shippingValue);
+		// result.setShippingPrice(shippingValue);
+		result.setShippingPrice(newShippingValue);
 
 		BigDecimal totalAmountCalculation = BigDecimal.ZERO;
 		totalAmountCalculation = totalAmountCalculation

@@ -109,7 +109,7 @@ public class OrderWorkflows {
 		verifyTotalPaid(orderTotalsGrabbed.getTotalPaid(), calculatedTotals.getTotalPaid());
 		verifyTotalRefunded(orderTotalsGrabbed.getTotalRefunded(), calculatedTotals.getTotalRefunded());
 		verifyTotalPayable(orderTotalsGrabbed.getTotalPayable(), calculatedTotals.getTotalPayable());
-
+		verifyIP(orderTotalsGrabbed.getTotalIP(), calculatedTotals.getTotalIP());
 	}
 	public void validateBorrowCartCalculationTotals(String string) {
 		
@@ -160,7 +160,7 @@ public class OrderWorkflows {
 
 	@Step
 	public void verifyIP(String orderValue, String calculation) {
-		CustomVerification.verifyTrue("Failure: IP values dont match: " + orderValue + " - " + calculation, orderValue.contentEquals(calculation));
+		CustomVerification.verifyTrue("Failure: IP values dont match: " + orderValue + " - " + calculation, calculation.contains(orderValue));
 	}
 
 	@Step
