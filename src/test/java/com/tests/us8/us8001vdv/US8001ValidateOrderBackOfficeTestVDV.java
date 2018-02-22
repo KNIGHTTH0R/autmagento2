@@ -38,7 +38,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US8.1 Customer Buy With Forthy Discounts And Jb Test", type = "Scenarios")
 @Story(Application.RegularCart.US8_1.class)
 @RunWith(SerenityRunner.class)
-public class US8001ValidateOrderBackOfficeTest extends BaseTest {
+public class US8001ValidateOrderBackOfficeTestVDV extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -64,10 +64,10 @@ public class US8001ValidateOrderBackOfficeTest extends BaseTest {
 	@Before
 	public void setUp() {
 
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US8001CustomerBuyProductsNoDiscountTest" + SoapKeys.GRAB);
-		productsList = MongoReader.grabRegularBasicProductModel("US8001CustomerBuyProductsNoDiscountTest" + SoapKeys.CALC);
-		shippingModelList = MongoReader.grabShippingModel("US8001CustomerBuyProductsNoDiscountTest" + SoapKeys.CALC);
-		calcDetailsModelList = MongoReader.grabRegularCartCalcDetailsModels("US8001CustomerBuyProductsNoDiscountTest" + SoapKeys.CALC);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US8001CustomerBuyProductsWithNoBonnusTestVDV" + SoapKeys.GRAB);
+		productsList = MongoReader.grabRegularBasicProductModel("US8001CustomerBuyProductsWithNoBonnusTestVDV" + SoapKeys.CALC);
+		shippingModelList = MongoReader.grabShippingModel("US8001CustomerBuyProductsWithNoBonnusTestVDV" + SoapKeys.CALC);
+		calcDetailsModelList = MongoReader.grabRegularCartCalcDetailsModels("US8001CustomerBuyProductsWithNoBonnusTestVDV" + SoapKeys.CALC);
 
 		if (orderModelList.size() == 1) {
 
@@ -105,7 +105,7 @@ public class US8001ValidateOrderBackOfficeTest extends BaseTest {
 	 * BackEnd steps in this test
 	 */
 	@Test
-	public void us8001ValidateOrderBackOfficeTest() {
+	public void us8001ValidateOrderBackOfficeTestVDV() {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 
 
