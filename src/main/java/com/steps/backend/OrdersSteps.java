@@ -122,6 +122,12 @@ public class OrdersSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void verifyCaptureOrder(String shopperReference) {
+		//orderNotificationPage().verifyCapture(shopperReference);
+	}
+
+	
+	@Step
 	public void openDocumentsSection() {
 		// TODO Auto-generated method stub
 		ordersActionsPage().openDocumentsSection();
