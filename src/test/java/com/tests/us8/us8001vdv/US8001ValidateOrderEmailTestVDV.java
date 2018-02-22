@@ -33,7 +33,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US8.1 Customer Buy With Forthy Discounts And Jb Test", type = "Scenarios")
+@WithTag(name = "US8.1 Customer Buy With Any Bonusses aplied", type = "Scenarios")
 @Story(Application.RegularCart.US8_1.class)
 @RunWith(SerenityRunner.class)
 public class US8001ValidateOrderEmailTestVDV extends BaseTest{

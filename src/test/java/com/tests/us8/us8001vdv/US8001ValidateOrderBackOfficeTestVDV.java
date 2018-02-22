@@ -94,6 +94,7 @@ public class US8001ValidateOrderBackOfficeTestVDV extends BaseTest {
 		shopTotalsModel.setTotalAmount(shippingModelList.get(0).getTotalAmount());
 		// Constants added
 		shopTotalsModel.setTax(calcDetailsModelList.get(0).getTax());
+		//shopTotalsModel.setTotalIP(calcDetailsModelList.get(0).getI());
 		shopTotalsModel.setTotalPaid("0.00");
 		shopTotalsModel.setTotalRefunded("0.00");
 		shopTotalsModel.setTotalPayable(shippingModelList.get(0).getTotalAmount());
@@ -117,7 +118,7 @@ public class US8001ValidateOrderBackOfficeTestVDV extends BaseTest {
 		orderInfoModel = ordersSteps.grabOrderInfo();
 
 		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, shopTotalsModel);
-		orderWorkflows.validateRegularUserCalculationTotals("TOTALS VALIVATION");
+		orderWorkflows.validateRegularUserCalculationTotalsReg("TOTALS VALIVATION");
 
 		regularUserOrderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
 		regularUserOrderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
