@@ -127,7 +127,7 @@ public class US11001ValidateOrderBackOfficeTestVDV extends BaseTest {
 		ordersSteps.selectMenu(ConfigConstants.ADYEN_NOTIFICATION_TAB);
 		ordersSteps.verifyAuthorization(orderInfoModel.getPspReference());
 		ordersSteps.verifyCapture(orderInfoModel.getPspReference());
-		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung erfolgreich");
+	//	orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung erfolgreich");
 //		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
 		
 		customVerifications.printErrors();

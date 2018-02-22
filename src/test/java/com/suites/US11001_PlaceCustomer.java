@@ -15,7 +15,7 @@ import com.tests.uss11.us11001.US11001ValidateOrderEmailTestVDV;
 	US10001CreatePartyWithCustomerHostTestVDV.class,
 	US11001PartyHostBuysForCustomerWithNoBonusTestVDV.class,
 	US11001ValidateOrderBackOfficeTestVDV.class,
-	US11001ValidateOrderEmailTestVDV.class
+//	US11001ValidateOrderEmailTestVDV.class
 	 
 })
 @RunWith(Suite.class)
