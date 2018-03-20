@@ -34,7 +34,7 @@ public class HeaderPage extends AbstractPage {
 	// @FindBy(id = "#add-to-cart")
 	// private WebElement addToCartButton;
 
-	@FindBy(css = "a.button[href*='cart']")
+	@FindBy(css = "a.btn[href*='cart']")
 	private WebElement goToCartButton;
 
 	@FindBy(css = "div.top-cart span")
