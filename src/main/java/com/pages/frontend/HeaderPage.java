@@ -85,6 +85,12 @@ public class HeaderPage extends AbstractPage {
 
 	@FindBy(css = ".link-list.iconed li:nth-child(2) a")
 	private WebElement inviteFriendsLink;
+	
+	
+	@FindBy(css = ".links li.last a")
+	private WebElement logOutBtn;
+	
+	
 
 	public void selectLanguage(String language) {
 		element(websiteContainer).waitUntilVisible();
@@ -274,6 +280,11 @@ public class HeaderPage extends AbstractPage {
 		// TODO Auto-generated method stub
 		CustomVerification.verifyTrue("The user seems to not be logged in Pippajean",
 				log0utBtn.getText().contains("ABMELDEN"));
+	}
+
+	public void performLogOut() {
+		element(logOutBtn).waitUntilVisible();
+		logOutBtn.click();
 	}
 
 }

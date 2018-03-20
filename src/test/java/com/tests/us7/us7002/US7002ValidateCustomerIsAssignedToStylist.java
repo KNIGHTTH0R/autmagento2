@@ -42,7 +42,7 @@ public class US7002ValidateCustomerIsAssignedToStylist extends BaseTest {
 			System.out.println(stylistEmail);
 		} else
 			System.out.println("The database has no entries");
-		context = "/ioa";
+		context = "/emc";
 	}
 
 	@Test

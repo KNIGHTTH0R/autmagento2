@@ -460,6 +460,7 @@ public class BackEndSteps extends AbstractSteps {
 		navigationPage().selectSubmenu("system_config");
 	}
 	
+	
 
 
 	@Step
@@ -498,6 +499,39 @@ public class BackEndSteps extends AbstractSteps {
 	public void clickOnSystemTab() {
 		navigationPage().clickOnSystemTab();
 		
+	}
+	
+	@Step
+	public void clickOnPippajeanStylistTab() {
+		systemConfigurationPage().clickOnDesiredTab1("Style Coach");
+		
+	}
+	
+	@Step
+	public void expendCustomerDistributionTab() {
+		systemConfigurationPage().expendCustomerDistributionTab();
+		
+	}
+
+	@Step
+	public void selectDistributedOnSpecificSc(String string) {
+		// TODO Auto-generated method stub
+		systemConfigurationPage().selectDistributedOnSpecificSc(string);
+
+		
+		
+	}
+	
+	
+	@Step
+	public void saveConfiguration() {
+		systemConfigurationPage().saveConfiguration();
+		
+	}
+
+	public void selectSpecifiSC(String scEmail) {
+		// TODO Auto-generated method stub
+		systemConfigurationPage().selectSpecifiSC(scEmail);
 	}
 
 	// @Step

@@ -40,7 +40,7 @@ public class ConfigConstants {
 	///public static final String WEB_MAIL = "mailnesia.com";
 //	public static final String WEB_MAIL = "ipdeer.com";
 //	public static final String WEB_MAIL = "golemico.com";
-	public static final String WEB_MAIL = "hitbts.com";
+	public static final String WEB_MAIL = "mailtrix.net";
 
 	
 	

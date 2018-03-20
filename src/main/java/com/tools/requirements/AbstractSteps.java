@@ -75,6 +75,7 @@ import com.pages.frontend.MyContactsListPage;
 import com.pages.frontend.PartiesListPage;
 import com.pages.frontend.PartyCreationPage;
 import com.pages.frontend.PartyDetailsPage;
+import com.pages.frontend.PartyHostGuestPage;
 import com.pages.frontend.PomProductListPage;
 import com.pages.frontend.ProductDetailsPage;
 import com.pages.frontend.ProductListPage;
@@ -153,6 +154,10 @@ public class AbstractSteps extends ScenarioSteps {
 	 */
 	@Step
 	public void performLogin(String userName, String userPass) {
+		
+	//	getDriver().navigate().to("http://185.48.116.231:8080/DynamicsNAV90/WebClient/");
+
+	//	System.out.println("eu sunce cel mai tare din parcare");
 		navigate(MongoReader.getBaseURL());
 		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
@@ -619,6 +624,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public PartyDetailsPage partyDetailsPage() {
 		return getPages().currentPageAt(PartyDetailsPage.class);
+	}
+	
+	public PartyHostGuestPage partyHostGuestPage() {
+		return getPages().currentPageAt(PartyHostGuestPage.class);
 	}
 
 	public ContactDetailsPage contactDetailsPage() {

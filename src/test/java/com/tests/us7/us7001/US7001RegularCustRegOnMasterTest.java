@@ -42,7 +42,7 @@ public class US7001RegularCustRegOnMasterTest extends BaseTest {
 	@Test
 	public void us7001RegularCustRegOnMasterTest() {
 
-		customerRegistrationSteps.fillCreateCustomerForm(dataModel, addressModel);
+		customerRegistrationSteps.fillCreateCustomerUnderMasterForm(dataModel, addressModel);
 		//customerRegistrationSteps.fillCreateCustomerFormAnReturnFoundByNameStylecoaches(dataModel, addressModel, "sim", "sim");
 		customerRegistrationSteps.verifyCustomerCreation();
 		customVerifications.printErrors();

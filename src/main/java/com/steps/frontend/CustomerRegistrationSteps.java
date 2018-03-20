@@ -41,6 +41,26 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		checkIAgree();
 		clickCompleteButton();
 	}
+	
+	@Title("Fill create customer under Master form")
+	@StepGroup
+	public void fillCreateCustomerUnderMasterForm(CustomerFormModel customerData, AddressModel addressData) {
+
+		navigate(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
+		headerPage().clickAnmeldenButton();
+		loginPage().clickGoToCustomerRegistration();
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		checkParties();
+		fillContactDetails(addressData);
+		//searchStylistByGeoip(addressData);
+		checkIAgree();
+		clickCompleteButton();
+	}
 
 	@Title("Fill create customer form without plz")
 	@StepGroup
@@ -359,6 +379,45 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		fillContactDetails(addressData);
 		checkIAgree();
 		clickCompleteButton();
+	}
+	
+	
+	@StepGroup
+	@Title("Fill create customer form under context -> from party guest page")
+	public void fillCreateCustomerFormUnderScContext(CustomerFormModel customerData, AddressModel addressData,
+			String context) {
+
+		verifyFistNameAutoFilled(customerData.getFirstName());
+		verifyLastAutoFilled(customerData.getLastName());
+		verifyEmailAutoFilled(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		checkParties();
+		checkMember();
+		fillContactDetails(addressData);
+		checkIAgree();
+		clickCompleteButton();
+	}
+	
+	public void verifyPrepopulatedFields(CustomerFormModel customerData, AddressModel addressModel) {
+		// TODO Auto-generated method stub
+		verifyFistNameAutoFilled(customerData.getFirstName());
+		verifyLastAutoFilled(customerData.getLastName());
+		verifyEmailAutoFilled(customerData.getEmailName());
+	}
+
+	
+
+	private void verifyEmailAutoFilled(String emailName) {
+		createCustomerPage().verifyEmailAutoFilled(emailName);	
+	}
+
+	private void verifyLastAutoFilled(String lastName) {
+		createCustomerPage().verifyLastAutoFilled(lastName);	
+	}
+
+	private void verifyFistNameAutoFilled(String firstName) {
+		createCustomerPage().verifyFistNameAutoFilled(firstName);	
 	}
 
 	@StepGroup
@@ -788,5 +847,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		headerPage().clickAnmeldenButton();
 		
 	}
+
+	
 
 }

@@ -159,7 +159,7 @@ public class CreateCustomerPage extends AbstractPage {
 	public void checkParties() {
 		waitABit(2000);
 		element(partiesCheckbox).waitUntilVisible();
-		//partiesCheckbox.click();
+		// partiesCheckbox.click();
 		clickElement(partiesCheckbox);
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
 				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
@@ -173,12 +173,12 @@ public class CreateCustomerPage extends AbstractPage {
 
 	public void checkIAgree() {
 		clickElement(iAgreeCheckbox);
-		//iAgreeCheckbox.click();
+		// iAgreeCheckbox.click();
 	}
 
 	public void clickCompleteButton() {
 		clickElement(completeButton);
-	//	completeButton.click();
+		// completeButton.click();
 	}
 
 	public void inputStreetAddress(String streetAddress) {
@@ -227,15 +227,13 @@ public class CreateCustomerPage extends AbstractPage {
 
 	public void selectCountryName(String countryName) {
 		element(countrySelect).waitUntilVisible();
-	//	focusElement("#country");
-//	/	element(countrySelect).selectByVisibleText(countryName);
-		
-		
-		
+		// focusElement("#country");
+		// / element(countrySelect).selectByVisibleText(countryName);
+
 		clickElement(countrySelect);
 		Actions actions = new Actions(getDriver());
 		actions.moveToElement(countrySelect).perform();
-		
+
 		Select oSelect = new Select(getDriver().findElement(By.id("country")));
 
 		oSelect.selectByVisibleText(countryName);
@@ -256,7 +254,7 @@ public class CreateCustomerPage extends AbstractPage {
 
 	public void searchStylistByGeoip() {
 		clickElement(searchStylistByGeoip);
-	//	searchStylistByGeoip.click();
+		// searchStylistByGeoip.click();
 	}
 
 	public void inputPostcodeFilter(String postcode) {
@@ -272,17 +270,17 @@ public class CreateCustomerPage extends AbstractPage {
 				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 		element(searchCountry).waitUntilVisible();
 		clickElement(searchCountry);
-		
+
 		Actions actions = new Actions(getDriver());
 		actions.moveToElement(countrySelect).perform();
-		
+
 		Select oSelect = new Select(getDriver().findElement(By.id("country")));
 
 		oSelect.selectByVisibleText(countryName);
-		
-		//element(searchCountry).selectByVisibleText(countryName);
+
+		// element(searchCountry).selectByVisibleText(countryName);
 	}
-	
+
 	public void selectCountryFilterLead(String countryName) {
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
 				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
@@ -294,7 +292,7 @@ public class CreateCustomerPage extends AbstractPage {
 	public void searchStylistByName() {
 		element(searchStylistByName).waitUntilVisible();
 		clickElement(searchStylistByName);
-	//	searchStylistByName.click();
+		// searchStylistByName.click();
 	}
 
 	public void inputSearchFirstName(String postcode) {
@@ -308,7 +306,7 @@ public class CreateCustomerPage extends AbstractPage {
 	public void selectFirstStylistFromList() {
 		element(firstStylistContainer).waitUntilVisible();
 		clickElement(firstStylistContainer);
-	//	firstStylistContainer.click();
+		// firstStylistContainer.click();
 	}
 
 	public List<DykscSeachModel> getFoundStylecoachesData() {
@@ -333,7 +331,7 @@ public class CreateCustomerPage extends AbstractPage {
 
 	public void searchByGeoipSubmit() {
 		element(searchByGeoipSubmitButton).waitUntilVisible();
-	//	searchByGeoipSubmitButton.click();
+		// searchByGeoipSubmitButton.click();
 		clickElement(searchByGeoipSubmitButton);
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
 				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
@@ -343,7 +341,7 @@ public class CreateCustomerPage extends AbstractPage {
 	public void searchByNameSubmit() {
 		element(searchByNameSubmitButton).waitUntilVisible();
 		clickElement(searchByNameSubmitButton);
-//	/	searchByNameSubmitButton.click();
+		// / searchByNameSubmitButton.click();
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
 				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 		waitABit(1000);
@@ -374,9 +372,38 @@ public class CreateCustomerPage extends AbstractPage {
 	public void verifyStylistEmail(String stylistEmail2) {
 		element(stylistEmail).waitUntilVisible();
 		String grabbedStylistEmail = stylistEmail.getText();
-		System.out.println("grabbedStylistEmail: "+grabbedStylistEmail );
+		System.out.println("grabbedStylistEmail: " + grabbedStylistEmail);
 		CustomVerification.verifyTrue("Failure: The expected stylist is not preselected" + "expected: " + stylistEmail2
 				+ "grabbed: " + grabbedStylistEmail, grabbedStylistEmail.contains(stylistEmail2));
+
+	}
+
+	public void verifyEmailAutoFilled(String emailName) {
+	
+		
+		WebElement guestEmail=getDriver().findElements(By.cssSelector("input[id*='email']")).get(0);
+		CustomVerification.verifyTrue(
+				"Failure: The Guest Email name is not displayed coretly exoected:" + emailName + " actual:"
+						+ guestEmail.getAttribute("value"),
+						guestEmail.getAttribute("value").contentEquals(emailName));
+	}
+
+	public void verifyLastAutoFilled(String lastName) {
+		WebElement guestLastName = getDriver().findElements(By.cssSelector(".name-lastname input")).get(0);
+
+		CustomVerification.verifyTrue(
+				"Failure: The Guest Last name is not displayed coretly exoected:" + lastName + " actual:"
+						+ guestLastName.getAttribute("value"),
+				guestLastName.getAttribute("value").contentEquals(lastName));
+	}
+
+	public void verifyFistNameAutoFilled(String firstName) {
+		WebElement guestFirstName = getDriver().findElements(By.cssSelector(".name-firstname input")).get(0);
+
+		CustomVerification.verifyTrue(
+				"Failure: The Guest First name is not displayed coretly exoected:" + firstName + " actual:"
+						+ guestFirstName.getAttribute("value"),
+				guestFirstName.getAttribute("value").contentEquals(firstName));
 
 	}
 

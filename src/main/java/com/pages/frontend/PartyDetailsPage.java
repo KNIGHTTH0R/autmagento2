@@ -15,6 +15,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import com.tools.CustomVerification;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
@@ -114,6 +115,8 @@ public class PartyDetailsPage extends AbstractPage {
 	@FindBy(css = ".mr-b-20 a")
 	private WebElement clickOSPMbutton;
 	
+	@FindBy(css = ".beta-block a")
+	private WebElement clickHostPatyLink;
 	
 
 	// this is made for a single product.if the products is the expected
@@ -479,6 +482,37 @@ public class PartyDetailsPage extends AbstractPage {
 		}
 		Assert.assertTrue("The guest was not found in invites list", found);
 	}
+	
+	
+	public void verifyGuestIsDisplayedOnPartyPage(String firstname, String lastname,boolean isApproved) {
+		boolean found = false;
+		List<WebElement> status=new ArrayList<WebElement>();
+		scrollToPageTop();
+		waitABit(3000);
+		List<WebElement> guestList = getDriver().findElements(By.cssSelector("#invitations-list-table tbody tr"));
+		for (WebElement guest : guestList) {
+			status=guest.findElements(By.cssSelector("td:nth-child(3)"));
+			if (guest.findElement(By.cssSelector("td:nth-child(1)")).getText()
+					.contentEquals(firstname +" "+lastname)) {
+				found = true;
+				break;
+			}
+		}
+		if(isApproved==false){
+			CustomVerification.verifyTrue(
+					"Failire: The guest Status is not coorect, expected isApproved= " + isApproved , status.get(0).getText().contains("Kann nicht teilnehmen"));
+		}
+		if(isApproved==true){
+			
+			//Nimmt teil
+			CustomVerification.verifyTrue(
+					"Failire: The guest Status is not coorect, isApproved= " + isApproved , status.get(0).getText().contains("Nimmt teil"));
+		}
+
+		CustomVerification.verifyTrue(
+				"Failire: The Guest was not find in guest list,expected:" + firstname + " " + lastname, found);
+
+	}
 
 	public void verifyThatOrderIsInTheOrdersList(String order) {
 		element(ordersList).waitUntilVisible();
@@ -581,6 +615,27 @@ public class PartyDetailsPage extends AbstractPage {
 	public void clickOnlineStylePartyManagerButton() {
 		element(clickOSPMbutton).waitUntilVisible();
 		clickOSPMbutton.click();
-		
 	}
+
+	public void openHostPartyPage() {
+		element(clickHostPatyLink).waitUntilVisible();
+		waitABit(2000);
+		clickHostPatyLink.click();
+	}
+
+	public String grabHostPassword() {
+		waitABit(2000);
+		WebElement passwordHost=getDriver().findElements(By.cssSelector(".beta-block tr:nth-child(2) td:nth-child(2)")).get(0);
+		System.out.println(passwordHost.getText());
+		return passwordHost.getText();
+	}
+
+	public String grabPartyLink() {
+		waitABit(2000);
+		WebElement partyLink=getDriver().findElements(By.cssSelector(".beta-block tr:nth-child(1) td:nth-child(2)")).get(0);
+		System.out.println(partyLink.getText());
+		return partyLink.getText();
+	}
+
+
 }

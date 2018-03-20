@@ -283,5 +283,10 @@ public class HeaderSteps extends AbstractSteps {
 		headerPage().navigate("https://staging.pippajean.com/de/");
 		headerPage().checkSucesfullLoginInPippa();
 	}
+
+	public void performLogOut() {
+		headerPage().performLogOut();	
+		waitABit(3000);
+	}
 	
 }

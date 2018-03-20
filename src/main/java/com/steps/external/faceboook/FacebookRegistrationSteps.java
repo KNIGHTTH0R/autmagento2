@@ -351,6 +351,8 @@ public class FacebookRegistrationSteps extends AbstractSteps {
 		facebookLoginPage().inputUser(user);
 		facebookLoginPage().inputPass(pass);
 		facebookLoginPage().clickLogin();
+		
+		findFrame("Deine Gäste Seite");
 
 	}
 

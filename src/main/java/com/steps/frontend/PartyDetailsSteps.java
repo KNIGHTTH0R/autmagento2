@@ -185,7 +185,16 @@ public class PartyDetailsSteps extends AbstractSteps {
 	public void verifyGuestIsInvited(String customerName) {
 		// TODO Auto-generated method stub
 		partyDetailsPage().verifyGuestIsInvited(customerName);
+
 	}
+	
+	@Step
+	public void verifyGuestIsDisplayedOnPartyPage(String customerName,String x, boolean y) {
+		// TODO Auto-generated method stub
+		partyDetailsPage().verifyGuestIsDisplayedOnPartyPage(customerName,x,y);
+
+	}
+	
 
 	@Step
 	public void checkWishlistSection(List<RegularBasicProductModel> productsWishList) {
@@ -219,5 +228,22 @@ public class PartyDetailsSteps extends AbstractSteps {
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		
 	}
+	@Step
+	public void clickOnPartyLink() {
+		// TODO Auto-generated method stub
+		partyDetailsPage().openHostPartyPage();
+	}
+
+	@Step
+	public String grabHostPassword() {
+		return partyDetailsPage().grabHostPassword();
+	}
+	
+	@Step
+	public String grabPartyLink() {
+		return partyDetailsPage().grabPartyLink();
+	}
+
+	
 
 }

@@ -92,7 +92,7 @@ public class US3001BuyProductsForTheFirstTimeTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		CartCalculator.wipe();
+		/*CartCalculator.wipe();
 		DataGrabber.wipe();
 
 //		 genProduct1 = MagentoProductCalls.createProductModel();
@@ -153,13 +153,16 @@ public class US3001BuyProductsForTheFirstTimeTest extends BaseTest {
 				}
 			}
 		}
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);*/
 	}
 
 	@Test
 	public void us3001BuyProductsForTheFirstTimeTest() {
+		
+		
+		
 		frontEndSteps.performLogin(username, password);
-		if (!headerSteps.succesfullLogin()) {
+	/*	if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
@@ -190,7 +193,7 @@ public class US3001BuyProductsForTheFirstTimeTest extends BaseTest {
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 
-		confirmationSteps.agreeAndCheckout();
+		confirmationSteps.agreeAndCheckout();*/
 	}
 
 	@After
