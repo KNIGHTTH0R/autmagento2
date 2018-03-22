@@ -6,6 +6,7 @@ import java.util.Properties;
 
 import javax.mail.Address;
 import javax.mail.BodyPart;
+import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -176,14 +177,10 @@ public class GmailConnector {
 	}
 	
 	
-	/*private void deleteInbox() {
+	public  void deleteInbox() {
 		Properties props2 = System.getProperties();
 		Session session2 = Session.getDefaultInstance(props2, null);
 		props2.setProperty(EmailConstants.EMAIL_STORE, protocol);
-
-		Message message[] = null;
-		Message imboxMessage[] = null;
-		Message spamMessage[] = null;
 
 		try {
 
@@ -194,14 +191,11 @@ public class GmailConnector {
 			
 
 			Message[] msgList = imboxFolder.getMessages();
-			// iterate messages and flag them as deleted
 			for (Message msg : msgList) {
 				msg.setFlag(Flags.Flag.DELETED, true);
+				System.out.println("deleted mail");
 			}
-			
-
-			//close folder with expunge argument true 
-			//in order to delete messages
+		
 			imboxFolder.close(true);
 			
 
@@ -209,6 +203,6 @@ public class GmailConnector {
 			e.printStackTrace();
 		}
 	}
-*/
+
 	
 }

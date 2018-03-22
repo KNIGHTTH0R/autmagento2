@@ -11,17 +11,23 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
+import com.steps.frontend.ContactDetailsSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
+import com.steps.frontend.MyContactsListSteps;
 import com.steps.frontend.registration.party.CreateNewContactSteps;
 import com.tests.BaseTest;
 import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.ContactModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.DateUtils;
+import com.workflows.frontend.contact.ContactValidationWorkflows;
 
 @WithTag(name = "US17.1 Check reassigned duplicate contacts and customer associated contacts when new SC is selected", type = "Scenarios")
 @Story(Application.MassAction.US17_1.class)
@@ -38,37 +44,57 @@ public class US17001AddNewContactToStyleCoachTest extends BaseTest {
 	public HeaderSteps headerSteps;
 	@Steps
 	public CreateNewContactSteps createNewContactSteps;
+	@Steps
+	public MyContactsListSteps myContactsListSteps;
+	
+	@Steps
+	public ContactValidationWorkflows contactValidationWorkflows;
+	@Steps
+	public ContactDetailsSteps contactDetailsSteps;
+	
+	private ContactModel expectedDetailsModel = new ContactModel();
 
+	private ContactModel grabbedDetailsModel;
+	
+	private DateModel dateModel;
 	private CustomerFormModel stylistRegistrationData;
 	private CustomerFormModel dataModel;
 	private AddressModel addressModel;
 
 	@Before
 	public void setUp() throws Exception {
-
+		dateModel=new DateModel();
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
-
-		int size = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").size();
+		stylistRegistrationData=new CustomerFormModel();
+		/*int size = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").size();
 		if (size > 0) {
 			stylistRegistrationData = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").get(0);
 		} else
-			System.out.println("The database has no entries");
-
+			System.out.println("The database has no entries");*/
+		stylistRegistrationData.setEmailName("vdv.automation@gmail.com");
+		stylistRegistrationData.setPassword("emilian1");
 		MongoConnector.cleanCollection(getClass().getSimpleName());
+		
+		dateModel.setDate(DateUtils.getCurrentDate("dd.MM.YYYY"));
+
+		expectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(stylistRegistrationData,dataModel,dateModel,addressModel);
+
+		expectedDetailsModel.setHasPartyHostInterrest(true);
+		expectedDetailsModel.setHasStyleCoachInterrest(true);
+		expectedDetailsModel.setIsNewsletterSubscribed(true);
 	}
 
 	@Test
 	public void us17001AddNewContactToStyleCoachTest() {
 
 		customerRegistrationSteps.performLogin(stylistRegistrationData.getEmailName(), stylistRegistrationData.getPassword());
-		if (!headerSteps.succesfullLogin()) {
-			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
-		}
-		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToToAddNewContact();
 		createNewContactSteps.fillCreateNewContact(dataModel, addressModel);
-
+		myContactsListSteps.verifyUnicAndOpenContactDetails(dataModel.getFirstName(),dataModel.getFirstName());
+	
+		grabbedDetailsModel = contactDetailsSteps.grabContactDetails();
+		contactValidationWorkflows.validateCreatedContactDetails(expectedDetailsModel, grabbedDetailsModel);
 	}
 
 	@After

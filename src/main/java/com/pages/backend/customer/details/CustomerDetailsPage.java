@@ -379,7 +379,7 @@ public class CustomerDetailsPage extends AbstractPage {
 		String jb = "";
 		List<WebElement> list = getDriver().findElements(By.cssSelector("#rewardPointsBalanceGrid_table tbody tr"));
 		for (WebElement item : list) {
-			if (item.getText().contains("Schmuckbonus")) {
+			if (item.getText().contains("Lingerie Bonus (EUR)")) {
 				jb = item.findElement(By.cssSelector("td:nth-child(3)")).getText();
 				break;
 			}

@@ -100,5 +100,10 @@ public class LoungeSteps extends AbstractSteps {
 		
 	}
 
+	public void gotToContactListPage() {
+		loungePage().gotToContactListPage();
+		
+	}
+
 	
 }

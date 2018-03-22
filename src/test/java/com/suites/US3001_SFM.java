@@ -12,8 +12,8 @@ import com.tests.us3.us3001vdv.US3001ValidateOrderEmailTest;
 @SuiteClasses({
 	CreateProductsSFMTest.class,
 	US3001SfmOrderWithNoDiscountTest.class,
-//	US3001ValidateOrderBackOfficeTest.class,
-	//US3001ValidateOrderEmailTest.class
+	US3001ValidateOrderBackOfficeTest.class,
+//	US3001ValidateOrderEmailTest.class
 	 
 })
 @RunWith(Suite.class)

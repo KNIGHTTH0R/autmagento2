@@ -29,9 +29,9 @@ public class US7003ConfirmCustomerTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		int size = MongoReader.grabCustomerFormModels("US7003RegularCustDykscSearchyPlzTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7003RegularCustDykscSearchByPlzTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US7003RegularCustDykscSearchyPlzTest").get(0).getEmailName();
+			stylistEmail = MongoReader.grabCustomerFormModels("US7003RegularCustDykscSearchByPlzTest").get(0).getEmailName();
 		} else
 			System.out.println("The database has no entries");
 

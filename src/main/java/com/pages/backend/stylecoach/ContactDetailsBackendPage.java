@@ -30,7 +30,7 @@ public class ContactDetailsBackendPage extends AbstractPage {
 			String key = itemNow.findElement(By.cssSelector("td:first-child")).getText();
 			WebElement valueTr = itemNow.findElement(By.cssSelector("td:last-child"));
 
-			if (key.contains("Style Coach")) {
+			if (key.contains("Stylistin")) {
 				valueTransformer = valueTr.getText();
 				resultModel.setParentId(valueTransformer);
 			}

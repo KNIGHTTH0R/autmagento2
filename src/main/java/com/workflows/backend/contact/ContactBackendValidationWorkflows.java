@@ -33,6 +33,21 @@ public class ContactBackendValidationWorkflows {
 
 		return result;
 	}
+	
+	public ContactDetailsModel populateSimpleContactDetailsModel(CustomerFormModel customerFormModel,
+			AddressModel addressModel, String parentId) {
+
+		ContactDetailsModel result = new ContactDetailsModel();
+
+		result.setEmail(customerFormModel.getEmailName());
+		result.setCountryCode(MongoReader.getContext().toUpperCase());
+		result.setHouseNumber(addressModel.getStreetNumber());
+		result.setPlz(addressModel.getPostCode());
+		result.setStreetAddress(addressModel.getStreetAddress());
+		result.setParentId(parentId);
+
+		return result;
+	}
 
 	public ContactDetailsModel populateContactDetailsModel(CustomerFormModel customerFormModel,
 			AddressModel addressModel, DateModel dateModel) {
@@ -59,6 +74,27 @@ public class ContactBackendValidationWorkflows {
 		verifyActivatedAt(grabbedModel.getActivatedAt(), expectedModel.getActivatedAt());
 		verifyPlz(grabbedModel.getPlz(), expectedModel.getPlz());
 		verifyStreetAddress(grabbedModel.getStreetAddress(), expectedModel.getStreetAddress());
+		verifyParentId(grabbedModel.getParentId(), expectedModel.getParentId());
+	}
+	
+	@Title("Validate contact details")
+	@StepGroup
+	public void verifyCreatedContactDetails(ContactDetailsModel grabbedModel, ContactDetailsModel expectedModel) {
+
+		verifyEmail(grabbedModel.getEmail(), expectedModel.getEmail());
+		verifyCountryCode(grabbedModel.getCountryCode(), expectedModel.getCountryCode());
+		verifyHouseNumber(grabbedModel.getHouseNumber(), expectedModel.getHouseNumber());
+		verifyPlz(grabbedModel.getPlz(), expectedModel.getPlz());
+		verifyStreetAddress(grabbedModel.getStreetAddress(), expectedModel.getStreetAddress());
+		verifyParentId(grabbedModel.getParentId(), expectedModel.getParentId());
+	}
+	
+	@Title("Validate contact details")
+	@StepGroup
+	public void verifyCreatedContactDetailsByAcceptinInvitation(ContactDetailsModel grabbedModel, ContactDetailsModel expectedModel) {
+
+		verifyEmail(grabbedModel.getEmail(), expectedModel.getEmail());
+		verifyCountryCode(grabbedModel.getCountryCode(), expectedModel.getCountryCode());
 		verifyParentId(grabbedModel.getParentId(), expectedModel.getParentId());
 	}
 

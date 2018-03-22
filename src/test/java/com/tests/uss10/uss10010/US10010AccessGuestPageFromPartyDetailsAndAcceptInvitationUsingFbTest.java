@@ -108,15 +108,8 @@ public class US10010AccessGuestPageFromPartyDetailsAndAcceptInvitationUsingFbTes
 		}
 		
 		urlModel = MongoReader.grabUrlModels("US10010CreatePartyWithStylistHostTest"+SoapKeys.GRAB).get(0);
+		System.out.println("URL: "+urlModel.getUrl());
 
-		EmailCredentialsModel emailData = new EmailCredentialsModel();
-		
-		emailData.setHost(EmailConstants.RECEIVING_HOST);
-		emailData.setProtocol(EmailConstants.PROTOCOL);
-		emailData.setUsername(email);
-		emailData.setPassword(emailPassword);
-        
-		gmailConnector = new GmailConnector(emailData);
 	}
 	
 	@Test

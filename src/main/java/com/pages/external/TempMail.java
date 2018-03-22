@@ -181,6 +181,10 @@ public class TempMail extends AbstractPage {
 		CustomVerification.verifyTrue("Failure: invoice doc does not appers in mail", list.getText().contains(orderIncrementId));
 	}
 	
-
+	public static void main(String[] args) {
+		String x="https://vdv-qa-aut.pippajean.com/de/index.php/customer/account/confirm/?back_url=https://vdv-qa-aut.pippajean.com/de/index.php/emc/dessous.html/?___store=de_lang_de&amp;id=55&amp;key=0cb150de74949e63deefc82523bb9ee7&amp;distributed=";
+		String y=x.substring(x.indexOf("https://vdv-qa"), x.indexOf("distributed="));
+		System.out.println(y+"distributed=");
+	}
 
 }

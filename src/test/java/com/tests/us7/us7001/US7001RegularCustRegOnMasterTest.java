@@ -51,6 +51,8 @@ public class US7001RegularCustRegOnMasterTest extends BaseTest {
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
+		MongoWriter.saveAddressModel(addressModel, getClass().getSimpleName());
+
 	}
 
 }

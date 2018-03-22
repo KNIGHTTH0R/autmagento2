@@ -23,7 +23,10 @@ public class EmailClientSteps extends AbstractSteps {
 	public String confirmAccount(String email, String title) {
 
 		mailPage.openEmail(email, title);
-		navigate(mailPage.getConfirmationLink());
+		String confirmationLink=mailPage.getConfirmationLink();
+		String link=confirmationLink.substring(confirmationLink.indexOf("https://vdv-qa"), confirmationLink.indexOf("distributed="));
+		navigate(link+"distributed=");
+	//	navigate(mailPage.getConfirmationLink());
 
 		return DateUtils.getCurrentDate("MM/dd/YYYY");
 

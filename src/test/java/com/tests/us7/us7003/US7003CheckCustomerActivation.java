@@ -21,7 +21,7 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US7.2 Regular Customer Registration on Context Test ", type = "Scenarios")
+@WithTag(name = "US7.3 Regular Customer Registration Dyksc by plz ", type = "Scenarios")
 @Story(Application.CustomerRegistration.US7_2.class)
 @RunWith(SerenityRunner.class)
 public class US7003CheckCustomerActivation extends BaseTest {
@@ -38,9 +38,9 @@ public class US7003CheckCustomerActivation extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		int size = MongoReader.grabCustomerFormModels("US7003RegularCustDykscSearchyPlzTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7003RegularCustDykscSearchByPlzTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US7003RegularCustDykscSearchyPlzTest").get(0).getEmailName();
+			stylistEmail = MongoReader.grabCustomerFormModels("US7003RegularCustDykscSearchByPlzTest").get(0).getEmailName();
 			System.out.println(stylistEmail);
 		} else
 			System.out.println("The database has no entries");

@@ -50,7 +50,7 @@ public class MyContactsListPage extends AbstractPage {
 		List<WebElement> contactsList = getDriver().findElements(By.cssSelector("form#contacts-form tbody tr"));
 		boolean found = false;
 		for (WebElement contact : contactsList) {
-			System.out.println("contact: " + contact);
+			System.out.println("contact: " + contact.getText());
 			boolean matchesAllTerms = true;
 			for (String term : terms) {
 				System.out.println("term: " + term);

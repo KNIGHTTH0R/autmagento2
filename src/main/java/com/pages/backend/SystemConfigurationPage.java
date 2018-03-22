@@ -174,8 +174,10 @@ public class SystemConfigurationPage extends AbstractPage {
 
 
 	public void expendCustomerDistributionTab() {
-		evaluateJavascript("jQuery.noConflict();");
+		//evaluateJavascript("jQuery.noConflict();");
+		waitABit(4000);
 		element(customerDistribution).waitUntilVisible();
+	//	clickElement(customerDistribution);
 		customerDistribution.click();
 	}
 

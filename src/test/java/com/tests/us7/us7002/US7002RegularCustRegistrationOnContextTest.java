@@ -60,6 +60,7 @@ public class US7002RegularCustRegistrationOnContextTest extends BaseTest{
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
+		MongoWriter.saveAddressModel(addressModel, getClass().getSimpleName());
 	}
 
 }

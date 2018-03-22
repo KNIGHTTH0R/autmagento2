@@ -83,6 +83,7 @@ public class PartyCreationPage extends AbstractPage {
 		element(partySubmitButton).waitUntilVisible();
 		clickElement(partySubmitButton);
 	//	partySubmitButton.click();
+	//
 		waitABit(TimeConstants.WAIT_TIME_LONG);
 		return getDriver().getCurrentUrl();
 		

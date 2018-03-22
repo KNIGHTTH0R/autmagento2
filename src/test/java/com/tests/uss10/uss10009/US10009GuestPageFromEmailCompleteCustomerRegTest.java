@@ -10,11 +10,13 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.gmail.GmailConnector;
+import com.connectors.mongo.MongoConnector;
 import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
@@ -32,6 +34,7 @@ import com.tools.data.email.EmailCredentialsModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -43,7 +46,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US10.9 From Email Grab Guest Link Page and Than complete customer Registration",type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_2.class)
 @RunWith(SerenityRunner.class)
-public class US10009AccessGuestPageFromEmailAndCompleteCustomerRegistrationTest extends BaseTest{
+public class US10009GuestPageFromEmailCompleteCustomerRegTest extends BaseTest{
 	
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -74,9 +77,9 @@ public class US10009AccessGuestPageFromEmailAndCompleteCustomerRegistrationTest 
 		customerData =new CustomerFormModel();
 		addressModel=new AddressModel();
 		
-		customerData.setFirstName("edi");
+		/*customerData.setFirstName("edi");
 		customerData.setLastName("wilkman");
-		customerData.setEmailName("test2231@evozon.com");
+		customerData.setEmailName("test2231@evozon.com");*/
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -110,11 +113,12 @@ public class US10009AccessGuestPageFromEmailAndCompleteCustomerRegistrationTest 
 		emailData.setPassword(emailPassword);
         
 		gmailConnector = new GmailConnector(emailData);
+		MongoConnector.cleanCollection(getClass().getSimpleName());
+
 	}
 	
 	@Test
-	public void us3002ValidateOrderEmailTest() {
-		
+	public void us10009GuestPageFromEmailCompleteCustomerRegTest() {
 		String message = gmailConnector.searchForMail("", "PIPPA&JEAN Einladung zur Style Party", false);
 		System.out.println("index: "+message.indexOf("http://vdv-qa.pippajean.com/p/g/"));
 		
@@ -132,13 +136,14 @@ public class US10009AccessGuestPageFromEmailAndCompleteCustomerRegistrationTest 
 		//System.out.println(linkparty.substring(linkparty.indexOf('"'), linkparty));
 		
 	//	emailSteps.validateEmailContent("PIPPA&JEAN Einladung zur Style Party", message);
-		
+		gmailConnector.deleteInbox();
 		customVerifications.printErrors();
 	
 	}
-	public static void main(String[] args) {
-		
-		
+	@After
+	public void saveData() {
+		MongoWriter.saveCustomerFormModel(customerData, getClass().getSimpleName());
+		MongoWriter.saveAddressModel(addressModel, getClass().getSimpleName());
 	}
 
 }

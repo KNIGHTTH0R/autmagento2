@@ -43,6 +43,23 @@ public class ContactValidationWorkflows {
 //		verifyNewsletterFlagStatus(expectedModel.getNewsletterStatus(), grabbedModel.getNewsletterStatus());
 		verifyLastHistoryRegistration(expectedModel.getLastHistoryRegistration(), grabbedModel.getLastHistoryRegistration());
 	}
+	
+	@Title("Validate contact details")
+	@Step
+	public void validateCreatedContactDetails(ContactModel expectedModel, ContactModel grabbedModel) {
+		System.out.println("VALIDATE CONTACT DETAILS");
+		verifyName(expectedModel.getName(), grabbedModel.getName());
+		verifyStreet(expectedModel.getStreet(), grabbedModel.getStreet());
+		verifyNumber(expectedModel.getNumber(), grabbedModel.getNumber());
+		verifyZip(expectedModel.getZip(), grabbedModel.getZip());
+		verifyTown(expectedModel.getTown(), grabbedModel.getTown());
+		verifyCountry(expectedModel.getCountry(), grabbedModel.getCountry());
+		verifyCreatedAt(expectedModel.getCreatedAt(), grabbedModel.getCreatedAt());
+		verifyPartyHostStatus(expectedModel.getHasPartyHostInterrest(), grabbedModel.getHasPartyHostInterrest());
+		verifyStylecoachFlagStatus(expectedModel.getHasPartyHostInterrest(), grabbedModel.getHasPartyHostInterrest());
+	//	verifyNewsletterFlagStatus(expectedModel.getIsNewsletterSubscribed(), grabbedModel.getIsNewsletterSubscribed());
+//		verifyLastHistoryRegistration(expectedModel.getLastHistoryRegistration(), grabbedModel.getLastHistoryRegistration());
+	}
 
 	@Step
 	public void verifyLastHistoryRegistration(String expectedValue, String grabbedValue) {
@@ -97,9 +114,40 @@ public class ContactValidationWorkflows {
 	}
 
 	@Step
-	public void verifyNewsletterFlagStatus(String expectedValue, String grabbedValue) {
+	public void verifyNewsletterFlagStatus(boolean expectedValue, boolean grabbedValue) {
 		CustomVerification.verifyTrue("Failure: Newsletter flag status doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue,
-				grabbedValue.contentEquals(expectedValue));
+				 grabbedValue == expectedValue);
 	}
+	public ContactModel populateExpectedContactModel(CustomerFormModel stylistModel, CustomerFormModel dataModel, AddressModel addressModel) {
+		ContactModel result = new ContactModel();
+
+		result.setName(dataModel.getFirstName() + Separators.SPACE + dataModel.getLastName());
+	//	result.setCreatedAt(dateModel.getDate());
+		result.setStreet(addressModel.getStreetAddress());
+		result.setNumber(addressModel.getStreetNumber());
+		result.setZip(addressModel.getPostCode());
+		result.setTown(addressModel.getHomeTown());
+		result.setCountry(addressModel.getCountryName());
+		result.setLastHistoryRegistration(stylistModel.getFirstName() + Separators.SPACE + stylistModel.getLastName());
+		
+		return result;
+	}
+	public void validateCreatedContact100erDetails(ContactModel expectedModel, ContactModel grabbedModel,
+			String expectedTag) {
+		
+		System.out.println("VALIDATE CONTACT DETAILS");
+		verifyName(expectedModel.getName(), grabbedModel.getName());
+	//	verifyStreet(expectedModel.getStreet(), grabbedModel.getStreet());
+		//verifyNumber(expectedModel.getNumber(), grabbedModel.getNumber());
+	//	verifyZip(expectedModel.getZip(), grabbedModel.getZip());
+	//	verifyTown(expectedModel.getTown(), grabbedModel.getTown());
+		verifyCountry(expectedModel.getCountry(), grabbedModel.getCountry());
+		verifyCreatedAt(expectedModel.getCreatedAt(), grabbedModel.getCreatedAt());
+		verifyPartyHostStatus(expectedModel.getHasPartyHostInterrest(), grabbedModel.getHasPartyHostInterrest());
+		verifyStylecoachFlagStatus(expectedModel.getHasPartyHostInterrest(), grabbedModel.getHasPartyHostInterrest());
+//	/	verifyTag(expectedTag,grabbedModel.getTag()));
+	
+	}
+
 
 }

@@ -503,7 +503,7 @@ public class BackEndSteps extends AbstractSteps {
 	
 	@Step
 	public void clickOnPippajeanStylistTab() {
-		systemConfigurationPage().clickOnDesiredTab1("Style Coach");
+		systemConfigurationPage().clickOnDesiredTab1("Stylistin");
 		
 	}
 	

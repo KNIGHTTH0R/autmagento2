@@ -91,7 +91,6 @@ public class US10009AcceptInvitationFromGuestPageTest extends BaseTest {
 		urlModel = MongoReader.grabUrlModels("US10009CreatePartyWithCustomerHostTestVDV"+SoapKeys.GRAB).get(0);
 		
 
-
 	}
 
 	@Test
@@ -108,7 +107,6 @@ public class US10009AcceptInvitationFromGuestPageTest extends BaseTest {
 		partyHostGuestSteps.clickOnCustomerRegistrationLink(); 
 		partyDetailsSteps.switchToNewestOpenedTab();
 		customerRegistrationSteps.fillCreateCustomerFormUnderScContext(customerData, addressModel, "emx");
-		
 		
 		
 	/*	partyHostGuestSteps.loginInHostPage(passord);

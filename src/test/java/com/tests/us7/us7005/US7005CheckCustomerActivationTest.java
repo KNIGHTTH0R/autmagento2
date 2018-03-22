@@ -18,34 +18,30 @@ import com.tools.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "backend")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US7.4b Regular Customer Registration from Landing Page Not Pref Country Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_4.class)
 @RunWith(SerenityRunner.class)
 public class US7005CheckCustomerActivationTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
-	@Steps 
+	@Steps
 	public StylistValidationSteps stylistValidationSteps;
 
-	public String clientName;
-	public String grabStatus;
-	public String expectedStatus;
-	
+	private String clientName;
+	private String grabStatus;
 
 	@Before
 	public void setUp() throws Exception {
-		
-		int size = MongoReader.grabCustomerFormModels("US7005RegularKnownUserRegistrationLandingPageTest").size();
+
+		int size = MongoReader.grabCustomerFormModels("US7005RegCustRegUnderSpecificBEStylistTest").size();
 		if (size > 0) {
-			clientName = MongoReader.grabCustomerFormModels("US7005RegularKnownUserRegistrationLandingPageTest").get(0).getEmailName();
+			clientName = MongoReader.grabCustomerFormModels("US7005RegCustRegUnderSpecificBEStylistTest").get(0).getEmailName();
 			System.out.println(clientName);
 		} else
 			System.out.println("The database has no entries");
-
-	
 	}
 
 	@Test
@@ -56,8 +52,7 @@ public class US7005CheckCustomerActivationTest extends BaseTest {
 		backEndSteps.searchForEmail(clientName);
 		backEndSteps.openCustomerDetails(clientName);
 		grabStatus = backEndSteps.extractEmailConfirmationStatus();
-		stylistValidationSteps.validateStatus(grabStatus, ConfigConstants.CONFIRMED);		
-		backEndSteps.deleteCustomer();		
+		stylistValidationSteps.validateStatus(grabStatus, ConfigConstants.CONFIRMED);
 		customVerifications.printErrors();
 	}
 

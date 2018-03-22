@@ -47,8 +47,11 @@ public class LoungePage extends AbstractPage {
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) > ul > li:nth-child(2)")
 	private WebElement myContactsLink;
 
-	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) > ul > li:nth-child(2) > ul li:nth-child(2) a")
+	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) .nav-column:nth-child(2) li:nth-child(2) a")
 	private WebElement addNewContactLink;
+	
+	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) .nav-column:nth-child(2) li:nth-child(1) a")
+	private WebElement contactListLink;
 
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) > ul > li:nth-child(2) > ul li:nth-child(1) a")
 	private WebElement contactsListLink;
@@ -212,7 +215,7 @@ public class LoungePage extends AbstractPage {
 		Actions builder = new Actions(getDriver());
 
 		builder.moveToElement(meinBusinessButton).build().perform();
-		builder.moveToElement(myContactsLink).build().perform();
+	//	builder.moveToElement(myContactsLink).build().perform();
 
 		element(addNewContactLink).waitUntilVisible();
 		addNewContactLink.click();
@@ -323,6 +326,16 @@ public void clickGoToStylistInventory() {
 
 	element(stylistInventoryLink).waitUntilVisible();
 	stylistInventoryLink.click();
+}
+
+public void gotToContactListPage() {
+	Actions builder = new Actions(getDriver());
+
+	builder.moveToElement(meinBusinessButton).build().perform();
+//	builder.moveToElement(myContactsLink).build().perform();
+
+	element(contactListLink).waitUntilVisible();
+	contactListLink.click();	
 }
 
 }

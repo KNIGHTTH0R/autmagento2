@@ -153,4 +153,30 @@ public class CreateNewContactSteps extends AbstractSteps {
 	public void fillCountry(AddressModel addressData) {
 		createNewContactPage().selectCountryName(addressData.getCountryName());
 	}
+
+	public void clickOn100erButton() {
+		createNewContactPage().clickOn100erButton();
+
+	}
+
+	public void fillCreateNewContactWith100er(CustomerFormModel dataModel, AddressModel addressModel, String tag) {
+		createNewContactPage().firstnameInput100er(dataModel.getFirstName());
+		createNewContactPage().lastnameInput100er(dataModel.getLastName());
+		createNewContactPage().emailInput100er(dataModel.getEmailName());
+		fillContactDetails100er(addressModel);
+		//createNewContactPage().checkNewsletter();
+		createNewContactPage().checkParties100er();
+		createNewContactPage().checkMember100er();
+		createNewContactPage().tagName100er(tag);
+		createNewContactPage().submitContact100er();
+		createNewContactPage().clickBackToContactList();
+		createNewContactPage().clickLeaveYhePage();
+		waitABit(TimeConstants.TIME_CONSTANT);
+	}
+
+	private void fillContactDetails100er(AddressModel addressModel) {
+		// TODO Auto-generated method stub
+		//createNewContactPage().selectCountryName100er(addressModel.getCountryName());
+		createNewContactPage().inputPhoneNumber100er(addressModel.getPhoneNumber())	;
+	}
 }
