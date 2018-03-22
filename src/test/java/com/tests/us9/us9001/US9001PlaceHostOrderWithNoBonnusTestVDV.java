@@ -199,7 +199,7 @@ public class US9001PlaceHostOrderWithNoBonnusTestVDV extends BaseTest {
 		hostCartSteps.acceptInfoPopupForNotConsumedBonus();
 		//shippingSteps.selectAddress(billingAddress);
 	//	shippingSteps.setSameAsBilling(true);
-		contactHostShippingHostSteps.checkItemNotReceivedYet();
+	//	contactHostShippingHostSteps.checkItemNotReceivedYet();
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();	
 		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();
 	

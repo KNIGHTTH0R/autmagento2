@@ -214,7 +214,7 @@ public class US11001PartyHostBuysForCustomerWithNoBonusTestVDV extends BaseTest 
 		HostCartCalculator.calculateOrderForCustomerCartAndShippingTotals(discountClass, shippingValue, voucherValue);
 
 		orderForCustomerCartSteps.clickGoToShipping();
-		shippingPartySectionSteps.checkItemNotReceivedYet();
+//		shippingPartySectionSteps.checkItemNotReceivedYet();
 		shippingPartySectionSteps.clickShipToHostessButton();
 	//	shippingPartySectionSteps.selectShipToHostessAddress(shippingAddress);
 
