@@ -1,7 +1,6 @@
 package com.tools.utils;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,7 +9,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 
 import com.tools.constants.Separators;
-import com.tools.data.IpOverViewSummaryModel;
 
 public class FormatterUtils {
 
