@@ -167,7 +167,22 @@ public class BackEndSteps extends AbstractSteps {
 	public void clickOnSalesOrders() {
 		navigationPage().selectSubmenu("sales_order");
 	}
-
+	
+	@Step
+	public void clickOnSalesInvoiceOrders() {
+		navigationPage().selectSubmenu("sales_invoice");
+	}
+	
+	@Step
+	public void clickOnSalesShipmentOrders() {
+		navigationPage().selectSubmenu("sales_shipment");
+	}
+	
+	@Step
+	public void clickOnSalesCreditOrders() {
+		navigationPage().selectSubmenu("sales_creditmemo");
+	}
+	
 	// @Step
 	// public void clickOnCreditMemo() {
 	// navigationPage().selectMenuFromNavbar("Verkäufe", "Gutschriften");
@@ -214,10 +229,49 @@ public class BackEndSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void searchInvoiceByOrderId(String orderId) {
+		orderListPage().inputInvoiceOderId(orderId);
+		orderListPage().clickOnInvoiceSearch();
+		waitABit(2000);
+	}
+	
+	@Step
+	public void searchShipmentByOrderId(String orderId) {
+		orderListPage().inputShipmentOderId(orderId);
+		orderListPage().clickOnShipmentSearch();
+		waitABit(2000);
+	}
+	
+	@Step
+	public void searchCreditMemoByOrderId(String orderId) {
+		orderListPage().inputCreditMemoOderId(orderId);
+		orderListPage().clickOnCreditMemoSearch();
+		waitABit(2000);
+	}
+	
+
+	
+	@Step
 	public void openOrderDetails(String name) {
 		orderListPage().openOrderDetails(name);
 	}
 
+	@Step
+	public void openInvoiceDetails(String name) {
+		orderListPage().openInvoiceDetails(name);
+	}
+
+	@Step
+	public void openShipmentDetails(String name) {
+		orderListPage().openShipmentDetails(name);
+	}
+	
+	@Step
+	public void openCreditMemoDetails(String name) {
+		orderListPage().openCreditMemoDetails(name);
+	}
+	
+	
 	@Step
 	public void searchCreditMemoByorderId(String orderId) {
 		creditMemoListPage().inputCreditMemoOrderId(orderId);
@@ -225,10 +279,7 @@ public class BackEndSteps extends AbstractSteps {
 		waitABit(2000);
 	}
 
-	@Step
-	public void openCreditMemoDetails(String name) {
-		creditMemoListPage().openCreditMemoDetails(name);
-	}
+	
 
 	@Step
 	public void cancelCreditMemo() {

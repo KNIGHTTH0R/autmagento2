@@ -57,9 +57,10 @@ public class US17001AddNewContactToStyleCoachTest extends BaseTest {
 	private ContactModel grabbedDetailsModel;
 	
 	private DateModel dateModel;
-	private CustomerFormModel stylistRegistrationData;
 	private CustomerFormModel dataModel;
 	private AddressModel addressModel;
+	private CustomerFormModel stylistRegistrationData;
+	
 
 	@Before
 	public void setUp() throws Exception {
@@ -67,11 +68,7 @@ public class US17001AddNewContactToStyleCoachTest extends BaseTest {
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 		stylistRegistrationData=new CustomerFormModel();
-		/*int size = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").size();
-		if (size > 0) {
-			stylistRegistrationData = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").get(0);
-		} else
-			System.out.println("The database has no entries");*/
+		
 		stylistRegistrationData.setEmailName("vdv.automation@gmail.com");
 		stylistRegistrationData.setPassword("emilian1");
 		MongoConnector.cleanCollection(getClass().getSimpleName());

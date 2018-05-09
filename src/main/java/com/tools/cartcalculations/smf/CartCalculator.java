@@ -4,10 +4,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.connectors.http.MagentoProductCalls;
+import com.tools.constants.ConfigConstants;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.data.soap.ProductDetailedModel;
 import com.tools.utils.PrintUtils;
+import com.workflows.frontend.AddProductsWorkflow;
 
 public class CartCalculator {
 
@@ -106,13 +110,13 @@ public class CartCalculator {
 
 		calculatedProductsList25 = CartDiscountsCalculation.calculateProductsfor25Discount(productsList25, jewelryDiscount);
 
-		calculatedProductsList50 = CartDiscountsCalculation.calculateProductsfor50Discount(productsList50, productsList25, jewelryDiscount);
+	//	calculatedProductsList50 = CartDiscountsCalculation.calculateProductsfor50Discount(productsList50, productsList25, jewelryDiscount);
 
-		calculatedProductsListMarketing = CartDiscountsCalculation.calculateProductsforMarketingMaterial(productsListMarketing, marketingDiscount);
+	//	calculatedProductsListMarketing = CartDiscountsCalculation.calculateProductsforMarketingMaterial(productsListMarketing, marketingDiscount);
 
-		allProductsListRecalculated.addAll(calculatedProductsList50);
+	//	allProductsListRecalculated.addAll(calculatedProductsList50);
 		allProductsListRecalculated.addAll(calculatedProductsList25);
-		allProductsListRecalculated.addAll(calculatedProductsListMarketing);
+		//allProductsListRecalculated.addAll(calculatedProductsListMarketing);
 
 		calculatedTotalsDiscounts = CartTotalsCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount, taxClass, shippingValue,
 				shippingValue);
@@ -242,5 +246,55 @@ public class CartCalculator {
 				taxClass, shippingValue, shippingValueForLessThan150);
 		shippingValue = Double.parseDouble(calculatedTotalsDiscounts.getTotalAmount()) >= 150 ? shippingValue : shippingValueForLessThan150;
 		shippingCalculatedModel = CartCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
+	}
+	
+	
+	private static ProductDetailedModel genProduct1 = new ProductDetailedModel();
+	private static ProductDetailedModel genProduct2 = new ProductDetailedModel();
+	private static ProductDetailedModel genProduct3 = new ProductDetailedModel();
+	private static List<BasicProductModel> productsList =new ArrayList<BasicProductModel>();
+	private static BasicProductModel productData;
+	private static AddProductsWorkflow addProductsWorkflow;
+	private static BasicProductModel productData2;
+	private static BasicProductModel productData3;
+	public static List<BasicProductModel> productsList25Beta = new ArrayList<BasicProductModel>();
+	
+	public static void main(String[] args) {
+		
+		genProduct1 = MagentoProductCalls.createProductModelBeta();
+		genProduct1.setIp("0");
+		genProduct1.setPrice("49.90");
+		
+		genProduct2 = MagentoProductCalls.createProductModelBeta();
+		genProduct2.setIp("0");
+		genProduct2.setPrice("89.90");
+		
+		genProduct3 = MagentoProductCalls.createProductModelBeta();
+		genProduct3.setIp("25");
+		genProduct3.setPrice("49.90");
+		
+		productData = addProductsWorkflow.setBasicChildProductToCart(genProduct1, "1", "0","20");
+		productData = addProductsWorkflow.setBasicChildProductToCart(genProduct2, "2", "0", "20");
+/*		productData = addInCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_20);
+		productData2=addInCart(genProduct2, "2", "0", ConfigConstants.DISCOUNT_20);*/
+//		productData3=addInCart(genProduct3, "1", "0", ConfigConstants.DISCOUNT_20);
+	/*	productsList25Beta.add(productData);
+		productsList25Beta.add(productData2);*/
+		productsList25.add(productData);
+		productsList25.add(productData);
+		calculateJMDiscounts("150","0","19","3.9");
+		
+		
+		
+//		productsList25Beta.add(productData3);
+		
+//		System.out.println(productsList25Beta.get(0).getFinalPrice());
+//		
+		/*BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList25Beta, ConfigConstants.DISCOUNT_20);
+		System.out.println("sumaaaa "+sum25);
+	
+		List<BasicProductModel> cartProductsBeta=calculateProductsfor25Discount(productsList25Beta,"150");
+		
+		System.out.println(""+cartProductsBeta.get(1).getFinalPrice());*/
 	}
 }

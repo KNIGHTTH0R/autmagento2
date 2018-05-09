@@ -14,6 +14,9 @@ import java.util.Locale;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import com.tools.persistance.MongoReader;
 
 public class DateUtils {
@@ -90,17 +93,17 @@ public class DateUtils {
 	}
 
 	public static Date yesterday() {
-	    final Calendar cal = Calendar.getInstance();
-	    cal.add(Calendar.DATE, -1);
-	    return cal.getTime();
+		final Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, -1);
+		return cal.getTime();
 	}
-	
+
 	public static String getYesterdayDateString() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        //2017-11-03 17:00:00
-        return dateFormat.format(yesterday());
-}
-	
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		// 2017-11-03 17:00:00
+		return dateFormat.format(yesterday());
+	}
+
 	public static String getFirstDayOfAGivenMonth(String dateString, String formatString) throws ParseException {
 		DateFormat format = new SimpleDateFormat(formatString);
 		Date date = format.parse(dateString);
@@ -203,7 +206,7 @@ public class DateUtils {
 
 		return String.valueOf(format.format(calendar.getTime()));
 	}
-	
+
 	public static String getFirstWednesdayAfterDate(String dateString, String formatString) throws ParseException {
 		DateFormat format = new SimpleDateFormat(formatString);
 		Date date = format.parse(dateString);
@@ -267,6 +270,14 @@ public class DateUtils {
 		return String.valueOf(sdf.format(new Date()));
 	}
 
+	public static String getFewHoursAgoDate(String format, int hoursAgo) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+		String now = LocalDateTime.now().minusHours(hoursAgo).format(formatter);
+		LocalDateTime formatDateTime = LocalDateTime.parse(String.valueOf(now), formatter);
+
+		return String.valueOf(formatDateTime.format(formatter));
+	}
+
 	public static String getCurrentDate(String format, Locale locale) {
 		DateFormat sdf = new SimpleDateFormat(format, locale);
 
@@ -292,6 +303,13 @@ public class DateUtils {
 		return String.valueOf(formatFinal.format(date));
 
 	}
+	
+	public static boolean isInTheSameMonth(String date, String month, String format) throws ParseException {
+		DateFormat formatFinal = new SimpleDateFormat(format);
+		Date date1 = formatFinal.parse(date);
+		Date date2 = formatFinal.parse(month);
+		return date1.getMonth()==date2.getMonth();
+	}
 
 	public static String parseDate(String dateString, String initialFormatString, String finalFormatString,
 			Locale locale) throws ParseException {
@@ -303,19 +321,19 @@ public class DateUtils {
 
 	}
 
-	public static String parseMilisDate(String dateString, String finalFormatString){
-	
+	public static String parseMilisDate(String dateString, String finalFormatString) {
 
 		DateFormat formatter = new SimpleDateFormat(finalFormatString);
 
-		long milliSeconds= Long.parseLong(dateString);
+		long milliSeconds = Long.parseLong(dateString);
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(milliSeconds);
-		
+
 		return String.valueOf(formatter.format(calendar.getTime()));
-		
+
 	}
+
 	public static String getCurrentDateBegining(String format) {
 		DateFormat sdf = new SimpleDateFormat(format);
 
@@ -346,16 +364,14 @@ public class DateUtils {
 
 		return String.valueOf(sdf.format(calendar.getTime()));
 	}
-	
-	
-	public static String addDaysToCurrentDate(String format, int days)
-    {
+
+	public static String addDaysToCurrentDate(String format, int days) {
 		DateFormat sdf = new SimpleDateFormat(format);
-        Calendar cal = Calendar.getInstance();
-       // cal.setTime(date);
-        cal.add(Calendar.DATE, days); //minus number would decrement the days
-        return String.valueOf(sdf.format(cal.getTime()));
-    }
+		Calendar cal = Calendar.getInstance();
+		// cal.setTime(date);
+		cal.add(Calendar.DATE, days); // minus number would decrement the days
+		return String.valueOf(sdf.format(cal.getTime()));
+	}
 
 	public static String getPreviousMonth(String format) {
 		Calendar cal = Calendar.getInstance();
@@ -395,7 +411,6 @@ public class DateUtils {
 		cal.set(year, month, day, 00, 00, 00);
 		return new SimpleDateFormat(format).format(cal.getTime());
 	}
-	
 
 	public static String getThreeMonthsBackMiddle(String format) {
 		Calendar cal = Calendar.getInstance();
@@ -410,7 +425,7 @@ public class DateUtils {
 
 	public static int getAge(String birthDate) {
 		String[] parts = birthDate.split("-");
-		
+
 		LocalDate birthdate = new LocalDate(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]),
 				Integer.parseInt(parts[2]));
 		LocalDate now = new LocalDate();
@@ -447,7 +462,7 @@ public class DateUtils {
 	 */
 	public static boolean isDateAfter(String currentDate, String startingDate, String format) throws ParseException {
 		DateFormat df = new SimpleDateFormat(format);
-
+		System.out.println("currentDate: "+currentDate   +"startingDate: "+startingDate );
 		return !(df.parse(currentDate).before(df.parse(startingDate)));
 	}
 
@@ -475,13 +490,31 @@ public class DateUtils {
 		return daysBetween(cal1.getTime(), cal2.getTime());
 	}
 
+	public static String setHourToDate(String startDate, int hour, String formatString) throws ParseException {
+
+		Calendar calendar = Calendar.getInstance();
+
+		SimpleDateFormat format = new SimpleDateFormat(formatString);
+
+		Date date = format.parse(startDate);
+
+		calendar.setTime(date);
+		calendar.set(Calendar.HOUR_OF_DAY, hour);
+		calendar.set(Calendar.MINUTE, 59);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		
+		return String.valueOf(format.format(calendar.getTime()));
+
+	}
+
 	public static int daysBetween(Date d1, Date d2) {
 
 		int result = (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
 
 		return result > 0 ? result : 0;
 	}
-	
+
 	public static int timeBetween(Date d1, Date d2) {
 
 		int result = (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
@@ -523,17 +556,41 @@ public class DateUtils {
 		// 12:00:00","yyyy-MM-dd HH:mm:ss"));
 		// System.out.println(DateUtils.getLastDayOfAGivenMonth("2016-09-30
 		// 12:00:00","yyyy-MM-dd HH:mm:ss"));
-	//	System.out.println(DateUtils.getFridaysBetweenDates("2016-11-11", "2016-12-24", "yyyy-MM-dd"));
-//		System.out.println(DateUtils.parseDate("2016-12-15", "yyyy-MM-dd", "dd. MM."));
-		//System.out.println(DateUtils.parseDate("07. MRZ. 17", "dd. MMM. yy", new Locale.Builder().setLanguage("de").build(), "dd.MM.YYYY"));
-	////	System.out.println(DateUtils.parseDate(dateString, initialFormatString, finalFormatString));
-//		String expectedDate =DateUtils.parseDate("2017-05-04 11:35:03", "yyyy-MM-dd HH:mm:ss", "dd.MM.YYYY");
-//		System.out.println(expectedDate);
+		// System.out.println(DateUtils.getFridaysBetweenDates("2016-11-11",
+		// "2016-12-24", "yyyy-MM-dd"));
+		// System.out.println(DateUtils.parseDate("2016-12-15", "yyyy-MM-dd",
+		// "dd. MM."));
+		// System.out.println(DateUtils.parseDate("07. MRZ. 17", "dd. MMM. yy",
+		// new Locale.Builder().setLanguage("de").build(), "dd.MM.YYYY"));
+		//// System.out.println(DateUtils.parseDate(dateString,
+		// initialFormatString, finalFormatString));
+		// String expectedDate =DateUtils.parseDate("2017-05-04 11:35:03",
+		// "yyyy-MM-dd HH:mm:ss", "dd.MM.YYYY");
+		// System.out.println(expectedDate);
+
+		// System.out.println(DateUtils.addDays("yyyy-MM-dd", 1));
+		// System.out.println(DateUtils.parseDate("1484728910770", "dd. MMM.
+		// yy", new Locale.Builder().setLanguage("de").build(), "dd.MM.YYYY"));
+		// /yyyy-MM-dd HH:mm:ss
+		// System.out.println(DateUtils.getCurrentDate());
+	//System.out.println(	DateUtils.setHourToDate(DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), 23, "yyyy-MM-dd HH:mm:ss"));
+				
+//	System.out.println(   DateUtils.getNumberOfDaysBeetweenTwoDates(DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), DateUtils.setHourToDate("2018-05-06 15:40:00", 23, "yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")); 
+	//    System.out.println(DateUtils.isDateAfter("", getFirstDayOfAGivenMonth("", "yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss"));
 		
-		//System.out.println(DateUtils.addDays("yyyy-MM-dd", 1));
-	//	System.out.println(DateUtils.parseDate("1484728910770", "dd. MMM. yy", new Locale.Builder().setLanguage("de").build(), "dd.MM.YYYY"));
+	  /*  Calendar cal =
+				 Calendar.getInstance(); // remove next line if you're always
+				 using the current time. cal.setTime(currentDate);
+				 cal.add(Calendar.HOUR, -1); Date oneHourBack = cal.getTime();*/
+				 
+
+		// System.out.println(new Date(System.currentTimeMillis() - 3600 *
+		// 1000));
+
+		System.out.println(isInTheSameMonth("2018-05-01 12:00:00","2018-04-03 12:00:00","yyyy-MM-dd HH:mm:ss"));
 		
-		System.out.println(DateUtils.getYesterdayDateString());
 	}
+
+	
 
 }

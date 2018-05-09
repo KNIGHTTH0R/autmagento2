@@ -119,6 +119,13 @@ public class HeaderSteps extends AbstractSteps {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		navigate(MongoReader.getBaseURL() + UrlConstants.STYLISTS_REPORTS);
 	}
+	
+	
+	@Step
+	public void redirectToTeamReport() {
+		waitABit(TimeConstants.TIME_CONSTANT);
+		navigate(MongoReader.getBaseURL() + UrlConstants.TEAM_REPORT);
+	}
 
 	@Step
 	public void redirectToCartPage() {

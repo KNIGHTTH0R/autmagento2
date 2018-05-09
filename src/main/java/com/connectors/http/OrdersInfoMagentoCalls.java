@@ -237,7 +237,7 @@ public class OrdersInfoMagentoCalls {
 		SOAPElement complexFilter = filters.addChildElement(SoapKeys.COMPLEX_FILTER);
 		addOrderFilter(complexFilter, SoapConstants.STYLIST_ID_FILTER, SoapConstants.EQUAL, stylistId);
 		addOrderFilter(complexFilter, SoapConstants.SOAP_CREATED_AT_FILTER, SoapConstants.GREATER_THAN,
-				"2017-09-01 00:00:00");
+				"2017-01-01 00:00:00");
 
 		SOAPElement clinetKey = getStylistRequestParam.addChildElement(SoapKeys.CLIENT_KEY);
 		clinetKey.addTextNode(SoapKeys.CLIENT_KEY_VALUE);
@@ -347,6 +347,8 @@ public class OrdersInfoMagentoCalls {
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("created_at")) {
 						model.setCreatedAt(childNodes.item(j).getTextContent());
 					}
+					
+					
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("status")) {
 						model.setStatus(childNodes.item(j).getTextContent());
 					}
@@ -494,19 +496,27 @@ public class OrdersInfoMagentoCalls {
 
 	public static void main(String args[]) throws SOAPException, IOException, ParseException {
 
-		 List<DBOrderModel>
-		 dbmodel=OrdersInfoMagentoCalls.getOrdersList("6013");
-		System.out.println(dbmodel.get(0)); ;
-		/*String x = "2017-11-06 17:33:03";
+		List<DBOrderModel> dbmodel = OrdersInfoMagentoCalls.getOrdersList("33");
+		System.out.println("order No: "+dbmodel.size());
+		for (DBOrderModel dbOrderModel : dbmodel) {
+			System.out.println(dbOrderModel.getIncrementId());
+			System.out.println(dbOrderModel.getPaidAt());
+		}
+		//System.out.println(dbmodel.get(0));
+		/*
+		 * String x = "2017-11-06 17:33:03";
+		 * 
+		 * String format = DateUtils.parseDate("2017-11-06 17:33:03",
+		 * "yyyy-mm-dd", "dd.mm.yyyy");
+		 * 
+		 * System.out.println(format);
+		 */
 
-		String format = DateUtils.parseDate("2017-11-06 17:33:03", "yyyy-mm-dd", "dd.mm.yyyy");
-
-		System.out.println(format);*/
-		
-		//String x="Payment In Progress".toLowerCase().replace(" ", "_");
-		/*for (DBOrderModel dbOrderModel : dbmodel) {
-			System.out.println(dbOrderModel.getCustomerName());
-		}*/
+		// String x="Payment In Progress".toLowerCase().replace(" ", "_");
+		/*
+		 * for (DBOrderModel dbOrderModel : dbmodel) {
+		 * System.out.println(dbOrderModel.getCustomerName()); }
+		 */
 		/*
 		 * for (DBOrderModel dbOrderModel : dbmodel) { System.out.println(
 		 * "customer name "+dbOrderModel.getCustomerName()); }

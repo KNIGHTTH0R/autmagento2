@@ -35,6 +35,13 @@ public class Credentials {
 	public static final String MAILCHIMP_PASSWORD = "mailchimp123";
 
 	// commision credentials
-	public static final String API_KEY = "api";
-	public static final String API_SECRET = "api";
+	/*public static final String API_KEY = "api";
+	public static final String API_SECRET = "api";*/
+	
+	public static final String API_KEY = "shop";
+	public static final String API_SECRET = "aut.atmyhome.secret";
+	
+	
+/*	public static final String API_KEY = "shop";
+	public static final String API_SECRET = "W3#x@qRkY2";*/
 }

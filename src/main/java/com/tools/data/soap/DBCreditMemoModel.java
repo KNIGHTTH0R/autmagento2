@@ -10,6 +10,16 @@ public class DBCreditMemoModel implements Cloneable {
 	private String orderIncrementId;
 	private String orderCreatedAt;
 	private String orderPaidAt;
+	private String grandTotal;
+
+	
+	public String getGrandTotal() {
+		return grandTotal;
+	}
+
+	public void setGrandTotal(String grandTotal) {
+		this.grandTotal = grandTotal;
+	}
 
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
@@ -78,5 +88,15 @@ public class DBCreditMemoModel implements Cloneable {
 	public void setUpdatedAt(String updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
+	@Override
+	public String toString() {
+		return "DBCreditMemoModel [stylistId=" + stylistId + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+				+ ", state=" + state + ", totalIpRefunded=" + totalIpRefunded + ", orderIncrementId=" + orderIncrementId
+				+ ", orderCreatedAt=" + orderCreatedAt + ", orderPaidAt=" + orderPaidAt + ", grandTotal=" + grandTotal
+				+ "]";
+	}
+	
+	
 
 }

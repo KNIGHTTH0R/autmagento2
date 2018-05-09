@@ -63,6 +63,7 @@ public class UrlConstants {
 	public static final String PROFILE_HISTORY_URL = "/sales/order/history/";
 	public static final String STYLISTS_CUSTOMER_ORDER_REPORT = "/stylereports/order/myorders/?type=customerorders";
 	public static final String STYLISTS_REPORTS = "/stylereports/";
+	public static final String TEAM_REPORT = "/stylereports/order/myteam/";
 	public static final String CART_PAGE_URL = "simona/checkout/cart/";
 	
 	//SOAP API

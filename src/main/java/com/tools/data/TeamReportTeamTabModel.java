@@ -119,4 +119,15 @@ public class TeamReportTeamTabModel {
 		this.quitDate = quitDate;
 	}
 
+	@Override
+	public String toString() {
+		return "TeamReportTeamTabModel [styleCoachId=" + styleCoachId + ", styleCoachName=" + styleCoachName
+				+ ", sponsorName=" + sponsorName + ", activationDate=" + activationDate + ", ip=" + ip + ", tqv=" + tqv
+				+ ", carrerLevelThisMonth=" + carrerLevelThisMonth + ", carrerLevelLastMonth=" + carrerLevelLastMonth
+				+ ", payLevel=" + payLevel + ", ipNewRecruited=" + ipNewRecruited + ", vacationMonth=" + vacationMonth
+				+ ", newStylist=" + newStylist + ", quitDate=" + quitDate + "]";
+	}
+
+	
+	
 }

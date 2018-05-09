@@ -68,6 +68,15 @@ public class OrdersActionsPage extends AbstractPage {
 
 	@FindBy(css = "#dt-order_related_files_form")
 	private WebElement navDocSectionTab;
+	
+	@FindBy(css = "button[title*='Trackingnummer']")
+	private WebElement trackingNoBtn;
+	
+	
+	@FindBy(css = "#trackingN1")
+	private WebElement inputTrackingNo;
+	
+	
 
 	public void markOrderAsPaid() {
 		waitABit(2000);
@@ -133,6 +142,12 @@ public class OrdersActionsPage extends AbstractPage {
 	}
 
 	public void checkShipmentMail() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(shipmentEmailCheckBox).waitUntilVisible();
+		shipmentEmailCheckBox.click();
+	}
+	
+	public void checkInvoiceMail() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(shipmentEmailCheckBox).waitUntilVisible();
 		shipmentEmailCheckBox.click();
@@ -345,5 +360,29 @@ public class OrdersActionsPage extends AbstractPage {
 		Select oSelect = new Select(getDriver().findElement(By.id("_orderfilesemail_receiver")));
 		oSelect.selectByValue(receiver);
 	}
+
+	public void clickTrakingNumberBtn() {
+		evaluateJavascript("jQuery.noConflict();");
+
+		element(trackingNoBtn).waitUntilVisible();
+		clickElement(trackingNoBtn);
+		//trackingNoBtn.click();
+	}
+	
+	public void selectTrakingNoMethod(String method) {
+		evaluateJavascript("jQuery.noConflict();");
+		waitABit(2000);
+		Select oSelect = new Select(getDriver().findElement(By.id("trackingC1")));
+		oSelect.selectByValue(method);
+	}
+	
+	public void insertTrackingNo(String trackingNo){
+		evaluateJavascript("jQuery.noConflict();");
+
+		element(inputTrackingNo).waitUntilVisible();
+		inputTrackingNo.sendKeys(trackingNo);
+	}
+	
+
 
 }

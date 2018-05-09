@@ -1,9 +1,12 @@
 package com.tools.data;
 
+import java.util.List;
+
 public class TeamReportModel {
 	private String styleCoachId;
 	private String styleCoachName;
 	private String activationDate;
+	private String canceledDate;
 	private String ip;
 	private String ipTop;
 	private String tqv;
@@ -22,6 +25,62 @@ public class TeamReportModel {
 	private String takeOffPhaseEndDate;
 	private String daysLeft;
 	private String level;
+	private String ip30Top;
+	private String topNrNewStylists;
+	private List<IpOverViewReturnsListModel> returns;
+	private String manualIpCorrection;
+	private String manualIpCorrectionTop;
+	
+	
+	
+
+	public String getManualIpCorrectionTop() {
+		return manualIpCorrectionTop;
+	}
+
+	public void setManualIpCorrectionTop(String manualIpCorrectionTop) {
+		this.manualIpCorrectionTop = manualIpCorrectionTop;
+	}
+
+	public String getManualIpCorrection() {
+		return manualIpCorrection;
+	}
+
+	public void setManualIpCorrection(String manualIpCorrection) {
+		this.manualIpCorrection = manualIpCorrection;
+	}
+
+	public List<IpOverViewReturnsListModel> getReturns() {
+		return returns;
+	}
+
+	public void setReturns(List<IpOverViewReturnsListModel> returns) {
+		this.returns = returns;
+	}
+
+	public String getTopNrNewStylists() {
+		return topNrNewStylists;
+	}
+
+	public void setTopNrNewStylists(String topNrNewStylists) {
+		this.topNrNewStylists = topNrNewStylists;
+	}
+
+	public String getIp30Top() {
+		return ip30Top;
+	}
+
+	public void setIp30Top(String ip30Top) {
+		this.ip30Top = ip30Top;
+	}
+
+	public String getCanceledDate() {
+		return canceledDate;
+	}
+
+	public void setCanceledDate(String canceledDate) {
+		this.canceledDate = canceledDate;
+	}
 
 	public String getStyleCoachId() {
 		return styleCoachId;
@@ -191,4 +250,19 @@ public class TeamReportModel {
 		this.level = level;
 	}
 
+	@Override
+	public String toString() {
+		return "TeamReportModel [styleCoachId=" + styleCoachId + ", styleCoachName=" + styleCoachName
+				+ ", activationDate=" + activationDate + ", canceledDate=" + canceledDate + ", ip=" + ip + ", ipTop="
+				+ ipTop + ", tqv=" + tqv + ", carrerLevelThisMonth=" + carrerLevelThisMonth + ", carrerLevelLastMonth="
+				+ carrerLevelLastMonth + ", payLevel=" + payLevel + ", ipNewRecruited=" + ipNewRecruited
+				+ ", newStylist=" + newStylist + ", newStylistTop=" + newStylistTop + ", ipThisMonth=" + ipThisMonth
+				+ ", ipLastMonth=" + ipLastMonth + ", partiesHeld=" + partiesHeld + ", partiesPlanned=" + partiesPlanned
+				+ ", partiesUpcoming=" + partiesUpcoming + ", revenuePerParty=" + revenuePerParty
+				+ ", takeOffPhaseEndDate=" + takeOffPhaseEndDate + ", daysLeft=" + daysLeft + ", level=" + level
+				+ ", ip30Top=" + ip30Top + ", topNrNewStylists=" + topNrNewStylists + "]";
+	}
+
+	
+	
 }

@@ -13,6 +13,7 @@ public class CommissionStylistModel {
 	private String countryId;
 	private String status;
 	private String careerLevel;
+	private String careerLevelName;
 	private String ip;
 	private String ipTop;
 	private String ipUnsafe;
@@ -22,6 +23,7 @@ public class CommissionStylistModel {
 	private String teamPointsUnsafe;
 	private String retail;
 	private String tob;
+	private String payLevel;
 	private String payLevelName;
 	private String minimumPaylevel;
 	private String minimumCareerLevel;
@@ -53,6 +55,55 @@ public class CommissionStylistModel {
 	private int teamPointsTpr;
 	private String ancestors;
 	private String level;
+	private int ip30Top;
+	private String canceledAt;
+	private String topNrNewStylists;
+	
+	
+	
+	
+
+	public String getTopNrNewStylists() {
+		return topNrNewStylists;
+	}
+
+	public void setTopNrNewStylists(String topNrNewStylists) {
+		this.topNrNewStylists = topNrNewStylists;
+	}
+
+	public int getIp30Top() {
+		return ip30Top;
+	}
+
+	public void setIp30Top(int ip30Top) {
+		this.ip30Top = ip30Top;
+	}
+
+	public String getCanceledAt() {
+		return canceledAt;
+	}
+
+	public void setCanceledAt(String canceledAt) {
+		this.canceledAt = canceledAt;
+	}
+
+	
+
+	public String getPayLevel() {
+		return payLevel;
+	}
+
+	public void setPayLevel(String payLevel) {
+		this.payLevel = payLevel;
+	}
+
+	public String getCareerLevelName() {
+		return careerLevelName;
+	}
+
+	public void setCareerLevelName(String careerLevelName) {
+		this.careerLevelName = careerLevelName;
+	}
 
 	public String getId() {
 		return id;
@@ -462,4 +513,40 @@ public class CommissionStylistModel {
 		this.level = level;
 	}
 
+	@Override
+	public String toString() {
+		return "CommissionStylistModel [id=" + id + ", stylistId=" + stylistId + ", parentStylistId=" + parentStylistId
+				+ ", name=" + name + ", customerId=" + customerId + ", city=" + city + ", postcode=" + postcode
+				+ ", street=" + street + ", countryId=" + countryId + ", status=" + status + ", careerLevel="
+				+ careerLevel + ", careerLevelName=" + careerLevelName + ", ip=" + ip + ", ipTop=" + ipTop
+				+ ", ipUnsafe=" + ipUnsafe + ", ipMonth=" + ipMonth + ", ipNewFl=" + ipNewFl + ", teamPoints="
+				+ teamPoints + ", teamPointsUnsafe=" + teamPointsUnsafe + ", retail=" + retail + ", tob=" + tob
+				+ ", payLevel=" + payLevel + ", payLevelName=" + payLevelName + ", minimumPaylevel=" + minimumPaylevel
+				+ ", minimumCareerLevel=" + minimumCareerLevel + ", joinedAt=" + joinedAt + ", createdAt=" + createdAt
+				+ ", teamPointsLevel1=" + teamPointsLevel1 + ", teamPointsLevel2=" + teamPointsLevel2
+				+ ", teamPointsLevel3=" + teamPointsLevel3 + ", teamPointsLevel4=" + teamPointsLevel4
+				+ ", nrTeamMembersLevel1=" + nrTeamMembersLevel1 + ", nrTeamMembersLevel2=" + nrTeamMembersLevel2
+				+ ", nrTeamMembersLevel3=" + nrTeamMembersLevel3 + ", nrTeamMembersLevel4=" + nrTeamMembersLevel4
+				+ ", activatedAt=" + activatedAt + ", bankAccountOwnerName=" + bankAccountOwnerName
+				+ ", bankAccountBankName=" + bankAccountBankName + ", bankAccountNumber=" + bankAccountNumber
+				+ ", bankAccountBlz=" + bankAccountBlz + ", bankAccountVatPayer=" + bankAccountVatPayer
+				+ ", bankAccountVatNumber=" + bankAccountVatNumber + ", obtTeam=" + obtTeam + ", frontliners="
+				+ frontliners + ", frontlinersQualified=" + frontlinersQualified + ", career=" + career
+				+ ", goldFrontliners=" + goldFrontliners + ", newFrontliners=" + newFrontliners + ", ipForMyself="
+				+ ipForMyself + ", ipForCustomers=" + ipForCustomers + ", teamPointsTpr=" + teamPointsTpr
+				+ ", ancestors=" + ancestors + ", level=" + level + ", ip30Top=" + ip30Top + ", canceledAt="
+				+ canceledAt + ", topNrNewStylists=" + topNrNewStylists + "]";
+	}
+
+
+
+
+
+	
+
+	
+
+
+	 
 }
+

@@ -29,8 +29,8 @@ public class CartDiscountsCalculation {
 
 		BigDecimal price = BigDecimal.valueOf(Double.parseDouble(unitPrice));
 		BigDecimal qty = BigDecimal.valueOf(Double.parseDouble(quantity));
-
-		return String.valueOf(price.multiply(qty));
+		System.out.println("oare aici se intampla minunea:"+price.multiply(qty));
+		return String.valueOf(price.multiply(qty).setScale(2, RoundingMode.CEILING));
 
 	}
 
@@ -59,7 +59,7 @@ public class CartDiscountsCalculation {
 		BigDecimal deltaAmount = BigDecimal.valueOf(Double.parseDouble(delta));
 
 		//delta is 0 for sample and marketing material products
-		if (discount != ConfigConstants.DISCOUNT_25)
+		if (discount != ConfigConstants.DISCOUNT_20)
 			deltaAmount = BigDecimal.ZERO;
 
 		discountValue = askPrice.multiply(disc);
@@ -194,7 +194,7 @@ public class CartDiscountsCalculation {
 			String jewelryDiscount) {
 
 		List<BasicProductModel> productList=getOnly25Products(products);
-		BigDecimal sum25 = calculateDiscountAskingPriceSum(productList, ConfigConstants.DISCOUNT_25);
+		BigDecimal sum25 = calculateDiscountAskingPriceSum(productList, ConfigConstants.DISCOUNT_20);
 
 		List<BasicProductModel> cartProducts = new ArrayList<BasicProductModel>();
 
@@ -235,7 +235,7 @@ public class CartDiscountsCalculation {
 	private static List<BasicProductModel> getOnly25Products(List<BasicProductModel> products) {
 		List<BasicProductModel> productList=new ArrayList<BasicProductModel>();
 		for (BasicProductModel product : products) {
-			if(product.getDiscountClass().contentEquals(ConfigConstants.DISCOUNT_25)){
+			if(product.getDiscountClass().contentEquals(ConfigConstants.DISCOUNT_20)){
 				productList.add(product);
 			}
 		}
@@ -277,7 +277,7 @@ public class CartDiscountsCalculation {
 
 		for (BasicProductModel product : productsList) {
 
-			if (product.getDiscountClass().contains(ConfigConstants.DISCOUNT_25)) {
+			if (product.getDiscountClass().contains(ConfigConstants.DISCOUNT_20)) {
 				sum25 = sum25.add(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())));
 			}
 		}
@@ -377,7 +377,7 @@ public class CartDiscountsCalculation {
 			result = result.multiply(jB);
 			result = askingPrice.subtract(result);
 			BigDecimal temp = result;
-			result = result.multiply(BigDecimal.valueOf(25));
+			result = result.multiply(BigDecimal.valueOf(Integer.parseInt(ConfigConstants.DISCOUNT_20)));
 			// the 25% disc is calculated with 5 decimals precision (we don't
 			// want the 4th decimal rounded)
 			diff = result.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
@@ -478,37 +478,35 @@ public class CartDiscountsCalculation {
 	
 	
 	public static void main(String[] args) {
-		/*genProduct1 = MagentoProductCalls.createProductModelBeta();
-		genProduct1.setIp("84");
+		genProduct1 = MagentoProductCalls.createProductModelBeta();
+		genProduct1.setIp("0");
 		genProduct1.setPrice("49.90");
 		
 		genProduct2 = MagentoProductCalls.createProductModelBeta();
-		genProduct2.setIp("25");
-		genProduct2.setPrice("89.00");
+		genProduct2.setIp("0");
+		genProduct2.setPrice("89.90");
 		
 		genProduct3 = MagentoProductCalls.createProductModelBeta();
 		genProduct3.setIp("25");
 		genProduct3.setPrice("49.90");
 		
-		productData = addInCart(genProduct1, "2", "0", ConfigConstants.DISCOUNT_25);
-		productData2=addInCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_25);
-		productData3=addInCart(genProduct3, "1", "0", ConfigConstants.DISCOUNT_25);
+		productData = addInCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_20);
+		productData2=addInCart(genProduct2, "2", "0", ConfigConstants.DISCOUNT_20);
+//		productData3=addInCart(genProduct3, "1", "0", ConfigConstants.DISCOUNT_20);
 		productsList25Beta.add(productData);
 		productsList25Beta.add(productData2);
-		productsList25Beta.add(productData3);
+//		productsList25Beta.add(productData3);
 		
 		System.out.println(productsList25Beta.get(0).getFinalPrice());
 //		
-//		
-
-//		
-		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList25Beta, ConfigConstants.DISCOUNT_25);
+		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList25Beta, ConfigConstants.DISCOUNT_20);
 		System.out.println("sumaaaa "+sum25);
 	
-		List<BasicProductModel> cartProductsBeta=calculateProductsfor25Discount(productsList25Beta,"100");
+		List<BasicProductModel> cartProductsBeta=calculateProductsfor25Discount(productsList25Beta,"150");
 		
-		System.out.println(""+cartProductsBeta.get(0).getFinalPrice());*/
+		System.out.println(""+cartProductsBeta.get(1).getFinalPrice());
 		
-		
+		CartTotalsCalculation.calculateCartProductsTotals(cartProductsBeta, "150", "0", "19", "3.9",
+				"3.9");
 	}
 }

@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Title;
 
 import org.junit.Assert;
 
@@ -18,7 +19,8 @@ public class EmailSteps extends AbstractSteps {
 	public void printEmailContent(String email) {
 		System.out.println("message: " + email);
 	}
-
+	
+	@Title("Validate Email Content")
 	@Step
 	public void validateEmailContent(String text, String message) {
 		Assert.assertTrue("Failure: Message does not contain text", message.contains(text));

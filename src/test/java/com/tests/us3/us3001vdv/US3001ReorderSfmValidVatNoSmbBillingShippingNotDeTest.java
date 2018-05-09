@@ -188,9 +188,9 @@ public class US3001ReorderSfmValidVatNoSmbBillingShippingNotDeTest extends BaseT
 
 		BasicProductModel productData;
 
-		productData = addProductsWorkflow.updateBasicProductToCart(genProduct1, "2", "0", ConfigConstants.DISCOUNT_25);
+		productData = addProductsWorkflow.updateBasicProductToCart(genProduct1, "2", "0", ConfigConstants.DISCOUNT_20);
 		CartCalculator.productsList25.add(productData);
-		productData = addProductsWorkflow.updateBasicProductToCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_25);
+		productData = addProductsWorkflow.updateBasicProductToCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_20);
 		CartCalculator.productsList25.add(productData);
 		productData = addProductsWorkflow.updateBasicProductToCart(genProduct3, "1", "0", ConfigConstants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);
@@ -198,7 +198,7 @@ public class US3001ReorderSfmValidVatNoSmbBillingShippingNotDeTest extends BaseT
 		CartCalculator.calculateJMDiscounts(jewelryDisount, marketingDisount, taxClass, shippingValue);
 
 		DataGrabber.cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
-		DataGrabber.cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
+		DataGrabber.cartProductsWith20Discount = cartSteps.grabProductsDataWith25PercentDiscount();
 		DataGrabber.cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
 
 		cartSteps.typeJewerlyBonus(jewelryDisount);

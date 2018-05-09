@@ -24,7 +24,7 @@ public class EmailClientSteps extends AbstractSteps {
 
 		mailPage.openEmail(email, title);
 		String confirmationLink=mailPage.getConfirmationLink();
-		String link=confirmationLink.substring(confirmationLink.indexOf("https://vdv-qa"), confirmationLink.indexOf("distributed="));
+		String link=confirmationLink.substring(confirmationLink.indexOf("https://aut."), confirmationLink.indexOf("distributed="));
 		navigate(link+"distributed=");
 	//	navigate(mailPage.getConfirmationLink());
 

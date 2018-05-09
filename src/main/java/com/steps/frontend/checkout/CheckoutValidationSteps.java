@@ -22,7 +22,8 @@ public class CheckoutValidationSteps extends AbstractSteps {
 	 */
 	@Step
 	public void validateMatchPrice(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: Price values dont match: expected " + productNow + " - grabbed " + compare, compare.contains(productNow));
+		System.out.println(productNow+"-"+compare);
+		CustomVerification.verifyTrue("Failure: Price values dont match: expected " + productNow + " - grabbed " + compare, compare.replaceAll("\\s+","").contains(productNow.replaceAll("\\s+","")));
 	}
 
 	@Step

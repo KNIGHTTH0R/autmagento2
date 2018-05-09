@@ -8,7 +8,18 @@ public class TeamReportTakeOffPhaseModel {
 	private String takeOffPhaseEndDate;
 	private String daysLeft;
 	private String ip;
+	private String ip30;
 	private String newStylistTop;
+
+	
+	
+	public String getIp30() {
+		return ip30;
+	}
+
+	public void setIp30(String ip30) {
+		this.ip30 = ip30;
+	}
 
 	public String getStyleCoachId() {
 		return styleCoachId;
@@ -74,5 +85,15 @@ public class TeamReportTakeOffPhaseModel {
 		this.ip = ip;
 	}
 
+	@Override
+	public String toString() {
+		return "TeamReportTakeOffPhaseModel [styleCoachId=" + styleCoachId + ", stylistName=" + stylistName
+				+ ", sponsorName=" + sponsorName + ", activationDate=" + activationDate + ", takeOffPhaseEndDate="
+				+ takeOffPhaseEndDate + ", daysLeft=" + daysLeft + ", ip=" + ip + ", ip30=" + ip30 + ", newStylistTop="
+				+ newStylistTop + "]";
+	}
+
+	
+	 
 
 }

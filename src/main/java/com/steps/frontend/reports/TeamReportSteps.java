@@ -1,5 +1,8 @@
 package com.steps.frontend.reports;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.ParseException;
 import java.util.List;
 
 import org.junit.Assert;
@@ -11,6 +14,7 @@ import com.tools.data.TeamReportTakeOffPhaseModel;
 import com.tools.data.TeamReportTeamTabModel;
 import com.tools.data.TeamReportTotalsModel;
 import com.tools.requirements.AbstractSteps;
+import com.tools.utils.DateUtils;
 
 import net.thucydides.core.annotations.Step;
 
@@ -94,13 +98,19 @@ public class TeamReportSteps extends AbstractSteps {
 	}
 
 	public void validateTeamReportTeamTab(List<TeamReportModel> expectedList,
-			List<TeamReportTeamTabModel> grabbedList) {
+			List<TeamReportTeamTabModel> grabbedList) throws ParseException {
+		
+		
+
 
 		Assert.assertTrue("Failure: The list size are not equal", expectedList.size() == grabbedList.size());
 
 		for (TeamReportModel stylist : expectedList) {
 			TeamReportTeamTabModel compare = findTeamStylist(stylist.getStyleCoachId(), grabbedList);
 
+			System.out.println("Validam stylistul: "+stylist.getStyleCoachName());
+		/*	System.out.println("expected: " +stylist);
+			System.out.println("compare: " +compare);*/
 			if (compare.getStyleCoachName() != null) {
 				matchStylistName(stylist.getStyleCoachName(), compare.getStyleCoachName());
 				validateStartDate(stylist.getActivationDate(), compare.getActivationDate());
@@ -129,8 +139,10 @@ public class TeamReportSteps extends AbstractSteps {
 			List<TeamReportPartyTabModel> grabbedList) {
 
 		Assert.assertTrue("Failure: The list size are not equal", expectedList.size() == grabbedList.size());
-
+		
+		
 		for (TeamReportModel stylist : expectedList) {
+			System.out.println("Star validation for: "+stylist.getStyleCoachName());
 			TeamReportPartyTabModel compare = findPartyStylist(stylist.getStyleCoachId(), grabbedList);
 			if (compare.getStylistName() != null) {
 				matchStylistName(stylist.getStyleCoachName(), compare.getStylistName());
@@ -153,19 +165,21 @@ public class TeamReportSteps extends AbstractSteps {
 	}
 
 	public void validateTeamReportTakeOffPhaseTab(List<TeamReportModel> expectedList,
-			List<TeamReportTakeOffPhaseModel> grabbedList) {
+			List<TeamReportTakeOffPhaseModel> grabbedList) throws ParseException {
 
 		Assert.assertTrue("Failure: The list size are not equal", expectedList.size() == grabbedList.size());
 
 		for (TeamReportModel stylist : expectedList) {
+			System.out.println("Start validation for: "+stylist.getStyleCoachName());
 			TeamReportTakeOffPhaseModel compare = findTofStylist(stylist.getStyleCoachId(), grabbedList);
 			if (compare.getStylistName() != null) {
 				matchStylistName(stylist.getStyleCoachName(), compare.getStylistName());
 				validateStartDate(stylist.getActivationDate(), compare.getActivationDate());
 				validateTopEndDate(stylist.getTakeOffPhaseEndDate(), compare.getTakeOffPhaseEndDate());
 				validateTakeOfPhaseLeftDays(stylist.getDaysLeft(), compare.getDaysLeft());
-				validateIpsOnTakeOffPhase(stylist.getIp(), compare.getIp());
+				validateIpsOnTakeOffPhase(stylist.getIpTop(), compare.getIp());
 				validateStylistWonInTakeOffPhase(stylist.getNewStylistTop(), compare.getNewStylistTop());
+				validateIps30TakeOffPhase(stylist.getIp30Top(),compare.getIp30());
 
 			} else {
 				Assert.assertTrue("Failure: Could not validate all stylists in the list", compare != null);
@@ -215,7 +229,7 @@ public class TeamReportSteps extends AbstractSteps {
 
 	public void validateTotals(TeamReportTotalsModel calculatedTotals, TeamReportTotalsModel grabbedTotals) {
 		validateIp(calculatedTotals.getIpTotal(), grabbedTotals.getIpTotal());
-		validateTp(calculatedTotals.getTqvTotal(), grabbedTotals.getTqvTotal());
+	//	validateTp(calculatedTotals.getTqvTotal(), grabbedTotals.getTqvTotal());
 		validateIpIncludingNewSc(calculatedTotals.getIpNewInclTotal(), grabbedTotals.getIpNewInclTotal());
 		validateNewScs(calculatedTotals.getNewScTotal(), grabbedTotals.getNewScTotal());
 		validateIpsThisMonth(calculatedTotals.getIpThisMonthTotal(), grabbedTotals.getIpThisMonthTotal());
@@ -226,14 +240,14 @@ public class TeamReportSteps extends AbstractSteps {
 		validateIpsPerParty(calculatedTotals.getRevenuePartyTotal(), grabbedTotals.getRevenuePartyTotal());
 		validateTakeOfPhaseLeftDays(calculatedTotals.getDaysLeftTotal(), grabbedTotals.getDaysLeftTotal());
 		validateIpsOnTakeOffPhase(calculatedTotals.getIpTakeOffTotal(), grabbedTotals.getIpTakeOffTotal());
+		validateIps30TakeOffPhase(calculatedTotals.getIp30TakeOffTotal(), grabbedTotals.getIp30TakeOffTotal());
 		validateStylistWonInTakeOffPhase(calculatedTotals.getNewScTakeOffTotal(), grabbedTotals.getNewScTakeOffTotal());
-
 	}
 
 	@Step
 	private void matchStylistName(String stylistName, String compare) {
 		CustomVerification.verifyTrue("Failure: SC name doesn't match: " + stylistName + " - " + compare,
-				stylistName.contentEquals(compare));
+				stylistName.toLowerCase().contentEquals(compare.toLowerCase()));
 	}
 
 	@Step
@@ -243,9 +257,10 @@ public class TeamReportSteps extends AbstractSteps {
 	}
 
 	@Step
-	private void validateStartDate(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Start date dont match: " + stylistName + " - " + compare,
-				stylistName.contentEquals(compare));
+	private void validateStartDate(String stylistDate, String compare) throws ParseException {
+		String expected = DateUtils.parseDate(stylistDate, "dd/mm/yy", "dd.mm.yy");
+		CustomVerification.verifyTrue("Failure: Start date dont match: " + expected + " - " + compare,
+				expected.contentEquals(compare));
 	}
 
 	@Step
@@ -338,8 +353,9 @@ public class TeamReportSteps extends AbstractSteps {
 
 	@Step
 	private void validateIpsPerParty(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Number of Ips per party dont match: " + stylistName + " - " + compare,
-				stylistName.contentEquals(compare));
+		BigDecimal value= BigDecimal.valueOf(Double.parseDouble(stylistName)).setScale(0, RoundingMode.HALF_UP);
+		CustomVerification.verifyTrue("Failure: Number of Ips per party dont match: " + value + " - " + compare,
+				value.toString().replaceAll("\\s+","").contentEquals(compare.replaceAll("\\s+","")));
 	}
 
 	@Step
@@ -350,9 +366,10 @@ public class TeamReportSteps extends AbstractSteps {
 	}
 
 	@Step
-	private void validateTopEndDate(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: TOP end date dont match: " + stylistName + " - " + compare,
-				stylistName.contentEquals(compare));
+	private void validateTopEndDate(String stylistName, String compare) throws ParseException {
+		String expected = DateUtils.parseDate(stylistName, "dd/mm/yy", "dd.mm.yy");
+		CustomVerification.verifyTrue("Failure: TOP end date dont match: " + expected + " - " + compare,
+				expected.contentEquals(compare));
 	}
 
 	@Step
@@ -375,5 +392,16 @@ public class TeamReportSteps extends AbstractSteps {
 				"Failure: Number of frontliners recruited in TOP dont match: " + stylistName + " - " + compare,
 				stylistName.contentEquals(compare));
 	}
+	
+
+	
+	@Step
+	private void validateIps30TakeOffPhase(String stylistName, String compare) {
+		CustomVerification.verifyTrue(
+				"Failure: Number of Ips in first 30 top dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
+	}
+	
+
 
 }

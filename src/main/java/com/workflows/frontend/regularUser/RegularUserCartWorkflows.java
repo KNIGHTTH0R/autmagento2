@@ -35,6 +35,7 @@ public class RegularUserCartWorkflows {
 
 	@Step
 	public void validateProducts(String message) {
+		System.out.println(message);
 
 		for (RegularBasicProductModel productNow : basicProductsList) {
 			RegularUserCartProductModel compare = findProduct(productNow.getProdCode(), productNow.getQuantity(), cartProductsList);

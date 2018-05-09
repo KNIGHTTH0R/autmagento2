@@ -114,4 +114,10 @@ public class PartyMagentoCalls {
 		return stylistPartyModelList;
 
 	}
+	public static void main(String[] args) {
+		 List<DBStylistPartyModel> parties=	PartyMagentoCalls.getPartyList("7");
+		 for (DBStylistPartyModel dbStylistPartyModel : parties) {
+			System.out.println(dbStylistPartyModel.getPartyId());
+		}
+	}
 }

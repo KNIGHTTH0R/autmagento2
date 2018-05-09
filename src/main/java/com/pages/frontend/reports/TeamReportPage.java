@@ -135,12 +135,18 @@ public class TeamReportPage extends AbstractPage {
 						.parseValueToZeroDecimals(elementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 				teamReportModel.setTqv(FormatterUtils
 						.parseValueToZeroDecimals(elementNow.findElement(By.cssSelector("td:nth-child(5)")).getText()));
-				teamReportModel.setCarrerLevelThisMonth(TeamReportCalculations.getFullNameOfAbbreviation(
+				/*teamReportModel.setCarrerLevelThisMonth(TeamReportCalculations.getFullNameOfAbbreviation(
 						elementNow.findElement(By.cssSelector("td:nth-child(6)")).getText()));
 				teamReportModel.setCarrerLevelLastMonth(TeamReportCalculations.getFullNameOfAbbreviation(
 						elementNow.findElement(By.cssSelector("td:nth-child(7)")).getText()));
 				teamReportModel.setPayLevel(TeamReportCalculations.getFullNameOfAbbreviation(
-						elementNow.findElement(By.cssSelector("td:nth-child(8)")).getText()));
+						elementNow.findElement(By.cssSelector("td:nth-child(8)")).getText()));*/
+				teamReportModel.setCarrerLevelThisMonth(
+						elementNow.findElement(By.cssSelector("td:nth-child(6)")).getText());
+				teamReportModel.setCarrerLevelLastMonth
+						(elementNow.findElement(By.cssSelector("td:nth-child(7)")).getText());
+				teamReportModel.setPayLevel(
+						elementNow.findElement(By.cssSelector("td:nth-child(8)")).getText());
 				teamReportModel.setIpNewRecruited(FormatterUtils
 						.parseValueToZeroDecimals(elementNow.findElement(By.cssSelector("td:nth-child(9)")).getText()));
 				teamReportModel.setVacationMonth(elementNow.findElement(By.cssSelector("td:nth-child(10)")).getText());
@@ -148,13 +154,14 @@ public class TeamReportPage extends AbstractPage {
 				teamReportModel.setQuitDate(elementNow.findElement(By.cssSelector("td:nth-child(12)")).getText());
 
 				result.add(teamReportModel);
+		//		System.out.println(teamReportModel);
 			}
 			reportNextPageButton.click();
 			waitABit(1000);
 			currentPage++;
 
 		} while (currentPage <= numberOfPages);
-		PrintUtils.printTeamReportTeamTabModel(result);
+	//	PrintUtils.printTeamReportTeamTabModel(result);
 		return result;
 	}
 
@@ -200,13 +207,14 @@ public class TeamReportPage extends AbstractPage {
 						.parseValueToZeroDecimals(elementNow.findElement(By.cssSelector("td:nth-child(8)")).getText()));
 
 				result.add(teamReportPartyModel);
+		//		System.out.println(teamReportPartyModel);
 			}
 			reportNextPageButton.click();
 			waitABit(1000);
 			currentPage++;
 
 		} while (currentPage <= numberOfPages);
-		PrintUtils.printTeamReportPartyTabModel(result);
+	//	PrintUtils.printTeamReportPartyTabModel(result);
 		return result;
 	}
 
@@ -244,9 +252,12 @@ public class TeamReportPage extends AbstractPage {
 						.setTakeOffPhaseEndDate(elementNow.findElement(By.cssSelector("td:nth-child(4)")).getText());
 				teamReportTakeOffPhaseModel
 						.setDaysLeft(elementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
-				teamReportTakeOffPhaseModel.setIp(elementNow.findElement(By.cssSelector("td:nth-child(6)")).getText());
+				teamReportTakeOffPhaseModel.setIp(FormatterUtils
+						.parseValueToZeroDecimals(elementNow.findElement(By.cssSelector("td:nth-child(6)")).getText()));
 				teamReportTakeOffPhaseModel
-						.setNewStylistTop(elementNow.findElement(By.cssSelector("td:nth-child(7)")).getText());
+				.setIp30(FormatterUtils.parseValueToZeroDecimals(elementNow.findElement(By.cssSelector("td:nth-child(7)")).getText()));
+				teamReportTakeOffPhaseModel
+						.setNewStylistTop(elementNow.findElement(By.cssSelector("td:nth-child(8)")).getText());
 
 				result.add(teamReportTakeOffPhaseModel);
 			}
@@ -255,7 +266,7 @@ public class TeamReportPage extends AbstractPage {
 			currentPage++;
 
 		} while (currentPage <= numberOfPages);
-		PrintUtils.printTeamReportTakeOffPhaseTabModel(result);
+	//	PrintUtils.printTeamReportTakeOffPhaseTabModel(result);
 		return result;
 	}
 
@@ -264,11 +275,13 @@ public class TeamReportPage extends AbstractPage {
 		clickTeamTab();
 		WebElement teamTabTotalContainer = getDriver().findElement(By.cssSelector("div.dataTables_scrollFoot"));
 
-		totals.setIpTotal(teamTabTotalContainer.findElement(By.cssSelector("th.table_total_ip.tab_team")).getText());
+		totals.setIpTotal(FormatterUtils
+				.parseValueToZeroDecimals(teamTabTotalContainer.findElement(By.cssSelector("th.table_total_ip.tab_team")).getText()));
 		totals.setTqvTotal(
 				teamTabTotalContainer.findElement(By.cssSelector("th.table_total_team_points.tab_team")).getText());
-		totals.setIpNewInclTotal(
-				teamTabTotalContainer.findElement(By.cssSelector("th.table_total_ip_incl_new_sc.tab_team")).getText());
+		totals.setIpNewInclTotal(FormatterUtils
+				.parseValueToZeroDecimals(
+				teamTabTotalContainer.findElement(By.cssSelector("th.table_total_ip_incl_new_sc.tab_team")).getText()));
 		totals.setNewScTotal(
 				teamTabTotalContainer.findElement(By.cssSelector("th.table_total_no_new_sc.tab_team")).getText());
 
@@ -280,10 +293,12 @@ public class TeamReportPage extends AbstractPage {
 		clickStylePartyTab();
 		WebElement teamTabTotalContainer = getDriver().findElement(By.cssSelector("div.dataTables_scrollFoot"));
 
-		totals.setIpThisMonthTotal(
-				teamTabTotalContainer.findElement(By.cssSelector("th.table_total_ip_month.tab_party")).getText());
-		totals.setIpLastMonthTotal(
-				teamTabTotalContainer.findElement(By.cssSelector("th.table_total_ip_last_month.tab_party")).getText());
+		totals.setIpThisMonthTotal(FormatterUtils
+				.parseValueToZeroDecimals(
+				teamTabTotalContainer.findElement(By.cssSelector("th.table_total_ip_month.tab_party")).getText()));
+		totals.setIpLastMonthTotal(FormatterUtils
+				.parseValueToZeroDecimals(
+				teamTabTotalContainer.findElement(By.cssSelector("th.table_total_ip_last_month.tab_party")).getText()));
 		totals.setPartiesHeldTotal(
 				teamTabTotalContainer.findElement(By.cssSelector("th.table_total_held_parties.tab_party")).getText());
 		totals.setPartiesPlannedTotal(teamTabTotalContainer
@@ -304,8 +319,10 @@ public class TeamReportPage extends AbstractPage {
 
 		totals.setDaysLeftTotal(teamTabTotalContainer
 				.findElement(By.cssSelector("th.table_total_remaining_top.tab_takeoff")).getText());
-		totals.setIpTakeOffTotal(
-				teamTabTotalContainer.findElement(By.cssSelector("th.table_total_ips_in_top.tab_takeoff")).getText());
+		totals.setIpTakeOffTotal(FormatterUtils
+				.parseValueToZeroDecimals(teamTabTotalContainer.findElement(By.cssSelector("th.table_total_ips_in_top.tab_takeoff")).getText()));
+		totals.setIp30TakeOffTotal(FormatterUtils
+				.parseValueToZeroDecimals(teamTabTotalContainer.findElement(By.cssSelector("th.table_total_ips_in_first_month_top.tab_takeoff")).getText()));
 		totals.setNewScTakeOffTotal(teamTabTotalContainer
 				.findElement(By.cssSelector("th.table_total_top_new_frontliners.tab_takeoff")).getText());
 

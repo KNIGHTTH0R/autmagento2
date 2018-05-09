@@ -19,6 +19,24 @@ public class OrderTotalsModel {
 	private String totalFortyDiscounts;
 	private String totalBonusJeverly;
 	private String totalMarketingBonus;
+	private String totalOrder;
+
+	
+	public Map<String, String> getDiscountList() {
+		return discountList;
+	}
+
+	public void setDiscountList(Map<String, String> discountList) {
+		this.discountList = discountList;
+	}
+
+	public String getTotalOrder() {
+		return totalOrder;
+	}
+
+	public void setTotalOrder(String totalOrder) {
+		this.totalOrder = totalOrder;
+	}
 
 	public String getSubtotal() {
 		return subtotal;

@@ -83,6 +83,14 @@ public class TeamReportPartyTabModel {
 		this.revenuePerParty = revenuePerParty;
 	}
 
+	@Override
+	public String toString() {
+		return "TeamReportPartyTabModel [styleCoachId=" + styleCoachId + ", stylistName=" + stylistName
+				+ ", sponsorName=" + sponsorName + ", ipThisMonth=" + ipThisMonth + ", ipLastMonth=" + ipLastMonth
+				+ ", partiesHeld=" + partiesHeld + ", partiesPlanned=" + partiesPlanned + ", partiesUpcoming="
+				+ partiesUpcoming + ", revenuePerParty=" + revenuePerParty + "]";
+	}
+
 
 
 

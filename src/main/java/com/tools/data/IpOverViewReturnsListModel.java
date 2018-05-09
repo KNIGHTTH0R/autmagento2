@@ -47,4 +47,12 @@ public class IpOverViewReturnsListModel {
 		this.ip = ip;
 	}
 
+	@Override
+	public String toString() {
+		return "IpOverViewReturnsListModel [orderId=" + orderId + ", refundDate=" + refundDate + ", refundType="
+				+ refundType + ", amount=" + amount + ", ip=" + ip + "]";
+	}
+	
+	
+
 }

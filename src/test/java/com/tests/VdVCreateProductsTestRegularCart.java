@@ -62,53 +62,59 @@ public class VdVCreateProductsTestRegularCart extends BaseTest {
 		
 		////vdv
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("49.60");
+		genProduct1.setPrice("33.95");
 		genProduct1.setSku("0541220PCS38");
 		genProduct1.setColor("peachy skin");
 		genProduct1.setProductSize("38");
+		genProduct1.setIp("29");
 		genProduct1.setParentProductSku("primadonna-twist-happiness-slip-0541220");
 		productsList.add(genProduct1);
 		
 		genProduct2 = MagentoProductCalls.createProductModel();
-		genProduct2.setPrice("49.60");
+		genProduct2.setPrice("33.95");
 		genProduct2.setSku("0541220PCS40");
 		genProduct2.setColor("peachy skin");
 		genProduct2.setProductSize("40");
+		genProduct2.setIp("29");
 		genProduct2.setParentProductSku("primadonna-twist-happiness-slip-0541220");
 		productsList.add(genProduct2);
 		
 		
 		genProduct3 = MagentoProductCalls.createProductModel();
-		genProduct3.setPrice("49.60");
+		genProduct3.setPrice("33.95");
 		genProduct3.setSku("0541220PCS42");
+		genProduct3.setIp("29");
 		genProduct3.setColor("peachy skin");
 		genProduct3.setProductSize("42");
 		genProduct3.setParentProductSku("primadonna-twist-happiness-slip-0541220");
 		productsList.add(genProduct3);
 		
 		genProduct4 = MagentoProductCalls.createProductModel();
-		genProduct4.setPrice("49.60");
+		genProduct4.setPrice("33.95");
 		genProduct4.setSku("0541220PCS44");
 		genProduct4.setColor("peachy skin");
 		genProduct4.setProductSize("44");
+		genProduct4.setIp("29");
 		genProduct4.setParentProductSku("primadonna-twist-happiness-slip-0541220");
 		productsList.add(genProduct4);
 		
 		
 		genProduct5 = MagentoProductCalls.createProductModel();
-		genProduct5.setPrice("49.60");
+		genProduct5.setPrice("33.95");
 		genProduct5.setSku("0541220PCS46");
 		genProduct5.setColor("peachy skin");
 		genProduct5.setProductSize("46");
+		genProduct5.setIp("29");
 		genProduct5.setParentProductSku("primadonna-twist-happiness-slip-0541220");
 		productsList.add(genProduct5);
 		
 		
 		genProduct6 = MagentoProductCalls.createProductModel();
-		genProduct6.setPrice("49.60");
+		genProduct6.setPrice("33.95");
 		genProduct6.setSku("0541220PCS48");
 		genProduct6.setColor("peachy skin");
 		genProduct6.setProductSize("48");
+		genProduct6.setIp("29");
 		genProduct6.setParentProductSku("primadonna-twist-happiness-slip-0541220");
 		productsList.add(genProduct6);
 		

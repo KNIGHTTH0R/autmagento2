@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.PippaDb.VanDelVeldeDBConnection;
 import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
@@ -163,7 +164,9 @@ public class US11001PartyHostBuysForCustomerWithNoBonusTestVDV extends BaseTest 
 
 		urlModel = MongoReader.grabUrlModels("US10001CreatePartyWithCustomerHostTestVDV" + SoapKeys.GRAB).get(0);
 		System.out.println("URL "+ urlModel.getUrl());
-
+		
+		
+		VanDelVeldeDBConnection.updateActiveParty(urlModel.getUrl());
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 	}

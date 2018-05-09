@@ -20,6 +20,7 @@ import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
+import com.tests.uss10.uss10009.US10009CreatePartyWithCustomerHostTestVDV;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
@@ -76,7 +77,7 @@ public class US9001ClosePartyTestVDV extends BaseTest {
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
-		urlModel = MongoReader.grabUrlModels("US10001CreatePartyWithCustomerHostTestVDV"+SoapKeys.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10009CreatePartyWithCustomerHostTestVDV"+SoapKeys.GRAB).get(0);
 		VanDelVeldeDBConnection.updateDateOnParty(urlModel.getUrl());
 	
 		VanDelVeldeDBConnection.updateCloseParty(urlModel.getUrl());
@@ -87,14 +88,17 @@ public class US9001ClosePartyTestVDV extends BaseTest {
 	public void us9001ClosePartyTestVDV() throws SQLException {
 		customerRegistrationSteps.waitABit(4000);
 		VanDelVeldeDBConnection.updateCloseParty(urlModel.getUrl());
-		/*customerRegistrationSteps.performLogin(username, password);
-		if (!headerSteps.succesfullLogin()) {
+		customerRegistrationSteps.performLogin(username, password);
+		/*	if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
-		headerSteps.selectLanguage(MongoReader.getContext());
+		headerSteps.selectLanguage(MongoReader.getContext());*/
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.closeTheParty();
-		partyDetailsSteps.verifyClosedPartyAvailableActions();*/
+		partyDetailsSteps.verifyClosedPartyAvailableActions();
 	}
+	
+	
+		
 
 }

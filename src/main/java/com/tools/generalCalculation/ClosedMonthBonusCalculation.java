@@ -33,6 +33,7 @@ public class ClosedMonthBonusCalculation {
 		totalIp = totalIp.add(ipForOrders);
 		totalIp = totalIp.add(ipForCreditMemos);
 
+		System.out.println("totalIp: "+totalIp);
 		BigDecimal tobIpForOrders = OrdersCalculation.calculateTotalIpFromOrdersInTakeOfPeriod(allOrdersList, activationDate, startDate);
 		BigDecimal tobIpForCreditMemos = CreditMemoCalculation.calculateTotalIpsForCreditMemosInTakeOfPeriod(completeCMList, activationDate, startDate);
 
@@ -46,7 +47,7 @@ public class ClosedMonthBonusCalculation {
 
 	}
 
-	public static IpModel calculateCurrentMonthBonuses(String stylistId, String startDate, String endDate) throws NumberFormatException, ParseException {
+	public static IpModel calculateCurrentMonthBonuses(String stylistId, String startDate, String endDate, String ipCorrection) throws NumberFormatException, ParseException {
 
 		IpModel result = new IpModel();
 		BigDecimal totalIp = BigDecimal.ZERO;
@@ -58,8 +59,10 @@ public class ClosedMonthBonusCalculation {
 
 		BigDecimal ipForOrders = OrdersCalculation.calculateTotalIpsForOrders(allOrdersList ,startDate, endDate);
 		BigDecimal ipForCreditMemos = CreditMemoCalculation.calculateTotalIpsForCreditMemos(completeCMList, startDate, endDate);
+		
 		totalIp = totalIp.add(ipForOrders);
 		totalIp = totalIp.add(ipForCreditMemos);
+		totalIp=totalIp.add(BigDecimal.valueOf(Double.parseDouble(ipCorrection)));
 
 		BigDecimal unsafeIpForOrders = OrdersCalculation.calculateTotalUnsafeIp(allOrdersList, endDate);
 
@@ -120,7 +123,9 @@ public class ClosedMonthBonusCalculation {
 	}
 
 	public static void main(String[] args) throws NumberFormatException, ParseException {
-//		ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835","2015-12-15 01:00:00", "2016-02-15 00:00:00", "2016-03-08 15:00:00");
+		IpModel x= ClosedMonthBonusCalculation.calculateCurrentMonthBonuses("33","2018-04-09 17:00:00", "2018-04-20 17:00:00","125");
+		System.out.println(x.getIp());
+		System.out.println(x.getUnsafeIp());
 //		ClosedMonthBonusCalculation.calculateCurrentMonthBonuses("1835","2016-02-23 00:00:00", "2016-02-23 16:00:00");
 	}
 }

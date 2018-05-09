@@ -4,11 +4,23 @@ public class LoungeIpPerformanceModel {
 
 	private String careerLevel;
 	private String payLevel;
+	private String careerLevelName;
 	private String individualPoints;
 	private String unsafeIndividualPoints;
 	private String teamPoints;
 	private String styleCoachFirstLevel;
 	private String goldStyleCoaches;
+
+	
+	
+	
+	public String getCareerLevelName() {
+		return careerLevelName;
+	}
+
+	public void setCareerLevelName(String careerLevelName) {
+		this.careerLevelName = careerLevelName;
+	}
 
 	public String getCareerLevel() {
 		return careerLevel;
@@ -66,4 +78,13 @@ public class LoungeIpPerformanceModel {
 		this.unsafeIndividualPoints = unsafeIndividualPoints;
 	}
 
+	@Override
+	public String toString() {
+		return "LoungeIpPerformanceModel [careerLevel=" + careerLevel + ", payLevel=" + payLevel + ", careerLevelName="
+				+ careerLevelName + ", individualPoints=" + individualPoints + ", unsafeIndividualPoints="
+				+ unsafeIndividualPoints + ", teamPoints=" + teamPoints + ", styleCoachFirstLevel="
+				+ styleCoachFirstLevel + ", goldStyleCoaches=" + goldStyleCoaches + "]";
+	}
+
+	
 }

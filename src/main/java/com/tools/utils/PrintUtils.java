@@ -66,6 +66,8 @@ public class PrintUtils {
 		System.out.println(" *** Print List from Cart *** ");
 		for (TeamReportModel model : list) {
 			System.out.println("------------------------");
+		
+			//team tab
 			System.out.println("styleCoachID " + model.getStyleCoachId());
 			System.out.println("styleCoachName " + model.getStyleCoachName());
 			System.out.println("activationDate " + model.getActivationDate());
@@ -78,15 +80,27 @@ public class PrintUtils {
 			System.out.println("ipNewRecruited " + model.getIpNewRecruited());
 			System.out.println("newStylist " + model.getNewStylist());
 			System.out.println("newStylistTop " + model.getNewStylistTop());
+			System.out.println("ipNewFrontileners " + model.getIpNewRecruited());
+			System.out.println("level " + model.getLevel());
+			System.out.println("Cancel Date " + model.getCanceledDate());
+			
+			
+			//parties tab
 			System.out.println("ipThisMonth " + model.getIpThisMonth());
 			System.out.println("ipLastMonth " + model.getIpLastMonth());
 			System.out.println("partiesPlanned " + model.getPartiesPlanned());
 			System.out.println("partiesHeld " + model.getPartiesHeld());
 			System.out.println("partiesUpcoming " + model.getPartiesUpcoming());
 			System.out.println("revenuePerParty " + model.getRevenuePerParty());
+			
+			//TOP tab
+			System.out.println("activationDate " + model.getActivationDate());
 			System.out.println("takeOffPhaseEndDate " + model.getTakeOffPhaseEndDate());
 			System.out.println("daysLeft " + model.getDaysLeft());
-			System.out.println("level " + model.getLevel());
+			System.out.println("ipTop " + model.getIpTop());
+			System.out.println("ip 30 Top " + model.getIp30Top());
+			System.out.println("Top New SC " + model.getTopNrNewStylists());
+			
 		}
 	}
 

@@ -2,6 +2,7 @@ package com.tools.generalCalculation;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.tools.constants.DateConstants;
@@ -96,16 +97,18 @@ public class CreditMemoCalculation {
 	}
 
 	public static List<DBCreditMemoModel> populateCreditMemosListWithOrderDetails(List<DBCreditMemoModel> creditMemoList, List<DBOrderModel> orderList) {
-
+		List<DBCreditMemoModel> cmList=new ArrayList<DBCreditMemoModel>();
 		for (DBCreditMemoModel creditMemo : creditMemoList) {
 			for (DBOrderModel order : orderList) {
 				if (creditMemo.getOrderIncrementId().contentEquals(order.getIncrementId())) {
 					creditMemo.setOrderCreatedAt(order.getCreatedAt());
 					creditMemo.setOrderPaidAt(order.getPaidAt());
+					cmList.add(creditMemo);
+					
 				}
 			}
 		}
-		return creditMemoList;
+		return cmList;
 	}
 
 }

@@ -29,7 +29,7 @@ public class ShippingAndConfirmationWorkflows {
 	
 	@Step
 	public void validateProducts(String message) {
-
+		System.out.println();
 		System.out.println(message);
 		
 		System.out.println("basicProductsList" +basicProductsList);

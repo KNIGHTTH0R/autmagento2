@@ -24,6 +24,7 @@ import com.steps.frontend.HomeSteps;
 import com.steps.frontend.ReportsSteps;
 import com.steps.frontend.reports.TeamReportSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.constants.FilePaths;
 import com.tools.constants.UrlConstants;
 import com.tools.data.TeamReportModel;
@@ -58,6 +59,8 @@ public class US33001ValidateTeamReportTest extends BaseTest {
 	public ReportsSteps reportsSteps;
 	@Steps
 	public TeamReportSteps teamReportSteps;
+	@Steps
+	public CustomVerification customVerification;
 
 	Map<String, List<TeamReportModel>> expectedTeamMap = new HashMap<String, List<TeamReportModel>>();
 
@@ -116,13 +119,13 @@ public class US33001ValidateTeamReportTest extends BaseTest {
 
 		frontEndSteps.performLogin(username, password);
 
-		if (!headerSteps.succesfullLogin()) {
+	/*	if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
-		headerSteps.selectLanguage(MongoReader.getContext());
-		headerSteps.redirectToStylistReports();
-		System.out.println("aici");
-		reportsSteps.clickOnTeamReports();
+		headerSteps.selectLanguage(MongoReader.getContext());*/
+		
+		
+		headerSteps.redirectToTeamReport();
 		teamReportSteps.selectPagination("100");
 		teamReportSteps.selectMonth(DateUtils.parseDate(reportMonth, "yyyy-MM-dd HH:mm:ss", "yyyy-MMM",
 				new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
@@ -133,7 +136,6 @@ public class US33001ValidateTeamReportTest extends BaseTest {
 			TeamReportTotalsModel grabbedTotals = new TeamReportTotalsModel();
 
 			teamReportSteps.selectScLevel(entry.getKey());
-
 			teamReportSteps.clickTeamTab();
 			List<TeamReportTeamTabModel> grabbedTeamModel = teamReportSteps.getTeamReportTeamModel();
 			grabbedTotals = teamReportSteps.getTeamReportTeamTotals(grabbedTotals);
@@ -151,7 +153,10 @@ public class US33001ValidateTeamReportTest extends BaseTest {
 			teamReportSteps.validateTeamReportTakeOffPhaseTab(entry.getValue(), takeOffPhaseModel);
 
 			teamReportSteps.validateTotals(calculatedTotals, grabbedTotals);
+			
+		
 		}
 
+		customVerification.printErrors();
 	}
 }

@@ -362,7 +362,7 @@ public class AbstractSteps extends ScenarioSteps {
 	@Step
 	public void navigate(String URL) {
 		// failsafe in case of redirects to live
-		if (!URL.contains("www.pippajean.com")) {
+		if (!URL.contains("www.atmyhome.com")) {
 			getDriver().manage().timeouts().pageLoadTimeout(3600, TimeUnit.SECONDS);
 			getDriver().get(URL);
 			getDriver().manage().window().maximize();
@@ -375,7 +375,7 @@ public class AbstractSteps extends ScenarioSteps {
 	@Step
 	public void navigateWithoutMaximize(String URL) {
 		// failsafe in case of redirects to live
-		if (!URL.contains("www.pippajean.com")) {
+		if (!URL.contains("www.atmyhome.com")) {
 			// getDriver().manage().timeouts().pageLoadTimeout(3600,
 			// TimeUnit.SECONDS);
 			getDriver().get(URL);

@@ -9,6 +9,7 @@ import net.thucydides.core.annotations.StepGroup;
 
 import org.junit.Assert;
 
+import com.tools.CustomVerification;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.requirements.AbstractSteps;
@@ -42,7 +43,7 @@ public class OrderValidationSteps extends AbstractSteps {
 	@Step
 	@Screenshots(onlyOnFailures = true)
 	public void validateMatchPrice(String productNow, String compare) {
-		Assert.assertTrue("Failure: Price values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
+		Assert.assertTrue("Failure: Price values dont match: " + productNow + " - " + compare, productNow.replaceAll("\\s+","").contentEquals(compare.replaceAll("\\s+","")));
 	}
 
 	/**
@@ -53,11 +54,17 @@ public class OrderValidationSteps extends AbstractSteps {
 	 */
 	@Step
 	public void matchName(String productNow, String compare) {
+		CustomVerification.verifyTrue("Failure: Name values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
+
+	}
+	@Step
+	public void matchSku(String prodCode, String compare) {
+		CustomVerification.verifyTrue("Failure: Sku values dont match: " + prodCode + " - " + compare, compare.contentEquals(prodCode));
 	}
 
 	@Step
 	public void validateMatchQuantity(String productNow, String compare) {
-		Assert.assertTrue("Failure: Quantity values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
+		CustomVerification.verifyTrue("Failure: Quantity values dont match: " + productNow + " - " + compare, compare.contains(productNow));
 	}
 
 	public List<OrderItemModel> findProducts(String productCode, List<OrderItemModel> orderProducts) {
@@ -105,5 +112,7 @@ public class OrderValidationSteps extends AbstractSteps {
 		}
 		return result;
 	}
+
+	
 
 }

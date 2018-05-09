@@ -108,11 +108,8 @@ public class US8001CustomerBuyProductsWithNoBonnusTestVDV extends BaseTest {
         createdProductsList = MongoReader.grabProductDetailedModel("VdVCreateProductsTestRegularCart" + SoapKeys.GRAB);
 		
 		genProduct1 = createdProductsList.get(0);
-		System.out.println(genProduct1.getParentProductSku());
 		genProduct2 = createdProductsList.get(1);
-		System.out.println(genProduct2.getSku());
 		genProduct3 = createdProductsList.get(2);
-		System.out.println(genProduct3.getSku());
 
 		Properties prop = new Properties();
 		InputStream input = null;

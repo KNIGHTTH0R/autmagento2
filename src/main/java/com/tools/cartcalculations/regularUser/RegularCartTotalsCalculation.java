@@ -143,7 +143,7 @@ public class RegularCartTotalsCalculation {
 				BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 		System.out.println("shippingValue-> " + shippingValue);
 
-		if (totalAmount.compareTo(BigDecimal.valueOf(150)) > 0) {
+		if (totalAmount.compareTo(BigDecimal.valueOf(800)) > 0) {
 			shippingValue = "0";
 		}
 		tax = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
@@ -170,7 +170,7 @@ public class RegularCartTotalsCalculation {
 	public static void main(String[] args) {
 		String shipping="3.9";
 		BigDecimal totalAmount=BigDecimal.valueOf(297.6);
-		if (totalAmount.compareTo(BigDecimal.valueOf(150)) > 0) {
+		if (totalAmount.compareTo(BigDecimal.valueOf(800)) > 0) {
 			shipping = "0";
 		}
 		System.out.println(shipping);

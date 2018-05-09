@@ -35,10 +35,36 @@ public class OrdersSteps extends AbstractSteps {
 	}
 
 	@Step
+	public List<OrderItemModel> grabInvoiceOrderItems() {
+		return orderItemsPage().grabInvoiceOrderItems();
+	}
+
+	@Step
+	public List<OrderItemModel> grabCreditMomoOrderItems() {
+		return orderItemsPage().grabCreditMomoOrderItems();
+	}
+	
+	
+	@Step
+	public List<OrderItemModel> grabShipmentOrderItems() {
+		return orderItemsPage().grabShipmentOrderItems();
+	}
+
+	@Step
 	public OrderTotalsModel grabTotals() {
 		return orderTotalsPage().grabTotals();
 	}
 
+	@Step
+	public OrderTotalsModel grabInvoiceTotals() {
+		return orderTotalsPage().grabInvoiceTotals();
+	}
+
+	@Step
+	public OrderTotalsModel grabCreditmemoTotals() {
+		return orderTotalsPage().grabInvoiceTotals();
+	}
+	
 	@Step
 	public OrderInfoModel grabOrderInfo() {
 		return orderInfoPage().grabOrderInfo();
@@ -72,9 +98,19 @@ public class OrdersSteps extends AbstractSteps {
 		ordersActionsPage().submitInvoice();
 		ordersActionsPage().verifyInvoiceShippingSubmitedMessage();
 	}
-	
-	
-	
+
+	@Step
+	public void clickShipButton() {
+		ordersActionsPage().clickShipButton();
+	}
+
+	@Step
+	public void submitShipment() {
+		ordersActionsPage().checkShipmentMail();
+		ordersActionsPage().submitShipment();
+		ordersActionsPage().verifyShippingSubmitedMessage();
+	}
+
 	@Step
 	public void createOrderShipment() {
 		ordersActionsPage().clickShipButton();
@@ -83,19 +119,50 @@ public class OrdersSteps extends AbstractSteps {
 		ordersActionsPage().verifyShippingSubmitedMessage();
 
 	}
+
 	@Step
-	public void validateCompleteStatus(){
+	public void validateCompleteStatus() {
 		ordersActionsPage().verifyCompleteStatus();
 	}
-	
-	
+
 	@Step
-	public void createOrderInvoice(){
+	public void clickInvoiceButton() {
 		ordersActionsPage().clickInvoiceButton();
-		//ordersActionsPage().checkCreateShippment();
+	}
+
+	@Step
+	public void submitInvoice() {
+		ordersActionsPage().checkInvoiceMail();
 		ordersActionsPage().submitInvoice();
 		ordersActionsPage().verifyInvoiceSubmitedMessage();
 	}
+
+	@Step
+	public void verifyInvoiceSubmitedMessage() {
+		ordersActionsPage().verifyInvoiceSubmitedMessage();
+	}
+
+	@Step
+	public void createOrderInvoice() {
+		ordersActionsPage().clickInvoiceButton();
+		ordersActionsPage().checkCreateShippment();
+		ordersActionsPage().submitInvoice();
+		ordersActionsPage().verifyInvoiceSubmitedMessage();
+	}
+	
+	@Step
+	public void clickcreditMemoButton() {
+		ordersActionsPage().clickcreditMemoButton();
+	}
+	
+	
+	@Step
+	public void submitMemoButton() {
+		ordersActionsPage().checkInvoiceMail();
+
+		ordersActionsPage().refundOffline();
+		ordersActionsPage().verifyRefundedSuccessMessage();
+		waitABit(2000);	}
 
 	@Step
 	public void refundOrder() {
@@ -123,10 +190,9 @@ public class OrdersSteps extends AbstractSteps {
 
 	@Step
 	public void verifyCaptureOrder(String shopperReference) {
-		//orderNotificationPage().verifyCapture(shopperReference);
+		// orderNotificationPage().verifyCapture(shopperReference);
 	}
 
-	
 	@Step
 	public void openDocumentsSection() {
 		// TODO Auto-generated method stub
@@ -135,37 +201,44 @@ public class OrdersSteps extends AbstractSteps {
 
 	@Step
 	public void valdateOriginalInvoiceIsReceived(String orderId, boolean isReceived) {
-		ordersActionsPage().valdateOriginalInvoiceIsReceived(orderId,isReceived);
+		ordersActionsPage().valdateOriginalInvoiceIsReceived(orderId, isReceived);
 	}
-	
+
 	@Step
 	public void valdateOriginalReturnIsReceived(String orderId, boolean isReceived) {
-		ordersActionsPage().valdateOriginalReturnIsReceived(orderId,isReceived);
+		ordersActionsPage().valdateOriginalReturnIsReceived(orderId, isReceived);
 	}
-	
+
 	@Step
-	public void validateSecoundReturnIsReceived(String orderId, boolean isReceived,int noOfDoc) {
-		ordersActionsPage().valdateExcangeReturnIsReceived(orderId,isReceived,noOfDoc);
+	public void validateSecoundReturnIsReceived(String orderId, boolean isReceived, int noOfDoc) {
+		ordersActionsPage().valdateExcangeReturnIsReceived(orderId, isReceived, noOfDoc);
 	}
 
 	public void validateEchangeDocIsReceived(String orderId, boolean isReceived) {
-		ordersActionsPage().validateEchangeDocIsReceived(orderId,isReceived);		
+		ordersActionsPage().validateEchangeDocIsReceived(orderId, isReceived);
 	}
 
-	public void sendIndividualDocumentToSpecificReceiver(String documentName,String receiver) {
-	
+	public void sendIndividualDocumentToSpecificReceiver(String documentName, String receiver) {
+
 		ordersActionsPage().sendIndividualDocumentToSpecificReceiver(documentName);
 		ordersActionsPage().selectReceiverMethod("additional_email_receiver");
 		ordersActionsPage().insertReceiver(receiver);
 		ordersActionsPage().clickSubmitEmail();
 	}
-	public void sendIndividualDocumentToReceiver(String documentName,String receiver) {
-		
+
+	public void sendIndividualDocumentToReceiver(String documentName, String receiver) {
+
 		ordersActionsPage().sendIndividualDocumentToSpecificReceiver(documentName);
 		System.out.println("done");
 		ordersActionsPage().selectReceiverMethod(receiver);
 		System.out.println("done1");
 		ordersActionsPage().clickSubmitEmail();
 		System.out.println("done2");
+	}
+
+	public void addTrakingNumber(String trNumber) {
+		ordersActionsPage().clickTrakingNumberBtn();
+		ordersActionsPage().selectTrakingNoMethod("ups");
+		ordersActionsPage().insertTrackingNo(trNumber);
 	}
 }

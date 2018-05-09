@@ -24,6 +24,7 @@ public class IpOverviewModel {
 	private String chargebacksThisMonth;
 	private String returnsThisMonth;
 	private String manualIpCorrection;
+	private String manualIpCorrectionTop;
 	private String totalIp;
 	private String ipThisMonth;
 	private String ipLastMonth;
@@ -31,9 +32,48 @@ public class IpOverviewModel {
 	private String ipTPOrdersThisMonth;
 	private String ipTPOrdersLastMonth;
 	private String openIpTotal;
+	private String stylistId;
+	private String ipTop;
+	private String ip30Top;
 	private List<IpOverViewPayedOrdersModel> payedOrders;
 	private List<IpOverViewReturnsListModel> returns;
 	private List<IpOverViewReturnsListModel> manualCorections;
+
+	
+	
+	
+	
+	public String getManualIpCorrectionTop() {
+		return manualIpCorrectionTop;
+	}
+
+	public void setManualIpCorrectionTop(String manualIpCorrectionTop) {
+		this.manualIpCorrectionTop = manualIpCorrectionTop;
+	}
+
+	public String getIpTop() {
+		return ipTop;
+	}
+
+	public void setIpTop(String ipTop) {
+		this.ipTop = ipTop;
+	}
+
+	public String getIp30Top() {
+		return ip30Top;
+	}
+
+	public void setIp30Top(String ip30Top) {
+		this.ip30Top = ip30Top;
+	}
+
+	public String getStylistId() {
+		return stylistId;
+	}
+
+	public void setStylistId(String stylistId) {
+		this.stylistId = stylistId;
+	}
 
 	public String getPaidOrdersPreviosMonth() {
 		return paidOrdersPreviosMonth;

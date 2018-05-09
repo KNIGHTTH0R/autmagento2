@@ -72,11 +72,17 @@ public class EnvironmentConstants {
 	
 	
 	//CLOUD: staging-aut env  - uncomment following for testing without running the test from cmd line
-	public static final String COMMISSION_URL = "commission-aut.pippajean.com";
-	public static final String SOAP_URL="https://staging-aut.pippajean.com/";
+	
+	//aut.myhome
+	public static final String COMMISSION_URL = "https://commission-aut.atmyhome.com/api/";
+	
+//	public static final String COMMISSION_URL = "https://commission-platform.pippajean.com/api/";
+	
+	
+	public static final String SOAP_URL="https://aut.atmyhome.com/";
 		
-	public static final String SOAP_USERNAME="navision";
-	public static final String SOAP_PASSWORD=";Bn8NzlGhi[z";
+	public static final String SOAP_USERNAME="emilian";
+	public static final String SOAP_PASSWORD="emilian123";
 
 
 /*	public static final String COMMISSION_URL = "commission-aut.pippajean.com";

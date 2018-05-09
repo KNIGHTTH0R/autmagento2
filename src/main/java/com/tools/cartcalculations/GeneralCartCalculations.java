@@ -48,7 +48,7 @@ public class GeneralCartCalculations {
 
 			BigDecimal remainingSum = ruleDiscount.subtract(subTotal);
 			System.out.println("remainingSum " + remainingSum);
-			if (remainingSum.compareTo(BigDecimal.valueOf(150)) == 1) {
+			if (remainingSum.compareTo(BigDecimal.valueOf(800)) == 1) {
 
 				shipping = BigDecimal.valueOf(0);
 			} else {
@@ -59,7 +59,7 @@ public class GeneralCartCalculations {
 		} else {
 			BigDecimal remainingSum2 = subTotal.subtract(ruleDiscount);
 			
-			if (remainingSum2.compareTo(BigDecimal.valueOf(150)) > -1) {
+			if (remainingSum2.compareTo(BigDecimal.valueOf(800)) > -1) {
 
 				shipping = BigDecimal.valueOf(0);
 				System.out.println("firt gr" + shipping);

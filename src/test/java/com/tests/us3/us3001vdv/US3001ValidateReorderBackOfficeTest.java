@@ -68,9 +68,9 @@ public class US3001ValidateReorderBackOfficeTest extends BaseTest {
 	public void setUp() {
 
 		List<OrderModel> orderModelList = MongoReader
-				.getOrderModel("US3001ReorderSfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.GRAB);
+				.getOrderModel("US3003ValidateOrderBackOfficeTestVDV" + SoapKeys.GRAB);
 		productsList = MongoReader
-				.grabBasicProductModel("US3001ReorderSfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.GRAB);
+				.grabBasicProductModel("US3003ValidateOrderBackOfficeTestVDV" + SoapKeys.GRAB);
 		shippingModelList = MongoReader
 				.grabShippingModel("US3001ReorderSfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.CALC);
 		calcDetailsModelList = MongoReader

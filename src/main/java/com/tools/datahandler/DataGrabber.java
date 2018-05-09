@@ -25,7 +25,7 @@ public class DataGrabber {
 
 	// Phase One
 	public static List<CartProductModel> cartProductsWith50Discount = new ArrayList<CartProductModel>();
-	public static List<CartProductModel> cartProductsWith25Discount = new ArrayList<CartProductModel>();
+	public static List<CartProductModel> cartProductsWith20Discount = new ArrayList<CartProductModel>();
 	public static List<CartProductModel> cartMarketingMaterialsProducts = new ArrayList<CartProductModel>();
 
 	// Phase Two
@@ -86,7 +86,7 @@ public class DataGrabber {
 
 		// Phase One
 		cartProductsWith50Discount = new ArrayList<CartProductModel>();
-		cartProductsWith25Discount = new ArrayList<CartProductModel>();
+		cartProductsWith20Discount = new ArrayList<CartProductModel>();
 		cartMarketingMaterialsProducts = new ArrayList<CartProductModel>();
 		cartProductsList25AndMm = new ArrayList<CartProductModel>();
 
@@ -119,7 +119,7 @@ public class DataGrabber {
 	}
 
 	public static void addAll25AndMmProducts() {
-		cartProductsList25AndMm.addAll(cartProductsWith25Discount);
+		cartProductsList25AndMm.addAll(cartProductsWith20Discount);
 		cartProductsList25AndMm.addAll(cartMarketingMaterialsProducts);
 	}
 

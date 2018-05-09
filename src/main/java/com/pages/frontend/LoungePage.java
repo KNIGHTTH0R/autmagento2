@@ -238,15 +238,15 @@ public class LoungePage extends AbstractPage {
 
 		LoungeIpPerformanceModel result = new LoungeIpPerformanceModel();
 
-		WebElement performanceTable = getDriver().findElement(By.cssSelector(".performance-table tbody"));
+		WebElement performanceTable = getDriver().findElement(By.cssSelector(".performance-table"));
 		result.setCareerLevel(
-				performanceTable.findElement(By.cssSelector("tr:nth-child(1) td:nth-child(2)")).getText());
-		result.setPayLevel(performanceTable.findElement(By.cssSelector("tr:nth-child(2) td:nth-child(2)")).getText());
+				performanceTable.findElement(By.cssSelector(".career")).getText());
+		result.setPayLevel(performanceTable.findElement(By.cssSelector(".paylevel")).getText());
 		result.setIndividualPoints(
-				performanceTable.findElement(By.cssSelector("tr:nth-child(3) td:nth-child(2)")).getText());
+				performanceTable.findElement(By.cssSelector(".ip")).getText());
 		result.setUnsafeIndividualPoints(
-				performanceTable.findElement(By.cssSelector("tr:nth-child(4) td:nth-child(2)")).getText());
-		result.setTeamPoints(performanceTable.findElement(By.cssSelector("tr:nth-child(5) td:nth-child(2)")).getText());
+				performanceTable.findElement(By.cssSelector(".ipUnsafe")).getText());
+		result.setTeamPoints(performanceTable.findElement(By.cssSelector(".teamPoints")).getText());
 
 		PrintUtils.printLoungeIpPerformanceModel(result);
 

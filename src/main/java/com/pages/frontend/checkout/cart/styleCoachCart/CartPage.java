@@ -130,7 +130,7 @@ public class CartPage extends AbstractPage {
 			// span.price")).getText()));
 			// productNow.setPriceIP(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6)
 			// span.ff-Ge")).getText()));
-			productNow.setDiscountClass(ConfigConstants.DISCOUNT_25);
+			productNow.setDiscountClass(ConfigConstants.DISCOUNT_20);
 			resultList.add(productNow);
 		}
 
@@ -238,7 +238,7 @@ public class CartPage extends AbstractPage {
 				if (!valueTransformer.contains(".")) {
 					valueTransformer += ".00";
 				}
-
+				
 				resultModel.setJewelryBonus(valueTransformer);
 			}
 			if (key.contains(ContextConstants.MARKETING_BONUS)) {

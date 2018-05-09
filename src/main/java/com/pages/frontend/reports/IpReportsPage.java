@@ -123,13 +123,7 @@ public class IpReportsPage extends AbstractPage {
 			openIps.setOpenChargebacks(
 					ipTables.get(1).findElement(By.cssSelector("tr:nth-child(3) td:last-child")).getText());
 
-			openIps.setIpTPOrdersThisMonth(
-					ipTables.get(1).findElement(By.cssSelector("tr:nth-child(4) td:last-child")).getText());
-	
-			openIps.setIpTPOrdersLastMonth(
-					ipTables.get(1).findElement(By.cssSelector("tr:nth-child(5) td:last-child")).getText());
-
-			openIps.setOpenIpTotal(ipTables.get(1).findElement(By.cssSelector("tr:nth-child(6) td:last-child")).getText());
+			openIps.setOpenIpTotal(ipTables.get(1).findElement(By.cssSelector("tr:nth-child(4) td:last-child")).getText());
 
 //			result.add(openIps);
 
@@ -154,8 +148,8 @@ public class IpReportsPage extends AbstractPage {
 				payedOrder.setOrderDate(item.findElement(By.cssSelector("td:nth-child(3)")).getText());
 				payedOrder.setPaymentDate(item.findElement(By.cssSelector("td:nth-child(4)")).getText());
 				payedOrder.setOrderStatus(item.findElement(By.cssSelector("td:nth-child(5)")).getText());
-				payedOrder.setAmount(FormatterUtils
-						.parseValueToTwoDecimals(item.findElement(By.cssSelector("tr td:nth-child(6)")).getText()));
+				payedOrder.setAmount(FormatterUtils.
+						parseValueToTwoDecimals(item.findElement(By.cssSelector("tr td:nth-child(6)")).getText()));
 				payedOrder.setIp(item.findElement(By.cssSelector("tr td:nth-child(7)")).getText());
 
 				result.add(payedOrder);
@@ -180,7 +174,7 @@ public class IpReportsPage extends AbstractPage {
 				returnList.setOrderId(item.findElement(By.cssSelector("td:nth-child(1)")).getText());
 				returnList.setRefundDate(item.findElement(By.cssSelector("td:nth-child(2)")).getText());
 				returnList.setRefundType(item.findElement(By.cssSelector("td:nth-child(3)")).getText());
-				returnList.setAmount(item.findElement(By.cssSelector("td:nth-child(4)")).getText());
+				returnList.setAmount(FormatterUtils.cleanString(item.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 				returnList.setIp(item.findElement(By.cssSelector("td:nth-child(5)")).getText());
 
 				result.add(returnList);

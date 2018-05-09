@@ -57,42 +57,42 @@ public class CreateProductsTestHostCart extends BaseTest {
 	public void createProductsTest() {
 		
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("90.00");
+		genProduct1.setPrice("89.95 ");
 		genProduct1.setIp("76");
-		genProduct1.setSku("0102056NATA080");
-		genProduct1.setName("Marie Jo SOFIA Unterlegter BH natur 80A");
+		genProduct1.setSku("0101337NATA080");
+		genProduct1.setName("Marie Jo JANE Push-up natur 80A");
 		genProduct1.setColor("natur");
 		genProduct1.setProductSize("80A");
-		genProduct1.setParentProductSku("marie-jo-sofia-unterlegter-bh-0102056");
+		genProduct1.setParentProductSku("marie-jo-jane-push-up-0101337");
 		productsList.add(genProduct1);
 		
 		genProduct2 = MagentoProductCalls.createProductModel();
-		genProduct2.setPrice("120.00");
-		genProduct2.setName("Marie Jo SOFIA Unterlegter BH schwarz 75A");
-		genProduct2.setIp("101");
-		genProduct2.setSku("0102056ZWAA075");
+		genProduct2.setPrice("89.95");
+		genProduct2.setName("Marie Jo JANE Push-up schwarz 75A");
+		genProduct2.setIp("76");
+		genProduct2.setSku("0101337ZWAA075");
 		genProduct2.setColor("schwarz");
 		genProduct2.setProductSize("75A");
-		genProduct2.setParentProductSku("marie-jo-sofia-unterlegter-bh-0102056");
+		genProduct2.setParentProductSku("marie-jo-jane-push-up-0101337");
 		productsList.add(genProduct2);
 		
 		genProduct3 = MagentoProductCalls.createProductModel();
-		genProduct3.setPrice("79.90");
-		genProduct3.setName("PrimaDonna PERLE Shapewear Body caffé latte 85B");
-		genProduct3.setIp("67");
-		genProduct3.setSku("0462342CALB085");
-		genProduct3.setColor("caffé latte");
-		genProduct3.setProductSize("85B");
-		genProduct3.setParentProductSku("primadonna-perle-shapewear-body-0462342");
+		genProduct3.setPrice("89.95");
+		genProduct3.setName("Marie Jo JANE Push-up brazilian garden 80C");
+		genProduct3.setIp("76");
+		genProduct3.setSku("0101337BGAC080");
+		genProduct3.setColor("brazilian garden");
+		genProduct3.setProductSize("80C");
+		genProduct3.setParentProductSku("marie-jo-jane-push-up-0101337");
 		productsList.add(genProduct3);
 		
 		genProduct4 = MagentoProductCalls.createProductModel();
-		genProduct4.setPrice("49.90");
-		genProduct4.setIp("42");
-		genProduct4.setSku("0662650VEN36");
-		genProduct4.setName("PrimaDonna DIVINE String venus 36");
+		genProduct4.setPrice("27.95");
+		genProduct4.setIp("23");
+		genProduct4.setSku("0662650VEN38");
+		genProduct4.setName("PrimaDonna DIVINE String venus 38");
 		genProduct4.setColor("venus");
-		genProduct4.setProductSize("36");
+		genProduct4.setProductSize("38");
 		genProduct4.setParentProductSku("primadonna-divine-string-0662650");
 		productsList.add(genProduct4);
 		

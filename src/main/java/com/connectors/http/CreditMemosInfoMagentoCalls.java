@@ -1,6 +1,8 @@
 package com.connectors.http;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -128,6 +130,14 @@ public class CreditMemosInfoMagentoCalls {
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("order_increment_id")) {
 					model.setOrderIncrementId(childNodes.item(j).getTextContent());
 				}
+				
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("grand_total")) {
+					
+					model.setGrandTotal(BigDecimal.valueOf(Double.parseDouble(childNodes.item(j).getTextContent())).setScale(2,
+							RoundingMode.HALF_UP).toString());
+				}
+				
+				
 			}
 			if (model.getState().equals("2")) {
 				credtMemoModelList.add(model);
@@ -145,6 +155,16 @@ public class CreditMemosInfoMagentoCalls {
 		return credtMemoModelList;
 	}
 	
-	
+	public static void main(String[] args) {
+		
+		
+		List<DBCreditMemoModel> creditMemoList =CreditMemosInfoMagentoCalls.getCreditMemosList("33");
+		for (DBCreditMemoModel cm : creditMemoList) {
+			System.out.println(cm);
+		}
+		
+		
+//	System.out.println(CreditMemosInfoMagentoCalls.getCreditMemosList("33").get(0).getTotalIpRefunded());
+	}
 
 }

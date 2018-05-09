@@ -103,6 +103,17 @@ public class HttpSoapConnector {
 		return soapResponse;
 	}
 	
+	public static SOAPMessage soapGetStylistList(String filter, String operand, String filterValue,String sesssionId)
+			throws SOAPException, IOException {
+		String sessID = sesssionId;
+		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+		SOAPMessage soapResponse = soapConnection.call(getStylistList(sessID, filter, operand, filterValue),
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
+
+		return soapResponse;
+	}
+	
 	public static SOAPMessage soapGetStylistListInRange(String filter, String operand1,String operand2, String filterValue1,String filterValue2)
 			throws SOAPException, IOException {
 		String sessID = performLogin();

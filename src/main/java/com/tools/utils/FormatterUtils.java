@@ -105,10 +105,12 @@ public class FormatterUtils {
 		// System.out.println(FormatterUtils.incrementSingleTpOrderId("10026526800",
 		// 2));
 	//	System.out.println(FormatterUtils.getIntegerNumberFromString("311.0"));
-		BigDecimal ipPoints = BigDecimal.ZERO;
-		ipPoints=BigDecimal.valueOf(311.0);
+	/*	BigDecimal ipPoints = BigDecimal.ZERO;
+		ipPoints=BigDecimal.valueOf(311.0);*/
 		
-		System.out.println(ipPoints.setScale(0));
+		
+		//System.out.println(getTestIntegerFromString("-1.108"));
+		System.out.println(parseValueToZeroDecimals("-1.108"));
 	}
 
 	public static String incrementSingleTpOrderId(String orderId, int incrementNumber) {
@@ -138,11 +140,19 @@ public class FormatterUtils {
 		StringBuilder t = new StringBuilder();
 		for (int i = 0; i < s.length(); i++) {
 			char ch = s.charAt(i);
-			if (Character.isDigit(ch)) {
+			if (Character.isDigit(ch)|| ch=='-') {
 				t.append(ch);
 			}
 		}
 		return String.valueOf(t);
+	}
+	
+	public static int getTestIntegerFromString(String s){
+		
+		int x = Integer.parseInt(s);
+
+		System.out.println(x);
+		return x;
 	}
 
 	public static String getNotDigitsFromString(String s) {

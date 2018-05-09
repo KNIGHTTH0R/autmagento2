@@ -30,7 +30,7 @@ public class VanDelVeldeDBConnection {
 
 			// Vdv -aut
 			 connection = DriverManager.getConnection(
-			 "jdbc:mysql://81.173.114.77:3306/vdv_qa_aut",
+			 "jdbc:mysql://81.173.112.131:3306/vdv_qa_aut",
 			 "vdv_aut", "44Wd3xx67");
 			 
 
@@ -126,6 +126,20 @@ public class VanDelVeldeDBConnection {
 				+ partyIde + ";";
 		statement.executeUpdate(queryString);
 		System.out.println("Party was closed in: " + date);
+		connection.close();
+	}
+	
+	public static void updateActiveParty(String partyId) throws SQLException {
+		// TODO Auto-generated method stub
+		String partyIde = partyId.replaceAll("\\D+", "");
+	//	String date = DateUtils.getYesterdayDateString();
+		String date=DateUtils.getFewHoursAgoDate("yyyy-MM-dd HH:mm:ss", 3);
+		Connection connection = VanDelVeldeDBConnection.connectToMySql();
+		Statement statement = connection.createStatement();
+		String queryString = "update vdv_qa_aut.stylist_party SET party_date_time='" + date + "' where party_id="
+				+ partyIde + ";";
+		statement.executeUpdate(queryString);
+		System.out.println("party_date_time was changed with: " + date);
 		connection.close();
 	}
 

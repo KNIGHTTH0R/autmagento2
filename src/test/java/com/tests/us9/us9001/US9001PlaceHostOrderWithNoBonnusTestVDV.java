@@ -155,7 +155,7 @@ public class US9001PlaceHostOrderWithNoBonnusTestVDV extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 		
-		partyUrlModel = MongoReader.grabUrlModels("US10001CreatePartyWithCustomerHostTestVDV" + SoapKeys.GRAB).get(0);
+		partyUrlModel = MongoReader.grabUrlModels("US10009CreatePartyWithCustomerHostTestVDV" + SoapKeys.GRAB).get(0);
 		System.out.println("partyUrlModel " + partyUrlModel.getUrl());
 	}
 

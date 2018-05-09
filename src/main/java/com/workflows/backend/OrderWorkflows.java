@@ -99,6 +99,21 @@ public class OrderWorkflows {
 		verifyTotalPayable(orderTotalsGrabbed.getTotalPayable(), calculatedTotals.getTotalPayable());
 
 	}
+	
+	public void validateInvoiceCalculationTotals(String string) {
+
+		verifySubTotals(orderTotalsGrabbed.getSubtotal(), calculatedTotals.getSubtotal());
+		verifyTax(orderTotalsGrabbed.getTax(), calculatedTotals.getTax());
+	//	verifyShipping(orderTotalsGrabbed.getShipping(), calculatedTotals.getShipping());
+		verifyTotalAmount(orderTotalsGrabbed.getTotalAmount(), calculatedTotals.getTotalAmount());
+		verifyIP(orderTotalsGrabbed.getTotalIP(), calculatedTotals.getTotalIP());
+		verifyJewelryBonus(orderTotalsGrabbed.getTotalBonusJeverly(), calculatedTotals.getTotalBonusJeverly());
+		verifyMarketingBonus(orderTotalsGrabbed.getTotalMarketingBonus(), calculatedTotals.getTotalMarketingBonus());
+		//verifyTotalPaid(orderTotalsGrabbed.getTotalPaid(), calculatedTotals.getTotalPaid());
+		/*verifyTotalRefunded(orderTotalsGrabbed.getTotalRefunded(), calculatedTotals.getTotalRefunded());
+		verifyTotalPayable(orderTotalsGrabbed.getTotalPayable(), calculatedTotals.getTotalPayable());*/
+
+	}
 
 	public void validateRegularUserCalculationTotals(String string) {
 

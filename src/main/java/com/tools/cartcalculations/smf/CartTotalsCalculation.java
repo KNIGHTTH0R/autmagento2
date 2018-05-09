@@ -21,7 +21,7 @@ public class CartTotalsCalculation {
 		CalcDetailsModel result = new CalcDetailsModel();
 		String shippingValue;
 		BigDecimal sum25 = CartDiscountsCalculation.calculateDiscountAskingPriceSum(productsList,
-				ConfigConstants.DISCOUNT_25);
+				ConfigConstants.DISCOUNT_20);
 
 		BigDecimal subtotal = BigDecimal.ZERO;
 		BigDecimal rabatt50 = BigDecimal.ZERO;
@@ -34,9 +34,11 @@ public class CartTotalsCalculation {
 
 		for (BasicProductModel product : productsList) {
 			subtotal = subtotal.add(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())));
+			System.out.println("subtotal: "+subtotal);
 			rabatt50 = calculate50Discount(productsList);
 			rabatt25 = calculate25Discount(productsList, BigDecimal.valueOf(Double.parseDouble(jewerlyDiscount)),
 					sum25);
+			System.out.println("rabat 25: "+rabatt25);
 			ipPoints = ipPoints.add(BigDecimal.valueOf(Double.parseDouble(product.getPriceIP())));
 		}
 
@@ -53,12 +55,14 @@ public class CartTotalsCalculation {
 		result.setSubTotal(String.valueOf(subtotal));
 		System.out.println("jewerlyDiscount" +jewerlyDiscount);
 		result.setJewelryBonus(jewerlyDiscount);
+		System.out.println(jewerlyDiscount);
 		result.setMarketingBonus(marketingDiscount);
 		result.setTotalAmount(String.valueOf(totalAmount));
+		System.out.println(String.valueOf(totalAmount));
 		result.setIpPoints(String.valueOf(ipPoints.intValue()));
 		result.setTax(String.valueOf(tax));
 		result.addSegment(ConfigConstants.DISCOUNT_50, String.valueOf(rabatt50));
-		result.addSegment(ConfigConstants.DISCOUNT_25, String.valueOf(rabatt25));
+		result.addSegment(ConfigConstants.DISCOUNT_20, String.valueOf(rabatt25));
 		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(rabattBuy3Get1));
 		result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(voucherDiscount));
 
@@ -73,7 +77,7 @@ public class CartTotalsCalculation {
 		
 		String shippingValue;
 		BigDecimal sum25 = CartDiscountsCalculation.calculateDiscountAskingPriceSum(productsListTp,
-				ConfigConstants.DISCOUNT_25);
+				ConfigConstants.DISCOUNT_20);
 
 		BigDecimal subtotal = BigDecimal.ZERO;
 		BigDecimal rabatt50 = BigDecimal.ZERO;
@@ -123,7 +127,7 @@ public class CartTotalsCalculation {
 		result.setIpPoints(String.valueOf(ipPoints.intValue()));
 		result.setTax(String.valueOf(tax));
 		result.addSegment(ConfigConstants.DISCOUNT_50, String.valueOf(rabatt50));
-		result.addSegment(ConfigConstants.DISCOUNT_25, String.valueOf(rabatt25));
+		result.addSegment(ConfigConstants.DISCOUNT_20, String.valueOf(rabatt25));
 		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(rabattBuy3Get1));
 		result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(voucherDiscount));
 
@@ -147,7 +151,7 @@ public class CartTotalsCalculation {
 			String taxClass, String shipping) {
 		CalcDetailsModel result = new CalcDetailsModel();
 		BigDecimal sum25 = CartDiscountsCalculation.calculateDiscountAskingPriceSum(productsList,
-				ConfigConstants.DISCOUNT_25);
+				ConfigConstants.DISCOUNT_20);
 
 		BigDecimal subtotal = BigDecimal.ZERO;
 		BigDecimal rabatt50 = BigDecimal.ZERO;
@@ -187,7 +191,7 @@ public class CartTotalsCalculation {
 		result.setIpPoints(String.valueOf(ipPoints.intValue()));
 		result.setTax(String.valueOf(tax));
 		result.addSegment(ConfigConstants.DISCOUNT_50, String.valueOf(rabatt50));
-		result.addSegment(ConfigConstants.DISCOUNT_25, String.valueOf(rabatt25));
+		result.addSegment(ConfigConstants.DISCOUNT_20, String.valueOf(rabatt25));
 		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(rabattBuy3Get1));
 		result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(discountRule));
 
@@ -226,7 +230,7 @@ public class CartTotalsCalculation {
 		BigDecimal discountSum = BigDecimal.ZERO;
 
 		for (BasicProductModel cartProductModel : productsList) {
-			if (cartProductModel.getDiscountClass().contains(ConfigConstants.DISCOUNT_25)) {
+			if (cartProductModel.getDiscountClass().contains(ConfigConstants.DISCOUNT_20)) {
 				discountSum = discountSum.add(BigDecimal.valueOf(Double.parseDouble(cartProductModel.getProductsPrice())).subtract(BigDecimal.valueOf(Double.parseDouble(cartProductModel.getFinalPrice()))).setScale(2, RoundingMode.HALF_UP));
 			}
 		}
@@ -255,7 +259,7 @@ public class CartTotalsCalculation {
 		String productsPrice="";
 		
 		for (BasicProductModel cartProductModel : productsList) {
-			if (cartProductModel.getDiscountClass().contains(ConfigConstants.DISCOUNT_25)) {
+			if (cartProductModel.getDiscountClass().contains(ConfigConstants.DISCOUNT_20)) {
 				/*if(cartProductModel.getFinalPriceWithBuy3()!=null){
 					productsPrice
 				}*/
@@ -368,7 +372,9 @@ public class CartTotalsCalculation {
 			result = result.multiply(jB);
 			result = askingPrice.subtract(result);
 
-			result = result.multiply(BigDecimal.valueOf(25));
+			result = result.multiply(BigDecimal.valueOf(Integer.parseInt(ConfigConstants.DISCOUNT_20)));
+			
+			//ConfigConstants.DISCOUNT_20
 			// the 25% disc is calculated with 5 decimals precision (we don't
 			// want the 4th decimal rounded)
 			diff = result.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
@@ -396,7 +402,7 @@ public class CartTotalsCalculation {
 		String shippingValue;
 
 		BigDecimal sum25 = CartDiscountsCalculation.calculateDiscountAskingPriceSum(productsList,
-				ConfigConstants.DISCOUNT_25);
+				ConfigConstants.DISCOUNT_20);
 
 		System.out.println("TESTARE sum25 : "+sum25);
 		
@@ -438,7 +444,7 @@ public class CartTotalsCalculation {
 		result.setIpPoints(String.valueOf(ipPoints.intValue()));
 		result.setTax(String.valueOf(tax));
 		result.addSegment(ConfigConstants.DISCOUNT_50, String.valueOf(rabatt50));
-		result.addSegment(ConfigConstants.DISCOUNT_25, String.valueOf(rabatt25));
+		result.addSegment(ConfigConstants.DISCOUNT_20, String.valueOf(rabatt25));
 		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1,
 				String.valueOf(CartBuy3Get1Calculation.calculateTotalBuy3Get1Discount(productsList)));
 		result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(voucherDiscount));

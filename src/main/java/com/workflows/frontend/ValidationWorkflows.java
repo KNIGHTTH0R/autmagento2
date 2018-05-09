@@ -39,17 +39,13 @@ public class ValidationWorkflows {
 
 		checkoutValidationSteps.verifySuccessMessage();
 
-		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25, DataGrabber.cartProductsWith25Discount);
-		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25, DataGrabber.cartProductsWith20Discount);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 20 SECTION");
 
-		cartWorkflows2.setValidateProductsModels(CartCalculator.productsListMarketing, DataGrabber.cartMarketingMaterialsProducts);
-		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");
+		/*cartWorkflows2.setValidateProductsModels(CartCalculator.calculatedProductsList25, DataGrabber.cartProductsWith25DiscountDiscounted);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 20 SECTION -RECALCULATED");*/
 
-		cartWorkflows2.setValidateProductsModels(CartCalculator.calculatedProductsList25, DataGrabber.cartProductsWith25DiscountDiscounted);
-		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION -RECALCULATED");
-
-		/*cartWorkflows2.setValidateProductsModels(CartCalculator.calculatedProductsListMarketing, DataGrabber.cartMarketingMaterialsProductsDiscounted);
-		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION -RECALCULATED");*/
+		
 
 		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.shippingProductsList, DataGrabber.shippingProducts);
 		shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
@@ -82,23 +78,12 @@ public class ValidationWorkflows {
 
 		checkoutValidationSteps.verifySuccessMessage();
 
-		/*cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);
-		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");*/
 
-		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25, DataGrabber.cartProductsWith25Discount);
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25, DataGrabber.cartProductsWith20Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
-
-		/*cartWorkflows2.setValidateProductsModels(CartCalculator.productsListMarketing, DataGrabber.cartMarketingMaterialsProducts);
-		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");*/
-
-		/*cartWorkflows2.setValidateProductsModels(CartCalculator.calculatedProductsList50, DataGrabber.cartProductsWith50DiscountDiscounted);
-		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION -RECALCULATED");*/
 
 		cartWorkflows2.setValidateProductsModels(CartCalculator.calculatedProductsList25, DataGrabber.cartProductsWith25DiscountDiscounted);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION -RECALCULATED");
-
-		/*cartWorkflows2.setValidateProductsModels(CartCalculator.calculatedProductsListMarketing, DataGrabber.cartMarketingMaterialsProductsDiscounted);
-		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION -RECALCULATED");*/
 
 		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.allProductsList, DataGrabber.shippingProducts);
 		shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
@@ -167,7 +152,7 @@ public class ValidationWorkflows {
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50DiscountRule, DataGrabber.cartProductsWith50Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
 
-		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25DiscountRule, DataGrabber.cartProductsWith25Discount);
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25DiscountRule, DataGrabber.cartProductsWith20Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
 
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsListMarketingDiscountRule, DataGrabber.cartMarketingMaterialsProducts);
@@ -207,7 +192,7 @@ public class ValidationWorkflows {
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
 
-		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25, DataGrabber.cartProductsWith25Discount);
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25, DataGrabber.cartProductsWith20Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
 
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsListMarketing, DataGrabber.cartMarketingMaterialsProducts);
@@ -333,8 +318,8 @@ public class ValidationWorkflows {
 		
 
 		System.out.println("lista produse 25 "+CartCalculator.productsList25);
-		System.out.println("cartProductsWith25Discount " +DataGrabber.cartProductsWith25Discount);
-		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25, DataGrabber.cartProductsWith25Discount);
+		System.out.println("cartProductsWith25Discount " +DataGrabber.cartProductsWith20Discount);
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25, DataGrabber.cartProductsWith20Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
 //
 		
@@ -438,8 +423,8 @@ public class ValidationWorkflows {
 		
 
 		System.out.println("lista produse 25 "+CartCalculator.productsList25);
-		System.out.println("cartProductsWith25Discount " +DataGrabber.cartProductsWith25Discount);
-		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25, DataGrabber.cartProductsWith25Discount);
+		System.out.println("cartProductsWith25Discount " +DataGrabber.cartProductsWith20Discount);
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25, DataGrabber.cartProductsWith20Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
 //
 		

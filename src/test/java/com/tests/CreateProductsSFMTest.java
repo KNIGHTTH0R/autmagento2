@@ -67,17 +67,17 @@ public class CreateProductsSFMTest extends BaseTest {
 
 		//// vdv
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("49.90");
-		genProduct1.setIp("42");
-		genProduct1.setSku("0662650VEN36");
-		genProduct1.setName("PrimaDonna DIVINE String venus 36");
+		genProduct1.setPrice("27.95");
+		genProduct1.setIp("23");
+		genProduct1.setSku("0662650VEN38");
+		genProduct1.setName("PrimaDonna DIVINE String venus 38");
 		genProduct1.setColor("venus");
-		genProduct1.setProductSize("36");
+		genProduct1.setProductSize("38");
 		genProduct1.setParentProductSku("primadonna-divine-string-0662650");
 		productsList.add(genProduct1);
 		
 		genProduct2 = MagentoProductCalls.createProductModel();
-		genProduct2.setPrice("89.90");
+		genProduct2.setPrice("89.95");
 		genProduct2.setName("PrimaDonna DIVINE Trägerloser BH schwarz 80E");
 		genProduct2.setIp("76");
 		genProduct2.setSku("0262659ZWAE080");

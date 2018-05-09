@@ -15,6 +15,17 @@ public class TeamReportTotalsModel {
 	private String daysLeftTotal;
 	private String ipTakeOffTotal;
 	private String newScTakeOffTotal;
+	private String ip30TakeOffTotal;
+
+	
+	
+	public String getIp30TakeOffTotal() {
+		return ip30TakeOffTotal;
+	}
+
+	public void setIp30TakeOffTotal(String ip30TakeOffTotal) {
+		this.ip30TakeOffTotal = ip30TakeOffTotal;
+	}
 
 	public String getIpTotal() {
 		return ipTotal;

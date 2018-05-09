@@ -50,7 +50,7 @@ public class OrderForCustomerDiscountsCalculation {
 
 		for (BasicProductModel product : productsList) {
 
-			if (product.getDiscountClass().contains(ConfigConstants.DISCOUNT_25)) {
+			if (product.getDiscountClass().contains(ConfigConstants.DISCOUNT_20)) {
 				sum25 = sum25.add(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())));
 			}
 		}

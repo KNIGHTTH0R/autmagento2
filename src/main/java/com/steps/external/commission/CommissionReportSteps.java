@@ -73,8 +73,8 @@ public class CommissionReportSteps extends AbstractSteps {
 
 	@Title("Close last month and get current month ips")
 	@StepGroup
-	public IpModel closeLastMonthAndGetCurrentMonthIps(String stylistId) throws Exception {
-
+	public IpModel closeLastMonthAndGetCurrentMonthIps(String stylistId,String ipCorrection) throws Exception {
+/*
 		// ApacheHttpHelper.sendGet(EnvironmentConstants.IMPORT_ALL_JOB);
 		ApacheHttpHelper.sendGet(EnvironmentConstants.REOPEN_MONTH_JOB, EnvironmentConstants.USERNAME_JENKINS_COMM,
 				EnvironmentConstants.PASSWORD_JENKINS_COMM);
@@ -85,10 +85,10 @@ public class CommissionReportSteps extends AbstractSteps {
 		commissionReportPage().selectMonthToBeClosed();
 		commissionReportPage().enterCloseMonthDate();
 		commissionReportPage().saveCommDate();
-		commissionReportPage().closeMonth();
+		commissionReportPage().closeMonth();*/
 
 		return ClosedMonthBonusCalculation.calculateCurrentMonthBonuses(stylistId,
-				DateUtils.getCurrentDateBegining(DateConstants.FORMAT), DateUtils.getCurrentDate(DateConstants.FORMAT));
+				DateUtils.getCurrentDateBegining(DateConstants.FORMAT), DateUtils.getCurrentDate(DateConstants.FORMAT),ipCorrection);
 
 	}
 

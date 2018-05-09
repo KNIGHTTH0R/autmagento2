@@ -277,6 +277,7 @@ public class ProductSteps extends AbstractSteps {
 		RegularBasicProductModel result = new RegularBasicProductModel();
 		setQuantity(qty);
 		
+		System.out.println("finalPrice: "+finalPrice);
 		result.setName(model.getName());
 		result.setProdCode(model.getSku());
 		result.setUnitPrice(model.getPrice());
