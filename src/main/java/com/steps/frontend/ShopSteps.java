@@ -1,12 +1,11 @@
 package com.steps.frontend;
 
-import net.thucydides.core.annotations.Step;
-
 import com.tools.constants.ContextConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.data.frontend.LoungeIpPerformanceModel;
 import com.tools.requirements.AbstractSteps;
+
+import net.thucydides.core.annotations.Step;
 
 public class ShopSteps  extends AbstractSteps {
 

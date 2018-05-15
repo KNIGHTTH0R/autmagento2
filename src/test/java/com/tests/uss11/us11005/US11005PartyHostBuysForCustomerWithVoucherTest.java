@@ -19,6 +19,7 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyDetailsSteps;
+import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
@@ -82,6 +83,8 @@ public class US11005PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 	public HostCartValidationWorkflows hostCartValidationWorkflows;
 	@Steps
 	public CustomVerification customVerifications;
+	@Steps
+	public SearchSteps searchSteps;
 
 	private String username, password, customerName;
 	private String discountClass;
@@ -119,11 +122,11 @@ public class US11005PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 //		genProduct3.setIp("25");
 //		MagentoProductCalls.createApiProduct(genProduct3);
 //		
-        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsPlaceCustomerCartTest" + SoapKeys.GRAB);
-		
-		genProduct1 = createdProductsList.get(2);
-		genProduct2 = createdProductsList.get(3);
-		genProduct3 = createdProductsList.get(4);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsPlaceCustomerCartTest" + SoapKeys.GRAB);
+
+		genProduct1 = createdProductsList.get(0);
+		genProduct2 = createdProductsList.get(1);
+		genProduct3 = createdProductsList.get(2);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -157,7 +160,7 @@ public class US11005PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 		}
 
 		//urlModel = MongoReader.grabUrlModels("US10001CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
-		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithExistingContactHostTest").get(0);
+		urlModel = MongoReader.grabUrlModels("US10009CreatePartyWithCustomerHostTestVDV").get(0);
 		
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
@@ -166,10 +169,7 @@ public class US11005PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 	@Test
 	public void us11005PartyHostBuysForCustomerWithVoucherTest() {
 		customerRegistrationSteps.performLogin(username, password);
-		if (!headerSteps.succesfullLogin()) {
-			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
-		}
-		headerSteps.selectLanguage(MongoReader.getContext());
+	
 		/*customerRegistrationSteps.navigate(urlModel.getUrl());
 		do {
 			customerRegistrationSteps.navigate(urlModel.getUrl());
@@ -196,12 +196,16 @@ public class US11005PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 		
 		HostBasicProductModel productData;
 
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "4", "0");
+		searchSteps.navigateToProductPage(genProduct1.getParentProductSku());
+		productData = addProductsForCustomerWorkflow.setHostChildProductToCart(genProduct1, "4", "0");
 		HostCartCalculator.allProductsList.add(productData);
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "3", "0");
+		// qty =1
+		searchSteps.navigateToProductPage(genProduct2.getParentProductSku());
+		productData = addProductsForCustomerWorkflow.setHostChildProductToCart(genProduct2, "3", "0");
 		HostCartCalculator.allProductsList.add(productData);
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct3, "4", "0");
-		HostCartCalculator.allProductsList.add(productData);
+		
+		searchSteps.navigateToProductPage(genProduct3.getParentProductSku());
+		productData = addProductsForCustomerWorkflow.setHostChildProductToCart(genProduct3, "4", "0");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();

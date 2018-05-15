@@ -1,7 +1,5 @@
 package com.tools.constants;
 
-import com.tools.persistance.MongoReader;
-
 public class WebsiteAndStoreViewConstants {
 
 	// SOAP user authentication

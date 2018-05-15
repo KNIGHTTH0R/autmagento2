@@ -130,7 +130,8 @@ public class IpOverviewCalculations {
 	public static String calculateTotalIp(IpOverviewModel result) {
 		BigDecimal intial = BigDecimal.ZERO;
 
-		BigDecimal totalIp = intial.add(BigDecimal.valueOf(Integer.parseInt((result.getPaidOrdersPreviosMonth()))))
+	
+		BigDecimal totalIp = intial
 				.add(BigDecimal.valueOf(Integer.parseInt((result.getPaidOrdersThisMonth()))))
 				.add(BigDecimal.valueOf(Integer.parseInt((result.getReverseChargebackThisMonth()))))
 				.add(BigDecimal.valueOf(Integer.parseInt((result.getChargebacksThisMonth()))))

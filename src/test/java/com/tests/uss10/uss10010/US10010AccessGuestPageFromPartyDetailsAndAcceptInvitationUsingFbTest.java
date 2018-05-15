@@ -4,17 +4,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.gmail.GmailConnector;
 import com.steps.EmailSteps;
 import com.steps.external.faceboook.FacebookRegistrationSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
@@ -24,13 +19,9 @@ import com.steps.frontend.PartyHostGuestSteps;
 import com.steps.frontend.profile.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.constants.EmailConstants;
-import com.tools.constants.FilePaths;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
-import com.tools.data.backend.OrderModel;
-import com.tools.data.email.EmailCredentialsModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoReader;
@@ -69,8 +60,8 @@ public class US10010AccessGuestPageFromPartyDetailsAndAcceptInvitationUsingFbTes
 	private AddressModel addressModel;
 	private CustomerFormModel customerData;
 	
-	private String email, password, emailPassword,fbPass,fbEmail;
-	private List<OrderModel> orderModel = new ArrayList<OrderModel>();
+	private String email, password, fbPass,fbEmail;
+//	private List<OrderModel> orderModel = new ArrayList<OrderModel>();
 	
 	private UrlModel urlModel = new UrlModel();
 	@Before
@@ -91,7 +82,6 @@ public class US10010AccessGuestPageFromPartyDetailsAndAcceptInvitationUsingFbTes
 			prop.load(input);
 			email = prop.getProperty("username");
 			password = prop.getProperty("password");
-			emailPassword = prop.getProperty("customerPassword");
 
 			fbEmail="margaret_trmzxlh_vdv@tfbnw.net";
 			fbPass="test1234";

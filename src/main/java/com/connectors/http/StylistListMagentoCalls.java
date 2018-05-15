@@ -195,7 +195,7 @@ public class StylistListMagentoCalls {
 	}
 
 	public static void main(String[] args) {
-		List<DBStylistModel> model =StylistListMagentoCalls.getStylistList("stylist_id", "gteg", "1");
+	//	List<DBStylistModel> model =StylistListMagentoCalls.getStylistList("stylist_id", "gteg", "1");
 		
 		System.out.println();
 	}

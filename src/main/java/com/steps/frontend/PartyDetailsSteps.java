@@ -17,6 +17,17 @@ public class PartyDetailsSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	@StepGroup
+	public ClosedPartyPerformanceModel closeThePartyAndGrabModalData() {
+		partyDetailsPage().closeParty();
+		partyDetailsPage().typePartyAttendersNumber("10");
+		partyDetailsPage().popupCloseParty();
+		ClosedPartyPerformanceModel grabbedData=grabDataFromClosePartyModal();
+		
+		return grabbedData;
+	}
+	
+	
+	@StepGroup
 	public void closeTheParty() {
 		partyDetailsPage().closeParty();
 		partyDetailsPage().typePartyAttendersNumber("10");
@@ -242,6 +253,11 @@ public class PartyDetailsSteps extends AbstractSteps {
 	@Step
 	public String grabPartyLink() {
 		return partyDetailsPage().grabPartyLink();
+	}
+
+	public ClosedPartyPerformanceModel grabDataFromClosePartyModal() {
+		waitABit(TimeConstants.TIME_CONSTANT);
+		return partyDetailsPage().grabClosedPartyPerformanceFromModal();		
 	}
 
 	

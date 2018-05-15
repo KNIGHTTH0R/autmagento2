@@ -9,11 +9,8 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.tools.CustomVerification;
 import com.tools.constants.UrlConstants;
-
 import com.tools.requirements.AbstractPage;
-import com.tools.utils.DateUtils;
 
-import freemarker.template.utility.DateUtil;
 import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class TempMail extends AbstractPage {

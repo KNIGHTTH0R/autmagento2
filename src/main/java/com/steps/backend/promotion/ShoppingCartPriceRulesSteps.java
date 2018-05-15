@@ -3,9 +3,6 @@ package com.steps.backend.promotion;
 
 import org.junit.Assert;
 
-import com.tools.constants.Credentials;
-import com.tools.constants.UrlConstants;
-import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 
 import net.thucydides.core.annotations.Step;

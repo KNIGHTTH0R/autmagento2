@@ -16,7 +16,6 @@ import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.salesOnSpeed.MagentoSOSContactModel;
-import com.tools.persistance.MongoReader;
 import com.tools.utils.DateUtils;
 
 public class MagentoSosContactInfo {

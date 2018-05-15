@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import com.connectors.http.MagentoProductCalls;
 import com.tools.constants.ConfigConstants;
@@ -176,13 +175,13 @@ public class CartDiscountsCalculation {
 		//	Optional<BasicProductModel> element=productsList2.stream().filter(o -> o.getName().equals(product.get)).findFirst();
 			BasicProductModel newProduct = new BasicProductModel();
 
-			/*newProduct.setDiscountClass(product.getDiscountClass());
+			newProduct.setDiscountClass(product.getDiscountClass());
 			newProduct.setName(product.getName());
 			newProduct.setUnitPrice(product.getUnitPrice());
 			newProduct.setProdCode(product.getProdCode());
 			newProduct.setQuantity(product.getQuantity());
 			newProduct.setProductsPrice(product.getProductsPrice());
-			newProduct.setPriceIP(product.getPriceIP());*/
+			newProduct.setPriceIP(product.getPriceIP());
 			cartProducts.add(newProduct);
 		}
 
@@ -470,10 +469,10 @@ public class CartDiscountsCalculation {
 	private static ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private static ProductDetailedModel genProduct2 = new ProductDetailedModel();
 	private static ProductDetailedModel genProduct3 = new ProductDetailedModel();
-	private static List<BasicProductModel> productsList =new ArrayList<BasicProductModel>();
+//	private static List<BasicProductModel> productsList =new ArrayList<BasicProductModel>();
 	private static BasicProductModel productData;
-	private static BasicProductModel productData2;
-	private static BasicProductModel productData3;
+//	private static BasicProductModel productData2;
+//	private static BasicProductModel productData3;
 	public static List<BasicProductModel> productsList25Beta = new ArrayList<BasicProductModel>();
 	
 	
@@ -491,10 +490,10 @@ public class CartDiscountsCalculation {
 		genProduct3.setPrice("49.90");
 		
 		productData = addInCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_20);
-		productData2=addInCart(genProduct2, "2", "0", ConfigConstants.DISCOUNT_20);
+	//	productData2=addInCart(genProduct2, "2", "0", ConfigConstants.DISCOUNT_20);
 //		productData3=addInCart(genProduct3, "1", "0", ConfigConstants.DISCOUNT_20);
 		productsList25Beta.add(productData);
-		productsList25Beta.add(productData2);
+	//	productsList25Beta.add(productData2);
 //		productsList25Beta.add(productData3);
 		
 		System.out.println(productsList25Beta.get(0).getFinalPrice());

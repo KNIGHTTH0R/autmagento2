@@ -2,14 +2,13 @@ package com.pages.backend.products;
 
 import java.util.List;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class BackendProductListPage extends AbstractPage {
 

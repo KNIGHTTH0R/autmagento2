@@ -1,21 +1,8 @@
 package com.steps.frontend;
 
-import java.util.Set;
-
-import org.junit.Assert;
-import org.mockito.internal.invocation.finder.VerifiableInvocationsFinder;
-
-import com.tools.CustomVerification;
-import com.tools.constants.ContextConstants;
-import com.tools.data.frontend.AddressModel;
-import com.tools.data.frontend.CustomerFormModel;
-import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
-import com.tools.utils.FormatterUtils;
 
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.StepGroup;
-import net.thucydides.core.annotations.Title;
 
 public class SingleSignOnSteps extends AbstractSteps {
 

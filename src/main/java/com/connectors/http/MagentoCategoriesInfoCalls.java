@@ -1,9 +1,6 @@
 package com.connectors.http;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 import javax.xml.soap.SOAPBody;
 import javax.xml.soap.SOAPConnection;
@@ -17,11 +14,7 @@ import org.w3c.dom.NodeList;
 import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
-import com.tools.data.salesOnSpeed.MagentoSOSContactModel;
 import com.tools.data.soap.CategoryModel;
-import com.tools.utils.DateUtils;
-import com.tools.utils.FieldGenerators;
-import com.tools.utils.FieldGenerators.Mode;
 
 /**
  * @author mihaibarta

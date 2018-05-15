@@ -2,9 +2,6 @@ package com.steps.backend;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.Select;
-
 import com.tools.constants.TimeConstants;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;

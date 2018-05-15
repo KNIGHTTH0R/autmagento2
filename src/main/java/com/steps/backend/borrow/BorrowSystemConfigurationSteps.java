@@ -1,10 +1,5 @@
 package com.steps.backend.borrow;
 
-import java.text.ParseException;
-
-import com.pages.backend.borrow.BorrowPage;
-import com.tools.constants.ConfigConstants;
-import com.tools.data.backend.TermPurchaseOrderModel;
 import com.tools.requirements.AbstractSteps;
 
 import net.thucydides.core.annotations.Step;

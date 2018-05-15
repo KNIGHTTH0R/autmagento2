@@ -100,7 +100,6 @@ public class US11001PartyHostBuysForCustomerWithNoBonusTestVDV extends BaseTest 
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
-	private int stopCounter=0;
 	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
@@ -146,7 +145,6 @@ public class US11001PartyHostBuysForCustomerWithNoBonusTestVDV extends BaseTest 
 			billingAddress = prop.getProperty("billingAddress");
 			shippingAddress = prop.getProperty("shippingAddress");
 			shippingValue = prop.getProperty("shippingValue");
-
 			voucherCode = "salutare ";
 			voucherValue = prop.getProperty("voucherValue");
 
@@ -218,7 +216,7 @@ public class US11001PartyHostBuysForCustomerWithNoBonusTestVDV extends BaseTest 
 
 		orderForCustomerCartSteps.clickGoToShipping();
 //		shippingPartySectionSteps.checkItemNotReceivedYet();
-		shippingPartySectionSteps.clickShipToHostessButton();
+	//	shippingPartySectionSteps.clickShipToStylecoach();
 	//	shippingPartySectionSteps.selectShipToHostessAddress(shippingAddress);
 
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();

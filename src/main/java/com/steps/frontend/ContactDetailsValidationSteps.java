@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.tools.CustomVerification;
 import com.tools.data.frontend.RegularBasicProductModel;
-import com.tools.data.salesOnSpeed.MagentoSOSContactModel;
 import com.tools.requirements.AbstractSteps;
 
 import net.thucydides.core.annotations.Step;

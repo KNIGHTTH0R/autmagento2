@@ -5,7 +5,6 @@ import java.util.List;
 import org.junit.Assert;
 
 import com.connectors.http.JerseyClientSos;
-import com.connectors.http.SalesOnSpeedCalls;
 import com.tools.CustomVerification;
 import com.tools.constants.SalesOnSpeedConstants;
 import com.tools.data.salesOnSpeed.MagentoSOSContactModel;

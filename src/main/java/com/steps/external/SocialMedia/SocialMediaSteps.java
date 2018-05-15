@@ -6,12 +6,10 @@ import org.junit.Assert;
 
 import com.tools.CustomVerification;
 import com.tools.constants.SocialMediaConstansts;
-import com.tools.data.socialMediaApi.MeModel;
 import com.tools.data.socialMediaApiCommnets.Data;
 import com.tools.requirements.AbstractSteps;
 
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.Steps;
 
 public class SocialMediaSteps extends AbstractSteps {
 

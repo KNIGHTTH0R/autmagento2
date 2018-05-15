@@ -2,15 +2,14 @@ package com.pages.backend.stylecoach;
 
 import java.util.List;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.tools.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class SosDetailsBackendPage extends AbstractPage {
 

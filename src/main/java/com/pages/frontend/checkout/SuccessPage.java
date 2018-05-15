@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.tools.constants.ConfigConstants;
 import com.tools.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 

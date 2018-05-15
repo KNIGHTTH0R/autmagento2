@@ -3,14 +3,11 @@ package com.steps.frontend;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import com.tools.constants.ContextConstants;
 import com.tools.data.soap.ProductDetailedModel;

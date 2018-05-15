@@ -31,9 +31,12 @@ public class HostShippingAndConfirmationWorkflows {
 	public void validateProducts(String message) {
 		System.out.println(" ");
 		System.out.println(message);
+		
+		
 		for (HostBasicProductModel productNow : basicProductsList) {
+			System.out.println("productNow: "+productNow);
 			HostCartProductModel compare = findProduct(productNow.getProdCode(),productNow.getQuantity(), cartProductsList);
-
+			System.out.println("compare: "+compare);
 			compare.setQuantity(compare.getQuantity().replace("x", "").trim());
 
 			if (compare.getName() != null) {

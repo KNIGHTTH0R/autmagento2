@@ -1,10 +1,7 @@
 package com.connectors.facebook;
 
 import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
 
 public class FacebookPrb implements Runnable {
 

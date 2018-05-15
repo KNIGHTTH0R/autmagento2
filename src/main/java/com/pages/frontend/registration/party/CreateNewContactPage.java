@@ -1,7 +1,5 @@
 package com.pages.frontend.registration.party;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import java.util.List;
 
 import org.junit.Assert;
@@ -10,10 +8,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.tools.constants.ConfigConstants;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class CreateNewContactPage extends AbstractPage {
 

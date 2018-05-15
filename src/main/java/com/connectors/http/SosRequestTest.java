@@ -1,8 +1,5 @@
 package com.connectors.http;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.tools.CustomVerification;
 import com.tools.data.salesOnSpeed.MagentoSOSContactModel;
 import com.tools.data.salesOnSpeed.MagentoSOSUserInfoModel;
@@ -11,8 +8,8 @@ import com.tools.data.salesOnSpeed.MagentoSOSUserInfoModel;
 
 public class SosRequestTest {
 	
-	private static List<MagentoSOSContactModel> contactList = new ArrayList<MagentoSOSContactModel>();
-	private static List<MagentoSOSContactModel> contactsInfo = new ArrayList<MagentoSOSContactModel>();
+	/*private static List<MagentoSOSContactModel> contactList = new ArrayList<MagentoSOSContactModel>();
+	private static List<MagentoSOSContactModel> contactsInfo = new ArrayList<MagentoSOSContactModel>();*/
 	
 
 	
@@ -72,8 +69,8 @@ public class SosRequestTest {
 				orderId.contentEquals(compare));
 	}
 	
-	private static void validatePostCode(String postcode, String postcode2) {
+/*	private static void validatePostCode(String postcode, String postcode2) {
 		CustomVerification.verifyTrue("Failure: Prename doesn't match: " + postcode + " - " + postcode2,
 				postcode.contentEquals(postcode2));		
-	}
+	}*/
 }

@@ -13,7 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -161,7 +160,6 @@ public class US3001SfmOrderWithNoDiscountTestVDV extends BaseTest {
 		System.out.println("genProduct1.getSku(): "+genProduct1.getSku());
 		System.out.println("genProduct1.getSku(): "+genProduct2.getSku());
 
-	//	System.out.println(genProduct3.getSku());
 
 		productData = addProductsWorkflow.setBasicChildProductToCart(genProduct1, "2", "0", ConfigConstants.DISCOUNT_20);
 		CartCalculator.productsList25.add(productData);

@@ -99,7 +99,7 @@ public class AcademyPage extends AbstractPage {
 		openCourse(courseno);
 		List<WebElement> linkNextPrev = getDriver().findElements(By.cssSelector("#learndash_next_prev_link a"));
 		List<WebElement> quiz = getDriver().findElements(By.cssSelector("#learndash_quizzes"));
-		List<WebElement> completeBtn = getDriver().findElements(By.cssSelector("#learndash_mark_complete_button"));
+		//List<WebElement> completeBtn = getDriver().findElements(By.cssSelector("#learndash_mark_complete_button"));
 		if (linkNextPrev.size() != 0) {
 			while (quiz.size() == 0) {
 				for (WebElement link : linkNextPrev) {

@@ -2,8 +2,6 @@ package com.steps.frontend.reports;
 
 import java.util.List;
 
-import net.thucydides.core.annotations.Step;
-
 import org.junit.Assert;
 
 import com.tools.CustomVerification;
@@ -13,11 +11,10 @@ import com.tools.data.IpOverViewPayedOrdersModel;
 import com.tools.data.IpOverViewReturnsListModel;
 import com.tools.data.IpOverViewSummaryModel;
 import com.tools.data.IpOverviewModel;
-import com.tools.data.TeamReportModel;
-import com.tools.data.TeamReportTakeOffPhaseModel;
-import com.tools.data.TeamReportTeamTabModel;
 import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.requirements.AbstractSteps;
+
+import net.thucydides.core.annotations.Step;
 
 public class IpReportsSteps extends AbstractSteps {
 

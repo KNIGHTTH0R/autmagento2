@@ -1,13 +1,12 @@
 package com.pages.frontend.registration;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.gargoylesoftware.htmlunit.javascript.host.event.CustomEvent;
 import com.tools.CustomVerification;
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class FacebookRegistrationFormPage extends AbstractPage {
 

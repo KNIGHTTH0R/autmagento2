@@ -1,7 +1,5 @@
 package com.steps.external;
 
-import com.pages.external.FakeMailGenerator;
-import com.pages.external.Mailnesia;
 import com.pages.external.TempMail;
 import com.tools.requirements.AbstractSteps;
 import com.tools.utils.DateUtils;

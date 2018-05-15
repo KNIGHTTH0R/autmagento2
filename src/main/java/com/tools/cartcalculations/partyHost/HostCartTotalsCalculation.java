@@ -3,7 +3,6 @@ package com.tools.cartcalculations.partyHost;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.tools.cartcalculations.GeneralCartCalculations;
@@ -13,9 +12,7 @@ import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.data.frontend.TermPurchaseIpModel;
-import com.tools.generalCalculation.OrderForCustomerDiscountsCalculation;
 import com.tools.utils.DateUtils;
-import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 
 public class HostCartTotalsCalculation {
@@ -237,12 +234,13 @@ public class HostCartTotalsCalculation {
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(
 				Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_SHIPPING))));
 
+		
 		String newShippingValue = GeneralCartCalculations
 				.calculateNewShipping1(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSubTotal())),
 						BigDecimal.valueOf(Double.parseDouble(
 								discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_SHIPPING))),
 				BigDecimal.valueOf(Double.parseDouble(shippingValue)));
-
+		System.out.println("newShippingValue" +newShippingValue);
 		result.setDiscountPrice(discountCalculation.toString());
 		result.setShippingPrice(newShippingValue);
 

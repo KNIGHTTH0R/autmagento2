@@ -1,16 +1,14 @@
 package com.steps.frontend.reports;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.util.List;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.junit.Assert;
-import java.lang.reflect.Field;
 
 import com.tools.CustomVerification;
-import com.tools.data.soap.DBOrderModel;
-import com.tools.data.soap.NavOrderModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.requirements.AbstractSteps;
 

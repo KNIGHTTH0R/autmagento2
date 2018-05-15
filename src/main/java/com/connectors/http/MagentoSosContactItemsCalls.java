@@ -2,7 +2,6 @@ package com.connectors.http;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.soap.SOAPBody;
@@ -17,10 +16,7 @@ import org.w3c.dom.NodeList;
 import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
-import com.tools.data.navision.SalesOrderInfoModel;
 import com.tools.data.salesOnSpeed.MagentoSOSContactModel;
-import com.tools.data.salesOnSpeed.SalesOnSpeedContactModel;
-import com.tools.data.soap.DBOrderModel;
 
 public class MagentoSosContactItemsCalls {
 

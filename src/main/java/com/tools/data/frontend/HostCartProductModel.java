@@ -74,4 +74,13 @@ public class HostCartProductModel {
 		this.ipPoints = ipPoints;
 	}
 
+	@Override
+	public String toString() {
+		return "HostCartProductModel [name=" + name + ", prodCode=" + prodCode + ", quantity=" + quantity
+				+ ", unitPrice=" + unitPrice + ", finalPrice=" + finalPrice + ", bonusType=" + bonusType + ", ipPoints="
+				+ ipPoints + "]";
+	}
+	
+	
+
 }

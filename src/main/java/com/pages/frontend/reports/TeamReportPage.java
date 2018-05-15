@@ -13,10 +13,8 @@ import com.tools.data.TeamReportPartyTabModel;
 import com.tools.data.TeamReportTakeOffPhaseModel;
 import com.tools.data.TeamReportTeamTabModel;
 import com.tools.data.TeamReportTotalsModel;
-import com.tools.generalCalculation.TeamReportCalculations;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
-import com.tools.utils.PrintUtils;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;

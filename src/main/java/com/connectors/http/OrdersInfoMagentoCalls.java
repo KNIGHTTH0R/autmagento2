@@ -13,14 +13,12 @@ import javax.xml.soap.SOAPElement;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
-import org.jruby.RubyProcess.Sys;
 import org.w3c.dom.NodeList;
 
 import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
-import com.tools.data.navision.SalesOrderInfoModel;
 import com.tools.data.soap.DBOrderModel;
 import com.tools.utils.DateUtils;
 
@@ -77,6 +75,9 @@ public class OrdersInfoMagentoCalls {
 		return orderList;
 
 	}
+	
+	
+	
 
 	public static List<DBOrderModel> getOrderWithItems(String orderLimit1, String orderLimit2)
 			throws SOAPException, IOException {
@@ -326,8 +327,8 @@ public class OrdersInfoMagentoCalls {
 				model.setTotalIp("0");
 				model.setPaidAt("2010-01-21 11:45:03");
 				model.setStylePartyId("0");
-				String cartType = "";
-				String orderType = "";
+			//	String cartType = "";
+			//	String orderType = "";
 
 				NodeList childNodes = orderList.item(i).getChildNodes();
 				for (int j = 0; j < childNodes.getLength(); j++) {
@@ -496,12 +497,21 @@ public class OrdersInfoMagentoCalls {
 
 	public static void main(String args[]) throws SOAPException, IOException, ParseException {
 
-		List<DBOrderModel> dbmodel = OrdersInfoMagentoCalls.getOrdersList("33");
+	/*	List<DBOrderModel> dbmodel = OrdersInfoMagentoCalls.getOrdersList("33");
 		System.out.println("order No: "+dbmodel.size());
 		for (DBOrderModel dbOrderModel : dbmodel) {
 			System.out.println(dbOrderModel.getIncrementId());
 			System.out.println(dbOrderModel.getPaidAt());
+		}*/
+		
+		
+		
+		List<DBOrderModel> dbmodel = OrdersInfoMagentoCalls.getPartyOrdersList("208");
+		for (DBOrderModel dbOrderModel : dbmodel) {
+			System.out.println(dbOrderModel);
 		}
+		
+		
 		//System.out.println(dbmodel.get(0));
 		/*
 		 * String x = "2017-11-06 17:33:03";

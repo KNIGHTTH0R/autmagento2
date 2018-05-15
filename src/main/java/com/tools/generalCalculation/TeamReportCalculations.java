@@ -421,8 +421,11 @@ public class TeamReportCalculations extends AbstractSteps {
 		IpCalculationModel ipValue = new IpCalculationModel();
 		IpCalculationModel ipValue2 = new IpCalculationModel();
 
+		/*String lastComissionRun = "2018-05-01 17:00:00";
+		String nextComissionRun = "2018-05-02 17:00:00";*/
+		
 		String lastComissionRun = "2018-05-01 17:00:00";
-		String nextComissionRun = "2018-05-02 17:00:00";
+		String nextComissionRun = "2018-05-11 20:00:00";
 
 		ipValue.setDate("2018-05-01 14:00:10");
 		ipValue.setValue("135");
@@ -449,7 +452,7 @@ public class TeamReportCalculations extends AbstractSteps {
 			}
 
 			IpOverviewModel model = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndOpenedLastMonth(
-					stylist.getStylistId(), commIpCorrection, stylist.getActivatedAt(), "2018-05-02 00:00:00",
+					stylist.getStylistId(), commIpCorrection, stylist.getActivatedAt(), "2018-05-11 00:00:00",
 					lastComissionRun, nextComissionRun);
 			teamModel.setStyleCoachId(stylist.getStylistId());
 			teamModel.setActivationDate(stylist.getActivatedAt());
@@ -464,24 +467,21 @@ public class TeamReportCalculations extends AbstractSteps {
 			shopDataList.add(teamModel);
 		}
 
-		/*for (TeamReportModel shopmodel : shopDataList) {
+		for (TeamReportModel shopmodel : shopDataList) {
 			System.out.println("");
 			System.out.println("sc id: " + shopmodel.getStyleCoachId());
 			System.out.println("total  ip: " + shopmodel.getIp());
 			System.out.println("getActivatedAt: " + shopmodel.getActivationDate());
-			System.out.println("getIpThisMonth: " + shopmodel.getIpThisMonth());
-			System.out.println("getIpLastMont: " + shopmodel.getIpLastMonth());
+		//	System.out.println("getIpThisMonth: " + shopmodel.getIpThisMonth());
+		//	System.out.println("getIpLastMont: " + shopmodel.getIpLastMonth());
 			System.out.println("ip Top: " + shopmodel.getIpTop());
 			System.out.println("ip Manual: " + shopmodel.getManualIpCorrection());
 			System.out.println("ip Manual Top : " + shopmodel.getManualIpCorrectionTop());
 			
-			 * List<IpOverViewReturnsListModel> chargebacks =
-			 * shopmodel.getReturns(); for (IpOverViewReturnsListModel
-			 * ipOverViewReturnsListModel : chargebacks) { System.out.println(
-			 * "charge TOP " +ipOverViewReturnsListModel); }
+			  List<IpOverViewReturnsListModel> chargebacks = shopmodel.getReturns(); for (IpOverViewReturnsListModel ipOverViewReturnsListModel : chargebacks) { System.out.println("charge TOP " +ipOverViewReturnsListModel); }
 			 
 
-		}*/
+		}
 
 		String[] dateFields = DateUtils.getDateFields(month, "yyyy-MM-dd HH:mm:ss");
 		String previousMonth = DateUtils.getPreviousMonth(month, "yyyy-MM-dd HH:mm:ss");
@@ -571,12 +571,12 @@ public class TeamReportCalculations extends AbstractSteps {
 			String tqv = calculateTqv(ipShopModel.getIp(), commissionStylistModel.getTeamPoints());
 
 			// Thread.sleep(5000);
-			/*
-			 * CommissionStylistModel commStylistModelPreviousMonth =
+			
+			/* * CommissionStylistModel commStylistModelPreviousMonth =
 			 * ComissionRestCalls.getStylistInfo(
 			 * commissionStylistModel.getStylistId(),
-			 * dateFieldsPreviousMonth[0], dateFieldsPreviousMonth[1]);
-			 */
+			 * dateFieldsPreviousMonth[0], dateFieldsPreviousMonth[1]);*/
+			 
 			CommissionStylistModel commStylistModelPreviousMonth = grabPreviousMonthStylistData(
 					commissionStylistModel.getStylistId(), allPreviousMonthStylists);
 			

@@ -1,19 +1,11 @@
 package com.steps.external.navision;
 
-import net.thucydides.core.annotations.Step;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.connectors.http.ImportInterfaceCalls;
-import com.pages.external.navision.NavisionHomePage;
-import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
+
+import net.thucydides.core.annotations.Step;
 
 public class NavisionHomeSteps extends AbstractSteps {
 

@@ -3,26 +3,22 @@ package com.pages.frontend.reports;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
-import com.tools.constants.ContextConstants;
 import com.tools.data.IpOverViewIpCorrectionModel;
 import com.tools.data.IpOverViewOpenIpsModel;
 import com.tools.data.IpOverViewPayedOrdersModel;
 import com.tools.data.IpOverViewReturnsListModel;
 import com.tools.data.IpOverViewSummaryModel;
-import com.tools.data.TeamReportTeamTabModel;
 import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
-import net.serenitybdd.core.pages.WebElementFacade;
 
 public class IpReportsPage extends AbstractPage {
 

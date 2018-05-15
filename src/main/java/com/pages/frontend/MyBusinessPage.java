@@ -2,11 +2,8 @@ package com.pages.frontend;
 
 import java.util.List;
 
-import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 
-import com.tools.CustomVerification;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;

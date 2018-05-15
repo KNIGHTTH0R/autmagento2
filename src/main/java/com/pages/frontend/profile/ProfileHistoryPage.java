@@ -4,19 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.CustomVerification;
-import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.data.backend.OrderModel;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.DateUtils;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class ProfileHistoryPage extends AbstractPage {
 
@@ -36,6 +34,7 @@ public class ProfileHistoryPage extends AbstractPage {
 	private WebElement tableOrderHistory;
 
 	@FindBy(css = "#tab-button-related")
+	
 	private WebElement dokumenteTab;
 	
 	@FindBy(css = "#tabs-2 p")

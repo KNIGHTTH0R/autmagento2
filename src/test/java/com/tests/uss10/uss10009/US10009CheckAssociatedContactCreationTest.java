@@ -1,10 +1,5 @@
 package com.tests.uss10.uss10009;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,10 +12,14 @@ import com.tools.constants.Credentials;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.ContactDetailsModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.backend.contact.ContactBackendValidationWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_1.class)
@@ -39,7 +38,6 @@ public class US10009CheckAssociatedContactCreationTest extends BaseTest {
 	private ContactDetailsModel expectedContactDetailsModel;
 	private CustomerFormModel customerFormModel;
 	private AddressModel addressModel;
-	private DateModel dateModel;
 	private String prefferedStylist = "emilian melian (20)";
 
 	@Before

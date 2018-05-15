@@ -1,20 +1,12 @@
 package com.pages.backend.borrow;
 
-import java.text.ParseException;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.tools.data.backend.TermPurchaseOrderModel;
 import com.tools.requirements.AbstractPage;
-import com.tools.utils.DateUtils;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
-import net.thucydides.core.annotations.Step;
 
 public class BorrowPage extends AbstractPage {
 

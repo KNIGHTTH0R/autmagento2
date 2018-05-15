@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.connectors.http.MagentoProductCalls;
-import com.tools.constants.ConfigConstants;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.ShippingModel;
@@ -252,11 +251,11 @@ public class CartCalculator {
 	private static ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private static ProductDetailedModel genProduct2 = new ProductDetailedModel();
 	private static ProductDetailedModel genProduct3 = new ProductDetailedModel();
-	private static List<BasicProductModel> productsList =new ArrayList<BasicProductModel>();
+//	private static List<BasicProductModel> productsList =new ArrayList<BasicProductModel>();
 	private static BasicProductModel productData;
 	private static AddProductsWorkflow addProductsWorkflow;
-	private static BasicProductModel productData2;
-	private static BasicProductModel productData3;
+//	private static BasicProductModel productData2;
+//	private static BasicProductModel productData3;
 	public static List<BasicProductModel> productsList25Beta = new ArrayList<BasicProductModel>();
 	
 	public static void main(String[] args) {

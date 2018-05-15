@@ -2,20 +2,13 @@ package com.steps.frontend.reports;
 
 import java.util.List;
 
-import org.junit.Assert;
-
-import com.steps.backend.ImportOrdersToNavSteps;
 import com.tools.CustomVerification;
-import com.tools.data.frontend.BorrowCartTotalsModel;
-import com.tools.data.frontend.BorrowedCartModel;
 import com.tools.data.frontend.StylistInventoryModel;
 import com.tools.data.soap.NavOrderLinesModel;
-import com.tools.data.soap.NavOrderModel;
 import com.tools.requirements.AbstractSteps;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
-import net.thucydides.core.annotations.Steps;
 
 public class StylistInventorySteps extends AbstractSteps {
 

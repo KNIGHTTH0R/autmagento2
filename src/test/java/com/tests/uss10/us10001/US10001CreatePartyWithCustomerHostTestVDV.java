@@ -23,10 +23,8 @@ import com.sun.jna.Platform;
 import com.tests.BaseTest;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
-import com.tools.customDrivers.CustomZaleniumDriver;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
-import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 

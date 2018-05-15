@@ -17,8 +17,6 @@ import org.w3c.dom.NodeList;
 
 import com.tools.constants.NavSoapKeys;
 import com.tools.data.navision.SalesInvoicePosted;
-import com.tools.data.navision.SyncInfoModel;
-import com.tools.data.soap.NavOrderLinesModel;
 
 public class NavisionSalesInvoicePostedCalls {
 

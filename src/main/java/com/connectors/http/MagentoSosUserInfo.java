@@ -14,7 +14,6 @@ import org.w3c.dom.NodeList;
 import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
-import com.tools.data.salesOnSpeed.MagentoSOSContactModel;
 import com.tools.data.salesOnSpeed.MagentoSOSUserInfoModel;
 
 public class MagentoSosUserInfo {

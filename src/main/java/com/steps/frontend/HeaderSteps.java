@@ -1,18 +1,14 @@
 package com.steps.frontend;
 
-import net.serenitybdd.core.annotations.findby.By;
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.StepGroup;
-import net.thucydides.core.annotations.Title;
-
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import com.tools.constants.ContextConstants;
 import com.tools.constants.Separators;
 import com.tools.constants.TimeConstants;
 import com.tools.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
+
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.Title;
 
 public class HeaderSteps extends AbstractSteps {
 

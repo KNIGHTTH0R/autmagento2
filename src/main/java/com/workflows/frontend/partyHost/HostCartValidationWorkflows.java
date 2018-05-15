@@ -85,6 +85,8 @@ public class HostCartValidationWorkflows {
 				HostDataGrabber.grabbedHostCartProductsList);
 		hostCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
 
+		
+		
 		hostShippingAndConfirmationWorkflows.setValidateProductsModels(HostCartCalculator.allProductsList,
 				HostDataGrabber.grabbedHostShippingProductsList);
 		hostShippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");

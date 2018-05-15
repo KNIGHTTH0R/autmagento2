@@ -1,11 +1,9 @@
 package com.steps.frontend.reports;
 
-import org.junit.Assert;
-
-import net.thucydides.core.annotations.Step;
-
 import com.tools.CustomVerification;
 import com.tools.requirements.AbstractSteps;
+
+import net.thucydides.core.annotations.Step;
 
 public class ValidateIpsOverviewSteps extends AbstractSteps{
 	private static final long serialVersionUID = 1L;

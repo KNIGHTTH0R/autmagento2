@@ -1,17 +1,15 @@
 package com.steps.frontend;
 
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.Steps;
-
 import java.util.List;
 
 import org.junit.Assert;
 
-import com.steps.backend.SalesOnSpeed.MagentoToSosContactsSyncValidationSteps;
 import com.tools.data.frontend.ContactModel;
 import com.tools.data.frontend.RegularBasicProductModel;
-import com.tools.data.salesOnSpeed.MagentoSOSContactModel;
 import com.tools.requirements.AbstractSteps;
+
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Steps;
 
 public class ContactDetailsSteps extends AbstractSteps {
 

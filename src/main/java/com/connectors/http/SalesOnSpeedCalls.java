@@ -20,7 +20,6 @@ import com.tools.data.salesOnSpeed.Follow_up_date;
 import com.tools.data.salesOnSpeed.Is_distributed;
 import com.tools.data.salesOnSpeed.Lang_issues;
 import com.tools.data.salesOnSpeed.MagentoSOSContactModel;
-import com.tools.data.salesOnSpeed.Male;
 import com.tools.data.salesOnSpeed.Not_interested;
 import com.tools.data.salesOnSpeed.Notes;
 import com.tools.data.salesOnSpeed.Phones;
@@ -132,7 +131,7 @@ public class SalesOnSpeedCalls {
 		Wrong_details wrongDetails = customfields.getWrong_details();
 		salesOnSpeedContactModel.setWrongDetailsValue(wrongDetails.getValue());
 
-		Male male = customfields.getMale();
+	//	Male male = customfields.getMale();
 	//	salesOnSpeedContactModel.setMaleValue(male.getValue());
 
 		Signup_issues signupIssues = customfields.getSignup_issues();

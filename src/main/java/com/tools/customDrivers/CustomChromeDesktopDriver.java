@@ -1,17 +1,11 @@
 package com.tools.customDrivers;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
-import com.sun.jna.Platform;
 
 import net.thucydides.core.webdriver.DriverSource;
 

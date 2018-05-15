@@ -109,15 +109,14 @@ public class PartyDetailsPage extends AbstractPage {
 
 	@FindBy(css = "a.fancybox-item.fancybox-close")
 	private WebElement closeFancy;
-	
-//	@FindBy(css = "div[style*='overflow'] a[class*='right button']")
-//	private WebElement clickOSPMbutton;
+
+	// @FindBy(css = "div[style*='overflow'] a[class*='right button']")
+	// private WebElement clickOSPMbutton;
 	@FindBy(css = ".mr-b-20 a")
 	private WebElement clickOSPMbutton;
-	
+
 	@FindBy(css = ".beta-block a")
 	private WebElement clickHostPatyLink;
-	
 
 	// this is made for a single product.if the products is the expected
 	// one,select it and borrow it
@@ -161,24 +160,27 @@ public class PartyDetailsPage extends AbstractPage {
 	}
 
 	public boolean orderForCustomer() {
-//		element(orderForCustomer).waitUntilVisible();
-		boolean isDisplayed=false;
-//		if(orderForCustomer.isDisplayed()){
-//			orderForCustomer.click();
-//			isDisplayed=true;
-//		}
-//		orderForCustomer.click();
-//		withTimeoutOf(40, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
-//				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+		// element(orderForCustomer).waitUntilVisible();
+		boolean isDisplayed = false;
+		// if(orderForCustomer.isDisplayed()){
+		// orderForCustomer.click();
+		// isDisplayed=true;
+		// }
+		// orderForCustomer.click();
+		// withTimeoutOf(40,
+		// TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
+		// By.cssSelector(".blockUI.blockMsg.blockElement"),
+		// ContextConstants.LOADING_MESSAGE));
 		waitABit(5000);
-		List<WebElement> placeCustomerOrderBtn= getDriver().findElements(By.cssSelector("form[action*='placeCustomerOrder'] button"));
-		if(placeCustomerOrderBtn.size()!=0){
-			isDisplayed=true;
+		List<WebElement> placeCustomerOrderBtn = getDriver()
+				.findElements(By.cssSelector("form[action*='placeCustomerOrder'] button"));
+		if (placeCustomerOrderBtn.size() != 0) {
+			isDisplayed = true;
 			clickElement(orderForCustomer);
-//			orderForCustomer.click();
+			// orderForCustomer.click();
 			withTimeoutOf(40, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
 					By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
-		}else{
+		} else {
 			Assert.assertTrue("The button is not displayed", isDisplayed);
 		}
 		return isDisplayed;
@@ -187,13 +189,13 @@ public class PartyDetailsPage extends AbstractPage {
 	public void hostessInviteConfirmation() {
 		element(hostessInviteConfirmation).waitUntilVisible();
 		clickElement(hostessInviteConfirmation);
-		//hostessInviteConfirmation.click();
+		// hostessInviteConfirmation.click();
 	}
 
 	public void sendInvitationToHostess() {
 		element(sendInvitationToHostess).waitUntilVisible();
 		clickElement(sendInvitationToHostess);
-//		sendInvitationToHostess.click();
+		// sendInvitationToHostess.click();
 	}
 
 	public ClosedPartyPerformanceModel grabClosedPartyPerformance() {
@@ -218,21 +220,37 @@ public class PartyDetailsPage extends AbstractPage {
 		return result;
 
 	}
-	
+
+	public ClosedPartyPerformanceModel grabClosedPartyPerformanceFromModal() {
+		ClosedPartyPerformanceModel result = new ClosedPartyPerformanceModel();
+		result.setGuestsNo(getDriver().findElement(By.cssSelector("#guests")).getText());
+		result.setNoOfOrders(getDriver().findElement(By.cssSelector("#ordersCount")).getText());
+		result.setRetail(getDriver().findElement(By.cssSelector("#revenue")).getText().replace(",", ".").replace(" €", "").replace("€ ", ""));
+		result.setIp(getDriver().findElement(By.cssSelector("#potentialIps")).getText());
+		result.setJewelryBonus(getDriver().findElement(By.cssSelector("#jewelry")).getText().replace(",", ".").replace(" €", "").replace("€ ", ""));
+		result.setFourthyDiscounts(getDriver().findElement(By.cssSelector("#fiftydiscount")).getText());
+
+		return result;
+	}
+
 	public ClosedPartyPerformanceModel grabClosedPartyPerformanceNoOrders() {
 		ClosedPartyPerformanceModel result = new ClosedPartyPerformanceModel();
-//		result.setNoOfOrders(
-//				getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(1) td:nth-child(2)"))
-//						.getText());
-//		result.setRetail(
-//				getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(2) td:nth-child(2)"))
-//						.getText().replace(",", ".").replace(" €", "").replace("€ ", ""));
-//		result.setIp(
-//				getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(3) td:nth-child(2)"))
-//						.getText());
-//		result.setIpInPayment(
-//				getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(4) td:nth-child(2)"))
-//						.getText());
+		// result.setNoOfOrders(
+		// getDriver().findElement(By.cssSelector("table.party-performance tbody
+		// tr:nth-child(1) td:nth-child(2)"))
+		// .getText());
+		// result.setRetail(
+		// getDriver().findElement(By.cssSelector("table.party-performance tbody
+		// tr:nth-child(2) td:nth-child(2)"))
+		// .getText().replace(",", ".").replace(" €", "").replace("€ ", ""));
+		// result.setIp(
+		// getDriver().findElement(By.cssSelector("table.party-performance tbody
+		// tr:nth-child(3) td:nth-child(2)"))
+		// .getText());
+		// result.setIpInPayment(
+		// getDriver().findElement(By.cssSelector("table.party-performance tbody
+		// tr:nth-child(4) td:nth-child(2)"))
+		// .getText());
 		result.setJewelryBonus(getDriver().findElement(By.cssSelector("div.col-3 p:nth-child(2) .price")).getText()
 				.replace(",", ".").replace(" €", "").replace("€ ", "").trim());
 		String[] parts = getDriver().findElement(By.cssSelector("div.col-3 p:nth-child(3)")).getText().split(":");
@@ -244,7 +262,7 @@ public class PartyDetailsPage extends AbstractPage {
 
 	public void closeParty() {
 		element(closeParty).waitUntilVisible();
-	//	closeParty.click();
+		// closeParty.click();
 		clickElement(closeParty);
 	}
 
@@ -256,7 +274,7 @@ public class PartyDetailsPage extends AbstractPage {
 	public void createFolowUpParty() {
 		element(createFolowUpParty).waitUntilVisible();
 		createFolowUpParty.click();
-		
+
 		waitForLoadingImageToDissapear();
 	}
 
@@ -283,7 +301,7 @@ public class PartyDetailsPage extends AbstractPage {
 	public void popupCloseParty() {
 		element(popupPartyCloseButton).waitUntilVisible();
 		clickElement(popupPartyCloseButton);
-//		popupPartyCloseButton.click();
+		// popupPartyCloseButton.click();
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.textToBePresentInElement(
 				getDriver().findElement(By.id("closePartyWrapper")), ContextConstants.SUCCESSFULY_CLOSED_PARTY));
 	}
@@ -482,31 +500,31 @@ public class PartyDetailsPage extends AbstractPage {
 		}
 		Assert.assertTrue("The guest was not found in invites list", found);
 	}
-	
-	
-	public void verifyGuestIsDisplayedOnPartyPage(String firstname, String lastname,boolean isApproved) {
+
+	public void verifyGuestIsDisplayedOnPartyPage(String firstname, String lastname, boolean isApproved) {
 		boolean found = false;
-		List<WebElement> status=new ArrayList<WebElement>();
+		List<WebElement> status = new ArrayList<WebElement>();
 		scrollToPageTop();
 		waitABit(3000);
 		List<WebElement> guestList = getDriver().findElements(By.cssSelector("#invitations-list-table tbody tr"));
 		for (WebElement guest : guestList) {
-			status=guest.findElements(By.cssSelector("td:nth-child(3)"));
+			status = guest.findElements(By.cssSelector("td:nth-child(3)"));
 			if (guest.findElement(By.cssSelector("td:nth-child(1)")).getText()
-					.contentEquals(firstname +" "+lastname)) {
+					.contentEquals(firstname + " " + lastname)) {
 				found = true;
 				break;
 			}
 		}
-		if(isApproved==false){
+		if (isApproved == false) {
 			CustomVerification.verifyTrue(
-					"Failire: The guest Status is not coorect, expected isApproved= " + isApproved , status.get(0).getText().contains("Kann nicht teilnehmen"));
+					"Failire: The guest Status is not coorect, expected isApproved= " + isApproved,
+					status.get(0).getText().contains("Kann nicht teilnehmen"));
 		}
-		if(isApproved==true){
-			
-			//Nimmt teil
-			CustomVerification.verifyTrue(
-					"Failire: The guest Status is not coorect, isApproved= " + isApproved , status.get(0).getText().contains("Nimmt teil"));
+		if (isApproved == true) {
+
+			// Nimmt teil
+			CustomVerification.verifyTrue("Failire: The guest Status is not coorect, isApproved= " + isApproved,
+					status.get(0).getText().contains("Nimmt teil"));
 		}
 
 		CustomVerification.verifyTrue(
@@ -579,13 +597,13 @@ public class PartyDetailsPage extends AbstractPage {
 
 	public void checkWishlistSection(List<RegularBasicProductModel> productsWishList) {
 		List<WebElement> result = new ArrayList<WebElement>();
-		System.out.println("list size " +productsWishList.size());
+		System.out.println("list size " + productsWishList.size());
 		List<WebElement> wishlistProductsList = getDriver()
 				.findElements(By.cssSelector("div.customer-list-container.clearfix .mini-box img"));
 
 		for (int i = 0; i < productsWishList.size(); i++) {
 			for (WebElement item : wishlistProductsList) {
-				System.out.println("product "+productsWishList.get(i).getName());
+				System.out.println("product " + productsWishList.get(i).getName());
 				System.out.println("grabbed product " + item.getAttribute("alt"));
 				if (item.getAttribute("alt").contains(productsWishList.get(i).getName())) {
 					result.add(item);
@@ -594,21 +612,21 @@ public class PartyDetailsPage extends AbstractPage {
 			}
 
 		}
-		System.out.println("list size " +productsWishList.size());
+		System.out.println("list size " + productsWishList.size());
 		System.out.println("grabbed size " + result.size());
 		Assert.assertTrue("Not all products have been validated ", result.size() == productsWishList.size());
 	}
 
 	public void editTime() {
 		Select oSelect = new Select(getDriver().findElement(By.id("time")));
-	//	oSelect.selectByIndex(1);
+		// oSelect.selectByIndex(1);
 		oSelect.selectByValue("10:45");
 		oSelect.selectByVisibleText("10:45");
-		
+
 	}
 
 	public void saveEdit() {
-		WebElement save= getDriver().findElement(By.id("save-edit-party"));
+		WebElement save = getDriver().findElement(By.id("save-edit-party"));
 		save.click();
 	}
 
@@ -625,17 +643,18 @@ public class PartyDetailsPage extends AbstractPage {
 
 	public String grabHostPassword() {
 		waitABit(2000);
-		WebElement passwordHost=getDriver().findElements(By.cssSelector(".beta-block tr:nth-child(2) td:nth-child(2)")).get(0);
+		WebElement passwordHost = getDriver()
+				.findElements(By.cssSelector(".beta-block tr:nth-child(2) td:nth-child(2)")).get(0);
 		System.out.println(passwordHost.getText());
 		return passwordHost.getText();
 	}
 
 	public String grabPartyLink() {
 		waitABit(2000);
-		WebElement partyLink=getDriver().findElements(By.cssSelector(".beta-block tr:nth-child(1) td:nth-child(2)")).get(0);
+		WebElement partyLink = getDriver().findElements(By.cssSelector(".beta-block tr:nth-child(1) td:nth-child(2)"))
+				.get(0);
 		System.out.println(partyLink.getText());
 		return partyLink.getText();
 	}
-
 
 }

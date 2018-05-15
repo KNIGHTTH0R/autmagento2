@@ -11,9 +11,6 @@ import javax.xml.soap.SOAPElement;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
@@ -81,7 +78,7 @@ public class MagentoProductsListCalls {
 	private static List<ProductDetailedModel> extractProductInfo(SOAPMessage response) throws Exception {
 
 		List<ProductDetailedModel> listResult=new ArrayList<ProductDetailedModel>();
-		ProductDetailedModel result = new ProductDetailedModel();
+	//	ProductDetailedModel result = new ProductDetailedModel();
 
 	/*	NodeList productInfoList = response.getSOAPBody().getElementsByTagName("result");
 		Node productInfo = productInfoList.item(0);

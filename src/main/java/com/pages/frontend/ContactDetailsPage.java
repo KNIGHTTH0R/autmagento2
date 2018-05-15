@@ -5,11 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.plaf.synth.SynthSpinnerUI;
-
-import net.serenitybdd.core.annotations.findby.FindBy;
-
-import org.jruby.RubyProcess.Sys;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -21,6 +16,8 @@ import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 
 public class ContactDetailsPage extends AbstractPage {
@@ -188,7 +185,7 @@ public class ContactDetailsPage extends AbstractPage {
 		// TODO Auto-generated method stub
 		List<RegularBasicProductModel>  cartItems= new ArrayList<RegularBasicProductModel>();
 		
-		WebElement cartItemSection= customerBlockLines.get(1);
+	//	WebElement cartItemSection= customerBlockLines.get(1);
 		
 		
 		return cartItems;
@@ -204,8 +201,8 @@ public class ContactDetailsPage extends AbstractPage {
 			RegularBasicProductModel wishlistItem= new RegularBasicProductModel();
 			String productCode=webElement.findElement(By.cssSelector("td:nth-child(2) p:nth-child(2)")).getAttribute("innerText");
 			String qty1=webElement.findElement(By.cssSelector("td:nth-child(3)")).getAttribute("innerText").replaceAll("\\s+","");
-			String dateAddedOn=webElement.findElement(By.cssSelector("td:nth-child(4)")).getAttribute("innerText").replaceAll("\\s+","");
-			String availabilityStatus=webElement.findElement(By.cssSelector("td:nth-child(4)")).getAttribute("innerText");
+//			String dateAddedOn=webElement.findElement(By.cssSelector("td:nth-child(4)")).getAttribute("innerText").replaceAll("\\s+","");
+//			String availabilityStatus=webElement.findElement(By.cssSelector("td:nth-child(4)")).getAttribute("innerText");
 			String price=webElement.findElement(By.cssSelector(".price")).getAttribute("innerText").replaceAll("\\s+","");
 			
 			//should be added on availabilityStatus

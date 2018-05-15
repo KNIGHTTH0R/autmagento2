@@ -1,9 +1,8 @@
 package com.steps.backend.stylecoach;
 
-import net.thucydides.core.annotations.Step;
-
-import com.pages.backend.stylecoach.SosDetailsBackendPage;
 import com.tools.requirements.AbstractSteps;
+
+import net.thucydides.core.annotations.Step;
 
 public class StylecoachSalesOnSpeedBackendSteps extends AbstractSteps {
 

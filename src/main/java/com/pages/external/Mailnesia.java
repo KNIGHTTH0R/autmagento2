@@ -2,15 +2,14 @@ package com.pages.external;
 
 import java.util.List;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.CustomVerification;
 import com.tools.constants.UrlConstants;
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class Mailnesia extends AbstractPage {
 

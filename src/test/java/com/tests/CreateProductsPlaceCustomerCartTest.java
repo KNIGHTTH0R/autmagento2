@@ -49,10 +49,10 @@ public class CreateProductsPlaceCustomerCartTest extends BaseTest {
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("85.95");
 		genProduct1.setIp("72");
-		genProduct1.setSku("0101338ZWAB085");
-		genProduct1.setName("Marie Jo JANE Trägerloser BH natur 85B");
+		genProduct1.setSku("0101338NATC080");
+		genProduct1.setName("Marie Jo Jane Trägerloser BH Natur 80C");
 		genProduct1.setColor("natur");
-		genProduct1.setProductSize("85B");
+		genProduct1.setProductSize("80C");
 		genProduct1.setParentProductSku("marie-jo-jane-tragerloser-bh-0101338");
 		productsList.add(genProduct1);
 		

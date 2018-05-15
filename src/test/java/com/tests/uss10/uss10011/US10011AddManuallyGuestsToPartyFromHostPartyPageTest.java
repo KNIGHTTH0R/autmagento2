@@ -6,31 +6,27 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.gmail.GmailConnector;
 import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.steps.frontend.PartyHostGuestSteps;
 import com.tests.BaseTest;
-import com.tools.constants.ContextConstants;
-import com.tools.constants.EmailConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
-import com.tools.data.email.EmailCredentialsModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US10.5 Create Follow Up Party", type = "Scenarios")
 @Story(Application.StyleParty.US10_5.class)
@@ -48,7 +44,7 @@ public class US10011AddManuallyGuestsToPartyFromHostPartyPageTest extends BaseTe
 	@Steps
 	public PartyHostGuestSteps partyHostGuestSteps;
 
-	private String email, password, emailPassword;
+	private String email, password;
 	private UrlModel urlModel = new UrlModel();
 
 	@Before
@@ -63,7 +59,6 @@ public class US10011AddManuallyGuestsToPartyFromHostPartyPageTest extends BaseTe
 
 			email = prop.getProperty("username");
 			password = prop.getProperty("password");
-			emailPassword = prop.getProperty("customerPassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
