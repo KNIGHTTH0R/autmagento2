@@ -6,7 +6,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.CreateProductsSFMTest;
 import com.tests.us3.us3001vdv.US3001SfmOrderWithNoDiscountTestVDV;
-import com.tests.us3.us3001vdv.US3001ValidateOrderBackOfficeTestVDV;
 
 @SuiteClasses({
 	CreateProductsSFMTest.class,

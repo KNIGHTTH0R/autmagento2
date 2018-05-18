@@ -11,8 +11,8 @@ public class MailchimpSearchSteps extends AbstractSteps {
 	@Step
 	public void searchForSubscriber(String email) {
 		mailchimpListDetailsPage().startSearch();
-		mailchimpSearchPage().inputSearchTerm(email);
-		mailchimpSearchPage().submitSearch();
+//		mailchimpSearchPage().inputSearchTerm(email);
+//		mailchimpSearchPage().subMitSearch();
 		mailchimpSearchPage().selectSearchResultAndViewProfile(email);
 
 	}

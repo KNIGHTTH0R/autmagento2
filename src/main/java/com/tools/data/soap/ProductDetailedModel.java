@@ -63,6 +63,7 @@ public class ProductDetailedModel {
 	private String color;
 	
 	private String parentProductSku;
+
 	
 	
 	
