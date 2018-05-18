@@ -2,11 +2,6 @@ package com.tests.uss23;
 
 import java.text.ParseException;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -16,7 +11,11 @@ import com.tests.BaseTest;
 import com.tools.constants.ConfigConstants;
 import com.tools.constants.Credentials;
 import com.tools.requirements.Application;
-import com.tools.utils.DateUtils;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US3.6 Shop for myself VAT valid and SMB billing and shipping DE",type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_6.class)

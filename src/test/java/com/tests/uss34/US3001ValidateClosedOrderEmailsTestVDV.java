@@ -8,11 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +28,11 @@ import com.tools.data.email.EmailCredentialsModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
+
 @WithTag(name = "US3.1 Shop for myself with any bonnus applied",type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(SerenityRunner.class)
@@ -49,7 +49,7 @@ public class US3001ValidateClosedOrderEmailsTestVDV extends BaseTest{
 	@Steps 
 	public CustomVerification customVerifications;
 	public String message;
-	private String username, password, emailPassword;
+	private String username, emailPassword;
 	private List<OrderModel> orderModel = new ArrayList<OrderModel>();
 	
 	@Before
@@ -62,7 +62,6 @@ public class US3001ValidateClosedOrderEmailsTestVDV extends BaseTest{
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
-			password = prop.getProperty("password");
 			emailPassword = prop.getProperty("Emailpassword");
 
 		} catch (IOException ex) {

@@ -2,9 +2,6 @@ package com.tests.uss26.uss26002;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,10 +14,6 @@ import com.steps.frontend.ReportsSteps;
 import com.steps.frontend.reports.AvailabilityReportSteps;
 import com.steps.frontend.reports.StylistsCustomerOrdersReportSteps;
 import com.tests.BaseTest;
-import com.tools.constants.ContextConstants;
-import com.tools.constants.SoapKeys;
-import com.tools.data.soap.ProductDetailedModel;
-import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 import net.serenitybdd.junit.runners.SerenityRunner;

@@ -3,11 +3,6 @@ package com.tests.uss13.us13005;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +14,6 @@ import com.tests.BaseTest;
 import com.tools.constants.SoapConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.data.frontend.DykscSeachModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.soap.DBStylistModel;
 import com.tools.generalCalculation.StylistListCalculation;
@@ -29,6 +23,11 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.tools.utils.RandomAddress;
 import com.workflows.frontend.DysksWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US13.5 DYKSC Assignation to SC qualified lead SC", type = "Scenarios")
 @Story(Application.Distribution.US13_5.class)
@@ -45,7 +44,7 @@ public class US13005StyleCoachLeadDykscPlzAndCountryTest extends BaseTest {
 	private CoordinatesModel coordinatesModel = new CoordinatesModel();
 	private RandomAddress randomAddress;
 	private List<DBStylistModel> searchByPlzAndCountryStylistList = new ArrayList<DBStylistModel>();
-	private List<DykscSeachModel> dysksStylecoachesList = new ArrayList<DykscSeachModel>();
+//	private List<DykscSeachModel> dysksStylecoachesList = new ArrayList<DykscSeachModel>();
 
 	@Before
 	public void setUp() throws Exception {

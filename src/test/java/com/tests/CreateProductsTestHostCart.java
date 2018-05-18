@@ -14,7 +14,6 @@ import com.tools.constants.SoapKeys;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.DateUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -32,15 +31,7 @@ public class CreateProductsTestHostCart extends BaseTest {
 	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct4 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct5 = new ProductDetailedModel();
-	private ProductDetailedModel genProduct6 = new ProductDetailedModel();
-	private ProductDetailedModel genProduct7 = new ProductDetailedModel();
-	private ProductDetailedModel genProduct8 = new ProductDetailedModel();
-	private ProductDetailedModel genProduct9 = new ProductDetailedModel();
-	private ProductDetailedModel genProduct10 = new ProductDetailedModel();
-	private ProductDetailedModel genProduct11 = new ProductDetailedModel();
-	private ProductDetailedModel genProduct12 = new ProductDetailedModel();
-	private ProductDetailedModel genProduct13 = new ProductDetailedModel();
-	private ProductDetailedModel genProduct14 = new ProductDetailedModel();
+
     String voucherValue;
 	
 	@Steps

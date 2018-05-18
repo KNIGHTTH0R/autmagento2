@@ -23,9 +23,9 @@ import com.tools.constants.ContextConstants;
 import com.tools.constants.Credentials;
 import com.tools.constants.EnvironmentConstants;
 import com.tools.data.backend.StylistPropertiesModel;
+import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
-import com.tools.data.frontend.SepaPaymentMethodModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -70,8 +70,9 @@ public class US6002ScRegistrationExistingCustomerTest extends BaseTest {
 	private static DateModel formDate = new DateModel();
 	private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
 	private CustomerFormModel stylistData = new CustomerFormModel("");
+	public AddressModel customerAddressData;
 	private String birthDate;
-	private SepaPaymentMethodModel sepaPaymentData = new SepaPaymentMethodModel();
+	//private SepaPaymentMethodModel sepaPaymentData = new SepaPaymentMethodModel();
 
 	@Before
 	public void setUp() throws Exception {
@@ -81,8 +82,10 @@ public class US6002ScRegistrationExistingCustomerTest extends BaseTest {
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 		int size = MongoReader.grabCustomerFormModels("US6002CreateCustomerTest").size();
-		if (size > 0) {
+		int size2=MongoReader.grabAddressModels("US6002CreateCustomerTest").size();
+		if (size > 0 || size2>0) {
 			stylistData = MongoReader.grabCustomerFormModels("US6002CreateCustomerTest").get(0);
+			customerAddressData=MongoReader.grabAddressModels("US6002CreateCustomerTest").get(0);
 		} else
 			Assert.assertTrue("Failure: No test data has been found.", false);
 

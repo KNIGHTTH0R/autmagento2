@@ -5,7 +5,6 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.uss10.uss10010.US10010AccessGuestPageFromPartyDetailsAndAcceptInvitationUsingFbTest;
-import com.tests.uss10.uss10010.US10010AddManuallyGuestsToPartyFromHostPartyPageTest;
 import com.tests.uss10.uss10010.US10010CreatePartyWithStylistHostTest;
 
 

@@ -17,7 +17,6 @@ import com.tools.CustomVerification;
 import com.tools.constants.Credentials;
 import com.tools.constants.SoapKeys;
 import com.tools.data.CalcDetailsModel;
-import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
@@ -31,8 +30,6 @@ import com.workflows.backend.OrderWorkflows;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.annotations.WithTags;
 
 
 @Story(Application.Newsletter.US15_4.class)
@@ -54,10 +51,8 @@ public class US34001CreateCreditMemoOnOrderTestVDV extends BaseTest {
 	public CustomVerification customVerifications;
 	
 	private String orderId;
-	private static OrderModel orderModel = new OrderModel();
 	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
 	public static List<CalcDetailsModel> calcDetailsModelList = new ArrayList<CalcDetailsModel>();
-	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
 	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
 	private static OrderTotalsModel shopTotalsModel = new OrderTotalsModel();
 	

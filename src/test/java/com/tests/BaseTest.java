@@ -19,8 +19,6 @@ import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;
 
 import net.thucydides.core.annotations.Managed;
-import net.thucydides.core.annotations.ManagedPages;
-import net.thucydides.core.pages.Pages;
 
 public class BaseTest {
 

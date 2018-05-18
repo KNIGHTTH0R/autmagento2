@@ -25,7 +25,6 @@ import com.tools.constants.EnvironmentConstants;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
-import com.tools.data.frontend.ElvPaymentMethodModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -67,7 +66,7 @@ public class US6002bScRegExistingCustForbiddenCountryTest extends BaseTest{
 	@Steps
 	public StarterSetSteps starterSetSteps;
 
-	private ElvPaymentMethodModel elvPaymentData = new ElvPaymentMethodModel();
+	//private ElvPaymentMethodModel elvPaymentData = new ElvPaymentMethodModel();
 	private static DateModel formDate = new DateModel();
 	private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
 	private CustomerFormModel stylistData = new CustomerFormModel("");

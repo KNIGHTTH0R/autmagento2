@@ -7,8 +7,6 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.tests.CreateProductsPlaceCustomerCartTest;
 import com.tests.uss10.us10001.US10001CreatePartyWithCustomerHostTestVDV;
 import com.tests.uss11.us11001.US11001PartyHostBuysForCustomerWithNoBonusTestVDV;
-import com.tests.uss11.us11001.US11001ValidateOrderBackOfficeTestVDV;
-import com.tests.uss11.us11001.US11001ValidateOrderEmailTestVDV;
 
 @SuiteClasses({
 	CreateProductsPlaceCustomerCartTest.class,

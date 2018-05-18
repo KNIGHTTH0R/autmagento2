@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -15,7 +14,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.MagentoProductCalls;
 import com.connectors.http.MagentoProductsInfoCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
@@ -98,7 +96,7 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 	private List<SyncInfoModel> changingStockMagentoProducts = new ArrayList<SyncInfoModel>();
 
 	//private List<SyncInfoModel> changingStockMagentoProducts = new ArrayList<SyncInfoModel>();
-	private List<SyncInfoModel> changingStockMagentoProductsNewTp = new ArrayList<SyncInfoModel>();
+//	private List<SyncInfoModel> changingStockMagentoProductsNewTp = new ArrayList<SyncInfoModel>();
 //	private static List<String> changingStockIdList = new ArrayList<String>(
 //			Arrays.asList("4469", "2358", "4271", "4304"));
 //	private static List<String> changingStockIdListNewTp = new ArrayList<String>(
@@ -122,7 +120,7 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 //			changingStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
 //		}
 
-		changingStockMagentoProductsNewTp=MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeTpOrderTest" + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK_NEW_TP);
+	//	changingStockMagentoProductsNewTp=MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeTpOrderTest" + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK_NEW_TP);
 //		for (String id : changingStockIdListNewTp) {
 //			changingStockMagentoProductsNewTp.add(MagentoProductCalls.getMagProductInfo(id));
 //		}

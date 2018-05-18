@@ -8,17 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.promotion.ShoppingCartPriceRulesSteps;
@@ -37,22 +31,23 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
-import com.tools.constants.ContextConstants;
 import com.tools.constants.Credentials;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
-import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandler.DataGrabber;
 import com.tools.datahandler.HostDataGrabber;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddHostProductsWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US9.1 Place Host Order With 40% Discount and JB Test", type = "Scenarios")
 @Story(Application.HostCart.US9_1.class)
@@ -99,7 +94,7 @@ public class US9006PlaceHostOrderSpecialCaseTest extends BaseTest {
 	private String shippingValue;
 	private String discount;
 	private String voucherValue;
-	private CreditCardModel creditCardData = new CreditCardModel();
+	//private CreditCardModel creditCardData = new CreditCardModel();
 	private static UrlModel partyUrlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
 	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();

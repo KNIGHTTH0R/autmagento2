@@ -22,7 +22,6 @@ import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
-import com.tools.data.frontend.OnlineStylePartyModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 
@@ -43,7 +42,7 @@ public class US5001cCreatePartyWithStylistHostTest extends BaseTest {
 	public PartyCreationSteps partyCreationSteps;
 
 	private static UrlModel urlModel = new UrlModel();
-	private static OnlineStylePartyModel ospModel = new OnlineStylePartyModel();
+//	private static OnlineStylePartyModel ospModel = new OnlineStylePartyModel();
 	private static DateModel dateModel = new DateModel();
 	private String username, password;
 

@@ -53,7 +53,7 @@ public class US5001cPartyGuestAcceptInvitationUsingFBDataTest extends BaseTest {
 	@Steps
 	public FacebookRegistrationSteps facebookRegistrationSteps;
 
-	private String fbUser, fbPass, appID;
+	private String fbPass;
 	private String email,firstName,lastName,country;
 	private UrlModel urlModel;
 	
@@ -73,7 +73,7 @@ public class US5001cPartyGuestAcceptInvitationUsingFBDataTest extends BaseTest {
 			prop.load(input);
 			email = prop.getProperty("fbInviteeUser");
 			fbPass = prop.getProperty("fbInviteePass");
-			appID = prop.getProperty("appID");
+	//		appID = prop.getProperty("appID");
 			country="Germany";
 			firstName="Qaius";
 			lastName="Bravius";
