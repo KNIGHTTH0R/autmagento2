@@ -64,17 +64,17 @@ public class US29001UnbounceDykscRegistrationTest extends BaseTest {
 		customerFormDate = new DateModel();
 
 
-//	while (coordinatesModel.getLattitude() == null) {
-//
-//			addressModel = randomAddress.getRandomAddressFromFile();
-//			coordinatesModel = AddressConverter.calculateLatAndLongFromAddressWithComponent(addressModel);
-//		}
-//
-//		searchByPlzAndCountryStylistList = StylistListCalculation.getCompatibleStylistsForDysks(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE,
-//				SoapConstants.STYLIST_ID_FILTER, SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN, SoapConstants.STYLIST_ID_2000, 3);
-//		PrintUtils.printListDbStylists(searchByPlzAndCountryStylistList);
-//		MongoConnector.cleanCollection(getClass().getSimpleName());
-//
+	while (coordinatesModel.getLattitude() == null) {
+
+			addressModel = randomAddress.getRandomAddressFromFile();
+			coordinatesModel = AddressConverter.calculateLatAndLongFromAddressWithComponent(addressModel);
+		}
+
+		searchByPlzAndCountryStylistList = StylistListCalculation.getCompatibleStylistsForDysks(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE,
+				SoapConstants.STYLIST_ID_FILTER, SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN, SoapConstants.STYLIST_ID_2000, 3);
+		PrintUtils.printListDbStylists(searchByPlzAndCountryStylistList);
+		MongoConnector.cleanCollection(getClass().getSimpleName());
+
 	}
 
 	@Test
@@ -88,18 +88,18 @@ public class US29001UnbounceDykscRegistrationTest extends BaseTest {
 
 		unbounceRegSuccessSteps.verifySuccessMessage();
 
-//		dysksWorkflows.setValidateStylistsModels(searchByPlzAndCountryStylistList, foundScList);
-//		dysksWorkflows.validateStylists("VALIDATE THAT SEARCH BY PLZ AND COUNTRY RETURNS THE CORRECT LIST");
+		dysksWorkflows.setValidateStylistsModels(searchByPlzAndCountryStylistList, foundScList);
+		dysksWorkflows.validateStylists("VALIDATE THAT SEARCH BY PLZ AND COUNTRY RETURNS THE CORRECT LIST");
 	}
 
-//	@After
-//	public void saveData() {
-//		MongoWriter.saveDateModel(customerFormDate, getClass().getSimpleName());
-//		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
-//		MongoWriter.saveAddressModel(addressModel, getClass().getSimpleName());
-//		for (DBStylistModel stylist : searchByPlzAndCountryStylistList) {
-//			MongoWriter.saveDbStylistModel(stylist, getClass().getSimpleName());
-//		}
-//	}
+	@After
+	public void saveData() {
+		MongoWriter.saveDateModel(customerFormDate, getClass().getSimpleName());
+		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
+		MongoWriter.saveAddressModel(addressModel, getClass().getSimpleName());
+		for (DBStylistModel stylist : searchByPlzAndCountryStylistList) {
+			MongoWriter.saveDbStylistModel(stylist, getClass().getSimpleName());
+		}
+	}
 
 }

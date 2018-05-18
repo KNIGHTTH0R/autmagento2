@@ -46,7 +46,7 @@ public class US23001TranferQuantityFromQSin1000Test extends BaseTest{
 	List<SyncInfoModel> initialChangingMagentoProductsNewTp = new ArrayList<SyncInfoModel>();
 
 	private List<SyncInfoModel> changingStockMagentoProducts = new ArrayList<SyncInfoModel>();
-	private List<SyncInfoModel> changingStockMagentoProductsCopy = new ArrayList<SyncInfoModel>();
+//	private List<SyncInfoModel> changingStockMagentoProductsCopy = new ArrayList<SyncInfoModel>();
 
 	private List<SyncInfoModel> changingStockNavisionProducts = new ArrayList<SyncInfoModel>();
 	

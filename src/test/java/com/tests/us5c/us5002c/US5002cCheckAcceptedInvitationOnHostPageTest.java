@@ -64,8 +64,8 @@ public class US5002cCheckAcceptedInvitationOnHostPageTest extends BaseTest {
 	public FacebookRegistrationSteps facebookRegistrationSteps;
 	private static OnlineStylePartyModel ospModel = new OnlineStylePartyModel();
 	
-	private String fbUser, fbPass, appID,username,password;
-	private String email, firstName, lastName, country;
+	private String username,password;
+	private String firstName, lastName;
 	private UrlModel urlModel;
 
 	@Before
@@ -82,10 +82,10 @@ public class US5002cCheckAcceptedInvitationOnHostPageTest extends BaseTest {
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-			email = prop.getProperty("fbInviteeUser");
-			fbPass = prop.getProperty("fbInviteePass");
-			appID = prop.getProperty("appID");
-			country = "Germany";
+	//		email = prop.getProperty("fbInviteeUser");
+	//		fbPass = prop.getProperty("fbInviteePass");
+	//		appID = prop.getProperty("appID");
+	//		country = "Germany";
 			firstName = "Qaius";
 			lastName = "Bravius";
 		} catch (IOException ex) {

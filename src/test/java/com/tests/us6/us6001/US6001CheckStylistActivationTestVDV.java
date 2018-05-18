@@ -44,7 +44,7 @@ public class US6001CheckStylistActivationTestVDV extends BaseTest {
 
 	// private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData
 	// = new StylistPropertiesModel();
-	private StylistPropertiesModel expectedAfterLinkConfirmationStylistData = new StylistPropertiesModel();
+	//private StylistPropertiesModel expectedAfterLinkConfirmationStylistData = new StylistPropertiesModel();
 	private StylistPropertiesModel expectedOrderPaidStylistData = new StylistPropertiesModel();
 	private RegistrationActivationDateModel datesExpected = new RegistrationActivationDateModel();
 	private CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
@@ -60,8 +60,8 @@ public class US6001CheckStylistActivationTestVDV extends BaseTest {
 		} else
 			System.out.println("The database has no entries");
 
-		expectedAfterLinkConfirmationStylistData = new StylistPropertiesModel(ConfigConstants.CONFIRMED,
-				ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.STYLIST);
+		/*expectedAfterLinkConfirmationStylistData = new StylistPropertiesModel(ConfigConstants.CONFIRMED,
+				ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.STYLIST);*/
 		expectedOrderPaidStylistData = new StylistPropertiesModel(ConfigConstants.CONFIRMED,
 				ConfigConstants.JEWELRY_FINAL_VALUE, ConfigConstants.STYLIST);
 		datesExpected = new RegistrationActivationDateModel(formCreationDate, formCreationDate);
@@ -76,7 +76,7 @@ public class US6001CheckStylistActivationTestVDV extends BaseTest {
 		backEndSteps.searchForEmail(stylistRegistrationData.getEmailName());
 		backEndSteps.openCustomerDetails(stylistRegistrationData.getEmailName());
 
-		StylistPropertiesModel grabAfterLinkConfirmationStylistData = backEndSteps.grabCustomerConfiguration();
+	//	StylistPropertiesModel grabAfterLinkConfirmationStylistData = backEndSteps.grabCustomerConfiguration();
 
 		backEndSteps.clickOnSalesOrders();
 		backEndSteps.searchOrderByName(stylistRegistrationData.getFirstName());

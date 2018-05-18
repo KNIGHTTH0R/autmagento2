@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.OrderInfoMagCalls;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.steps.external.navision.NavisionHomeSteps;
@@ -16,7 +15,6 @@ import com.tests.BaseTest;
 import com.tools.constants.Credentials;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.navision.SyncInfoModel;
-import com.tools.data.soap.DBOrderModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -39,7 +37,7 @@ public class US23001PayAndImportTermPurchaseOrderTest extends BaseTest {
 	@Steps
 	public OrdersSteps ordersSteps;
 
-	private DBOrderModel DBorderModel;
+	//private DBOrderModel DBorderModel;
 
 	private OrderModel orderModel;
 

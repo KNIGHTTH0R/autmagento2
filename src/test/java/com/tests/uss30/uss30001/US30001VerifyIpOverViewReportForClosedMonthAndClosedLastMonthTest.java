@@ -1,24 +1,12 @@
 package com.tests.uss30.uss30001;
 
-import static net.thucydides.core.steps.stepdata.StepData.withTestDataFrom;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.ParseException;
 import java.util.List;
-import java.util.Locale;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.annotations.UseTestDataFrom;
-
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,8 +29,13 @@ import com.tools.data.IpOverviewModel;
 import com.tools.generalCalculation.IpOverviewCalculations;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.tools.utils.DateUtils;
 import com.workflows.frontend.reports.IpReportValidationWorkflow;
+
+import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
+import net.thucydides.junit.annotations.UseTestDataFrom;
 
 @WithTag(name = "US30.1 Verify Ip Overview Report", type = "Scenarios")
 @Story(Application.IpReport.US30_1.class)
@@ -71,7 +64,7 @@ public class US30001VerifyIpOverViewReportForClosedMonthAndClosedLastMonthTest e
 	
 
 	private String stylistUsername, stylistPassword;
-	private String reportMonth;
+	//private String reportMonth;
 	String month,previousCommissionRun,lastCommissionRun,nextCommissionRun;
 
 	IpOverviewModel expectedIpOverviewModel;
@@ -95,7 +88,7 @@ public class US30001VerifyIpOverViewReportForClosedMonthAndClosedLastMonthTest e
 			prop.load(input);
 			stylistUsername = prop.getProperty("username");
 			stylistPassword = prop.getProperty("password");
-			reportMonth = prop.getProperty("reportMonth");
+		//	reportMonth = prop.getProperty("reportMonth");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();

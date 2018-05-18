@@ -6,11 +6,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-import com.connectors.http.OrderInfoMagCalls;
-import com.jayway.restassured.response.Header;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.steps.external.navision.NavisionHomeSteps;
@@ -19,7 +15,6 @@ import com.tests.BaseTest;
 import com.tools.constants.Credentials;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.navision.SyncInfoModel;
-import com.tools.data.soap.DBOrderModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -43,7 +38,7 @@ public class US23001PayAndImportOrderInNavisionTest extends BaseTest {
 	public NavisionImportSteps navisionImportSteps;
 
 	private OrderModel orderModel;
-	private DBOrderModel DBorderModel;
+//	private DBOrderModel DBorderModel;
 	List<SyncInfoModel> syncronizedMagentoProducts = new ArrayList<SyncInfoModel>();
 	List<SyncInfoModel> syncronizedNavProducts = new ArrayList<SyncInfoModel>();
 

@@ -17,7 +17,6 @@ import com.tools.CustomVerification;
 import com.tools.constants.Credentials;
 import com.tools.constants.SoapKeys;
 import com.tools.data.CalcDetailsModel;
-import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
@@ -42,7 +41,6 @@ public class US34001CreateInvoiceTestVDV extends BaseTest {
 	public BackEndSteps backEndSteps;
 	@Steps
 	public OrdersSteps ordersSteps;
-
 	@Steps
 	public OrderValidationSteps orderValidationSteps;
 	@Steps
@@ -53,10 +51,8 @@ public class US34001CreateInvoiceTestVDV extends BaseTest {
 	public CustomVerification customVerifications;
 	
 	private String orderId;
-	private static OrderModel orderModel = new OrderModel();
 	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
 	public static List<CalcDetailsModel> calcDetailsModelList = new ArrayList<CalcDetailsModel>();
-	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
 	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
 	private static OrderTotalsModel shopTotalsModel = new OrderTotalsModel();
 	

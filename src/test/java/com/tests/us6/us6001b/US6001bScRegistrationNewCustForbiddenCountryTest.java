@@ -6,11 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +27,6 @@ import com.tools.constants.ContextConstants;
 import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.AddressModel;
-import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.StarterSetProductModel;
@@ -44,6 +38,11 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.stylecoachRegistration.AddStarterSetProductsWorkflow;
 import com.workflows.frontend.stylecoachRegistration.StarterSetConfirmationWorkflows;
 import com.workflows.frontend.stylecoachRegistration.StylecoachRegistrationCartWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US6.1b Sc Registration New Customer Forbidden Country Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_1.class)
@@ -79,7 +78,7 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 	private DateModel customerFormDate = new DateModel();
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;
-	private CreditCardModel creditCardData = new CreditCardModel();
+	//private CreditCardModel creditCardData = new CreditCardModel();
 	private String taxClass, shippingValue, voucherValue, voucherCode;
 
 	@Before

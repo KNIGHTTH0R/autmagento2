@@ -31,7 +31,6 @@ import com.tools.constants.ConfigConstants;
 import com.tools.constants.FilePaths;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
-import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -86,7 +85,7 @@ public class US3003SfmWithLbAppliedTestVDV extends BaseTest {
 	private static String addressString;
 
 	private CreditCardModel creditCardData;
-	private AddressModel addressModel;
+//	private AddressModel addressModel;
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	
@@ -98,7 +97,7 @@ public class US3003SfmWithLbAppliedTestVDV extends BaseTest {
 		DataGrabber.wipe();
 
 		creditCardData = new CreditCardModel();
-		addressModel = new AddressModel();
+		//addressModel = new AddressModel();
 
 		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsSFMTest" + SoapKeys.GRAB);
 
