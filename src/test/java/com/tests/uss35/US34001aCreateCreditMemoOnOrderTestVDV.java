@@ -34,7 +34,7 @@ import net.thucydides.core.annotations.Story;
 
 @Story(Application.Newsletter.US15_4.class)
 @RunWith(SerenityRunner.class)
-public class US34001CreateCreditMemoOnOrderTestVDV extends BaseTest {
+public class US34001aCreateCreditMemoOnOrderTestVDV extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -105,7 +105,7 @@ public class US34001CreateCreditMemoOnOrderTestVDV extends BaseTest {
 
 
 	@Test
-	public void us34001CreateCreditMemoOnOrderTestVDV() throws Exception {
+	public void us34001aCreateCreditMemoOnOrderTestVDV() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSalesOrders();

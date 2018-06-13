@@ -63,7 +63,7 @@ public class OrderProductsWorkflows {
 
 
 			if (compare.getProductName() != null && (productNow.getQuantity().contentEquals(compare.getNumber()))) {
-				orderValidationSteps.matchSku(productNow.getProdCode(), compare.getProductCode());
+			//	orderValidationSteps.matchSku(productNow.getProdCode(), compare.getProductCode());
 				//orderValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getPrice());
 				orderValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getNumber());
 				

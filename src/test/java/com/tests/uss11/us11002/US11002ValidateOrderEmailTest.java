@@ -35,7 +35,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US11.5 Party Host Buys For Customer With Free Shipping Voucher Test, ship to host", type = "Scenarios")
 @Story(Application.PlaceACustomerOrderCart.US11_5.class)
 @RunWith(SerenityRunner.class)
-public class US11005ValidateOrderEmailTest extends BaseTest{
+public class US11002ValidateOrderEmailTest extends BaseTest{
 	
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -58,7 +58,7 @@ public class US11005ValidateOrderEmailTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss11" + File.separator + "us11005.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss11" + File.separator + "us11002.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -76,7 +76,7 @@ public class US11005ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		
-		orderModel = MongoReader.getOrderModel("US11005PartyHostBuysForCustomerWithVoucherTest" + SoapKeys.GRAB);
+		orderModel = MongoReader.getOrderModel("US11002PartyHostBuysForCustomerWithVoucherTestVDV" + SoapKeys.GRAB);
 		
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 		
@@ -92,7 +92,7 @@ public class US11005ValidateOrderEmailTest extends BaseTest{
 	}
 	
 	@Test
-	public void us11005ValidateOrderEmailTest() {
+	public void us11002ValidateOrderEmailTest() {
 		frontEndSteps.performLogin(username, password);
 		
 		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
