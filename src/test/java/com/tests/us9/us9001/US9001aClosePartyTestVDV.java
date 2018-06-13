@@ -57,7 +57,7 @@ public class US9001aClosePartyTestVDV extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us9" + File.separator + "us9001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -76,7 +76,7 @@ public class US9001aClosePartyTestVDV extends BaseTest {
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
-		urlModel = MongoReader.grabUrlModels("US10009CreatePartyWithCustomerHostTestVDV"+SoapKeys.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10001CreatePartyWithCustomerHostTestVDV"+SoapKeys.GRAB).get(0);
 		VanDelVeldeDBConnection.updateDateOnParty(urlModel.getUrl());
 	
 		VanDelVeldeDBConnection.updateCloseParty(urlModel.getUrl());

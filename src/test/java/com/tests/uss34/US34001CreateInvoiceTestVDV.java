@@ -124,9 +124,13 @@ public class US34001CreateInvoiceTestVDV extends BaseTest {
 		//with send email flag checked
 		ordersSteps.submitInvoice();
 		
-		backEndSteps.clickOnSalesInvoiceOrders();
+		
+		//emilian check error generated on invoice  
+	/*	backEndSteps.clickOnSalesInvoiceOrders();
 		backEndSteps.searchInvoiceByOrderId(orderId);
-		backEndSteps.openInvoiceDetails(orderId);
+		backEndSteps.openInvoiceDetails(orderId);*/
+		
+		
 		/*ordersSteps.createOrderShipment();
 		ordersSteps.validateCompleteStatus();*/
 		

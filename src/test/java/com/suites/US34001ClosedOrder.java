@@ -15,7 +15,7 @@ import com.tests.uss34.US34001CreateShipmentTestVDV;
 	US34001CreateInvoiceTestVDV.class,
 	US34001CreateShipmentTestVDV.class,
 	US34001CreateCreditMemoOnOrderTestVDV.class,
-	US3001ValidateClosedOrderEmailsTestVDV.class
+	//US3001ValidateClosedOrderEmailsTestVDV.class
 })
 @RunWith(Suite.class)
 public class US34001ClosedOrder {
