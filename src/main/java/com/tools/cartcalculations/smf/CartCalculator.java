@@ -122,6 +122,26 @@ public class CartCalculator {
 		shippingCalculatedModel = CartCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
 	}
 	
+	public static void calculateLMDiscounts(String jewelryDiscount, String marketingDiscount, String taxClass, String shippingValue) {
+		allProductsList.addAll(productsList25);
+		allProductsList.addAll(productsList50);
+		allProductsList.addAll(productsListMarketing);
+
+		calculatedProductsList25 = CartDiscountsCalculation.calculateProductsfor25Discount(productsList25, jewelryDiscount);
+
+	//	calculatedProductsList50 = CartDiscountsCalculation.calculateProductsfor50Discount(productsList50, productsList25, jewelryDiscount);
+
+		calculatedProductsListMarketing = CartDiscountsCalculation.calculateProductsforMarketingMaterial(productsListMarketing, marketingDiscount);
+
+	//	allProductsListRecalculated.addAll(calculatedProductsList50);
+		allProductsListRecalculated.addAll(calculatedProductsList25);
+		allProductsListRecalculated.addAll(calculatedProductsListMarketing);
+
+		calculatedTotalsDiscounts = CartTotalsCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount, taxClass, shippingValue,
+				shippingValue);
+		shippingCalculatedModel = CartCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
+	}
+	
 	
 	public static void calculateJMDiscountsTP(String jewelryDiscount, String marketingDiscount, String taxClass, String shippingValue) {
 		allProductsList.addAll(productsList25);

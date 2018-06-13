@@ -76,6 +76,35 @@ public class ProductSteps extends AbstractSteps {
 		return result;
 	}
 	
+	@StepGroup
+	public BasicProductModel setMarketingProductAddToCart(ProductDetailedModel model, String qty, String size, String askingPrice, String finalPrice,
+			String ip, String discountClass) {
+		BasicProductModel result = new BasicProductModel();
+	
+	//	setProductColor("");
+	//	setProductSize("");
+		setQuantity(qty);
+	
+		
+		// work aroung until the sku is displauyed on fronted for marketing products
+		result = productDetailsPage().grabMarketingProductData(model.getSku());
+		System.out.println("grabbed ok");
+		result.setDiscountClass(discountClass);
+		System.out.println("discountClass ok");
+		result.setProductsPrice(askingPrice);
+		System.out.println("askingPrice ok");
+		result.setFinalPrice(finalPrice);
+		System.out.println("finalPrice ok");
+		
+		
+		result.setPriceIP(ip);
+
+		
+		addToCart();
+		waitABit(TimeConstants.TIME_CONSTANT);
+		return result;
+	}
+	
 	public BasicProductModel setBasicProductAddToCartBeta(String qty, String size, String askingPrice, String finalPrice,
 			String ip, String discountClass) {
 		BasicProductModel result = new BasicProductModel();

@@ -173,7 +173,7 @@ public class StockCalculations {
 		return finalList;
 	}
 
-	private static String calculateMinimumQty(SyncInfoModel product, String transferQty)  {
+	/*private static String calculateMinimumQty(SyncInfoModel product, String transferQty)  {
 		//need navision formula
 		double transferValue = Double.parseDouble(transferQty) * 0.5;
 		System.out.println("transferValue"+transferValue);
@@ -185,8 +185,7 @@ public class StockCalculations {
 		return String.valueOf(roudedValue);
 		
 		
-
-	}
+	}*/
 	
 	private static String calculateMinimumQty1(String skuProduct) throws Exception {
 		//need navision formula

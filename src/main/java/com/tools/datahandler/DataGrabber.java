@@ -8,7 +8,6 @@ import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
-import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.ShippingModel;
 
 public class DataGrabber {
@@ -30,7 +29,7 @@ public class DataGrabber {
 
 	// Phase Two
 	public static List<CartProductModel> cartProductsWith50DiscountDiscounted = new ArrayList<CartProductModel>();
-	public static List<CartProductModel> cartProductsWith25DiscountDiscounted = new ArrayList<CartProductModel>();
+	public static List<CartProductModel> cartProductsWith20DiscountDiscounted = new ArrayList<CartProductModel>();
 	public static List<CartProductModel> cartMarketingMaterialsProductsDiscounted = new ArrayList<CartProductModel>();
 	public static List<CartProductModel> cartProductsList25AndMm = new ArrayList<CartProductModel>();
 	public static CartTotalsModel cartTotals = new CartTotalsModel();
@@ -92,7 +91,7 @@ public class DataGrabber {
 
 		// Phase Two
 		cartProductsWith50DiscountDiscounted = new ArrayList<CartProductModel>();
-		cartProductsWith25DiscountDiscounted = new ArrayList<CartProductModel>();
+		cartProductsWith20DiscountDiscounted = new ArrayList<CartProductModel>();
 		cartMarketingMaterialsProductsDiscounted = new ArrayList<CartProductModel>();
 		cartTotals = new CartTotalsModel();
 

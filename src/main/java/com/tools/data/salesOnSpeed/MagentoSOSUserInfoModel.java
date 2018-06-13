@@ -1,7 +1,5 @@
 package com.tools.data.salesOnSpeed;
 
-import java.util.List;
-
 public class MagentoSOSUserInfoModel {
 	private String stylistId;
 	private String stylistRef;

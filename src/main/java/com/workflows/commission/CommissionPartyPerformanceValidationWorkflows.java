@@ -57,7 +57,7 @@ public class CommissionPartyPerformanceValidationWorkflows {
 
 	@Step
 	public void verifyClosedPartyIp(String grabbedValue, String expectedValue) {
-		CustomVerification.verifyTrue("Failure: Ip doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
+		CustomVerification.verifyTrue("Failure: Ip doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contains(grabbedValue));
 	}
 
 	@Step

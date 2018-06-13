@@ -14,7 +14,6 @@ import com.connectors.http.ComissionRestCalls;
 import com.connectors.http.OrdersInfoMagentoCalls;
 import com.connectors.http.PartyMagentoCalls;
 import com.connectors.http.StylistListMagentoCalls;
-import com.steps.frontend.HeaderSteps;
 import com.tools.constants.ComissionConfigConstants;
 import com.tools.data.IpCalculationModel;
 import com.tools.data.IpOverViewReturnsListModel;
@@ -30,7 +29,6 @@ import com.tools.utils.DateUtils;
 import com.tools.utils.PrintUtils;
 
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.Steps;
 
 public class TeamReportCalculations extends AbstractSteps {
 
@@ -81,7 +79,7 @@ public class TeamReportCalculations extends AbstractSteps {
 		 * }
 		 */
 
-		List<TeamReportModel> list = TeamReportCalculations.getTeamReportListShop("1", "2018-05-03 12:00:00");
+	//	List<TeamReportModel> list = TeamReportCalculations.getTeamReportListShop("1", "2018-05-03 12:00:00");
 
 		// System.out.println("salut");
 

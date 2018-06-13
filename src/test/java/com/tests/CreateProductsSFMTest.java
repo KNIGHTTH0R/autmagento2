@@ -28,6 +28,8 @@ public class CreateProductsSFMTest extends BaseTest {
 
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct4 = new ProductDetailedModel();
 
 
 	String voucherValue;
@@ -68,6 +70,26 @@ public class CreateProductsSFMTest extends BaseTest {
 		genProduct2.setParentProductSku("primadonna-divine-tragerloser-bh-0262659");
 		productsList.add(genProduct2);
 		
+		
+		genProduct3 = MagentoProductCalls.createProductModel();
+		genProduct3.setPrice("89.95");
+		genProduct3.setName("PrimaDonna DIVINE Trägerloser BH schwarz 80E");
+		genProduct3.setIp("76");
+		genProduct3.setSku("test");
+		genProduct3.setColor("schwarz");
+		genProduct3.setProductSize("80E");
+		genProduct3.setParentProductSku("primadonna-divine-tragerloser-bh-0262659");
+		productsList.add(genProduct3);
+		
+		genProduct4 = MagentoProductCalls.createProductModel();
+		genProduct4.setPrice("34.45");
+		genProduct4.setName("test");
+		genProduct4.setIp("29");
+		genProduct4.setSku("m214");
+		genProduct4.setColor("");
+		genProduct4.setProductSize("");
+		genProduct4.setParentProductSku("test");
+		productsList.add(genProduct4);
 		
 
 	}

@@ -508,6 +508,7 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.TOTAL_AMOUNT, calcDetailsModel.getTotalAmount());
 		document.put(MongoTableKeys.SUBTOTAL, calcDetailsModel.getSubTotal());
 		document.put(MongoTableKeys.TAX, calcDetailsModel.getTax());
+		document.put(MongoTableKeys.IP_POINTS, calcDetailsModel.getIpPoints());
 		document.put(MongoTableKeys.SEGMENTS, calcDetailsModel.getSegments());
 
 		table.insert(document);

@@ -916,6 +916,7 @@ public class MongoReader extends MongoConnector {
 				result.setTax(MongoUtils.checkField(dbObject, MongoTableKeys.TAX));
 				result.setSubTotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
 				result.setTotalAmount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_AMOUNT));
+				result.setIpPoints(MongoUtils.checkField(dbObject, MongoTableKeys.IP_POINTS));
 				result.addSegments(((Map<String, String>) dbObject.get(MongoTableKeys.SEGMENTS)));
 
 				itemList.add(result);

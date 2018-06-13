@@ -59,7 +59,7 @@ public class PartyDetailsBackendSteps extends AbstractSteps {
 		partyDetailsBackendPage().saveBonus();
 		partyDetailsBackendPage().verifyAddBonusSuccessMessage();
 		partyDetailsBackendPage().addNewBonus();
-		partyDetailsBackendPage().selectBonusType("40% discount bonus");
+		partyDetailsBackendPage().selectBonusType("30% discount bonus");
 		partyDetailsBackendPage().typeBonusValue("100000");
 		partyDetailsBackendPage().saveBonus();
 		partyDetailsBackendPage().verifyAddBonusSuccessMessage();
@@ -74,7 +74,7 @@ public class PartyDetailsBackendSteps extends AbstractSteps {
 		partyDetailsBackendPage().saveBonus();
 		partyDetailsBackendPage().verifyAddBonusSuccessMessage();
 		partyDetailsBackendPage().addNewBonus();
-		partyDetailsBackendPage().selectBonusType("40% discount bonus");
+		partyDetailsBackendPage().selectBonusType("30% discount bonus");
 		partyDetailsBackendPage().typeBonusValue(forthyDiscount);
 		partyDetailsBackendPage().saveBonus();
 		partyDetailsBackendPage().verifyAddBonusSuccessMessage();

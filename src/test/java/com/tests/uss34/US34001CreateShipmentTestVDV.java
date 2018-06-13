@@ -119,7 +119,7 @@ public class US34001CreateShipmentTestVDV extends BaseTest {
 		ordersSteps.addTrakingNumber("123456");
 
 		orderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
-		orderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
+		orderProductsWorkflows.validateProductsOnShippment("PRODUCTS VALIDATION");
 
 		// with send email flag checked
 		ordersSteps.submitShipment();

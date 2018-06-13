@@ -150,6 +150,9 @@ public class CartPage extends AbstractPage {
 
 		for (WebElement webElementNow : entryList) {
 			CartProductModel productNow = new CartProductModel();
+			
+			
+			
 
 			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()
@@ -189,6 +192,7 @@ public class CartPage extends AbstractPage {
 		for (WebElement webElementNow : entryList) {
 			CartProductModel productNow = new CartProductModel();
 
+			
 			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()
 					.replace(productNow.getName(), "").trim());
@@ -202,6 +206,8 @@ public class CartPage extends AbstractPage {
 					webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
 			productNow.setPriceIP(FormatterUtils.parseValueToZeroDecimals(
 					webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText()));
+			
+			
 			productNow.setDiscountClass(ConfigConstants.DISCOUNT_0);
 
 			resultList.add(productNow);

@@ -407,4 +407,9 @@ public class CreateCustomerPage extends AbstractPage {
 
 	}
 
+	public void checkNewsletter() {
+			element(newsletterCheckbox).waitUntilVisible();
+			newsletterCheckbox.click();
+	}
+
 }

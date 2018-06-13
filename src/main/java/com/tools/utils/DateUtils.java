@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,11 +15,6 @@ import java.util.Locale;
 
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import com.tools.persistance.MongoReader;
 
 public class DateUtils {
 
@@ -304,6 +301,7 @@ public class DateUtils {
 
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static boolean isInTheSameMonth(String date, String month, String format) throws ParseException {
 		DateFormat formatFinal = new SimpleDateFormat(format);
 		Date date1 = formatFinal.parse(date);

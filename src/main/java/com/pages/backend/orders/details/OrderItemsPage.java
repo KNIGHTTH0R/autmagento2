@@ -93,6 +93,7 @@ public class OrderItemsPage extends AbstractPage {
 			orderNow.setProductCode(productCode.replace("Artikelposition: ", ""));
 			orderNow.setPropertyStatus(propertyStatus);
 			orderNow.setPrice(price);
+			orderNow.setOriginalPrice(price);
 			orderNow.setNumber(number);
 			orderNow.setSubtotal(subtotal);
 			orderNow.setTaxAmount(taxAmount);

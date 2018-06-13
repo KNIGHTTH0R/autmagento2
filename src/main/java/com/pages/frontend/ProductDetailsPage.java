@@ -104,6 +104,27 @@ public class ProductDetailsPage extends AbstractPage {
 		result.setName(productName);
 		result.setProdCode(productCode.getText());
 		result.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(productPrice.getText()));
+
+		result.setQuantity(quantityInput.getAttribute("value"));
+
+		return result;
+	}
+	
+	
+	public BasicProductModel grabMarketingProductData(String sku) {
+		BasicProductModel result = new BasicProductModel();
+		//element(productName).waitUntilVisible();
+
+	//	String type = cleanProductCode();
+
+		String productName=grabProductNameInfo();
+		System.out.println("product Name="+productName);
+		
+		result.setName(productName);
+		//result.setProdCode(productCode.getText());
+		result.setProdCode(sku);
+		result.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(productPrice.getText()));
+
 		result.setQuantity(quantityInput.getAttribute("value"));
 
 		return result;

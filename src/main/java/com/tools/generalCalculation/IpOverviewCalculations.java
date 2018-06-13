@@ -1,7 +1,6 @@
 package com.tools.generalCalculation;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +29,6 @@ public class IpOverviewCalculations {
 
 	private static List<String> notPayedStatusesTPList = new ArrayList<String>(Arrays.asList("pending_payment_hold"));
 
-	private static List<String> creditMemoStateList = new ArrayList<String>(Arrays.asList("2", "3"));
 
 	public static IpOverviewModel calculateIpOverviewForOpenMonthAndClosedLastMonth(String stylistId, String month,
 			String previousCommissionRun, String lastComissionRun, String nextComissionRun)
@@ -310,7 +308,7 @@ public class IpOverviewCalculations {
 		BigDecimal openIpsPreviousMonth = BigDecimal.ZERO;
 		BigDecimal tpIpsCurrentMonth = BigDecimal.ZERO;
 		BigDecimal tpIpUpcomingMonths = BigDecimal.ZERO;
-		BigDecimal ipPrevMonth = BigDecimal.ZERO;
+	//	BigDecimal ipPrevMonth = BigDecimal.ZERO;
 		BigDecimal ipTakeOff = BigDecimal.ZERO;
 
 		String takeOffEnd = calculateTakeOffPhaseAndDate(takeOffPhaseStart, "yyyy-MM-dd HH:mm:ss");
@@ -441,7 +439,7 @@ public class IpOverviewCalculations {
 		BigDecimal chargeBacksCurrentMonth = BigDecimal.ZERO;
 		BigDecimal reverseChargeBacksCurrentMonth = BigDecimal.ZERO;
 		BigDecimal returns = BigDecimal.ZERO;
-		BigDecimal openChargebackPreviousAndCurrent = BigDecimal.ZERO;
+	//	BigDecimal openChargebackPreviousAndCurrent = BigDecimal.ZERO;
 		List<IpOverViewReturnsListModel> chargebacks = new ArrayList<IpOverViewReturnsListModel>();
 
 		for (DBCreditMemoModel cm : cmList) {
@@ -467,7 +465,7 @@ public class IpOverviewCalculations {
 						.add(BigDecimal.valueOf(Integer.parseInt((cm.getTotalIpRefunded()))));
 			}
 			if (isOpenChargeback(cm, month)) {
-				openChargebackPreviousAndCurrent = BigDecimal.ZERO;
+		//		openChargebackPreviousAndCurrent = BigDecimal.ZERO;
 			}
 			if (isCreditMemoForCurrentMonthIfLastMonthIsOpened(cm, month, previousCommissiomRun, lastComissionRun)) {
 				returns = returns.add(BigDecimal.valueOf(Integer.parseInt((cm.getTotalIpRefunded()))));
@@ -771,21 +769,21 @@ public class IpOverviewCalculations {
 						DateConstants.FORMAT);
 	}
 
-	private static boolean isOrderCompatibleForIpPrevMonth(DBOrderModel order, String month) throws ParseException {
+	/*private static boolean isOrderCompatibleForIpPrevMonth(DBOrderModel order, String month) throws ParseException {
 
 		return DateUtils.isDateBefore(order.getCreatedAt(),
 				DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT);
-		/*
+		
 		 * return isPayed(order) && DateUtils.isDateBefore(order.getCreatedAt(),
 		 * DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),
 		 * DateConstants.FORMAT);
-		 */
-		/*
+		 
+		
 		 * && DateUtils.isDateBeetween(order.getPaidAt(), DateUtils.getf,
 		 * nextComissionRun, DateConstants.FORMAT);
-		 */
+		 
 	}
-
+*/
 	private static boolean isOrderCompatibleforTopIpsCalculation(DBOrderModel order, String month,
 			String takeOffPhaseStart, String takeOffPhaseEnd) throws ParseException {
 		System.out.println("order.getCreatedAt() " + order.getCreatedAt());

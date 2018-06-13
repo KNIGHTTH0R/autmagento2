@@ -124,7 +124,6 @@ public class US33001ValidateTeamReportTestShopCommTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());*/
 		
-		
 		headerSteps.redirectToTeamReport();
 		teamReportSteps.selectPagination("100");
 		teamReportSteps.selectMonth(DateUtils.parseDate(reportMonth, "yyyy-MM-dd HH:mm:ss", "yyyy-MMM",
@@ -151,9 +150,7 @@ public class US33001ValidateTeamReportTestShopCommTest extends BaseTest {
 			teamReportSteps.validateTeamReportTeamTab(entry.getValue(), grabbedTeamModel);
 			teamReportSteps.validateTeamReportPartyTab(entry.getValue(), grabbedPArtyModel);
 			teamReportSteps.validateTeamReportTakeOffPhaseTab(entry.getValue(), takeOffPhaseModel);
-
 			teamReportSteps.validateTotals(calculatedTotals, grabbedTotals);
-			
 		
 		}
 

@@ -96,7 +96,7 @@ public class HostCartPage extends AbstractPage {
 	public BigDecimal calculate40Discount(String finalPrice) {
 		BigDecimal bonusValue = BigDecimal.ZERO;
 		BigDecimal finPrice = BigDecimal.valueOf(Double.parseDouble(finalPrice));
-		bonusValue = finPrice.multiply(BigDecimal.valueOf(40));
+		bonusValue = finPrice.multiply(BigDecimal.valueOf(30));
 		bonusValue = bonusValue.divide(BigDecimal.valueOf(100), 2, BigDecimal.ROUND_HALF_UP);
 
 		return bonusValue.setScale(2);
@@ -209,7 +209,7 @@ public class HostCartPage extends AbstractPage {
 						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.VOUCHER_DISCOUNT, valueTransformer);
 			}
-			if ((key.contains("40%") && key.contains(ContextConstants.RABATT))
+			if ((key.contains("30%") && key.contains(ContextConstants.RABATT))
 					|| (key.contains("FORTY") && key.contains(ContextConstants.RABATT))) {
 				valueTransformer = FormatterUtils
 						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());

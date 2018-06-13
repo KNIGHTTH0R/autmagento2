@@ -306,10 +306,15 @@ public class RegularUserCartPage extends AbstractPage {
 	public BigDecimal calculate40Discount(String finalPrice) {
 		BigDecimal bonusValue = BigDecimal.ZERO;
 		BigDecimal finPrice = BigDecimal.valueOf(Double.parseDouble(finalPrice));
-		bonusValue = finPrice.multiply(BigDecimal.valueOf(40));
-		bonusValue = bonusValue.divide(BigDecimal.valueOf(100), 2, BigDecimal.ROUND_HALF_UP);
+		bonusValue = finPrice.multiply(BigDecimal.valueOf(30));
+		
+	//emilian
+	//	bonusValue = bonusValue.divide(BigDecimal.valueOf(100), 2, BigDecimal.ROUND_HALF_UP);
+		bonusValue = bonusValue.divide(BigDecimal.valueOf(100));
 
-		return bonusValue.setScale(2);
+		System.out.println("bonusValue nerotunjit"+bonusValue);
+	//	return bonusValue.setScale(2);
+		return bonusValue;
 	}
 
 	public void selectShippingOption(String option) {
@@ -516,8 +521,8 @@ public class RegularUserCartPage extends AbstractPage {
 						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.VOUCHER_DISCOUNT, valueTransformer);
 			}
-			if ((key.contains("40%") && key.contains(ContextConstants.RABATT))
-					|| (key.contains("FORTY") && key.contains(ContextConstants.RABATT))) {
+			if ((key.contains("30%") && key.contains(ContextConstants.RABATT))
+					|| (key.contains("THIRTY") && key.contains(ContextConstants.RABATT))) {
 				valueTransformer = FormatterUtils
 						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.DISCOUNT_40_BONUS, valueTransformer);

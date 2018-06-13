@@ -28,7 +28,6 @@ public class CartDiscountsCalculation {
 
 		BigDecimal price = BigDecimal.valueOf(Double.parseDouble(unitPrice));
 		BigDecimal qty = BigDecimal.valueOf(Double.parseDouble(quantity));
-		System.out.println("oare aici se intampla minunea:"+price.multiply(qty));
 		return String.valueOf(price.multiply(qty).setScale(2, RoundingMode.CEILING));
 
 	}
@@ -211,10 +210,11 @@ public class CartDiscountsCalculation {
 			newProduct.setQuantity(product.getQuantity());
 			newProduct.setProductsPrice(product.getProductsPrice());
 			newProduct.setFinalPriceWithBuy3(product.getFinalPriceWithBuy3());
-			newProduct
+			/*newProduct
 					.setPriceIP(calculateIpForEachProduct(BigDecimal.valueOf(Double.parseDouble(product.getPriceIP())),
-							BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), sum25));
-
+							BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), sum25));*/
+			newProduct
+			.setPriceIP("0");
 			String[] discounts = calculate25DiscountCartProductFinalPrice(
 					BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())),
 					BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), sum25, delta);

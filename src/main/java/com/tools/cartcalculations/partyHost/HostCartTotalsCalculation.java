@@ -211,7 +211,7 @@ public class HostCartTotalsCalculation {
 
 		BigDecimal ip = BigDecimal.valueOf(Double.parseDouble(ipPoints));
 		BigDecimal reducedIp = BigDecimal.valueOf(Double.parseDouble(ipPoints));
-		reducedIp = reducedIp.multiply(BigDecimal.valueOf(40));
+		reducedIp = reducedIp.multiply(BigDecimal.valueOf(30));
 		reducedIp = reducedIp.divide(BigDecimal.valueOf(100), 0, RoundingMode.HALF_UP);
 
 		return ip.subtract(reducedIp);

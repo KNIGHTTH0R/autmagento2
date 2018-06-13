@@ -17,7 +17,18 @@ public class RegularCartCalcDetailsModel {
 	private String totalAmount;
 	private String subTotal;
 	private String tax;
+	private String ipPoints;
 	private Map<String, String> segmentTotals = new HashMap<String, String>();
+
+	
+	
+	public String getIpPoints() {
+		return ipPoints;
+	}
+
+	public void setIpPoints(String ipPoints) {
+		this.ipPoints = ipPoints;
+	}
 
 	public String getTotalAmount() {
 		return totalAmount;

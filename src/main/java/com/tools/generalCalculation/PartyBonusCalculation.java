@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.tools.data.frontend.PartyBonusCalculationModel;
-import com.tools.data.soap.DBOrderModel;
 
 public class PartyBonusCalculation {
 	

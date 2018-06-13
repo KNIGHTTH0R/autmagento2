@@ -1,7 +1,5 @@
 package com.tools.data.socialMediaApiCommnets;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public class Data {
 	private String message;
 	private String is_silhouette;

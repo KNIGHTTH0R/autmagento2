@@ -226,7 +226,7 @@ public class StylistListCalculation {
 		initialList.addAll(initialListPart6);
 
 		List<DBStylistModel> compatibleList = new ArrayList<DBStylistModel>();
-		int i=0;
+	//	int i=0;
 		for (DBStylistModel dbStylistModel : initialList) {
 			
 			if (!isStylistIncompatibleForDykscSearchByName(dbStylistModel, firstName, lastName)) {

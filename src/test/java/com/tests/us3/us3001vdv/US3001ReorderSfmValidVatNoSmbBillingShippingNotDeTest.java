@@ -206,7 +206,7 @@ public class US3001ReorderSfmValidVatNoSmbBillingShippingNotDeTest extends BaseT
 		cartSteps.updateMarketingBonus();
 
 		DataGrabber.cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
-		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
+		DataGrabber.cartProductsWith20DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
 		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();
 
 		cartSteps.grabTotals();

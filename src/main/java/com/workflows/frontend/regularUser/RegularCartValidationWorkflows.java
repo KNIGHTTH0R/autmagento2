@@ -1,20 +1,14 @@
 package com.workflows.frontend.regularUser;
 
-import java.util.List;
-
 import com.steps.frontend.checkout.CheckoutValidationSteps;
-import com.tools.CustomVerification;
 import com.tools.cartcalculations.GeneralCartCalculations;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
-import com.tools.data.soap.DBOrderModel;
-import com.tools.data.soap.NavOrderModel;
 import com.tools.datahandler.DataGrabber;
 import com.tools.datahandler.RegularUserDataGrabber;
 import com.workflows.frontend.AddressWorkflows;
 import com.workflows.frontend.AdyenWorkflows;
 
 import net.thucydides.core.annotations.Screenshots;
-import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 
@@ -45,7 +39,7 @@ public class RegularCartValidationWorkflows {
 	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsWith40DiscountAndJb() {
 
-		checkoutValidationSteps.verifySuccessMessage();
+	//	checkoutValidationSteps.verifySuccessMessage();
 
 		regularUserCartWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList,
 				RegularUserDataGrabber.grabbedRegularCartProductsList);
@@ -61,7 +55,7 @@ public class RegularCartValidationWorkflows {
 
 		regularUserCartWorkflows.setVerifyTotalsDiscount(RegularUserDataGrabber.regularUserGrabbedCartTotals,
 				RegularUserCartCalculator.calculatedTotalsDiscounts);
-		regularUserCartWorkflows.verifyTotalsDiscountWith40AndJbDiscount("CART TOTALS WITH 40% AND JB APPLIED");
+		regularUserCartWorkflows.verifyTotalsDiscountWith40AndJbDiscount("CART TOTALS WITH 30% AND JB APPLIED");
 
 		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
 				RegularUserDataGrabber.regularUserShippingTotals, RegularUserCartCalculator.shippingCalculatedModel);

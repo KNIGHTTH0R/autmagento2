@@ -54,7 +54,8 @@ public class OrderValidationSteps extends AbstractSteps {
 	 */
 	@Step
 	public void matchName(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: Name values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
+
+		CustomVerification.verifyTrue("Failure: Name values dont match: " + productNow + " - " + compare, productNow.toLowerCase().contains(compare.toLowerCase()));
 
 	}
 	@Step

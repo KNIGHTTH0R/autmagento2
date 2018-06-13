@@ -125,6 +125,7 @@ public class HostCartWorkflows {
 	public void verifyTotalsDiscountWithVoucher(String message, boolean shouldBeVisible) {
 		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
 		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
+		verifyIP(discountTotals.getTotalIP(), discountCalculationModel.getIpPoints());
 		if (shouldBeVisible) {
 			verifyVoucherDiscount(discountTotals.getDiscount(ConfigConstants.VOUCHER_DISCOUNT), discountCalculationModel.findSegment(ConfigConstants.VOUCHER_DISCOUNT));
 		}

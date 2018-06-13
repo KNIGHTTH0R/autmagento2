@@ -374,14 +374,23 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		inputEmail(customerData.getEmailName());
 		inputPassword(customerData.getPassword());
 		inputConfirmation(customerData.getPassword());
+	
 		checkParties();
 		checkMember();
+		checkNewsletter();
 		fillContactDetails(addressData);
+		
 		checkIAgree();
 		clickCompleteButton();
 	}
 	
 	
+	private void checkNewsletter() {
+		// TODO Auto-generated method stub
+		createCustomerPage().checkNewsletter();
+
+	}
+
 	@StepGroup
 	@Title("Fill create customer form under context -> from party guest page")
 	public void fillCreateCustomerFormUnderScContext(CustomerFormModel customerData, AddressModel addressData,

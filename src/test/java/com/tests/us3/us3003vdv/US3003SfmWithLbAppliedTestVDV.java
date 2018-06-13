@@ -56,6 +56,8 @@ public class US3003SfmWithLbAppliedTestVDV extends BaseTest {
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
+	public CustomerRegistrationSteps frontEndSteps;
+	@Steps
 	public HomeSteps homeSteps;
 	@Steps
 	public FooterSteps footerSteps;
@@ -83,6 +85,7 @@ public class US3003SfmWithLbAppliedTestVDV extends BaseTest {
 	private static String shippingValue;
 	private static String taxClass;
 	private static String addressString;
+	private static String marketingDiscount;
 
 	private CreditCardModel creditCardData;
 //	private AddressModel addressModel;
@@ -105,6 +108,8 @@ public class US3003SfmWithLbAppliedTestVDV extends BaseTest {
 		genProduct1.setIp("0");
 		genProduct2 = createdProductsList.get(1);
 		genProduct2.setIp("0");
+
+		
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -113,11 +118,13 @@ public class US3003SfmWithLbAppliedTestVDV extends BaseTest {
 			input = new FileInputStream(
 					UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3003.properties");
 			prop.load(input);
+
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-			jewelryDiscount = prop.getProperty("jewelryDiscount");
-			shippingValue = prop.getProperty("shippingPrice");
+			jewelryDiscount = prop.getProperty("jewelryDisount");
+			marketingDiscount = prop.getProperty("marketingDisount");
 			addressString = prop.getProperty("addressString");
+			shippingValue = prop.getProperty("shippingPrice");
 			taxClass = prop.getProperty("taxClass");
 
 		} catch (IOException ex) {
@@ -137,24 +144,30 @@ public class US3003SfmWithLbAppliedTestVDV extends BaseTest {
 	}
 
 	@Test
-	public void us3003SfmWithLbAppliedTestVDV() {
-		customerRegistrationSteps.performLogin(username, password);
+	public void us3001SfmOrderWithNoDiscountTestVDV() {
+		frontEndSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
+		//	footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
-		homeSteps.clickonGeneralView();
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
 		BasicProductModel productData;
+		
 		searchSteps.navigateToProductPage(genProduct1.getParentProductSku());
-		productData = addProductsWorkflow.setBasicChildProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_20);
+		System.out.println("genProduct1.getSku(): "+genProduct1.getSku());
+		System.out.println("genProduct1.getSku(): "+genProduct2.getSku());
+
+
+		productData = addProductsWorkflow.setBasicChildProductToCart(genProduct1, "2", "0", ConfigConstants.DISCOUNT_20);
 		CartCalculator.productsList25.add(productData);
+	
 		searchSteps.navigateToProductPage(genProduct2.getParentProductSku());
-		productData = addProductsWorkflow.setBasicChildProductToCart(genProduct2, "2", "0", ConfigConstants.DISCOUNT_20);
+		productData = addProductsWorkflow.setBasicChildProductToCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_20);
 		CartCalculator.productsList25.add(productData);
 		
-		CartCalculator.calculateJMDiscounts(jewelryDiscount, "0", taxClass, shippingValue);
-
+		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
+		
 		
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -165,7 +178,7 @@ public class US3003SfmWithLbAppliedTestVDV extends BaseTest {
 		cartSteps.typeJewerlyBonus(jewelryDiscount);
 		cartSteps.updateJewerlyBonus();
 
-		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
+		DataGrabber.cartProductsWith20DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
 		cartSteps.grabTotals();
 		cartSteps.goToShipping();
 

@@ -106,7 +106,7 @@ public class RegularCartTotalsCalculation {
 
 		BigDecimal ip = BigDecimal.valueOf(Double.parseDouble(ipPoints));
 		BigDecimal reducedIp = BigDecimal.valueOf(Double.parseDouble(ipPoints));
-		reducedIp = reducedIp.multiply(BigDecimal.valueOf(40));
+		reducedIp = reducedIp.multiply(BigDecimal.valueOf(30));
 		reducedIp = reducedIp.divide(BigDecimal.valueOf(100), 0, RoundingMode.HALF_UP);
 
 		return ip.subtract(reducedIp);
@@ -122,9 +122,11 @@ public class RegularCartTotalsCalculation {
 		BigDecimal jewerlyDiscount = BigDecimal.ZERO;
 		BigDecimal forthyDiscount = BigDecimal.ZERO;
 		BigDecimal buy3Get1 = BigDecimal.ZERO;
+		BigDecimal ipPoints = BigDecimal.ZERO;
 		BigDecimal voucherPrice = BigDecimal.valueOf(Double.parseDouble(voucherValue));
 
 		for (RegularBasicProductModel product : productsList) {
+			ipPoints = ipPoints.add(BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())));
 			subtotal = subtotal.add(BigDecimal.valueOf(Double.parseDouble(product.getFinalPrice())));
 			if (product.getBonusType().contentEquals(ContextConstants.JEWELRY_BONUS)) {
 				jewerlyDiscount = jewerlyDiscount.add(BigDecimal.valueOf(Double.parseDouble(product.getBunosValue())));
@@ -132,7 +134,9 @@ public class RegularCartTotalsCalculation {
 			}
 			if (product.getBonusType().contentEquals(ContextConstants.DISCOUNT_40_BONUS)) {
 				forthyDiscount = forthyDiscount.add(BigDecimal.valueOf(Double.parseDouble(product.getBunosValue())));
+				System.out.println("30% no rounding "+forthyDiscount );
 				forthyDiscount.setScale(2, RoundingMode.HALF_UP);
+				System.out.println("30% no rounding "+forthyDiscount);
 			}
 		}
 
@@ -151,11 +155,14 @@ public class RegularCartTotalsCalculation {
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2,
 				BigDecimal.ROUND_HALF_UP);
 		System.out.println("tax-> " + tax);
+		//System.out.println("ip Points-> " + String.valueOf(ipPoints.setScale(0)));
 		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
 		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));
 		result.setTax(String.valueOf(tax));
+		result.setIpPoints(String.valueOf(ipPoints.setScale(0)));
+		System.out.println("Ippp points: "+result.getIpPoints());
 		result.addSegment(ConfigConstants.JEWELRY_BONUS, String.valueOf(jewerlyDiscount));
-		result.addSegment(ConfigConstants.DISCOUNT_40_BONUS, String.valueOf(forthyDiscount));
+		result.addSegment(ConfigConstants.DISCOUNT_40_BONUS, String.valueOf(forthyDiscount.setScale(2, RoundingMode.HALF_UP)));
 		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(buy3Get1));
 		result.addSegment(ConfigConstants.VOUCHER_SHIPPING, String.valueOf(voucherValue));
 		result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(voucherValue));

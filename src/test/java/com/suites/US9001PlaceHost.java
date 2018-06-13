@@ -5,10 +5,9 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.CreateProductsTestHostCart;
-import com.tests.us9.us9001.US9001ClosePartyTestVDV;
-import com.tests.us9.us9001.US9001PlaceHostOrderWithNoBonnusTestVDV;
-import com.tests.us9.us9001.US9001ValidateOrderBackOfficeTestVDV;
-import com.tests.us9.us9001.US9001ValidateOrderEmailTestVDV;
+import com.tests.us9.us9001vdv.US9001ClosePartyTestVDV;
+import com.tests.us9.us9001vdv.US9001PlaceHostOrderWithNoBonnusTestVDV;
+import com.tests.us9.us9001vdv.US9001ValidateOrderBackOfficeTestVDV;
 
 @SuiteClasses({
 	CreateProductsTestHostCart.class,

@@ -21,8 +21,8 @@ public class ConfigConstants {
 	public static final String DISCOUNT_BUY_3_GET_1 = "3+1";
 
 	// BONUSES
-	public static final String JEWELRY_BONUS = "Schmuck Bonus";
-	public static final String DISCOUNT_40_BONUS = "40% Rabatt Gutschein";
+	public static final String JEWELRY_BONUS = "Lingerie Bonus";
+	public static final String DISCOUNT_40_BONUS = "30% Rabatt Gutschein";
 	public static final String REGULAR_PRICE = "Regulärer Preis";
 	public static final String VOUCHER_DISCOUNT = "Voucher Discount";
 	public static final String VOUCHER_SHIPPING = "Voucher On Shipping";
@@ -38,7 +38,7 @@ public class ConfigConstants {
 	///public static final String WEB_MAIL = "mailnesia.com";
 //	public static final String WEB_MAIL = "ipdeer.com";
 //	public static final String WEB_MAIL = "golemico.com";
-	public static final String WEB_MAIL = "mailtrix.net";
+	public static final String WEB_MAIL = "fxprix.com";
 
 	
 	
