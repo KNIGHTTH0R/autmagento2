@@ -5,7 +5,6 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.connectors.http.MagentoProductCalls;
 import com.tools.constants.ConfigConstants;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -123,9 +122,13 @@ public class CartDiscountsCalculation {
 			newProduct.setQuantity(product.getQuantity());
 			newProduct.setProductsPrice(product.getProductsPrice());
 			newProduct.setPriceIP(product.getPriceIP());
+			newProduct.setDiscountMarketing(calculateMarketingMaterialDiscountApplied(
+					BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())),
+					BigDecimal.valueOf(Double.parseDouble(marketingDiscount)), sumMarketingMaterial));
 			newProduct.setFinalPrice(calculateMarketingMaterialCartProductFinalPrice(
 					BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())),
 					BigDecimal.valueOf(Double.parseDouble(marketingDiscount)), sumMarketingMaterial));
+			newProduct.setTax(calculateProductTaxAmount(BigDecimal.valueOf(Double.valueOf(newProduct.getFinalPrice()))).toString());
 
 			cartProducts.add(newProduct);
 		}
@@ -204,6 +207,8 @@ public class CartDiscountsCalculation {
 			BasicProductModel newProduct = new BasicProductModel();
 
 			newProduct.setDiscountClass(product.getDiscountClass());
+			newProduct.setColour(product.getColour());
+			newProduct.setSize(product.getSize());
 			newProduct.setName(product.getName());
 			newProduct.setUnitPrice(product.getUnitPrice());
 			newProduct.setProdCode(product.getProdCode());
@@ -221,9 +226,14 @@ public class CartDiscountsCalculation {
 
 			
 			newProduct.setFinalPrice(discounts[0]);
-
+			newProduct.setTax(calculateProductTaxAmount(BigDecimal.valueOf(Double.valueOf(discounts[0]))).toString());
+			
+			
+			
 			delta = BigDecimal.valueOf(Double.parseDouble(discounts[1]));
-
+			
+			newProduct.setDiscount20(discounts[2]);
+			newProduct.setDiscountJb(discounts[3]);
 			cartProducts.add(newProduct);
 		}
 
@@ -356,15 +366,38 @@ public class CartDiscountsCalculation {
 	 * @return Returns the discount applied for a product and the remaining
 	 *         discount to be applied on the next product
 	 */
+	
+	
+	public static BigDecimal calculateProductTaxAmount(BigDecimal rowTotal) {
+		BigDecimal taxAmount=BigDecimal.ZERO;
+		BigDecimal taxAmountValue=BigDecimal.valueOf(1.19);
+		
+		
+		if (taxAmount.compareTo(rowTotal) == 0) {
+			taxAmount = BigDecimal.ZERO;
+
+		} else{
+			taxAmount=taxAmount.add(rowTotal);
+			taxAmount=taxAmount.divide(taxAmountValue,6, RoundingMode.HALF_UP);
+			taxAmount=rowTotal.subtract(taxAmount);
+		}
+		
+		return taxAmount.setScale(2, RoundingMode.HALF_UP);
+	}
+	
+	
+	
 	public static String[] calculate25DiscountCartProductFinalPrice(BigDecimal askingPrice, BigDecimal jB,
 			BigDecimal sum25Section, BigDecimal deltaDiscount) {
 
 		
 		
-		String[] discountAndRemainder = new String[2];
+		String[] discountAndRemainder = new String[4];
 
 		BigDecimal result = BigDecimal.ZERO;
 		BigDecimal diff = BigDecimal.ZERO;
+		BigDecimal discount25 = BigDecimal.ZERO;
+		BigDecimal discountJB = BigDecimal.ZERO;
 
 		System.out.println(sum25Section.compareTo(jB) > 0);
 		if (sum25Section.compareTo(jB) > 0) {
@@ -374,6 +407,8 @@ public class CartDiscountsCalculation {
 			result = result.divide(sum25Section, 4, BigDecimal.ROUND_HALF_UP);
 			result = result.divide(BigDecimal.valueOf(100), 10, BigDecimal.ROUND_HALF_UP);
 			result = result.multiply(jB);
+			
+			discountJB=discountJB.add(result);
 			result = askingPrice.subtract(result);
 			BigDecimal temp = result;
 			result = result.multiply(BigDecimal.valueOf(Integer.parseInt(ConfigConstants.DISCOUNT_20)));
@@ -381,7 +416,9 @@ public class CartDiscountsCalculation {
 			// want the 4th decimal rounded)
 			diff = result.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
 			diff = diff.add(deltaDiscount);// add delta discount from previous
-											// product
+						
+			// product
+			discount25 =discount25.add(diff);
 			System.out.println("fucking diff: " + diff);
 			// the calculated discount is rounded to 2 decimals- actual discount
 			result = diff.setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -397,6 +434,8 @@ public class CartDiscountsCalculation {
 		}
 		discountAndRemainder[0] = String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_UP));
 		discountAndRemainder[1] = String.valueOf(diff.setScale(4, BigDecimal.ROUND_HALF_UP));
+		discountAndRemainder[2] = String.valueOf(discount25.setScale(2, BigDecimal.ROUND_HALF_UP));
+		discountAndRemainder[3] = String.valueOf(discountJB.setScale(0, BigDecimal.ROUND_HALF_UP));
 
 		return discountAndRemainder;
 	}
@@ -432,8 +471,26 @@ public class CartDiscountsCalculation {
 			result = result.divide(sumMarketingMaterial, 2, BigDecimal.ROUND_HALF_UP);
 			result = result.divide(BigDecimal.valueOf(100), 2, BigDecimal.ROUND_HALF_UP);
 			result = result.multiply(marketingDiscount);
-
+			System.out.println(result);
 			result = askingPrice.subtract(result);
+		}
+		return String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_UP));
+	}
+	
+	
+	public static String calculateMarketingMaterialDiscountApplied(BigDecimal askingPrice,
+			BigDecimal marketingDiscount, BigDecimal sumMarketingMaterial) {
+
+		BigDecimal result = BigDecimal.ZERO;
+		if (sumMarketingMaterial.compareTo(marketingDiscount) < 0) {
+			result = BigDecimal.ZERO;
+		} else {
+			result = result.add(askingPrice);
+			result = result.multiply(BigDecimal.valueOf(100));
+			result = result.divide(sumMarketingMaterial, 2, BigDecimal.ROUND_HALF_UP);
+			result = result.divide(BigDecimal.valueOf(100), 2, BigDecimal.ROUND_HALF_UP);
+			result = result.multiply(marketingDiscount);
+			System.out.println(result);
 		}
 		return String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_UP));
 	}
@@ -466,18 +523,18 @@ public class CartDiscountsCalculation {
 		return result;
 	}
 	
-	private static ProductDetailedModel genProduct1 = new ProductDetailedModel();
+	/*private static ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private static ProductDetailedModel genProduct2 = new ProductDetailedModel();
 	private static ProductDetailedModel genProduct3 = new ProductDetailedModel();
 //	private static List<BasicProductModel> productsList =new ArrayList<BasicProductModel>();
 	private static BasicProductModel productData;
 //	private static BasicProductModel productData2;
 //	private static BasicProductModel productData3;
-	public static List<BasicProductModel> productsList25Beta = new ArrayList<BasicProductModel>();
+	public static List<BasicProductModel> productsList25Beta = new ArrayList<BasicProductModel>();*/
 	
 	
 	public static void main(String[] args) {
-		genProduct1 = MagentoProductCalls.createProductModelBeta();
+		/*genProduct1 = MagentoProductCalls.createProductModelBeta();
 		genProduct1.setIp("0");
 		genProduct1.setPrice("49.90");
 		
@@ -506,6 +563,11 @@ public class CartDiscountsCalculation {
 		System.out.println(""+cartProductsBeta.get(1).getFinalPrice());
 		
 		CartTotalsCalculation.calculateCartProductsTotals(cartProductsBeta, "150", "0", "19", "3.9",
-				"3.9");
+				"3.9");*/
+		BigDecimal askingPrice=BigDecimal.valueOf(55.90);
+		BigDecimal jB=BigDecimal.valueOf(30);
+		BigDecimal sumMarketingMaterial=BigDecimal.valueOf(55.90);
+		BigDecimal deltaDiscount=BigDecimal.valueOf(0);
+		System.out.println(calculate25DiscountCartProductFinalPrice(askingPrice, jB, sumMarketingMaterial, deltaDiscount));
 	}
 }

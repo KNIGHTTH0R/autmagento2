@@ -157,12 +157,13 @@ public class US11002PartyHostBuysForCustomerWithVoucherTestVDV extends BaseTest 
 			}
 		}
 
-		//urlModel = MongoReader.grabUrlModels("US10001CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
 		urlModel = MongoReader.grabUrlModels("US10001CreatePartyWithCustomerHostTestVDV" +SoapKeys.GRAB).get(0);
 		VanDelVeldeDBConnection.updateActiveParty(urlModel.getUrl());
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.RECALC);
+
 	}
 
 	@Test
@@ -258,6 +259,10 @@ public class US11002PartyHostBuysForCustomerWithVoucherTestVDV extends BaseTest 
 		MongoWriter.saveUrlModel(HostDataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		for (HostBasicProductModel product : HostCartCalculator.allProductsList) {
 			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + SoapKeys.CALC);
+		}
+		
+		for (HostBasicProductModel product : HostCartCalculator.allProductsListwithVoucher) {
+			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + SoapKeys.RECALC);
 		}
 	}
 

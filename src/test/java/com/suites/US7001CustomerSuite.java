@@ -19,6 +19,6 @@ import com.tests.us7.us7001vdv.US7001ValidateBoutiqueTestVDV;
 	US7001CheckReceivedEmailsTestVDV.class,
 })
 @RunWith(Suite.class)
-public class US7001CrateCustomerSuite {
+public class US7001CustomerSuite {
 
 }

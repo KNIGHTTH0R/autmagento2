@@ -1,4 +1,4 @@
-package com.tests.uss34;
+package com.tests.uss34.us34003;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US15.2 Check registered user with kobo all states in mailchimp ", type = "Scenarios")
 @Story(Application.Newsletter.US15_2.class)
 @RunWith(SerenityRunner.class)
-public class US34001CreateShipmentTestVDV extends BaseTest {
+public class US34003CreateShipmentTestVDV extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -62,10 +62,10 @@ public class US34001CreateShipmentTestVDV extends BaseTest {
 	public void setUp() throws Exception {
 
 		List<OrderModel> orderModelList = MongoReader
-				.getOrderModel("US3001SfmOrderWithNoDiscountTestVDV" + SoapKeys.GRAB);
-		productsList = MongoReader.grabBasicProductModel("US3001SfmOrderWithNoDiscountTestVDV" + SoapKeys.GRAB);
-		shippingModelList = MongoReader.grabShippingModel("US3001SfmOrderWithNoDiscountTestVDV" + SoapKeys.CALC);
-		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US3001SfmOrderWithNoDiscountTestVDV" + SoapKeys.CALC);
+				.getOrderModel("US3002SfmOrderWithLBandMarketingDiscountTestVDV" + SoapKeys.GRAB);
+		productsList = MongoReader.grabBasicProductModel("US3002SfmOrderWithLBandMarketingDiscountTestVDV" + SoapKeys.GRAB);
+		shippingModelList = MongoReader.grabShippingModel("US3002SfmOrderWithLBandMarketingDiscountTestVDV" + SoapKeys.CALC);
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US3002SfmOrderWithLBandMarketingDiscountTestVDV" + SoapKeys.CALC);
 
 		if (orderModelList.size() == 1) {
 
@@ -105,7 +105,7 @@ public class US34001CreateShipmentTestVDV extends BaseTest {
 	}
 
 	@Test
-	public void us34001CreateInvoiceTestVDV() throws Exception {
+	public void us34003CreateInvoiceTestVDV() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSalesOrders();

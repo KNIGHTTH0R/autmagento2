@@ -10,7 +10,7 @@ import com.tools.requirements.AbstractSteps;
 
 import net.thucydides.core.annotations.Step;
 
-public class OrdersSteps extends AbstractSteps {
+public class RmaSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1940802567090001853L;
 
@@ -184,7 +184,7 @@ public class OrdersSteps extends AbstractSteps {
 
 	@Step
 	public void selectMenu(String tabName) {
-		orderDetailsNavPage().selectMenu(tabName);
+		rmaItemsPage().selectMenu(tabName);
 	}
 
 	@Step
@@ -261,4 +261,22 @@ public class OrdersSteps extends AbstractSteps {
 		 orderItemsPage().updateSty();
 
 	}
+
+	public void authorizedQty(String prodCode, String qty, String status) {
+		rmaItemsPage().authorizedQty(prodCode,qty,status);
+	}
+	
+	public void receivedQty(String prodCode, String qty, String status) {
+		rmaItemsPage().receivedQty(prodCode,qty,status);
+	}
+	
+	public void approvedQty(String prodCode, String qty, String status) {
+		rmaItemsPage().approvedQty(prodCode,qty,status);
+	}
+	
+	public void saveAndContinue(){
+		rmaItemsPage().clickSaveAndContinue();
+	}
+
+	
 }

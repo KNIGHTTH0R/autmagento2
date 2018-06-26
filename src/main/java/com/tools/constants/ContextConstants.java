@@ -172,5 +172,8 @@ public class ContextConstants {
 	public static final String ALLERT_MESSAGE = MongoReader.getDictionaryItem("ALLERT_MESSAGE");
 	public static final String PARTY_USER = MongoReader.getDictionaryItem("PARTY_USER");
 	
+	public static final String RETURN_RESOLUTION= MongoReader.getDictionaryItem("RETURN_RESOLUTION");
+	public static final String RETURN_REASON = MongoReader.getDictionaryItem("RETURN_REASON");
+
 	
 }

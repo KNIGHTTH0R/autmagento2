@@ -66,7 +66,7 @@ public class AddProductsWorkflow {
 	/*	if (discountclass.equals(ConfigConstants.DISCOUNT_50) || discountclass.equals(ConfigConstants.DISCOUNT_0)) {
 			ipPoints = "0";
 		}*/
-
+		
 		return productSteps.setChildProductAddToCart(model,qty, productProperty, askingPrice, finalPrice, ipPoints,
 				discountclass);
 	}

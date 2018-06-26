@@ -7,6 +7,7 @@ public class SoapKeys {
 	//SOAP TEST DATA - data grouping
 	public static final String GRAB = "Grab";
 	public static final String CALC = "Calc";
+	public static final String RECALC = "Recalc";
 	public static final String COMPLETE = "Complete";
 	public static final String CANCELED = "Cancelled";
 	public static final String MAGENTO_INITIAL_CHANGING_STOCK = "MICS";

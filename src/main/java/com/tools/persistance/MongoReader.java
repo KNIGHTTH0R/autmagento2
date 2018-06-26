@@ -236,6 +236,15 @@ public class MongoReader extends MongoConnector {
 				result.setDeliveryDate(MongoUtils.checkField(dbObject, MongoTableKeys.DELIVERY_DATE));
 				result.setTotalPrice(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_PRICE));
 				result.setStatus(MongoUtils.checkField(dbObject, MongoTableKeys.STATUS));
+			
+				
+				result.setStatus(MongoUtils.checkField(dbObject, MongoTableKeys.STATUS));
+				result.setStatus(MongoUtils.checkField(dbObject, MongoTableKeys.STATUS));
+				result.setStatus(MongoUtils.checkField(dbObject, MongoTableKeys.STATUS));
+
+				
+				
+				
 
 				itemList.add(result);
 			}
@@ -557,6 +566,14 @@ public class MongoReader extends MongoConnector {
 				result.setPriceIP(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_IP_POINTS));
 				result.setDiscountClass(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_DISCOUNT_CLASS));
 				result.setDeliveryDate(MongoUtils.checkField(dbObject, MongoTableKeys.DELIVERY_DATE));
+				result.setColour(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_COLOR));
+				result.setSize(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_SIZE));
+
+				result.setDiscount20(MongoUtils.checkField(dbObject, MongoTableKeys.DISCOUNT_20));
+				result.setDiscountMarketing(MongoUtils.checkField(dbObject, MongoTableKeys.DISCOUNT_MARKETING));
+				result.setDiscountJb(MongoUtils.checkField(dbObject, MongoTableKeys.DISCOUNT_JB));
+				result.setTax(MongoUtils.checkField(dbObject, MongoTableKeys.TAX));
+
 				itemList.add(result);
 			}
 		} catch (Exception e) {
@@ -711,6 +728,9 @@ public class MongoReader extends MongoConnector {
 				result.setFinalPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_FINAL_PRICE));
 				result.setIpPoints(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_IP_POINTS));
 				result.setDeliveryDate(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_DELIVERY_DATE));
+				result.setDiscountValue(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_DISCOUNT_VALUE));
+
+				
 				itemList.add(result);
 			}
 		} catch (Exception e) {

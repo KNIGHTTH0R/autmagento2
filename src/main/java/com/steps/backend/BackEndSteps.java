@@ -227,6 +227,13 @@ public class BackEndSteps extends AbstractSteps {
 		orderListPage().clickOnSearch();
 		waitABit(2000);
 	}
+	
+	@Step
+	public void searchRMAByOrderId(String orderId) {
+		rmaListPage().inputOderId(orderId);
+		rmaListPage().clickOnSearch();
+		waitABit(2000);
+	}
 
 	@Step
 	public void searchInvoiceByOrderId(String orderId) {
@@ -254,6 +261,11 @@ public class BackEndSteps extends AbstractSteps {
 	@Step
 	public void openOrderDetails(String name) {
 		orderListPage().openOrderDetails(name);
+	}
+	
+	@Step
+	public void openRMADetails(String name) {
+		rmaListPage().openRMADetails(name);
 	}
 
 	@Step
@@ -583,6 +595,11 @@ public class BackEndSteps extends AbstractSteps {
 	public void selectSpecifiSC(String scEmail) {
 		// TODO Auto-generated method stub
 		systemConfigurationPage().selectSpecifiSC(scEmail);
+	}
+
+	public void clickOnRMA() {
+		navigationPage().selectSubmenuLevel2("/rma/");
+		
 	}
 
 	// @Step

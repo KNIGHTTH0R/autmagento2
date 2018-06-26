@@ -18,9 +18,83 @@ public class BasicProductModel {
 	private String isMarketing;
 	private BigDecimal isBuy3Get1;
 	private BigDecimal finalPriceWithBuy3;
+	private String discount20;
+	private String discountJb;
+	private String discountMarketing;
+	private String tax;
+	private String colour;
+	private String size;
 	
 	
 	
+	
+	
+	
+	
+	public BasicProductModel() {
+	
+		this.discount20 = "0";
+		this.discountJb = "0";
+		this.discountMarketing = "0";
+	}
+
+	
+	
+	public String getColour() {
+		return colour;
+	}
+
+
+
+	public void setColour(String colour) {
+		this.colour = colour;
+	}
+
+
+
+	public String getSize() {
+		return size;
+	}
+
+
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+
+
+	public String getDiscountJb() {
+		return discountJb;
+	}
+
+	public void setDiscountJb(String discountJb) {
+		this.discountJb = discountJb;
+	}
+
+	public String getTax() {
+		return tax;
+	}
+
+	public void setTax(String tax) {
+		this.tax = tax;
+	}
+
+	public String getDiscountMarketing() {
+		return discountMarketing;
+	}
+
+	public void setDiscountMarketing(String discountMarketing) {
+		this.discountMarketing = discountMarketing;
+	}
+
+	public String getDiscount20() {
+		return discount20;
+	}
+
+	public void setDiscount20(String discount20) {
+		this.discount20 = discount20;
+	}
 
 	public BigDecimal getFinalPriceWithBuy3() {
 		return finalPriceWithBuy3;
@@ -150,14 +224,18 @@ public class BasicProductModel {
 
 	}
 
+	
 	@Override
 	public String toString() {
 		return "BasicProductModel [name=" + name + ", prodCode=" + prodCode + ", quantity=" + quantity + ", unitPrice="
 				+ unitPrice + ", specialPrice=" + specialPrice + ", productsPrice=" + productsPrice + ", finalPrice="
 				+ finalPrice + ", priceIP=" + priceIP + ", discountClass=" + discountClass + ", deliveryDate="
 				+ deliveryDate + ", earliestAvailability=" + earliestAvailability + ", isMarketing=" + isMarketing
-				+ ", isBuy3Get1=" + isBuy3Get1 + ", finalPriceWithBuy3=" + finalPriceWithBuy3 + "]";
+				+ ", isBuy3Get1=" + isBuy3Get1 + ", finalPriceWithBuy3=" + finalPriceWithBuy3 + ", discount20="
+				+ discount20 + ", discountJb=" + discountJb + ", discountMarketing=" + discountMarketing + ", tax="
+				+ tax + "]";
 	}
+
 
 
 	

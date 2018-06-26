@@ -126,6 +126,8 @@ public class OrdersActionsPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(invoiceButton).waitUntilVisible();
 		invoiceButton.click();
+		
+		
 	}
 
 	public void clickShipButton() {

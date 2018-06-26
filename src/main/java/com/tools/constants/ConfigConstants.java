@@ -28,24 +28,21 @@ public class ConfigConstants {
 	public static final String VOUCHER_SHIPPING = "Voucher On Shipping";
 
 	// Webmail suffix
-//	public static final String WEB_MAIL = "mailinator.com";
-//	public static final String WEB_MAIL = "yopmail.com";
-	//public static final String WEB_MAIL = "rhyta.com";
-	
-//	public static final String WEB_MAIL = "gustr.com";
-//	public static final String WEB_MAIL = "maildrop.cc";
-	//public static final String WEB_MAIL = "dispostable.com";
-	///public static final String WEB_MAIL = "mailnesia.com";
-//	public static final String WEB_MAIL = "ipdeer.com";
-//	public static final String WEB_MAIL = "golemico.com";
+	// public static final String WEB_MAIL = "mailinator.com";
+	// public static final String WEB_MAIL = "yopmail.com";
+	// public static final String WEB_MAIL = "rhyta.com";
+
+	// public static final String WEB_MAIL = "gustr.com";
+	// public static final String WEB_MAIL = "maildrop.cc";
+	// public static final String WEB_MAIL = "dispostable.com";
+	/// public static final String WEB_MAIL = "mailnesia.com";
+	// public static final String WEB_MAIL = "ipdeer.com";
+	// public static final String WEB_MAIL = "golemico.com";
 	public static final String WEB_MAIL = "fxprix.com";
 
-	
-	
 	public static final String EVOZON = "evozon.com";
 	public static final String GMAIL = "gmail.com";
-	
-	
+
 	public static final String MASTER_STYLE_COACH = "";
 
 	public static final String NO = "No";
@@ -60,12 +57,12 @@ public class ConfigConstants {
 	public static final String ACTIVE = "Active";
 	public static final String INACTIVE = "Inactive";
 	public static final String REASSIGNED_PREFIX = "gesperrt_";
-	
-	//unbounce success registration page
-	
+
+	// unbounce success registration page
+
 	public static final String UNBOUNCE_SUCCESS_MESSAGE = "Vielen Dank für dein Interesse";
-	//backend horizontal menu cons
-	
+	// backend horizontal menu cons
+
 	public static final String PROMOTIONEN = "Promotionen";
 	public static final String WARENKORB_PREISGEBOTE = "Warenkorb Preisgebote";
 	public static final String STYLECOACH = "Stylecoach";
@@ -80,46 +77,45 @@ public class ConfigConstants {
 	public static final String VERKÄUFE = "Verkäufe";
 	public static final String KATALOG = "Katalog";
 	public static final String PRODUKTE_VERWALTEN = "Produkte verwalten";
-	
-	
+
 	public static final String BUNDLEARTIKEL = "Bundleartikel";
 	public static final String BUNDLEARTIKEL_NAME = "AutomationTest";
 	public static final String LOADING = "Bitte warten ...";
-	
-	//term purchase grid - Reasons
+
+	// term purchase grid - Reasons
 	public static final String REASON_POSTPONED_BY_ADMIN = "postponed by admin";
 	public static final String REASON_POSTPONED_NOT_ENOUGH_STOCK = "postponed because there is not enough stock";
 	public static final String REASON_POSTPONED_EARLIEST_AV_CHANGED = "postponed because earliest availability date of product has changed";
 	public static final String REASON_CANCEL_SOLD_OUT = "canceled because at least one item is sold out";
 	public static final String REASON_CANCEL_POSTPONING_LIMIT_REACHED = "canceled because postponing limit was reached";
 	public static final String REASON_CANCEL_PAYMENT_FAILED = "canceled because payment failed";
-	
-	//term purchase grid - Recomandations
+
+	// term purchase grid - Recomandations
 	public static final String NO_RECOMMENDATION = "Keine Empfehlung";
 	public static final String RECOMMENDATION_TO_CANCEL = "Stonierung empfohlen";
 	public static final String RECOMMENDATION_TO_POSTPONE = "Verschiebung empfohlen";
 	public static final String RECOMMENDATION_TO_RELEASE = "Freigabe empfohlen";
-	
-	//term purchase grid - Order statuses
+
+	// term purchase grid - Order statuses
 	public static final String TP_GRID_PAYMENT_ON_HOLD = "Payment on Hold";
 	public static final String TP_GRID_PAYMENT_COMPLETE = "Payment Complete";
 	public static final String TP_GRID_CANCELED = "Canceled";
 	public static final String TP_GRID_COMPLETE = "Complete";
 	public static final String TP_GRID_CLOSED = "Closed";
-	
-	//term purchase grid - Order statuses
+
+	// term purchase grid - Order statuses
 	public static final String PAYMENT_ON_HOLD = "Zahlung geplant";
 	public static final String PAYMENT_COMPLETE = "Zahlung erfolgreich";
 	public static final String CANCELED = "Storniert";
 	public static final String COMPLETE = "Complete";
 	public static final String CLOSED = "Closed";
 	public static final String PAYMENT_IN_PROGRESS = "Zahlung wird geprüft";
-	
-	//term purchase grid - Scheduled Payment statuses
+
+	// term purchase grid - Scheduled Payment statuses
 	public static final String PENDING = "Offene Bestellung";
 	public static final String POSTPONED = "Postponed";
 
-	//Term purchase grid -Actions
+	// Term purchase grid -Actions
 	public static final String POSTPONE = "Postpone Order";
 	public static final String CANCEL = "Cancel Order";
 	public static final String RELEASE = "Release Order";
@@ -131,43 +127,49 @@ public class ConfigConstants {
 	public static final String POSTPONE_SIX_WEEKS = "6 weeks";
 	public static final String POSTPONE_SEVEN_WEEKS = "7 weeks";
 	public static final String POSTPONE_EIGHT_WEEKS = "8 weeks";
-	
-	//Term purchase grid -messages
-	
+
+	// Term purchase grid -messages
+
 	public static final String POSTPONE_SUCCESS_MESSAGE = "1 order(s) have been postponed.";
 	public static final String CANCEL_SUCCESS_MESSAGE = "1 Bestellung(en) wurde(n) storniert.";
 	public static final String RELEASE_SUCCESS_MESSAGE = "1 order(s) have been released.";
 	public static final String RELEASE_ERROR_MESSAGE = "No order(s) were released";
-	
-	//Execution type
+
+	// Execution type
 	public static final String MANUAL = "Manuell";
 	public static final String FULL_AUTOMATED = "Full automated";
 	public static final String SEMIAUTOMATED = "Semi-automated";
 	public static final String AUTOMATED_ONLY_RELEASE = "Automated - Only release";
-	
-	//Order details tab
-	public static final String ADYEN_NOTIFICATION_TAB ="Adyen Order Notifications";
-	public static final String ADYEN_AUTHORISATION ="AUTHORISATION";
-	public static final String ADYEN_CAPTURE ="CAPTURE";
-	
-	//term purchse config
-	
-	public static final String FOR_ALL_PRODUCTS ="For all products";
-	public static final String ONLY_FOR_NOT_AVAILABLE ="Only for products which are temporarily not available";
-	public static final String DISABLED_FOR_ALL ="Not available";
-	public static final String MONDAY ="Montag";
-	public static final String TUESDAY ="Dienstag";
-	public static final String WEDNESDAY ="Mittwoch";
-	public static final String THURSDAY ="Donnerstag";
-	public static final String FRIDAY ="Freitag";
-	public static final String SATURDAY ="Samstag";
-	public static final String SUNDAY ="Sonntag";
-	
 
+	// Order details tab
+	public static final String ADYEN_NOTIFICATION_TAB = "Adyen Order Notifications";
+	public static final String ADYEN_AUTHORISATION = "AUTHORISATION";
+	public static final String ADYEN_CAPTURE = "CAPTURE";
+
+	// RMA details page
+
+	public static final String RMA_ITEMS = "RMA Artikel";
+	public static final String AUTHORIZED_STATUS = "Authorisiert";
+	public static final String RETURN_RECEIVED_STATUS = "Rücksendung erhalten";
+	public static final String APPROVED_STATUS = "Bestätigt";
+	public static final String PENDING_STATUS = "Ausstehend";
+	
+	
 	
 	
 	
 
-	
-	
+	// term purchse config
+
+	public static final String FOR_ALL_PRODUCTS = "For all products";
+	public static final String ONLY_FOR_NOT_AVAILABLE = "Only for products which are temporarily not available";
+	public static final String DISABLED_FOR_ALL = "Not available";
+	public static final String MONDAY = "Montag";
+	public static final String TUESDAY = "Dienstag";
+	public static final String WEDNESDAY = "Mittwoch";
+	public static final String THURSDAY = "Donnerstag";
+	public static final String FRIDAY = "Freitag";
+	public static final String SATURDAY = "Samstag";
+	public static final String SUNDAY = "Sonntag";
+
 }

@@ -1,10 +1,13 @@
 package com.tools.cartcalculations.partyHost;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.tools.constants.ContextConstants;
 import com.tools.data.HostCartCalcDetailsModel;
+import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.generalCalculation.OrderForCustomerDiscountsCalculation;
@@ -36,6 +39,9 @@ public class HostCartCalculator {
 	public static ShippingModel shippingCalculatedModelTp6 = new ShippingModel();
 	public static ShippingModel shippingCalculatedModelTp7 = new ShippingModel();
 	public static ShippingModel shippingCalculatedModelTp8 = new ShippingModel();
+	
+	
+
 
 	public static void wipe() {
 		allProductsList = new ArrayList<HostBasicProductModel>();
@@ -101,8 +107,10 @@ public class HostCartCalculator {
 
 	public static void calculateOrderForCustomerCartAndShippingTotals(String discountClass, String shippingValue,
 			String voucherValue) {
+		
 		allProductsListwithVoucher = OrderForCustomerDiscountsCalculation
 				.calculateProductsWithVoucherApplied(allProductsList, voucherValue);
+	//	allProductsList=OrderForCustomerDiscountsCalculation.recalculateProducts(allProductsList,voucherValue);
 		calculatedTotalsDiscounts = HostCartTotalsCalculation.calculateOrderForCustomerTotals(
 				allProductsListwithVoucher, discountClass, voucherValue, shippingValue);
 		shippingCalculatedModel = HostCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts,
@@ -161,4 +169,80 @@ public class HostCartCalculator {
 
 	}
 
+	public static List<HostBasicProductModel> calculateCMpartial(List<HostBasicProductModel> products,
+			String discountPrice) {
+		
+		
+		System.out.println("in metoda size "+products.size() );
+		System.out.println("in metoda discount "+discountPrice );
+
+		List<HostBasicProductModel> recalculatedProducts =new ArrayList<HostBasicProductModel>();
+		 
+		for (HostBasicProductModel product : products) {
+			HostBasicProductModel rowProduct=new HostBasicProductModel();
+			rowProduct.setRowTotal(OrderForCustomerDiscountsCalculation.calculateRowTotal(BigDecimal.valueOf(Double.valueOf(product.getFinalPrice())),BigDecimal.valueOf(Double.valueOf(product.getDiscountValue()))).toString());
+			rowProduct.setProductTaxAmount(OrderForCustomerDiscountsCalculation.calculateProductTaxAmount(BigDecimal.valueOf(Double.valueOf(rowProduct.getRowTotal()))).toString());
+		
+			System.out.println("rowProduct.getTax: "+ rowProduct.getProductTaxAmount());
+			
+			
+			rowProduct.setQuantity(product.getQuantity());
+			rowProduct.setName(product.getName());
+			rowProduct.setProdCode(product.getProdCode());
+			rowProduct.setFinalPrice(product.getFinalPrice());
+			rowProduct.setIpPoints(product.getIpPoints());
+			rowProduct.setDiscountValue(product.getDiscountValue());
+			
+			System.out.println("hai:" +rowProduct);
+			recalculatedProducts.add(rowProduct);
+		}
+		
+		
+		return recalculatedProducts;
+	}
+	
+	
+	
+	
+	public static void main(String[] args) {
+	//	System.out.println(productDiscount("2","3","25"));
+		System.out.println(OrderForCustomerDiscountsCalculation.calculateIpValue("85.95","8.33"));
+	}
+
+	public static OrderTotalsModel updateTotals(HostBasicProductModel product, OrderTotalsModel shopTotalsModel) {
+		BigDecimal totalAmount=BigDecimal.ZERO;
+		
+		OrderTotalsModel model= new OrderTotalsModel();
+		
+		model.setSubtotal(product.getFinalPrice());
+		//model.setShipping(shippingModelList.get(0).getShippingPrice());
+		model.setDiscount(product.getDiscountValue());
+		model.setTax(product.getProductTaxAmount());
+	
+		
+		
+		model.setTotalMarketingBonus("0");
+		model.setTotalBonusJeverly("0");
+		model.setTotalFortyDiscounts("0.00");
+		
+		
+		
+		model.setTotalIpRefunded(product.getIpPoints());
+		totalAmount=totalAmount.add(BigDecimal.valueOf(Double.valueOf(product.getRowTotal())));
+	//	totalAmount=totalAmount.add(BigDecimal.valueOf(Double.valueOf(shopTotalsModel.getShipping())));
+		model.setTotalAmount(totalAmount.toString());
+		model.setTotalIP(shopTotalsModel.getTotalIP());
+		// from calcDetails model calculations
+		//model.setRefundToStoreCredit(product.getRowTotal());
+		
+		
+		
+		
+	//	model.setTotalPaid("0.00");
+	//	model.setTotalRefunded("0.00");
+	//	model.setTotalPayable(shippingModelList.get(0).getTotalAmount());
+		
+		
+		return model;
+	}
 }

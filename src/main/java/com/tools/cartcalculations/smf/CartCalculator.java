@@ -1,16 +1,16 @@
 package com.tools.cartcalculations.smf;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.connectors.http.MagentoProductCalls;
 import com.tools.data.CalcDetailsModel;
+import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.BasicProductModel;
+import com.tools.data.frontend.ReturnProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.data.soap.ProductDetailedModel;
 import com.tools.utils.PrintUtils;
-import com.workflows.frontend.AddProductsWorkflow;
 
 public class CartCalculator {
 
@@ -44,6 +44,8 @@ public class CartCalculator {
 	public static List<BasicProductModel> productsListTp4 = new ArrayList<BasicProductModel>();
 	public static List<BasicProductModel> productsListTp5 = new ArrayList<BasicProductModel>();
 	
+	
+	public static List<ReturnProductModel> returnProductsList = new ArrayList<ReturnProductModel>();
 	
 	public static CalcDetailsModel calculatedTotalsDiscounts = new CalcDetailsModel();
 	//emilian
@@ -129,9 +131,11 @@ public class CartCalculator {
 
 		calculatedProductsList25 = CartDiscountsCalculation.calculateProductsfor25Discount(productsList25, jewelryDiscount);
 
+		System.out.println("aici e problema");
 	//	calculatedProductsList50 = CartDiscountsCalculation.calculateProductsfor50Discount(productsList50, productsList25, jewelryDiscount);
 
 		calculatedProductsListMarketing = CartDiscountsCalculation.calculateProductsforMarketingMaterial(productsListMarketing, marketingDiscount);
+		System.out.println("sau aici e problema");
 
 	//	allProductsListRecalculated.addAll(calculatedProductsList50);
 		allProductsListRecalculated.addAll(calculatedProductsList25);
@@ -268,19 +272,19 @@ public class CartCalculator {
 	}
 	
 	
-	private static ProductDetailedModel genProduct1 = new ProductDetailedModel();
-	private static ProductDetailedModel genProduct2 = new ProductDetailedModel();
-	private static ProductDetailedModel genProduct3 = new ProductDetailedModel();
+//	private static ProductDetailedModel genProduct1 = new ProductDetailedModel();
+//	private static ProductDetailedModel genProduct2 = new ProductDetailedModel();
+//	private static ProductDetailedModel genProduct3 = new ProductDetailedModel();
 //	private static List<BasicProductModel> productsList =new ArrayList<BasicProductModel>();
-	private static BasicProductModel productData;
-	private static AddProductsWorkflow addProductsWorkflow;
+//	private static BasicProductModel productData;
+//	private static AddProductsWorkflow addProductsWorkflow;
 //	private static BasicProductModel productData2;
 //	private static BasicProductModel productData3;
 	public static List<BasicProductModel> productsList25Beta = new ArrayList<BasicProductModel>();
 	
 	public static void main(String[] args) {
 		
-		genProduct1 = MagentoProductCalls.createProductModelBeta();
+		/*genProduct1 = MagentoProductCalls.createProductModelBeta();
 		genProduct1.setIp("0");
 		genProduct1.setPrice("49.90");
 		
@@ -294,14 +298,14 @@ public class CartCalculator {
 		
 		productData = addProductsWorkflow.setBasicChildProductToCart(genProduct1, "1", "0","20");
 		productData = addProductsWorkflow.setBasicChildProductToCart(genProduct2, "2", "0", "20");
-/*		productData = addInCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_20);
-		productData2=addInCart(genProduct2, "2", "0", ConfigConstants.DISCOUNT_20);*/
+		productData = addInCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_20);
+		productData2=addInCart(genProduct2, "2", "0", ConfigConstants.DISCOUNT_20);
 //		productData3=addInCart(genProduct3, "1", "0", ConfigConstants.DISCOUNT_20);
-	/*	productsList25Beta.add(productData);
-		productsList25Beta.add(productData2);*/
+		productsList25Beta.add(productData);
+		productsList25Beta.add(productData2);
 		productsList25.add(productData);
 		productsList25.add(productData);
-		calculateJMDiscounts("150","0","19","3.9");
+		calculateJMDiscounts("150","0","19","3.9");*/
 		
 		
 		
@@ -315,5 +319,150 @@ public class CartCalculator {
 		List<BasicProductModel> cartProductsBeta=calculateProductsfor25Discount(productsList25Beta,"150");
 		
 		System.out.println(""+cartProductsBeta.get(1).getFinalPrice());*/
+		
+		BigDecimal value= BigDecimal.valueOf(0.5);
+		System.out.println(calculateValueRefunded("10",value));
+		
+		
+	}
+
+	public static List<BasicProductModel> calculatePartialRefundProducts(List<BasicProductModel> productsList,
+			BasicProductModel productRefunded, String qtyRefunded) {
+		
+		BigDecimal percentDiscounted=BigDecimal.ZERO;
+		List<BasicProductModel> listRecalculated =new ArrayList<BasicProductModel>();
+		
+		
+		for (BasicProductModel product : productsList) {
+			BasicProductModel item =new BasicProductModel();
+			if(product.getProdCode().contentEquals(productRefunded.getProdCode())){
+				percentDiscounted =calculatePercentDicounted(productRefunded.getQuantity(),qtyRefunded);
+				item.setProductsPrice(calculateValueRefunded(product.getProductsPrice(),percentDiscounted).toString());
+				item.setFinalPrice(calculateValueRefunded(product.getFinalPrice(), percentDiscounted).toString());
+				item.setDiscountJb(calculateValueRefunded(product.getDiscountJb(), percentDiscounted).toString());
+				item.setDiscountMarketing(calculateValueRefunded(product.getDiscountMarketing(), percentDiscounted).toString());
+				item.setDiscount20(calculateValueRefunded(product.getDiscount20(), percentDiscounted).toString());
+				item.setTax(calculateValueRefunded(product.getTax(), percentDiscounted).toString());
+				item.setQuantity(product.getQuantity());
+			}else{
+				
+				item.setName(product.getName());
+				item.setProdCode(product.getProdCode());
+				item.setUnitPrice(product.getUnitPrice());
+				item.setQuantity(product.getQuantity());
+				item.setDiscountClass(product.getDiscountClass());
+				item.setProductsPrice(product.getProductsPrice());
+				item.setFinalPrice(product.getFinalPrice());
+				item.setDiscountJb(product.getDiscountJb());
+				item.setDiscountMarketing(product.getDiscountMarketing());
+				item.setDiscount20(product.getDiscount20());
+				item.setTax(product.getTax());
+				
+				
+			}
+			
+			listRecalculated.add(item);
+			
+		}
+		
+		
+		return listRecalculated;
+	}
+
+	public static BigDecimal calculateValueRefunded(String productsPrice, BigDecimal percentDiscounted) {
+		
+		Double result=Double.valueOf(0);
+		if(Double.valueOf(productsPrice)==0 || Double.valueOf(percentDiscounted.toString())==0){
+			result=Double.valueOf(0);
+		}else{
+			 result=Double.valueOf(productsPrice)*Double.valueOf(percentDiscounted.toString());
+
+		}
+		
+		return BigDecimal.valueOf(result).setScale(2,RoundingMode.HALF_DOWN);
+	}
+
+	
+
+	
+	public static BigDecimal calculatePercentDicounted(String quantity, String qtyRefunded) {
+		Double result=Double.valueOf(0);
+		if(Double.valueOf(quantity)==0 || Double.valueOf(qtyRefunded)==0){
+			result=Double.valueOf(0);
+		}else{
+			 result=Double.valueOf(qtyRefunded)/Double.valueOf(quantity);
+		}
+		
+		return BigDecimal.valueOf(result).setScale(2, RoundingMode.HALF_UP);
+	}
+
+	public static OrderTotalsModel calculateTotalPartialRefund(OrderTotalsModel shopTotalsModel, List<BasicProductModel> recalculatedProductsList) {
+		
+		BigDecimal subtotal=BigDecimal.ZERO;
+		BigDecimal discount20=BigDecimal.ZERO;
+		BigDecimal discountMarketing=BigDecimal.ZERO;
+		BigDecimal discountJb=BigDecimal.ZERO;
+		BigDecimal tax=BigDecimal.ZERO;
+		BigDecimal totalAmount=BigDecimal.ZERO;
+		OrderTotalsModel order=new OrderTotalsModel();
+		
+	/*  */
+		
+		for (BasicProductModel product : recalculatedProductsList) {
+			
+			System.out.println(product);
+			
+			
+			subtotal=subtotal.add(BigDecimal.valueOf(Double.valueOf(product.getProductsPrice())));
+			System.out.println("subtotal: "+subtotal);
+			discount20=discount20.add(BigDecimal.valueOf(Double.valueOf(product.getDiscount20())));
+			System.out.println("discount20: "+discount20);
+
+			discountMarketing=discountMarketing.add(BigDecimal.valueOf(Double.valueOf(product.getDiscountMarketing())));
+			System.out.println("discountMarketing: "+discountMarketing);
+
+			discountJb=discountJb.add(BigDecimal.valueOf(Double.valueOf(product.getDiscountJb())));
+			System.out.println("discountJb: "+discountJb);
+
+			System.out.println("double tax value: "+product.getTax());
+			tax=tax.add(BigDecimal.valueOf(Double.valueOf(product.getTax())));
+			totalAmount=totalAmount.add(BigDecimal.valueOf(Double.valueOf(product.getFinalPrice())));
+		}
+	
+		order.setSubtotal(subtotal.toString());
+		order.setDiscount(discount20.toString());
+		order.setTax(tax.toString());
+		order.setTotalAmount(totalAmount.toString());
+		order.setJewerlryCreditRefunded(discountJb.toString());
+		order.setMarketingCreditRefunded(discountMarketing.toString());
+		order.setTotalBonusJeverly(shopTotalsModel.getTotalBonusJeverly());
+		order.setTotalMarketingBonus(shopTotalsModel.getTotalMarketingBonus());
+		return order;
+	}
+
+	public static OrderTotalsModel calculateTotalCM(OrderTotalsModel shopTotalsModel, BasicProductModel product,String qty) {
+		
+		
+		
+		OrderTotalsModel order=new OrderTotalsModel();
+		
+	
+		
+		order.setSubtotal(product.getProductsPrice());
+		order.setDiscount(product.getDiscount20());
+		order.setTax(product.getTax());
+		order.setTotalAmount(product.getFinalPrice());
+		order.setJewerlryCreditRefunded(product.getDiscountJb());
+		order.setMarketingCreditRefunded(product.getDiscountMarketing());
+		order.setTotalBonusJeverly(shopTotalsModel.getTotalBonusJeverly());
+		order.setTotalMarketingBonus(shopTotalsModel.getTotalMarketingBonus());
+		
+		return order;
+	}
+
+	public static List<ReturnProductModel> calcultedReturnProductList(
+			List<BasicProductModel> recalculatedProductsList) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

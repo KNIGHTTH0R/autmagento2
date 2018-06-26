@@ -82,6 +82,9 @@ public class MongoTableKeys {
 	public static final String INVOICE_CONTACT = "invoiceTo";
 	public static final String DELIVERY_CONTACT = "deliveryTo";
 	public static final String DELIVERY_DATE = "deliveryDate";
+	public static final String DISCOUNT_20 = "discount20";
+	public static final String DISCOUNT_MARKETING = "discountMarketing";
+	public static final String DISCOUNT_JB = "discountJb";
 	public static final String TOTAL_PRICE = "totalPrice";
 	public static final String STATUS = "status";
 
@@ -125,6 +128,9 @@ public class MongoTableKeys {
 	public static final String PRODUCT_IP_POINTS = "ipPoints";
 	public static final String PRODUCT_EARLIEST_DATE = "earliestDate";
 	public static final String PRODUCT_DELIVERY_DATE = "deliveryDate";
+	public static final String PRODUCT_DISCOUNT_VALUE = "discountValue";
+
+	
 	//vdv
 	public static final String PARENT_PRODUCT_SKU = "parentProductSku";
 	public static final String PRODUCT_SIZE = "productSize";

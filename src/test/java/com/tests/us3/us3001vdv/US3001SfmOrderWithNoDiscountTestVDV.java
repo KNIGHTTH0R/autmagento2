@@ -143,6 +143,8 @@ public class US3001SfmOrderWithNoDiscountTestVDV extends BaseTest {
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.RECALC);
+
 	}
 
 	@Test
@@ -219,6 +221,11 @@ public class US3001SfmOrderWithNoDiscountTestVDV extends BaseTest {
 		for (BasicProductModel product : CartCalculator.allProductsList) {
 			System.out.println(product);
 			MongoWriter.saveBasicProductModel(product, getClass().getSimpleName() + SoapKeys.GRAB);
+		}
+		
+		for (BasicProductModel product : CartCalculator.allProductsListRecalculated) {
+			System.out.println(product);
+			MongoWriter.saveBasicProductModel(product, getClass().getSimpleName() + SoapKeys.RECALC);
 		}
 	}
 

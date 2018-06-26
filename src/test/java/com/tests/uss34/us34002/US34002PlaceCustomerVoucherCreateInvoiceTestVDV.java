@@ -1,4 +1,4 @@
-package com.tests.uss34;
+package com.tests.uss34.us34002;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,31 +16,32 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.constants.Credentials;
 import com.tools.constants.SoapKeys;
-import com.tools.data.CalcDetailsModel;
+import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
-import com.tools.data.frontend.BasicProductModel;
+import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.backend.OrderProductsWorkflows;
 import com.workflows.backend.OrderWorkflows;
+import com.workflows.backend.partyHost.HostOrderProductsWorkflows;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
-
-@Story(Application.Newsletter.US15_4.class)
+@WithTag(name = "US15.2 Check registered user with kobo all states in mailchimp ", type = "Scenarios")
+@Story(Application.Newsletter.US15_2.class)
 @RunWith(SerenityRunner.class)
-public class US34001CreateCreditMemoOnOrderTestVDV extends BaseTest {
+public class US34002PlaceCustomerVoucherCreateInvoiceTestVDV extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
 	@Steps
 	public OrdersSteps ordersSteps;
-
 	@Steps
 	public OrderValidationSteps orderValidationSteps;
 	@Steps
@@ -49,12 +50,15 @@ public class US34001CreateCreditMemoOnOrderTestVDV extends BaseTest {
 	public OrderProductsWorkflows orderProductsWorkflows;
 	@Steps
 	public CustomVerification customVerifications;
+	@Steps
+	public HostOrderProductsWorkflows hostOrderProductsWorkflows;
 	
 	private String orderId;
-	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
-	public static List<CalcDetailsModel> calcDetailsModelList = new ArrayList<CalcDetailsModel>();
+	private static List<HostBasicProductModel> productsList = new ArrayList<HostBasicProductModel>();
+	private static List<HostCartCalcDetailsModel> calcDetailsModelList = new ArrayList<HostCartCalcDetailsModel>();
 	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
 	private static OrderTotalsModel shopTotalsModel = new OrderTotalsModel();
+
 	
 	
 	private static List<ShippingModel> shippingModelList = new ArrayList<ShippingModel>();
@@ -63,10 +67,10 @@ public class US34001CreateCreditMemoOnOrderTestVDV extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3001SfmOrderWithNoDiscountTestVDV" + SoapKeys.GRAB);
-		productsList = MongoReader.grabBasicProductModel("US3001SfmOrderWithNoDiscountTestVDV" + SoapKeys.GRAB);
-		shippingModelList = MongoReader.grabShippingModel("US3001SfmOrderWithNoDiscountTestVDV" + SoapKeys.CALC);
-		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US3001SfmOrderWithNoDiscountTestVDV" + SoapKeys.CALC);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US11002PartyHostBuysForCustomerWithVoucherTestVDV" + SoapKeys.GRAB);
+		productsList = MongoReader.grabHostBasicProductModel("US11002PartyHostBuysForCustomerWithVoucherTestVDV" + SoapKeys.CALC);
+		shippingModelList = MongoReader.grabShippingModel("US11002PartyHostBuysForCustomerWithVoucherTestVDV" + SoapKeys.CALC);
+		calcDetailsModelList = MongoReader.grabHostCartCalcDetailsModels("US11002PartyHostBuysForCustomerWithVoucherTestVDV" + SoapKeys.CALC);
 
 		if (orderModelList.size() == 1) {
 
@@ -93,8 +97,8 @@ public class US34001CreateCreditMemoOnOrderTestVDV extends BaseTest {
 		shopTotalsModel.setTotalAmount(shippingModelList.get(0).getTotalAmount());
 		// from calcDetails model calculations
 		shopTotalsModel.setTotalIP(calcDetailsModelList.get(0).getIpPoints());
-		shopTotalsModel.setTotalMarketingBonus(calcDetailsModelList.get(0).getMarketingBonus());
-		shopTotalsModel.setTotalBonusJeverly(calcDetailsModelList.get(0).getJewelryBonus());
+		shopTotalsModel.setTotalMarketingBonus("0");
+		shopTotalsModel.setTotalBonusJeverly("0");
 		
 		shopTotalsModel.setTax(calcDetailsModelList.get(0).getTax());
 		shopTotalsModel.setTotalPaid("0.00");
@@ -103,34 +107,36 @@ public class US34001CreateCreditMemoOnOrderTestVDV extends BaseTest {
 		shopTotalsModel.setTotalFortyDiscounts("0.00");
 	}
 
-
 	@Test
-	public void us34001CreateCreditMemoOnOrderTestVDV() throws Exception {
+	public void us34002PlaceCustomerVoucherCreateInvoiceTestVDV() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSalesOrders();
 		backEndSteps.searchOrderByOrderId(orderId);
 		backEndSteps.openOrderDetails(orderId);
+	
+		ordersSteps.clickInvoiceButton();
+		List<OrderItemModel> orderItemsList = ordersSteps.grabInvoiceOrderItems();
 		
-		ordersSteps.clickcreditMemoButton();
-		
-		List<OrderItemModel> orderItemsList = ordersSteps.grabCreditMomoOrderItems();
 		orderTotalsModel = ordersSteps.grabTotals();
+		
 		
 		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, shopTotalsModel);
 		orderWorkflows.validateInvoiceCalculationTotals("TOTALS VALIVATION");
-
-		orderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
-		orderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
 		
-		ordersSteps.submitMemoButton();
+	
+		hostOrderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
+		hostOrderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
 		
+		//with send email flag checked
+		ordersSteps.submitInvoice();
 		
-		backEndSteps.clickOnSalesCreditOrders();
-		backEndSteps.searchCreditMemoByOrderId(orderId);
-		backEndSteps.openCreditMemoDetails(orderId);
+		backEndSteps.clickOnSalesInvoiceOrders();
+		backEndSteps.searchInvoiceByOrderId(orderId);
+		backEndSteps.openInvoiceDetails(orderId);
+		/*ordersSteps.createOrderShipment();
+		ordersSteps.validateCompleteStatus();*/
 		
-		customVerifications.printErrors();
 		
 	}
 

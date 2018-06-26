@@ -90,6 +90,23 @@ public class NavigationPage extends AbstractPage {
 		}
 	}
 	
+	public void selectSubmenuLevel2(String submenu) {
+		evaluateJavascript("jQuery.noConflict();");
+		element(navigationBar).waitUntilVisible();
+		List<WebElement> menuList = navigationBar.findElements(By.cssSelector("li.parent.level0 ul > li.level1 > ul >li.level2 a"));
+		
+		for (WebElement menuNow : menuList) {
+			
+			if (menuNow.getAttribute("href").contains(submenu)) {
+				System.out.println("evrikaaa");
+				navigate(menuNow.getAttribute("href"));
+			//	System.out.println(menuNow.getAttribute("href"));
+			//	menuNow.click();
+				break;
+			}
+		}
+	}
+	
 	
 	public void goToHomePage() {
 		element(adminHomePage).waitUntilVisible();

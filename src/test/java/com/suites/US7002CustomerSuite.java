@@ -20,6 +20,6 @@ import com.tests.us7.us7002vdv.US7002ValidateCustomerIsAssignedToStylistVDV;
 	
 })
 @RunWith(Suite.class)
-public class US7002CreateCustomerSuite {
+public class US7002CustomerSuite {
 
 }

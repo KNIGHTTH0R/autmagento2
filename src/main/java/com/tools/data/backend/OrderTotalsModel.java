@@ -20,8 +20,73 @@ public class OrderTotalsModel {
 	private String totalBonusJeverly;
 	private String totalMarketingBonus;
 	private String totalOrder;
+	private String discount;
+	private String totalIpRefunded;
+	private String refundToStoreCredit;
+	private String jewerlryCreditRefunded;
+	private String marketingCreditRefunded;
+	private String fortyCreditRefunded;
+	
+
 
 	
+	
+	
+	
+	public OrderTotalsModel() {
+		this.fortyCreditRefunded = "0";
+		this.totalIP="0";
+		this.totalIpRefunded="0";
+	}
+
+	public String getJewerlryCreditRefunded() {
+		return jewerlryCreditRefunded;
+	}
+
+	public void setJewerlryCreditRefunded(String jewerlryCreditRefunded) {
+		this.jewerlryCreditRefunded = jewerlryCreditRefunded;
+	}
+
+	public String getMarketingCreditRefunded() {
+		return marketingCreditRefunded;
+	}
+
+	public void setMarketingCreditRefunded(String marketingCreditRefunded) {
+		this.marketingCreditRefunded = marketingCreditRefunded;
+	}
+
+	public String getFortyCreditRefunded() {
+		return fortyCreditRefunded;
+	}
+
+	public void setFortyCreditRefunded(String fortyCreditRefunded) {
+		this.fortyCreditRefunded = fortyCreditRefunded;
+	}
+
+	public String getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(String discount) {
+		this.discount = discount;
+	}
+
+	public String getTotalIpRefunded() {
+		return totalIpRefunded;
+	}
+
+	public void setTotalIpRefunded(String totalIpRefunded) {
+		this.totalIpRefunded = totalIpRefunded;
+	}
+
+	public String getRefundToStoreCredit() {
+		return refundToStoreCredit;
+	}
+
+	public void setRefundToStoreCredit(String refundToStoreCredit) {
+		this.refundToStoreCredit = refundToStoreCredit;
+	}
+
 	public Map<String, String> getDiscountList() {
 		return discountList;
 	}
@@ -167,6 +232,20 @@ public class OrderTotalsModel {
 		this.totalMarketingBonus = totalMarketingBonus;
 	}
 
+	@Override
+	public String toString() {
+		return "OrderTotalsModel [subtotal=" + subtotal + ", shipping=" + shipping + ", discountList=" + discountList
+				+ ", tax=" + tax + ", totalAmount=" + totalAmount + ", totalPaid=" + totalPaid + ", totalRefunded="
+				+ totalRefunded + ", totalPayable=" + totalPayable + ", totalIP=" + totalIP + ", totalFortyDiscounts="
+				+ totalFortyDiscounts + ", totalBonusJeverly=" + totalBonusJeverly + ", totalMarketingBonus="
+				+ totalMarketingBonus + ", totalOrder=" + totalOrder + ", discount=" + discount + ", totalIpRefunded="
+				+ totalIpRefunded + ", refundToStoreCredit=" + refundToStoreCredit + ", jewerlryCreditRefunded="
+				+ jewerlryCreditRefunded + ", marketingCreditRefunded=" + marketingCreditRefunded
+				+ ", fortyCreditRefunded=" + fortyCreditRefunded + "]";
+	}
+
+	
+
 	// public String getDiscount() {
 	// return discount;
 	// }
@@ -174,4 +253,6 @@ public class OrderTotalsModel {
 	// this.discount = discount;
 	// }
 
+	
+	
 }

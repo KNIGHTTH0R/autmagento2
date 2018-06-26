@@ -26,7 +26,6 @@ public class OrderTotalsPage extends AbstractPage {
 
 		List<WebElement> listEntries = tableContainer.findElements(By.cssSelector("tr"));
 		waitFor(ExpectedConditions.visibilityOfAllElements(listEntries));
-
 		String valueTransformer = "";
 
 		for (WebElement elementNow : listEntries) {
@@ -45,7 +44,7 @@ public class OrderTotalsPage extends AbstractPage {
 				valueTransformer = FormatterUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
 				result.addDiscount(MongoTableKeys.DISCOUNT_25_KEY, valueTransformer);
 			}
-			if (key.contains("Steuer")) {
+			if (key.contains("Steuer") && !key.contains("Erstattung Versand (inkl. Steuer)") ) {
 				valueTransformer = FormatterUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
 				result.setTax((valueTransformer));
 			}
@@ -65,8 +64,11 @@ public class OrderTotalsPage extends AbstractPage {
 				valueTransformer = FormatterUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
 				result.setTotalPayable((valueTransformer));
 			}
-			if (key.contains("Total IPs")) {
+			if (key.contains("Total IPs") && !key.contains("Total IPs Refunded")) {
+			
+
 				valueTransformer = FormatterUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
+				
 				result.setTotalIP((valueTransformer));
 			}
 			if (key.contains("Total Forty Discounts")) {
@@ -81,11 +83,25 @@ public class OrderTotalsPage extends AbstractPage {
 				valueTransformer = FormatterUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
 				result.setTotalMarketingBonus((valueTransformer));
 			}
+			if (key.contains("Total IPs Refunded")) {
+				valueTransformer = FormatterUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
+				result.setTotalIpRefunded((valueTransformer));
+			}
+			if (key.contains("Rabatt (")) {
+				valueTransformer = FormatterUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
+				result.setDiscount((valueTransformer));
+			}
+			
+		/*	if (key.contains("Auf Shop-Guthaben zurückvergüten")) {
+				valueTransformer = FormatterUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
+				result.setDiscount((valueTransformer));
+			}*/
 
 		}
 		return result;
 	}
-
+	
+	
 	public OrderTotalsModel grabInvoiceTotals() {
 		// TODO Auto-generated method stub
 		return null;
@@ -157,5 +173,7 @@ public class OrderTotalsPage extends AbstractPage {
 		}
 		return result;
 	}
+
+	
 
 }

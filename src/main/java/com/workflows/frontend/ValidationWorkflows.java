@@ -1,8 +1,11 @@
 package com.workflows.frontend;
 
+import java.util.List;
+
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tools.cartcalculations.GeneralCartCalculations;
 import com.tools.cartcalculations.smf.CartCalculator;
+import com.tools.data.frontend.ReturnProductModel;
 import com.tools.datahandler.DataGrabber;
 
 import net.thucydides.core.annotations.Screenshots;
@@ -19,6 +22,8 @@ public class ValidationWorkflows {
 	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
 	public AdyenWorkflows adyenWorkflows;
+	@Steps
+	public ReturnWorkFlow returnWorkFlow;
 
 	public static String billingAddress;
 	public static String shippingAddress;
@@ -107,6 +112,14 @@ public class ValidationWorkflows {
 		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
 		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
+	@StepGroup
+	@Screenshots(onlyOnFailures = true)
+	public void performReturnProductsValidations(List<ReturnProductModel> productsListCalculated, List<ReturnProductModel> productsListGrabbed,String message) {
+	
+		returnWorkFlow.setValidateReturnedProductsModels(productsListCalculated, productsListGrabbed);
+		returnWorkFlow.validateReturnedProducts("VALIDATE RETURNED PRODUCTS - "+message);
+	}
+	
 
 	@StepGroup
 	@Screenshots(onlyOnFailures = true)

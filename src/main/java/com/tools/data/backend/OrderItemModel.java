@@ -13,10 +13,117 @@ public class OrderItemModel {
 	private String taxPercentage;
 	private String discountAmount;
 	private String iP;
+
 	private String jB;
+	
 	private String mB;
+
 	private String fD;
+	
 	private String rowSum;
+	private String qty;
+	private String remainingQty;
+	private String refundedQty;
+	
+	private String refundedIp;
+	private String remainingIp;
+	
+	private String refundedJb;
+	private String remainingJb;
+	
+	private String refundedMb;
+	private String remainingMb;
+	
+	private String refundedFd;
+	private String remainingFd;
+	
+	public String getQty() {
+		return qty;
+	}
+
+	public void setQty(String qty) {
+		this.qty = qty;
+	}
+
+	public String getRemainingQty() {
+		return remainingQty;
+	}
+
+	public void setRemainingQty(String remainingQty) {
+		this.remainingQty = remainingQty;
+	}
+
+	public String getRefundedQty() {
+		return refundedQty;
+	}
+
+	public void setRefundedQty(String refundedQty) {
+		this.refundedQty = refundedQty;
+	}
+
+	public String getRefundedFd() {
+		return refundedFd;
+	}
+
+	public void setRefundedFd(String refundedFd) {
+		this.refundedFd = refundedFd;
+	}
+
+	public String getRemainingFd() {
+		return remainingFd;
+	}
+
+	public void setRemainingFd(String remainingFd) {
+		this.remainingFd = remainingFd;
+	}
+
+	public String getRefundedIp() {
+		return refundedIp;
+	}
+
+	public void setRefundedIp(String refundedIp) {
+		this.refundedIp = refundedIp;
+	}
+
+	public String getRemainingIp() {
+		return remainingIp;
+	}
+
+	public void setRemainingIp(String remainingIp) {
+		this.remainingIp = remainingIp;
+	}
+
+	public String getRefundedJb() {
+		return refundedJb;
+	}
+
+	public void setRefundedJb(String refundedJb) {
+		this.refundedJb = refundedJb;
+	}
+
+	public String getRemainingJb() {
+		return remainingJb;
+	}
+
+	public void setRemainingJb(String remainingJb) {
+		this.remainingJb = remainingJb;
+	}
+
+	public String getRefundedMb() {
+		return refundedMb;
+	}
+
+	public void setRefundedMb(String refundedMb) {
+		this.refundedMb = refundedMb;
+	}
+
+	public String getRemainingMb() {
+		return remainingMb;
+	}
+
+	public void setRemainingMb(String remainingMb) {
+		this.remainingMb = remainingMb;
+	}
 
 	public String getProductName() {
 		return productName;

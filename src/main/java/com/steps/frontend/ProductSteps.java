@@ -64,11 +64,14 @@ public class ProductSteps extends AbstractSteps {
 		setProductSize(model.getProductSize());
 		setQuantity(qty);
 	
+		
 		result = productDetailsPage().grabBasicProductData();
 		result.setDiscountClass(discountClass);
 		result.setProductsPrice(askingPrice);
 		result.setFinalPrice(finalPrice);
 		result.setPriceIP(ip);
+		result.setColour(model.getColor());
+		result.setSize(model.getProductSize());
 
 		
 		addToCart();

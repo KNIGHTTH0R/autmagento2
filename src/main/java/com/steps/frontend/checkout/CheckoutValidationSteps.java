@@ -20,6 +20,55 @@ public class CheckoutValidationSteps extends AbstractSteps {
 	 * @param productNow
 	 * @param compare
 	 */
+	
+	@Step
+	public void validateSize(String productNow, String compare) {
+		System.out.println(productNow+"-"+compare);
+		CustomVerification.verifyTrue("Failure: Size values dont match: expected " + productNow + " - grabbed " + compare, productNow.contentEquals(compare));
+	}
+	
+	@Step
+	public void validateColour(String productNow, String compare) {
+		System.out.println(productNow+"-"+compare);
+		CustomVerification.verifyTrue("Failure: Colour values dont match: expected " + productNow + " - grabbed " + compare, productNow.contentEquals(compare));
+	}
+	
+	@Step
+	public void validateReason(String productNow, String compare) {
+		System.out.println(productNow+"-"+compare);
+		CustomVerification.verifyTrue("Failure: Reason values dont match: expected " + productNow + " - grabbed " + compare, productNow.contentEquals(compare));
+	}
+	
+	@Step
+	public void validateProductSku(String productNow, String compare) {
+		System.out.println(productNow+"-"+compare);
+		CustomVerification.verifyTrue("Failure: Product sku  values dont match: expected " + productNow + " - grabbed " + compare, compare.contains(productNow));
+	}
+	
+	@Step
+	public void validateSpecifiedAmount(String productNow, String compare) {
+		System.out.println(productNow+"-"+compare);
+		CustomVerification.verifyTrue("Failure: Specified Amount values dont match: expected " + productNow + " - grabbed " + compare, productNow.contentEquals(compare));
+	}
+	
+	@Step
+	public void validateReturnedQty(String productNow, String compare) {
+		System.out.println(productNow+"-"+compare);
+		CustomVerification.verifyTrue("Failure: Returned Qty values dont match: expected " + productNow + " - grabbed " + compare, productNow.contentEquals(compare));
+	}
+	
+	@Step
+	public void validateStatus(String productNow, String compare) {
+		System.out.println(productNow+"-"+compare);
+		CustomVerification.verifyTrue("Failure: Returned Qty values dont match: expected " + productNow + " - grabbed " + compare, productNow.contentEquals(compare));
+	}
+	
+	@Step
+	public void validatePaidPrice(String productNow, String compare) {
+		System.out.println(productNow+"-"+compare);
+		CustomVerification.verifyTrue("Failure: Paid Price values dont match: expected " + productNow + " - grabbed " + compare, productNow.contentEquals(compare));
+	}
+	
 	@Step
 	public void validateMatchPrice(String productNow, String compare) {
 		System.out.println(productNow+"-"+compare);
@@ -28,7 +77,7 @@ public class CheckoutValidationSteps extends AbstractSteps {
 
 	@Step
 	public void matchName(String productNow, String compare) {
-		//CustomVerification.verifyTrue("Failure: Product name  dont match: expected " + productNow + " - grabbed " + compare, productNow.toLowerCase().contentEquals(compare.toLowerCase()));
+		CustomVerification.verifyTrue("Failure: Product name  dont match: expected " + productNow + " - grabbed " + compare, productNow.toLowerCase().contentEquals(compare.toLowerCase()));
 
 	}
 

@@ -1,4 +1,4 @@
-package com.tests.uss34;
+package com.tests.uss34.us34001;
 
 import java.util.ArrayList;
 import java.util.List;

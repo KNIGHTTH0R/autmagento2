@@ -4,10 +4,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.tests.uss34.US3001ValidateClosedOrderEmailsTestVDV;
-import com.tests.uss34.US34001CreateCreditMemoOnOrderTestVDV;
-import com.tests.uss34.US34001CreateInvoiceTestVDV;
-import com.tests.uss34.US34001CreateShipmentTestVDV;
+import com.tests.uss34.us34001.US34001CreateCreditMemoOnOrderTestVDV;
+import com.tests.uss34.us34001.US34001CreateInvoiceTestVDV;
+import com.tests.uss34.us34001.US34001CreateShipmentTestVDV;
 
 
 @SuiteClasses({

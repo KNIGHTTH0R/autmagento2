@@ -5,22 +5,32 @@ import java.util.List;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 
+import org.bouncycastle.asn1.eac.EACObjectIdentifiers;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import com.tools.data.backend.OrderItemModel;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 
-public class OrderItemsPage extends AbstractPage {
+public class RmaItemsPage extends AbstractPage {
 
 	@FindBy(css = "table.order-tables")
 	private WebElement tableContainer;
 	
 	@FindBy(css = "button[title*='Mengen aktualisieren']")
 	private WebElement updateQtyBtn;
-
+	
+	@FindBy(id = "rma_info_tabs")
+	private WebElement navContainer;
+	
+	@FindBy(css = "button[onClick*='saveAndContinueEdit']")
+	private WebElement saveAndContinueBtn;
+	
+	
 	public List<OrderItemModel> grabOrderItems() {
 		List<OrderItemModel> result = new ArrayList<OrderItemModel>();
         waitForPageToLoad();
@@ -279,4 +289,95 @@ public class OrderItemsPage extends AbstractPage {
 		element(updateQtyBtn).waitUntilVisible();
 		updateQtyBtn.click();
 	}
+	
+	
+
+	public void selectMenu(String menu) {
+		evaluateJavascript("jQuery.noConflict();");
+		waitForPageToLoad();
+		List<WebElement> menuList = navContainer.findElements(By.cssSelector("li a"));
+		boolean found = false;
+		for (WebElement webElement : menuList) {
+			if (webElement.getText().contains(menu)) {
+				webElement.click();
+				found = true;
+				break;
+			}
+		}
+		Assert.assertTrue("The menu was not found", found);
+	}
+
+	public void authorizedQty(String prodCode, String qty,String status) {
+		evaluateJavascript("jQuery.noConflict();");
+		List<WebElement> productList= getDriver().findElements(By.cssSelector("#enterprise_rma_item_edit_grid_table tbody tr"));
+		
+		for (WebElement product : productList) {
+			if(product.findElement(By.cssSelector("td:nth-child(2)")).getText().contains(prodCode)){
+				System.out.println(prodCode);
+				product.findElement(By.cssSelector("td:nth-child(5)  input")).clear();
+				product.findElement(By.cssSelector("td:nth-child(5)  input")).sendKeys(qty);
+				
+				waitABit(2000);
+				Select oSelect =new Select(product.findElement(By.cssSelector("td:nth-child(11) select")));
+				oSelect.selectByVisibleText(status);
+				
+				break;
+			}
+			
+		}
+	}
+	
+	
+	public void receivedQty(String prodCode, String qty,String status) {
+		evaluateJavascript("jQuery.noConflict();");
+		List<WebElement> productList= getDriver().findElements(By.cssSelector("#enterprise_rma_item_edit_grid_table tbody tr"));
+		
+		for (WebElement product : productList) {
+			if(product.findElement(By.cssSelector("td:nth-child(2)")).getText().contains(prodCode)){
+				System.out.println(prodCode);
+				product.findElement(By.cssSelector("td:nth-child(6)  input")).clear();
+				product.findElement(By.cssSelector("td:nth-child(6)  input")).sendKeys(qty);
+				
+				waitABit(2000);
+				Select oSelect =new Select(product.findElement(By.cssSelector("td:nth-child(11) select")));
+				oSelect.selectByVisibleText(status);
+				
+				break;
+			}
+			
+		}
+	}
+	
+	
+	public void approvedQty(String prodCode, String qty,String status) {
+		evaluateJavascript("jQuery.noConflict();");
+		List<WebElement> productList= getDriver().findElements(By.cssSelector("#enterprise_rma_item_edit_grid_table tbody tr"));
+		
+		for (WebElement product : productList) {
+			if(product.findElement(By.cssSelector("td:nth-child(2)")).getText().contains(prodCode)){
+				System.out.println(prodCode);
+				product.findElement(By.cssSelector("td:nth-child(7)  input")).clear();
+				product.findElement(By.cssSelector("td:nth-child(7)  input")).sendKeys(qty);
+				
+				waitABit(2000);
+				Select oSelect =new Select(product.findElement(By.cssSelector("td:nth-child(11) select")));
+				oSelect.selectByVisibleText(status);
+				
+				break;
+			}
+			
+		}
+	}
+	
+	public void clickSaveAndContinue() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(saveAndContinueBtn).waitUntilVisible();
+		saveAndContinueBtn.click();
+		waitForPageToLoad();
+	}
+
+	
+
+
+	
 }

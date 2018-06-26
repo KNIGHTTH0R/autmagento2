@@ -1,5 +1,7 @@
 package com.workflows.backend;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,6 +104,11 @@ public class OrderWorkflows {
 	
 	public void validateInvoiceCalculationTotals(String string) {
 
+		System.out.println("ce avem aici ? ");
+		System.out.println(orderTotalsGrabbed);
+		System.out.println(calculatedTotals);
+
+		
 		verifySubTotals(orderTotalsGrabbed.getSubtotal(), calculatedTotals.getSubtotal());
 		//emilian add correct value
 		//verifyTax(orderTotalsGrabbed.getTax(), calculatedTotals.getTax());
@@ -115,6 +122,95 @@ public class OrderWorkflows {
 		verifyTotalPayable(orderTotalsGrabbed.getTotalPayable(), calculatedTotals.getTotalPayable());*/
 
 	}
+	
+	public void validatePartialCMCalculationTotals(String string) {
+
+		verifySubTotals(orderTotalsGrabbed.getSubtotal(), calculatedTotals.getSubtotal());
+		//emilian add correct value
+
+		verifyTax(orderTotalsGrabbed.getTax(), calculatedTotals.getTax());
+	//	verifyShipping(orderTotalsGrabbed.getShipping(), calculatedTotals.getShipping());
+		verifyTotalAmount(orderTotalsGrabbed.getTotalAmount(), calculatedTotals.getTotalAmount());
+		verifyIP(orderTotalsGrabbed.getTotalIP(), calculatedTotals.getTotalIP());
+		verifyJewelryBonus(orderTotalsGrabbed.getTotalBonusJeverly(), calculatedTotals.getTotalBonusJeverly());
+		verifyMarketingBonus(orderTotalsGrabbed.getTotalMarketingBonus(), calculatedTotals.getTotalMarketingBonus());
+		
+		//verifyDiscount()
+		//verifyTotalIpRefunded();
+		
+		//verifyTotalPaid(orderTotalsGrabbed.getTotalPaid(), calculatedTotals.getTotalPaid());
+		/*verifyTotalRefunded(orderTotalsGrabbed.getTotalRefunded(), calculatedTotals.getTotalRefunded());
+		verifyTotalPayable(orderTotalsGrabbed.getTotalPayable(), calculatedTotals.getTotalPayable());*/
+
+	}
+	public void validatePartialCMCalculationTotalsAfterRefund(String string) {
+		System.out.println(string);
+
+		verifySubTotals(orderTotalsGrabbed.getSubtotal(), calculatedTotals.getSubtotal());
+		//emilian add correct value
+		verifyDiscount(orderTotalsGrabbed.getDiscount(), BigDecimal.valueOf(Double.valueOf(calculatedTotals.getDiscount())).setScale(2, RoundingMode.HALF_UP).toString());
+
+		verifyTax(orderTotalsGrabbed.getTax(), calculatedTotals.getTax());
+	//	verifyShipping(orderTotalsGrabbed.getShipping(), calculatedTotals.getShipping());
+		verifyTotalAmount(orderTotalsGrabbed.getTotalAmount(), calculatedTotals.getTotalAmount());
+		verifyIP(orderTotalsGrabbed.getTotalIP(), calculatedTotals.getTotalIP());
+		verifyJewelryBonus(orderTotalsGrabbed.getTotalBonusJeverly(), calculatedTotals.getTotalBonusJeverly());
+		verifyMarketingBonus(orderTotalsGrabbed.getTotalMarketingBonus(), calculatedTotals.getTotalMarketingBonus());
+		verifyTotalRefunded(orderTotalsGrabbed.getTotalRefunded(),BigDecimal.valueOf(Double.valueOf(calculatedTotals.getTotalRefunded())).setScale(2, RoundingMode.HALF_UP).toString() );
+		
+		//verifyDiscount()
+		//verifyTotalIpRefunded();
+		
+		//verifyTotalPaid(orderTotalsGrabbed.getTotalPaid(), calculatedTotals.getTotalPaid());
+		/*verifyTotalRefunded(orderTotalsGrabbed.getTotalRefunded(), calculatedTotals.getTotalRefunded());
+		verifyTotalPayable(orderTotalsGrabbed.getTotalPayable(), calculatedTotals.getTotalPayable());*/
+
+	}
+	
+	public void validatePartialCMCalculationTotalsBeforeRefund(String string) {
+
+		
+		System.out.println(string);
+		System.out.println("orderTotalsGrabbed: "+orderTotalsGrabbed);
+		System.out.println("calculatedTotals: "+calculatedTotals);
+
+	/*
+	
+		
+		
+		
+		
+		
+		// from calcDetails model calculations
+		model.setRefundToStoreCredit(product.getRowTotal());*/
+		
+		
+		
+		
+		
+		
+		verifySubTotals(orderTotalsGrabbed.getSubtotal(),  BigDecimal.valueOf(Double.valueOf(calculatedTotals.getSubtotal())).toString());
+		verifyDiscount(orderTotalsGrabbed.getDiscount(), BigDecimal.valueOf(Double.valueOf(calculatedTotals.getDiscount())).setScale(2, RoundingMode.HALF_UP).toString());
+		//emilian add correct value
+		verifyTax(orderTotalsGrabbed.getTax(), calculatedTotals.getTax());
+	//	verifyShipping(orderTotalsGrabbed.getShipping(), calculatedTotals.getShipping());
+		verifyTotalAmount(orderTotalsGrabbed.getTotalAmount(),BigDecimal.valueOf(Double.valueOf(calculatedTotals.getTotalAmount())).setScale(2, RoundingMode.HALF_UP).toString());
+		verifyIP(orderTotalsGrabbed.getTotalIP(), calculatedTotals.getTotalIP());
+		verifyJewelryBonus(orderTotalsGrabbed.getTotalBonusJeverly(), calculatedTotals.getTotalBonusJeverly());
+		verifyMarketingBonus(orderTotalsGrabbed.getTotalMarketingBonus(), calculatedTotals.getTotalMarketingBonus());
+		
+		verifyTotalIpRefunded(orderTotalsGrabbed.getTotalIpRefunded(),calculatedTotals.getTotalIpRefunded());
+		//verifyRefundToStoreCredit(orderTotalsGrabbed.getRefundToStoreCredit(),calculatedTotals.getRefundToStoreCredit());
+		//verifyDiscount()
+		//verifyTotalIpRefunded();
+		
+		//verifyTotalPaid(orderTotalsGrabbed.getTotalPaid(), calculatedTotals.getTotalPaid());
+		/*verifyTotalRefunded(orderTotalsGrabbed.getTotalRefunded(), calculatedTotals.getTotalRefunded());
+		verifyTotalPayable(orderTotalsGrabbed.getTotalPayable(), calculatedTotals.getTotalPayable());*/
+
+	}
+
+	
 
 	public void validateRegularUserCalculationTotals(String string) {
 
@@ -251,6 +347,25 @@ public class OrderWorkflows {
 	@Step
 	public void validateScheduledDeliveryDate(String orderStatus, String string) {
 		CustomVerification.verifyTrue("Failure: Status expected is " + string + ", actual status is " + orderStatus, orderStatus.contentEquals(string));
+		
+	}
+	
+	@Step
+	private void verifyRefundToStoreCredit(String grabbed, String expected) {
+		// TODO Auto-generated method stub
+		CustomVerification.verifyTrue("Failure: RefundToStoreCredit values dont match: " + grabbed + " - " + expected, grabbed.contains(expected));
+
+	}
+
+	@Step
+	private void verifyTotalIpRefunded(String grabbed, String expected) {
+		CustomVerification.verifyTrue("Failure: TotalIpRefunded values dont match: " + grabbed + " - " + expected, grabbed.contains(expected));
+		
+	}
+
+	@Step
+	private void verifyDiscount(String grabbed, String expected) {
+		CustomVerification.verifyTrue("Failure: Discoumt values dont match: " + grabbed + " - " + expected, grabbed.contains(expected));
 		
 	}
 

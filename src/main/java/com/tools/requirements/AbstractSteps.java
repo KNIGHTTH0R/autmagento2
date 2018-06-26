@@ -20,12 +20,14 @@ import com.pages.backend.customer.details.LeadSettingsPage;
 import com.pages.backend.importExport.ImportExportPage;
 import com.pages.backend.newsletter.NewsletterSubscribersListPage;
 import com.pages.backend.orders.OrderListPage;
+import com.pages.backend.orders.RMAListPage;
 import com.pages.backend.orders.details.OrderDetailsNavPage;
 import com.pages.backend.orders.details.OrderInfoPage;
 import com.pages.backend.orders.details.OrderItemsPage;
 import com.pages.backend.orders.details.OrderNotificationPage;
 import com.pages.backend.orders.details.OrderTotalsPage;
 import com.pages.backend.orders.details.OrdersActionsPage;
+import com.pages.backend.orders.details.RmaItemsPage;
 import com.pages.backend.products.BackendProductDetailsPage;
 import com.pages.backend.products.BackendProductListPage;
 import com.pages.backend.promotion.ShoppingCartPriceRulesPage;
@@ -462,6 +464,15 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public OrderListPage orderListPage() {
 		return getPages().currentPageAt(OrderListPage.class);
+	}
+	
+	public RmaItemsPage rmaItemsPage() {
+		return getPages().currentPageAt(RmaItemsPage.class);
+	}
+	
+
+	public RMAListPage rmaListPage() {
+		return getPages().currentPageAt(RMAListPage.class);
 	}
 
 	public CreditMemoListPage creditMemoListPage() {
