@@ -245,4 +245,9 @@ public class OrderItemModel {
 		this.rowSum = rowSum;
 	}
 
+	
+
+	
+	
+	
 }

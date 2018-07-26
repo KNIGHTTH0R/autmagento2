@@ -359,22 +359,33 @@ public class CartTotalsCalculation {
 
 		BigDecimal result = BigDecimal.ZERO;
 		BigDecimal diff = BigDecimal.ZERO;
+		
+		System.out.println("total:sum25Section: "+sum25Section);
+		System.out.println("total:askingPrice: "+askingPrice);
+		System.out.println("total:jB: "+jB);
 
+		
+	
 		if (sum25Section.compareTo(jB) > 0) {
 
-			result = result.add(askingPrice);
+	
+
+			
+			/*result = result.add(askingPrice);
 			result = result.multiply(BigDecimal.valueOf(100));
 			result = result.divide(sum25Section, 4, BigDecimal.ROUND_HALF_UP);
 			result = result.divide(BigDecimal.valueOf(100), 10, BigDecimal.ROUND_HALF_UP);
 			result = result.multiply(jB);
 			result = askingPrice.subtract(result);
-
-			result = result.multiply(BigDecimal.valueOf(Integer.parseInt(ConfigConstants.DISCOUNT_20)));
+			System.out.println("resultx: "+result);*/
+			result=askingPrice.multiply(BigDecimal.valueOf(0.2));
+		//	result = result.multiply(BigDecimal.valueOf(Integer.parseInt(ConfigConstants.DISCOUNT_20)));
 			
 			//ConfigConstants.DISCOUNT_20
 			// the 25% disc is calculated with 5 decimals precision (we don't
 			// want the 4th decimal rounded)
-			diff = result.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
+			//diff = result.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
+			diff=result.setScale(5, BigDecimal.ROUND_HALF_UP);
 			diff = diff.add(deltaDiscount);// add delta discount from previous
 											// product
 			// the calculated discount is rounded to 2 decimals- actual discount

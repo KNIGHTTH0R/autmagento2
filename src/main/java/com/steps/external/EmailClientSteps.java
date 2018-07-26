@@ -1,6 +1,13 @@
 package com.steps.external;
 
+import java.util.List;
+
 import com.pages.external.TempMail;
+import com.pages.external.YopmailPage;
+import com.tools.data.CalcDetailsModel;
+import com.tools.data.backend.OrderItemModel;
+import com.tools.data.backend.OrderTotalsModel;
+import com.tools.data.frontend.BasicProductModel;
 import com.tools.requirements.AbstractSteps;
 import com.tools.utils.DateUtils;
 
@@ -9,12 +16,12 @@ import net.thucydides.core.annotations.Step;
 public class EmailClientSteps extends AbstractSteps {
 
 //	 MailinatorPage mailPage;
-//	 YopmailPage mailPage;
+	 YopmailPage mailPage;
 //	 FakeMailGenerator mailPage;
 //	 MailDrop mailPage;
 //	 Dispostable mailPage;
 //   Mailnesia mailPage;
-	 TempMail mailPage;
+//	 TempMail mailPage;
 	private static final long serialVersionUID = 1L;
 
 	@Step
@@ -36,11 +43,13 @@ public class EmailClientSteps extends AbstractSteps {
 		
 	}
 	
-	@Step
+	
+	//need implemantation on yopmail actual: temp mail
+/*	@Step
 	public void checkReceivedOriginalDocuments(String originalDoc){
 		mailPage.checkReceivedOriginalDocuments(originalDoc);
 
-	}
+	}*/
 
 	@Step
 	public String registerFromLink(String email, String title) {
@@ -74,12 +83,13 @@ public class EmailClientSteps extends AbstractSteps {
 
 	}
 	
-	@Step
+	//need implemantation on yopmail actual: temp mai
+/*	@Step
 	public void validateThatOrderEmailIsReceived(String email, String title,String order) {
 
 		mailPage.openEmailAndCheck(email, title, order);
 
-	}
+	}*/
 
 	@Step
 	public void confirmPartyInvitation(String email, String title) {
@@ -89,6 +99,18 @@ public class EmailClientSteps extends AbstractSteps {
 
 		
 		
+	}
+
+
+
+	public List<OrderItemModel> grabbedProductsList() {
+		return mailPage.grabbedProductsList();
+
+	}
+
+	public OrderTotalsModel grabbedOrderTotals() {
+		return mailPage.grabbedOrderTotals();
+
 	}
 
 }

@@ -857,6 +857,24 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		
 	}
 
+	public void fillUserRegistrationForm(CustomerFormModel dataModel) {
+		navigate(MongoReader.getBaseURL());
+		homePage().clickOnCreateAccountLink();
+		
+		
+		
+	/*	
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		checkParties();
+		fillContactDetails(addressData);
+		checkIAgree();
+		clickCompleteButton();*/
+	}
+
 	
 
 }

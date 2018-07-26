@@ -364,6 +364,8 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.DISCOUNT_MARKETING, product.getDiscountMarketing());
 		document.put(MongoTableKeys.DISCOUNT_JB, product.getDiscountJb());
 		document.put(MongoTableKeys.TAX, product.getTax());
+		document.put(MongoTableKeys.TOTAL_DISCOUNT, product.getTotalDiscount());
+
 
 
 		table.insert(document);
@@ -397,6 +399,9 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.PRODUCT_PRICE, product.getUnitPrice());
 		document.put(MongoTableKeys.PRODUCT_QUANTITY, product.getQuantity());
 		document.put(MongoTableKeys.PRODUCT_FINAL_PRICE, product.getFinalPrice());
+		document.put(MongoTableKeys.PRODUCT_END_PRICE, product.getEndPrice());
+		document.put(MongoTableKeys.PRODUCT_BONUS_PRICE, product.getBunosValue());
+
 
 		table.insert(document);
 	}
@@ -414,6 +419,8 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.PRODUCT_IP_POINTS, product.getIpPoints());
 		document.put(MongoTableKeys.PRODUCT_DELIVERY_DATE, product.getDeliveryDate());
 		document.put(MongoTableKeys.PRODUCT_DISCOUNT_VALUE, product.getDiscountValue());
+		document.put(MongoTableKeys.PRODUCT_END_PRICE, product.getFinalPriceDiscounted());
+
 		table.insert(document);
 	}
 

@@ -33,7 +33,7 @@ public class OrderForCustomerDiscountsCalculation {
 			newProduct.setBunosValue(product.getBunosValue());
 			System.out.println("setBunosValue" + newProduct.getBunosValue());
 			newProduct.setDeliveryDate(product.getDeliveryDate());
-
+			newProduct.setFinalPriceDiscounted(calculateFinalPriceDiscounted(newProduct.getFinalPrice(),newProduct.getDiscountValue()));
 			cartProducts.add(newProduct);
 			
 			
@@ -44,6 +44,13 @@ public class OrderForCustomerDiscountsCalculation {
 
 	}
 	
+	private static String calculateFinalPriceDiscounted(String finalPrice, String discountValue) {
+		BigDecimal finalValue=BigDecimal.ZERO;
+		finalValue=finalValue.add(BigDecimal.valueOf(Double.parseDouble(finalPrice)));
+		finalValue=finalValue.subtract(BigDecimal.valueOf(Double.parseDouble(discountValue)));
+		return finalValue.setScale(2,BigDecimal.ROUND_HALF_UP).toString();
+	}
+
 	private static BigDecimal calculateTotalProductQty(List<HostBasicProductModel> productsList) {
 		BigDecimal totalQty = BigDecimal.ZERO;
 		

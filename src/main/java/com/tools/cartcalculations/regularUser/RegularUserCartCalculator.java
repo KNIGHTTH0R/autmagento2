@@ -18,6 +18,8 @@ public class RegularUserCartCalculator {
 	public static List<RegularBasicProductModel> allProductsListTp3 = new ArrayList<RegularBasicProductModel>();
 	public static List<RegularBasicProductModel> allProductsListWithRegularPrice = new ArrayList<RegularBasicProductModel>();
 	public static List<RegularBasicProductModel> allProductsListwithVoucher = new ArrayList<RegularBasicProductModel>();
+	public static List<RegularBasicProductModel> allProductsListwithDiscounts = new ArrayList<RegularBasicProductModel>();
+
 	public static RegularCartCalcDetailsModel calculatedTotalsDiscounts = new RegularCartCalcDetailsModel();
 	public static ShippingModel shippingCalculatedModel = new ShippingModel();
 	public static ShippingModel shippingCalculatedModelTp1 = new ShippingModel();
@@ -52,6 +54,7 @@ public class RegularUserCartCalculator {
 
 	public static void calculateCartAndShippingTotals(List<RegularBasicProductModel> prodList, String discountClass,
 			String shippingValue, String voucherValue) {
+		
 		calculatedTotalsDiscounts = RegularCartTotalsCalculation.calculateTotals(allProductsList, discountClass,
 				voucherValue, shippingValue);
 		shippingCalculatedModel = RegularCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts,

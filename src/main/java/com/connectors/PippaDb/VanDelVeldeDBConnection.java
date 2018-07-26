@@ -30,9 +30,22 @@ public class VanDelVeldeDBConnection {
 
 			// Vdv -aut
 			 connection = DriverManager.getConnection(
-			 "jdbc:mysql://81.173.112.131:3306/vdv_qa_aut",
-			 "vdv_aut", "44Wd3xx67");
+			 "jdbc:mysql://81.173.112.131:3306/vdv_qa_aut","vdv_aut", "44Wd3xx67");
 			 
+			
+			
+			/* qa - DB
+			 *  connection = DriverManager.getConnection(
+					 "jdbc:mysql://81.173.112.131:3306/vdv_qa",
+					 "vdv-qa", "11Wd3xx67");*/
+			 
+			// stage
+			/*  connection = DriverManager.getConnection(
+					 "jdbc:mysql://81.173.112.131:3306/vdv_stage",
+					 "vdv-qa", "11Wd3xx67");
+			*/
+			
+			 System.out.println("At myhome DB-> status:connected");
 
 			/*connection = DriverManager.getConnection(
 					"jdbc:mysql://staging.pippajean.com/pippajean_prod?zeroDateTimeBehavior=convertToNull",

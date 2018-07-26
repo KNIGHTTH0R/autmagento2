@@ -163,8 +163,10 @@ public class AbstractSteps extends ScenarioSteps {
 		navigate(MongoReader.getBaseURL());
 		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
+		loginPage().acceptCookieConsent();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
+		
 		loginPage().clickOnLoginButton();
 
 	}

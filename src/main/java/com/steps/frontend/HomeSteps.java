@@ -10,48 +10,6 @@ public class HomeSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1L;
 
-	@Step
-	public void goToStyleCoachSection() {
-		homePage().clickStyleCoachLink();
-	}
-
-	@StepGroup
-	public void navigateToRegisterFormFromStyleCoachLinkAndJetzStarten() {
-		getDriver().get(MongoReader.getBaseURL());
-		homePage().clickStyleCoachLink();
-		stylistCampaignPage().clickJetztStartenButton();
-		starterSetPage().clickOnJetztStartenFromStarterSet();
-	}
-
-	@StepGroup
-	public void navigateToRegisterFormFromStyleCoachLinkAndStarteJetzt() {
-		getDriver().get(MongoReader.getBaseURL());
-		homePage().clickStyleCoachLink();
-		stylistCampaignPage().clickStarteJetztButton();
-		starterSetPage().clickOnJetztStyleCoachWerdenButton();
-
-	}
-
-	@Step
-	public void clickonGeneralView() {
-		homePage().clickonGeneralView();
-		///waitABit(20000);
-	}
-	
-	@Step
-	public void goToNewItems(){
-		homePage().goToNewItems();
-	}
-	
-	@Step
-	public void clickOnContactBoosterDetails(){
-		homePage().clickOnContactBoosterDetails();
-	}
-	@Step
-	public void clickChangeShop() {
-		homePage().clickChangeShop();
-		
-	}
 	
 	
 

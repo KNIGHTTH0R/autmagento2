@@ -104,6 +104,7 @@ public class US3002SfmOrderWithLBandMarketingDiscountTestVDV extends BaseTest {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 
+		
 		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsSFMTest" + SoapKeys.GRAB);
 
 		genProduct1 = createdProductsList.get(0);

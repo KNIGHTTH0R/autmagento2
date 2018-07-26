@@ -48,7 +48,7 @@ public class CartWorkflows2 {
 			}
 
 			if (compare.getName() != null) {
-				checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
+				//checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
 				checkoutValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getUnitPrice());
 				checkoutValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
 				checkoutValidationSteps.validateMatchFinalPrice(productNow.getFinalPrice(), compare.getFinalPrice());

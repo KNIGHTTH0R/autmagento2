@@ -37,6 +37,8 @@ public class OrderTotalsModel {
 		this.fortyCreditRefunded = "0";
 		this.totalIP="0";
 		this.totalIpRefunded="0";
+		this.shipping="0";
+		this.totalBonusJeverly="0";
 	}
 
 	public String getJewerlryCreditRefunded() {

@@ -295,9 +295,11 @@ public class RegularUserCartPage extends AbstractPage {
 					product.setBunosValue(String.valueOf(calculate40Discount(product.getFinalPrice())));
 					product.setIpPoints(String
 							.valueOf(RegularCartTotalsCalculation.calculate40DiscountForIp(product.getIpPoints())));
+					product.setEndPrice(RegularCartTotalsCalculation.calculateEndPrice(product.getFinalPrice(),product.getBunosValue()));
 				} else if (discountType.contentEquals(ContextConstants.JEWELRY_BONUS)) {
 					product.setBunosValue(product.getFinalPrice());
 					product.setIpPoints(String.valueOf(BigDecimal.ZERO));
+					product.setEndPrice(String.valueOf(BigDecimal.ZERO));
 				}
 			}
 		}

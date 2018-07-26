@@ -202,6 +202,7 @@ public class US3001SfmOrderWithNoDiscountTestVDV extends BaseTest {
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();
 		
+		
 		confirmationSteps.agreeAndCheckout();
 		validationWorkflows.setBillingShippingAddress(addressString, addressString);
 		validationWorkflows.performCartValidations();

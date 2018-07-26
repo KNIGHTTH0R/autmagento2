@@ -24,10 +24,7 @@ public class BasicProductModel {
 	private String tax;
 	private String colour;
 	private String size;
-	
-	
-	
-	
+	private String totalDiscount;
 	
 	
 	
@@ -36,10 +33,23 @@ public class BasicProductModel {
 		this.discount20 = "0";
 		this.discountJb = "0";
 		this.discountMarketing = "0";
+		
 	}
 
 	
 	
+	public String getTotalDiscount() {
+		return totalDiscount;
+	}
+
+
+
+	public void setTotalDiscount(String totalDiscount) {
+		this.totalDiscount = totalDiscount;
+	}
+
+
+
 	public String getColour() {
 		return colour;
 	}
@@ -224,7 +234,8 @@ public class BasicProductModel {
 
 	}
 
-	
+
+
 	@Override
 	public String toString() {
 		return "BasicProductModel [name=" + name + ", prodCode=" + prodCode + ", quantity=" + quantity + ", unitPrice="
@@ -233,8 +244,11 @@ public class BasicProductModel {
 				+ deliveryDate + ", earliestAvailability=" + earliestAvailability + ", isMarketing=" + isMarketing
 				+ ", isBuy3Get1=" + isBuy3Get1 + ", finalPriceWithBuy3=" + finalPriceWithBuy3 + ", discount20="
 				+ discount20 + ", discountJb=" + discountJb + ", discountMarketing=" + discountMarketing + ", tax="
-				+ tax + "]";
+				+ tax + ", colour=" + colour + ", size=" + size + ", totalDiscount=" + totalDiscount + "]";
 	}
+
+	
+
 
 
 

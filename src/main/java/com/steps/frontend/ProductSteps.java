@@ -315,6 +315,7 @@ public class ProductSteps extends AbstractSteps {
 		result.setUnitPrice(model.getPrice());
 		result.setQuantity(qty);
 		result.setFinalPrice(finalPrice);
+		result.setEndPrice(finalPrice);
 		result.setBonusType(ContextConstants.REGULAR_PRICE);
 		result.setBunosValue("0");
 		result.setIpPoints(ipPoints);

@@ -45,7 +45,19 @@ public class OrderValidationSteps extends AbstractSteps {
 	public void validateMatchPrice(String productNow, String compare) {
 		Assert.assertTrue("Failure: Price values dont match: " + productNow + " - " + compare, productNow.replaceAll("\\s+","").contentEquals(compare.replaceAll("\\s+","")));
 	}
-
+	
+	
+	@Step
+	@Screenshots(onlyOnFailures = true)
+	public void validateMatchFinalPrice(String productNow, String compare) {
+		Assert.assertTrue("Failure: Final Price values dont match: " + productNow + " - " + compare, productNow.replaceAll("\\s+","").contentEquals(compare.replaceAll("\\s+","")));
+	}
+	
+	@Step
+	@Screenshots(onlyOnFailures = true)
+	public void validateMatchDiscount(String productNow, String compare) {
+		Assert.assertTrue("Failure: Discount values dont match: " + productNow + " - " + compare, productNow.replaceAll("\\s+","").contentEquals(compare.replaceAll("\\s+","")));
+	}
 	/**
 	 * Used only for reporting purposes. Display match names.
 	 * 
@@ -88,7 +100,6 @@ public class OrderValidationSteps extends AbstractSteps {
 		OrderItemModel result = new OrderItemModel();
 
 		theFor: for (OrderItemModel orderProduct : orderProducts) {
-
 			if (orderProduct.getProductCode().contains(productCode) && orderProduct.getNumber().contentEquals(qty)) {
 
 				result = orderProduct;

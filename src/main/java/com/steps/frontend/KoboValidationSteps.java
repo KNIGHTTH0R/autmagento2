@@ -25,14 +25,6 @@ public class KoboValidationSteps extends AbstractSteps {
 	}
 	
 	@StepGroup
-	public void enterKoboCodeAndGoToRegistrationProcess(String url,String code){
-		navigate(url);
-		navigate(url);
-		homePage().clickOnContactBoosterDetails();
-		koboValidationPage().enterKoboCode(code);
-		koboValidationPage().submitFormBooster();
-	}
-	@StepGroup
 	public void startKoboCampaignProcess(String url){
 		navigate(url);
 		koboCampaignPage().clickRegister();

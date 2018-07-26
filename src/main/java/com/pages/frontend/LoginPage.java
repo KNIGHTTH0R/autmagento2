@@ -1,10 +1,13 @@
 package com.pages.frontend;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
+import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class LoginPage extends AbstractPage {
 
@@ -31,6 +34,9 @@ public class LoginPage extends AbstractPage {
 
 	@FindBy(css = "button.button.left")
 	private WebElement customerRegistrationButton;
+	
+	@FindBy(css = "button[onclick*='allowSaveCookie()']")
+	private WebElement cookieConsent;
 
 	public void inputUserName(String userName) {
 		element(userInput).waitUntilVisible();
@@ -65,6 +71,15 @@ public class LoginPage extends AbstractPage {
 	public void clickOnFacebookRegistrationButton() {
 		element(facebookRegistrationButton).waitUntilVisible();
 		facebookRegistrationButton.click();
+		
+	}
+
+	public void acceptCookieConsent() {
+		List<WebElement> cookie= getDriver().findElements(By.cssSelector("button[onclick*='allowSaveCookie()']"));
+		if(!cookie.isEmpty()) {
+			element(cookieConsent).waitUntilVisible();
+			cookieConsent.click();
+		}
 		
 	}
 

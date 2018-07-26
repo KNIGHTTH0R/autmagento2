@@ -1,5 +1,6 @@
 package com.steps;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -7,6 +8,7 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Title;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
 
 import com.tools.constants.ContextConstants;
 import com.tools.requirements.AbstractSteps;
@@ -69,6 +71,23 @@ public class EmailSteps extends AbstractSteps {
 
 		}
 		Assert.assertTrue("The searched row was not found", foundRow);
+		return resultURL;
+	}
+	
+	
+	
+	
+	public String grabEmailsTableTotal(String message) {
+		String resultURL = null;
+		String[] lines = message.split("\n");
+		
+		String[] table=message.split("\n");
+		
+		for (String string : table) {
+			System.out.println("r0: "+string);
+		}
+		
+		
 		return resultURL;
 	}
 

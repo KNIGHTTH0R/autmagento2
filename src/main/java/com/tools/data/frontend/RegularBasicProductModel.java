@@ -11,6 +11,22 @@ public class RegularBasicProductModel {
 	private String bunosValue;
 	private String ipPoints;
 	private String deliveryDate;
+	private String endPrice;
+	
+	
+	
+
+	public RegularBasicProductModel() {
+		this.endPrice = "0";
+	}
+
+	public String getEndPrice() {
+		return endPrice;
+	}
+
+	public void setEndPrice(String endPrice) {
+		this.endPrice = endPrice;
+	}
 
 	public String getDeliveryDate() {
 		return deliveryDate;

@@ -106,9 +106,13 @@ public class FormatterUtils {
 	/*	BigDecimal ipPoints = BigDecimal.ZERO;
 		ipPoints=BigDecimal.valueOf(311.0);*/
 		
+		String x= "86,00 €";
+	//	String y=FormatterUtils.cleanString(x);
 		
+		System.out.println(FormatterUtils
+					.parseValueToBigDecimalWithZeroDecimals(x));
 		//System.out.println(getTestIntegerFromString("-1.108"));
-		System.out.println(parseValueToZeroDecimals("-1.108"));
+	//	System.out.println(parseValueToZeroDecimals("-1.108"));
 	}
 
 	public static String incrementSingleTpOrderId(String orderId, int incrementNumber) {
@@ -195,6 +199,10 @@ public class FormatterUtils {
 
 	public static BigDecimal parseValueToBigDecimal(String value) {
 		return BigDecimal.valueOf(Double.parseDouble(parseValue(value, 0)));
+	}
+	
+	public static BigDecimal parseValueToBigDecimalWithZeroDecimals(String value) {
+		return BigDecimal.valueOf(Double.parseDouble(parseValue(value, 0))).setScale(0);
 	}
 
 	public static double parseValueToDouble(String value) {

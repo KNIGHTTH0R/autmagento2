@@ -36,7 +36,7 @@ public class RegularUserShippingAndConfirmationWorkflows {
 			compare.setQuantity(compare.getQuantity().replace("x", "").trim());
 
 			if (compare.getName() != null) {
-				checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
+			//	checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
 				checkoutValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getUnitPrice());
 				checkoutValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
 

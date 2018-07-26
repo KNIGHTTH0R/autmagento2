@@ -170,7 +170,6 @@ public class RegularCartTotalsCalculation {
 		if (voucherPrice.compareTo(subtotal) > 0) {
 			result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(subtotal));
 		}
-
 		return result;
 	}
 
@@ -296,6 +295,8 @@ public class RegularCartTotalsCalculation {
 				BigDecimal.valueOf(Double
 						.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_SHIPPING))));
 
+		System.out.println("discountCalculation:" +discountCalculation);
+		
 		String newShippingValue = GeneralCartCalculations
 				.calculateNewShipping1(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSubTotal())),
 						BigDecimal.valueOf(Double.parseDouble(
@@ -367,6 +368,16 @@ public class RegularCartTotalsCalculation {
 		PrintUtils.printShippingTotals(result);
 
 		return result;
+	}
+
+	public static String calculateEndPrice(String finalPrice, String bunosValue) {
+		BigDecimal endPrice =BigDecimal.ZERO;
+		endPrice=endPrice.add(BigDecimal.valueOf(Double.valueOf(finalPrice)));
+		endPrice=endPrice.subtract(BigDecimal.valueOf(Double.valueOf(bunosValue)));
+		
+		return endPrice.setScale(2,RoundingMode.HALF_UP).toString();
+	
+		
 	}
 
 }

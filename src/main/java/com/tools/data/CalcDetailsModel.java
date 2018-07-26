@@ -19,9 +19,47 @@ public class CalcDetailsModel {
 	private String totalAmount;
 	private String subTotal;
 	private String ipPoints;
+	private String totalDiscount;
+	private String shipping;
+
 	private String tax;
 	private Map<String, String> segmentTotals = new HashMap<String, String>();
 	private Map<String, String> calculationsList = new HashMap<String, String>();
+
+	
+	
+	
+	public String getShipping() {
+		return shipping;
+	}
+
+	public void setShipping(String shipping) {
+		this.shipping = shipping;
+	}
+
+	public String getTotalDiscount() {
+		return totalDiscount;
+	}
+
+	public void setTotalDiscount(String totalDiscount) {
+		this.totalDiscount = totalDiscount;
+	}
+
+	public Map<String, String> getSegmentTotals() {
+		return segmentTotals;
+	}
+
+	public void setSegmentTotals(Map<String, String> segmentTotals) {
+		this.segmentTotals = segmentTotals;
+	}
+
+	public Map<String, String> getCalculationsList() {
+		return calculationsList;
+	}
+
+	public void setCalculationsList(Map<String, String> calculationsList) {
+		this.calculationsList = calculationsList;
+	}
 
 	public String getJewelryBonus() {
 		return jewelryBonus;
@@ -116,10 +154,15 @@ public class CalcDetailsModel {
 	@Override
 	public String toString() {
 		return "CalcDetailsModel [jewelryBonus=" + jewelryBonus + ", marketingBonus=" + marketingBonus
-				+ ", totalAmount=" + totalAmount + ", subTotal=" + subTotal + ", ipPoints=" + ipPoints + ", tax=" + tax
-				+ ", segmentTotals=" + segmentTotals + ", calculationsList=" + calculationsList + "]";
+				+ ", totalAmount=" + totalAmount + ", subTotal=" + subTotal + ", ipPoints=" + ipPoints
+				+ ", totalDiscount=" + totalDiscount + ", shipping=" + shipping + ", tax=" + tax + ", segmentTotals="
+				+ segmentTotals + ", calculationsList=" + calculationsList + "]";
 	}
 
+	
+
+	
+	
 	
 	
 	

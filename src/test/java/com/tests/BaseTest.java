@@ -24,6 +24,9 @@ public class BaseTest {
 
 	@Managed(uniqueSession = false)
 	public WebDriver webdriver;
+	
+	
+	
 //
 //	@ManagedPages(defaultUrl = "http://staging-aut.pippajean.com/customer/account/login/")
 //	public Pages pages;

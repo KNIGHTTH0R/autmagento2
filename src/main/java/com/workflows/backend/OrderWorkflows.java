@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 
 import org.junit.Assert;
@@ -100,6 +101,17 @@ public class OrderWorkflows {
 		verifyTotalRefunded(orderTotalsGrabbed.getTotalRefunded(), calculatedTotals.getTotalRefunded());
 		verifyTotalPayable(orderTotalsGrabbed.getTotalPayable(), calculatedTotals.getTotalPayable());
 
+	}
+	
+	@StepGroup
+	public void validateCalculationOrderEmailTotals(String string) {
+
+		verifySubTotals(orderTotalsGrabbed.getSubtotal(), calculatedTotals.getSubtotal());
+		verifyTax(orderTotalsGrabbed.getTax(), calculatedTotals.getTax());
+		verifyShipping(orderTotalsGrabbed.getShipping(), calculatedTotals.getShipping());
+		verifyTotalAmount(orderTotalsGrabbed.getTotalAmount(), calculatedTotals.getTotalAmount());
+	//	verifyIP(orderTotalsGrabbed.getTotalIP(), calculatedTotals.getTotalIP());
+		verifyDiscount(orderTotalsGrabbed.getDiscount(), calculatedTotals.getDiscount());
 	}
 	
 	public void validateInvoiceCalculationTotals(String string) {
@@ -364,8 +376,8 @@ public class OrderWorkflows {
 	}
 
 	@Step
-	private void verifyDiscount(String grabbed, String expected) {
-		CustomVerification.verifyTrue("Failure: Discoumt values dont match: " + grabbed + " - " + expected, grabbed.contains(expected));
+	public void verifyDiscount(String grabbed, String expected) {
+		CustomVerification.verifyTrue("Failure: Discount values dont match: " + grabbed + " - " + expected, grabbed.contains(expected));
 		
 	}
 

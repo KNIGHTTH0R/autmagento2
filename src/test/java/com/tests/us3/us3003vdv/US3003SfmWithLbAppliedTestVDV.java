@@ -141,10 +141,12 @@ public class US3003SfmWithLbAppliedTestVDV extends BaseTest {
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.RECALC);
+
 	}
 
 	@Test
-	public void us3001SfmOrderWithNoDiscountTestVDV() {
+	public void us3003SfmWithLbAppliedTestVDV() {
 		frontEndSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 		//	footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -210,6 +212,7 @@ public class US3003SfmWithLbAppliedTestVDV extends BaseTest {
 		validationWorkflows.setBillingShippingAddress(addressString, addressString);
 		validationWorkflows.performCartValidations();
 		customVerifications.printErrors();
+		
 	}
 
 	@After
@@ -223,6 +226,10 @@ public class US3003SfmWithLbAppliedTestVDV extends BaseTest {
 		MongoWriter.saveUrlModel(DataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		for (BasicProductModel product : CartCalculator.allProductsListRecalculated) {
 			MongoWriter.saveBasicProductModel(product, getClass().getSimpleName() + SoapKeys.GRAB);
+		}
+		for (BasicProductModel product : CartCalculator.allProductsListRecalculated) {
+			System.out.println(product);
+			MongoWriter.saveBasicProductModel(product, getClass().getSimpleName() + SoapKeys.RECALC);
 		}
 	}
 }

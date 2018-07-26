@@ -1,6 +1,8 @@
 package com.pages.external;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 
@@ -9,11 +11,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.constants.UrlConstants;
+import com.tools.data.backend.OrderItemModel;
+import com.tools.data.backend.OrderTotalsModel;
 import com.tools.requirements.AbstractPage;
+import com.tools.utils.FormatterUtils;
 
 public class YopmailPage extends AbstractPage {
 
-	@FindBy(css = "body.bodyinbox")
+	@FindBy(css = ".bodyinbox")
 	private WebElement inboxContainer;
 
 	@FindBy(className = "mailview")
@@ -42,7 +47,8 @@ public class YopmailPage extends AbstractPage {
 		boolean foundEmail = false;
 		List<WebElement> emailList = inboxContainer.findElements(By.cssSelector("div.m a"));
 		for (WebElement itemNow : emailList) {
-			if (itemNow.getText().contains(title)) {
+			System.out.println(itemNow.getText());
+			if (itemNow.getText().contains(title) && !itemNow.getText().contains("Aktualisierung")) {
 				itemNow.click();
 				getDriver().switchTo().defaultContent();
 				waitABit(2000);
@@ -83,6 +89,67 @@ public class YopmailPage extends AbstractPage {
 		getDriver().switchTo().frame(iFrameElement);
 		//get first a (link with Yes) from page
 		getDriver().findElements(By.cssSelector("a[href*='invitation']")).get(0).click();
+	}
+
+	public List<OrderItemModel> grabbedProductsList() {
+		getDriver().switchTo().frame(iFrameElement);
+		scrollPageDown();
+		getDriver().manage().timeouts().implicitlyWait(4,TimeUnit.SECONDS);
+		List<WebElement> totals=getDriver().findElements(By.cssSelector("#mailmillieu  table:nth-child(6) tbody"));
+		List<WebElement> products=totals.subList(0,totals.size() - 1);
+	
+		List<OrderItemModel> productsList=new ArrayList<OrderItemModel>();
+		
+		for (WebElement product : products) {
+			getDriver().manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+			OrderItemModel model=new OrderItemModel();
+	
+			model.setProductCode(product.findElement(By.cssSelector("tr td:nth-child(2)")).getText());
+			model.setNumber(product.findElement(By.cssSelector("tr td:nth-child(3)")).getText());
+			model.setOriginalPrice(FormatterUtils
+					.parseValueToTwoDecimals(product.findElement(By.cssSelector("tr td:nth-child(4)")).getText()));
+			model.setDiscountAmount(FormatterUtils
+					.parseValueToTwoDecimals(product.findElement(By.cssSelector("tr td:nth-child(5)")).getText()));
+			model.setPrice(FormatterUtils
+					.parseValueToTwoDecimals(product.findElement(By.cssSelector("tr td:nth-child(6)")).getText()));
+			productsList.add(model);
+		}
+		return productsList;
+	}
+	
+
+	public OrderTotalsModel grabbedOrderTotals() {
+
+		List<WebElement> totals=getDriver().findElements(By.cssSelector("#mailmillieu  table:nth-child(6) tbody"));
+		List<WebElement> total=totals.subList(totals.size() - 1,totals.size() );
+		List<WebElement> totalSection=total.get(0).findElements(By.cssSelector("tr"));
+		
+		OrderTotalsModel model=new OrderTotalsModel();
+		
+		for (WebElement totalLine : totalSection) {
+			if(totalLine.findElement(By.cssSelector("td:nth-child(1)")).getText().contains("Zwischensumme")){
+				model.setSubtotal(FormatterUtils
+						.parseValueToTwoDecimals(totalLine.findElement(By.cssSelector("td:nth-child(2)")).getText()));
+			}
+			if(totalLine.findElement(By.cssSelector("td:nth-child(1)")).getText().contains("Rabatt")){
+				model.setDiscount(FormatterUtils
+						.parseValueToTwoDecimals(totalLine.findElement(By.cssSelector("td:nth-child(2)")).getText()));
+			}
+			if(totalLine.findElement(By.cssSelector("td:nth-child(1)")).getText().contains("Steuer")){
+				model.setTax(FormatterUtils
+						.parseValueToTwoDecimals(totalLine.findElement(By.cssSelector("td:nth-child(2)")).getText()));
+			}
+			if(totalLine.findElement(By.cssSelector("td:nth-child(1)")).getText().contains("Lieferung und Verarbeitung")){
+				model.setShipping(FormatterUtils
+						.parseValueToTwoDecimals(totalLine.findElement(By.cssSelector("td:nth-child(2)")).getText()));
+			}
+			if(totalLine.findElement(By.cssSelector("td:nth-child(1)")).getText().contains("Gesamtsumme")){
+				model.setTotalAmount(FormatterUtils
+						.parseValueToTwoDecimals(totalLine.findElement(By.cssSelector("td:nth-child(2)")).getText()));
+			}
+		}
+		
+		return model;
 	}
 
 }

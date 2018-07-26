@@ -70,6 +70,24 @@ public class DateUtils {
 		return String.valueOf(sdf.format(lastDayOfMonth));
 	}
 
+	public static String getFirstDayOfPreviousMonth(String dateString, String formatString) throws ParseException {
+		DateFormat format = new SimpleDateFormat(formatString);
+		Date date = format.parse(dateString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.add(Calendar.MONTH, -1);
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DATE);
+		calendar.set(year, month, day, 00, 00, 00);
+		Date lastDayOfMonth = calendar.getTime();
+		DateFormat sdf = new SimpleDateFormat(formatString);
+
+		return String.valueOf(sdf.format(lastDayOfMonth));
+	}
+
 	public static String getLastDayOfAGivenMonth(String dateString, String formatString) throws ParseException {
 		DateFormat format = new SimpleDateFormat(formatString);
 		Date date = format.parse(dateString);
@@ -89,18 +107,6 @@ public class DateUtils {
 		return String.valueOf(sdf.format(lastDayOfMonth));
 	}
 
-	public static Date yesterday() {
-		final Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DATE, -1);
-		return cal.getTime();
-	}
-
-	public static String getYesterdayDateString() {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		// 2017-11-03 17:00:00
-		return dateFormat.format(yesterday());
-	}
-
 	public static String getFirstDayOfAGivenMonth(String dateString, String formatString) throws ParseException {
 		DateFormat format = new SimpleDateFormat(formatString);
 		Date date = format.parse(dateString);
@@ -116,6 +122,55 @@ public class DateUtils {
 		DateFormat sdf = new SimpleDateFormat(formatString);
 
 		return String.valueOf(sdf.format(lastDayOfMonth));
+	}
+	
+	
+	public static String getFirstDayOfANextGivenMonthFull(String dateString, String formatString) throws ParseException {
+		DateFormat format = new SimpleDateFormat(formatString);
+		Date date = format.parse(dateString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.add(Calendar.MONTH, 1);
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DATE);
+		calendar.set(year, month, day, 23, 59, 59);
+		Date lastDayOfMonth = calendar.getTime();
+		DateFormat sdf = new SimpleDateFormat(formatString);
+
+		return String.valueOf(sdf.format(lastDayOfMonth));
+	}
+	
+	public static String getFirstDayOfANextGivenMonthBeginning(String dateString, String formatString) throws ParseException {
+		DateFormat format = new SimpleDateFormat(formatString);
+		Date date = format.parse(dateString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.add(Calendar.MONTH, 1);
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DATE);
+		calendar.set(year, month, day, 00, 00, 00);
+		Date lastDayOfMonth = calendar.getTime();
+		DateFormat sdf = new SimpleDateFormat(formatString);
+
+		return String.valueOf(sdf.format(lastDayOfMonth));
+	}
+
+	public static Date yesterday() {
+		final Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, -1);
+		return cal.getTime();
+	}
+
+	public static String getYesterdayDateString() {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		// 2017-11-03 17:00:00
+		return dateFormat.format(yesterday());
 	}
 
 	public static String getFirstDayOfCurrentMonth(String formatString) throws ParseException {
@@ -222,6 +277,255 @@ public class DateUtils {
 		return String.valueOf(format.format(calendar.getTime()));
 	}
 
+	public static String getFirstSundayAfterDate(String dateString, String formatString) throws ParseException {
+		DateFormat format = new SimpleDateFormat(formatString);
+		Date date = format.parse(dateString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+
+		if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+			calendar.add(Calendar.DATE, 1);
+		}
+
+		while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
+			calendar.add(Calendar.DATE, 1);
+		}
+
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DATE);
+		calendar.set(year, month, day, 23, 59, 59);
+		return String.valueOf(format.format(calendar.getTime()));
+	}
+
+	public static String getFirstMondayAfterDate(String dateString, String formatString) throws ParseException {
+		DateFormat format = new SimpleDateFormat(formatString);
+		Date date = format.parse(dateString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+
+		if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) {
+			calendar.add(Calendar.DATE, 1);
+		}
+
+		while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
+			calendar.add(Calendar.DATE, 1);
+		}
+
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DATE);
+		calendar.set(year, month, day, 23, 59, 59);
+		return String.valueOf(format.format(calendar.getTime()));
+	}
+	
+	public static String getFirstMondayFromBeginningAfterDate(String dateString, String formatString) throws ParseException {
+		DateFormat format = new SimpleDateFormat(formatString);
+		Date date = format.parse(dateString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+
+		if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) {
+			calendar.add(Calendar.DATE, 1);
+		}
+
+		while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
+			calendar.add(Calendar.DATE, 1);
+		}
+
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DATE);
+		calendar.set(year, month, day, 00, 00, 00);
+		return String.valueOf(format.format(calendar.getTime()));
+	}
+	
+	
+	
+	public static String getFirstFullSundayAfterDate(String dateString, String formatString) throws ParseException {
+		DateFormat format = new SimpleDateFormat(formatString);
+		Date date = format.parse(dateString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+
+		if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+			calendar.add(Calendar.DATE, 1);
+		}
+
+		while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
+			calendar.add(Calendar.DATE, 1);
+		}
+
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DATE);
+		calendar.set(year, month, day, 23, 59, 59);
+		return String.valueOf(format.format(calendar.getTime()));
+	}
+
+	public static String[] getFirstConsideredKpiWeekInMonth(String dateString, String formatString) throws ParseException {
+
+		
+
+		String firstday = DateUtils.getFirstDayOfAGivenMonth(dateString, formatString);
+
+		String firstSundey = DateUtils.getFirstSundayAfterDate(firstday, formatString);
+
+		String[] weekLimit = new String[2];
+
+		weekLimit[0] = firstday;
+		weekLimit[1] = firstSundey;
+
+		// DateFormat sdf = new SimpleDateFormat(format);
+
+		return weekLimit;
+	}
+
+	public static String[] getASpecifWeekAfterCurrentDate(String formatString, String week)
+			throws ParseException {
+
+		int dayNoOfWeek = 7;
+		int days = dayNoOfWeek * (Integer.parseInt(week) - 1);
+
+		String today = DateUtils.getCurrentDate(formatString);
+
+		String firstday = DateUtils.getFirstMondayFromBeginningAfterDate(today, formatString);
+		String nextMonday = DateUtils.addDaysToAAGivenDate(firstday, formatString, days);
+
+		String firstSunday = DateUtils.getFirstSundayAfterDate(firstday, formatString);
+		String nextSunday = DateUtils.addDaysToAAGivenDate(firstSunday, formatString, days);
+		
+		String[] weekLimit = new String[2];
+
+		weekLimit[0] = nextMonday;
+		weekLimit[1] = nextSunday;
+
+		return weekLimit;
+	}
+	
+	public static String[] getASpecifcWeekAfterDate(String date,String formatString, String week, boolean isCurrentMonth)
+			throws ParseException {
+
+		int dayNoOfWeek = 7;
+		int days = dayNoOfWeek * (Integer.parseInt(week) - 1);
+		String today="";
+		String firstday = "";
+		String nextMonday ="";
+		String firstSunday = "";
+		String nextSunday = "";
+		
+		if(isCurrentMonth) {
+			today = DateUtils.getCurrentDate(formatString);
+		}else {
+			today=date;
+		}
+		
+		firstday = DateUtils.getFirstMondayFromBeginningAfterDate(today, formatString);
+		nextMonday = DateUtils.addDaysToAAGivenDate(firstday, formatString, days);
+		firstSunday = DateUtils.getFirstSundayAfterDate(firstday, formatString);
+		nextSunday = DateUtils.addDaysToAAGivenDate(firstSunday, formatString, days);
+		
+		String[] weekLimit = new String[2];
+
+		weekLimit[0] = nextMonday;
+		weekLimit[1] = nextSunday;
+
+		return weekLimit;
+	}
+	
+	
+	public static String[] getASpecifcWeekNextMonth(String date,String formatString, String week, boolean isCurrentMonth)
+			throws ParseException {
+
+		int dayNoOfWeek = 7;
+		int days = dayNoOfWeek * (Integer.parseInt(week) - 1);
+		String today="";
+		String firstday = "";
+		String nextMonday ="";
+		String firstSunday = "";
+		String nextSunday = "";
+		
+
+		today=date;
+		
+		
+		firstday = DateUtils.getFirstMondayFromBeginningAfterDate(today, formatString);
+		nextMonday = DateUtils.addDaysToAAGivenDate(firstday, formatString, days);
+		firstSunday = DateUtils.getFirstSundayAfterDate(firstday, formatString);
+		nextSunday = DateUtils.addDaysToAAGivenDate(firstSunday, formatString, days);
+		
+		String[] weekLimit = new String[2];
+
+		weekLimit[0] = nextMonday;
+		weekLimit[1] = nextSunday;
+
+		return weekLimit;
+	}
+	
+	public static String[] getCurrentWeekDate(String formatString)
+			throws ParseException {
+
+	
+		String today = DateUtils.getCurrentDayFromBeginning(formatString);
+		
+	//	String firstSunday = DateUtils.getFirstSundayAfterDate(today, formatString);
+		
+		String firstMonday = DateUtils.getFirstFullSundayAfterDate(today, formatString);
+		
+		String[] weekLimit = new String[2];
+
+		weekLimit[0] = today;
+		weekLimit[1] = firstMonday;
+
+		return weekLimit;
+	}
+	
+	
+	
+	public static String[] getCurrentWeekDateSpecificMonth(String month,String formatString,boolean isCurrentWeeek)
+			throws ParseException {
+		String today="";
+		String firstMonday="";
+		
+		if(isCurrentWeeek) {
+			 today = DateUtils.getCurrentDayFromBeginning(formatString);
+			 firstMonday = DateUtils.getFirstFullSundayAfterDate(today, formatString);
+			
+		}
+		
+		String[] weekLimit = new String[2];
+		weekLimit[0] = today;
+		weekLimit[1] = firstMonday;
+
+		return weekLimit;
+	}
+	
+	public static String[] getASpecifWeekAfterDate(String dateString, String formatString, String week)
+			throws ParseException {
+
+		int dayNoOfWeek = 7;
+		int days = dayNoOfWeek * (Integer.parseInt(week) - 2);
+
+	//	String today = DateUtils.getCurrentDate(formatString);
+
+		String firstday = DateUtils.getFirstMondayFromBeginningAfterDate(dateString, formatString);
+		String nextMonday = DateUtils.addDaysToAAGivenDate(firstday, formatString, days);
+
+		String firstSunday = DateUtils.getFirstSundayAfterDate(firstday, formatString);
+		String nextSunday = DateUtils.addDaysToAAGivenDate(firstSunday, formatString, days);
+		
+		String[] weekLimit = new String[2];
+
+		weekLimit[0] = nextMonday;
+		weekLimit[1] = nextSunday;
+
+		return weekLimit;
+	}
+
 	public static List<String> getFridaysBetweenDates(String startDateString, String endDateString, String formatString)
 			throws ParseException {
 
@@ -263,8 +567,25 @@ public class DateUtils {
 
 	public static String getCurrentDate(String format) {
 		DateFormat sdf = new SimpleDateFormat(format);
-
+	
 		return String.valueOf(sdf.format(new Date()));
+	}
+	
+	public static String getCurrentDayFromBeginning(String formatString) throws ParseException {
+		DateFormat format = new SimpleDateFormat(formatString);
+		
+		String dateString=DateUtils.getCurrentDate(formatString);
+		Date date = format.parse(dateString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DATE);
+		calendar.set(year, month, day, 00, 00, 00);
+		return String.valueOf(format.format(calendar.getTime()));
+		
 	}
 
 	public static String getFewHoursAgoDate(String format, int hoursAgo) {
@@ -300,13 +621,13 @@ public class DateUtils {
 		return String.valueOf(formatFinal.format(date));
 
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	public static boolean isInTheSameMonth(String date, String month, String format) throws ParseException {
 		DateFormat formatFinal = new SimpleDateFormat(format);
 		Date date1 = formatFinal.parse(date);
 		Date date2 = formatFinal.parse(month);
-		return date1.getMonth()==date2.getMonth();
+		return date1.getMonth() == date2.getMonth();
 	}
 
 	public static String parseDate(String dateString, String initialFormatString, String finalFormatString,
@@ -460,7 +781,7 @@ public class DateUtils {
 	 */
 	public static boolean isDateAfter(String currentDate, String startingDate, String format) throws ParseException {
 		DateFormat df = new SimpleDateFormat(format);
-		System.out.println("currentDate: "+currentDate   +"startingDate: "+startingDate );
+		System.out.println("currentDate: " + currentDate + "startingDate: " + startingDate);
 		return !(df.parse(currentDate).before(df.parse(startingDate)));
 	}
 
@@ -501,7 +822,7 @@ public class DateUtils {
 		calendar.set(Calendar.MINUTE, 59);
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
-		
+
 		return String.valueOf(format.format(calendar.getTime()));
 
 	}
@@ -550,10 +871,17 @@ public class DateUtils {
 	}
 
 	public static void main(String args[]) throws ParseException {
-		// System.out.println(DateUtils.getFirstDayOfAGivenMonth("2016-09-30
+		// System.out.println(DateUtils.getFirstConsideredKpiWeek("2018-07-30
 		// 12:00:00","yyyy-MM-dd HH:mm:ss"));
-		// System.out.println(DateUtils.getLastDayOfAGivenMonth("2016-09-30
-		// 12:00:00","yyyy-MM-dd HH:mm:ss"));
+
+	// System.out.println(DateUtils.getASpecifWeekAfterDate("2017-07-30 12:00:00", "yyyy-MM-dd HH:mm:ss", "1", false));
+
+	
+		String[] dates=DateUtils.getASpecifcWeekAfterDate("2018-05-01 00:00:00", "yyyy-MM-dd HH:mm:ss", "10", false);
+		System.out.println(dates[0]);
+		System.out.println(dates[1]);
+
+	//	 System.out.println(DateUtils.getFirstSundayAfterDate("2016-09-30 12:00:00","yyyy-MM-dd HH:mm:ss"));
 		// System.out.println(DateUtils.getFridaysBetweenDates("2016-11-11",
 		// "2016-12-24", "yyyy-MM-dd"));
 		// System.out.println(DateUtils.parseDate("2016-12-15", "yyyy-MM-dd",
@@ -571,24 +899,29 @@ public class DateUtils {
 		// yy", new Locale.Builder().setLanguage("de").build(), "dd.MM.YYYY"));
 		// /yyyy-MM-dd HH:mm:ss
 		// System.out.println(DateUtils.getCurrentDate());
-	//System.out.println(	DateUtils.setHourToDate(DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), 23, "yyyy-MM-dd HH:mm:ss"));
-				
-//	System.out.println(   DateUtils.getNumberOfDaysBeetweenTwoDates(DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), DateUtils.setHourToDate("2018-05-06 15:40:00", 23, "yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")); 
-	//    System.out.println(DateUtils.isDateAfter("", getFirstDayOfAGivenMonth("", "yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss"));
-		
-	  /*  Calendar cal =
-				 Calendar.getInstance(); // remove next line if you're always
-				 using the current time. cal.setTime(currentDate);
-				 cal.add(Calendar.HOUR, -1); Date oneHourBack = cal.getTime();*/
-				 
+		// System.out.println(
+		// DateUtils.setHourToDate(DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), 23,
+		// "yyyy-MM-dd HH:mm:ss"));
+
+		// System.out.println(
+		// DateUtils.getNumberOfDaysBeetweenTwoDates(DateUtils.getCurrentDate("yyyy-MM-dd
+		// HH:mm:ss"), DateUtils.setHourToDate("2018-05-06 15:40:00", 23, "yyyy-MM-dd
+		// HH:mm:ss"), "yyyy-MM-dd HH:mm:ss"));
+		// System.out.println(DateUtils.isDateAfter("", getFirstDayOfAGivenMonth("",
+		// "yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss"));
+
+		/*
+		 * Calendar cal = Calendar.getInstance(); // remove next line if you're always
+		 * using the current time. cal.setTime(currentDate); cal.add(Calendar.HOUR, -1);
+		 * Date oneHourBack = cal.getTime();
+		 */
 
 		// System.out.println(new Date(System.currentTimeMillis() - 3600 *
 		// 1000));
 
-		System.out.println(isInTheSameMonth("2018-05-01 12:00:00","2018-04-03 12:00:00","yyyy-MM-dd HH:mm:ss"));
-		
-	}
+		// System.out.println(isInTheSameMonth("2018-05-01 12:00:00","2018-04-03
+		// 12:00:00","yyyy-MM-dd HH:mm:ss"));
 
-	
+	}
 
 }

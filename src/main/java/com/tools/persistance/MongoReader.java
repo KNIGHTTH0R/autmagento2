@@ -573,6 +573,8 @@ public class MongoReader extends MongoConnector {
 				result.setDiscountMarketing(MongoUtils.checkField(dbObject, MongoTableKeys.DISCOUNT_MARKETING));
 				result.setDiscountJb(MongoUtils.checkField(dbObject, MongoTableKeys.DISCOUNT_JB));
 				result.setTax(MongoUtils.checkField(dbObject, MongoTableKeys.TAX));
+				result.setTotalDiscount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_DISCOUNT));
+				
 
 				itemList.add(result);
 			}
@@ -698,6 +700,8 @@ public class MongoReader extends MongoConnector {
 				result.setUnitPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_PRICE));
 				result.setQuantity(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_QUANTITY));
 				result.setFinalPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_FINAL_PRICE));
+				result.setEndPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_END_PRICE));
+				result.setBunosValue(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_BONUS_PRICE));
 
 				itemList.add(result);
 			}
@@ -729,8 +733,8 @@ public class MongoReader extends MongoConnector {
 				result.setIpPoints(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_IP_POINTS));
 				result.setDeliveryDate(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_DELIVERY_DATE));
 				result.setDiscountValue(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_DISCOUNT_VALUE));
+				result.setFinalPriceDiscounted(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_END_PRICE));
 
-				
 				itemList.add(result);
 			}
 		} catch (Exception e) {

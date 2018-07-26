@@ -18,10 +18,27 @@ public class RegularCartCalcDetailsModel {
 	private String subTotal;
 	private String tax;
 	private String ipPoints;
+	private String totalDiscount;
 	private Map<String, String> segmentTotals = new HashMap<String, String>();
 
 	
 	
+	public String getTotalDiscount() {
+		return totalDiscount;
+	}
+
+	public void setTotalDiscount(String totalDiscount) {
+		this.totalDiscount = totalDiscount;
+	}
+
+	public Map<String, String> getSegmentTotals() {
+		return segmentTotals;
+	}
+
+	public void setSegmentTotals(Map<String, String> segmentTotals) {
+		this.segmentTotals = segmentTotals;
+	}
+
 	public String getIpPoints() {
 		return ipPoints;
 	}

@@ -128,7 +128,11 @@ public class CartDiscountsCalculation {
 			newProduct.setFinalPrice(calculateMarketingMaterialCartProductFinalPrice(
 					BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())),
 					BigDecimal.valueOf(Double.parseDouble(marketingDiscount)), sumMarketingMaterial));
+			System.out.println("marketing final Price" +newProduct.getFinalPrice());
 			newProduct.setTax(calculateProductTaxAmount(BigDecimal.valueOf(Double.valueOf(newProduct.getFinalPrice()))).toString());
+			System.out.println("marketing tax Price" +newProduct.getTax());
+			newProduct.setTotalDiscount(calculateTotalDiscount(newProduct.getDiscount20(),newProduct.getDiscountJb(),newProduct.getDiscountMarketing()));
+
 
 			cartProducts.add(newProduct);
 		}
@@ -196,6 +200,7 @@ public class CartDiscountsCalculation {
 
 		List<BasicProductModel> productList=getOnly25Products(products);
 		BigDecimal sum25 = calculateDiscountAskingPriceSum(productList, ConfigConstants.DISCOUNT_20);
+		//BigDecimal sum20= calculateSumWithout20Percent(sum25);
 
 		List<BasicProductModel> cartProducts = new ArrayList<BasicProductModel>();
 
@@ -226,20 +231,43 @@ public class CartDiscountsCalculation {
 
 			
 			newProduct.setFinalPrice(discounts[0]);
+			System.out.println("20 section: "+newProduct.getFinalPrice());
 			newProduct.setTax(calculateProductTaxAmount(BigDecimal.valueOf(Double.valueOf(discounts[0]))).toString());
 			
 			
 			
 			delta = BigDecimal.valueOf(Double.parseDouble(discounts[1]));
 			
-			newProduct.setDiscount20(discounts[2]);
+			newProduct.setDiscount20(calculateDiscount20(BigDecimal.valueOf(Double.valueOf(product.getProductsPrice()))).toString());
 			newProduct.setDiscountJb(discounts[3]);
+			newProduct.setTotalDiscount(calculateTotalDiscount(newProduct.getDiscount20(),newProduct.getDiscountJb(),newProduct.getDiscountMarketing()));
 			cartProducts.add(newProduct);
 		}
 
 		return cartProducts;
 
 	}
+
+	private static String calculateTotalDiscount(String discount20, String discountJb,String discountMk) {
+		BigDecimal totalDiscounts=BigDecimal.ZERO;
+		totalDiscounts=totalDiscounts.add(BigDecimal.valueOf(Double.valueOf(discount20)));
+		totalDiscounts=totalDiscounts.add(BigDecimal.valueOf(Double.valueOf(discountJb)));
+		totalDiscounts=totalDiscounts.add(BigDecimal.valueOf(Double.valueOf(discountMk)));
+		return totalDiscounts.setScale(2,RoundingMode.HALF_UP).toString();
+	}
+
+	private static BigDecimal calculateDiscount20(BigDecimal sum25) {
+		// TODO Auto-generated method stub
+		return sum25.multiply(BigDecimal.valueOf(0.2)).setScale(2, RoundingMode.HALF_UP);	}
+
+	private static BigDecimal calculateSumWithout20Percent(BigDecimal sum25) {
+		
+		return sum25.multiply(BigDecimal.valueOf(0.8).setScale(2, RoundingMode.HALF_UP));
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 
 	private static List<BasicProductModel> getOnly25Products(List<BasicProductModel> products) {
 		List<BasicProductModel> productList=new ArrayList<BasicProductModel>();
@@ -387,10 +415,12 @@ public class CartDiscountsCalculation {
 	
 	
 	
-	public static String[] calculate25DiscountCartProductFinalPrice(BigDecimal askingPrice, BigDecimal jB,
+	/*public static String[] calculate25DiscountCartProductFinalPrice(BigDecimal askingPrice, BigDecimal jB,
 			BigDecimal sum25Section, BigDecimal deltaDiscount) {
 
-		
+		System.out.println("sum25Section: "+sum25Section);
+		System.out.println("askingPrice: "+askingPrice);
+		System.out.println("jB"+jB);
 		
 		String[] discountAndRemainder = new String[4];
 
@@ -403,23 +433,23 @@ public class CartDiscountsCalculation {
 		if (sum25Section.compareTo(jB) > 0) {
 
 			result = result.add(askingPrice);
+			System.out.println("result 0: "+result);
+
 			result = result.multiply(BigDecimal.valueOf(100));
 			result = result.divide(sum25Section, 4, BigDecimal.ROUND_HALF_UP);
 			result = result.divide(BigDecimal.valueOf(100), 10, BigDecimal.ROUND_HALF_UP);
-			result = result.multiply(jB);
+			System.out.println("result 1: "+result);
 			
-			discountJB=discountJB.add(result);
+			result = result.multiply(jB);
 			result = askingPrice.subtract(result);
 			BigDecimal temp = result;
-			result = result.multiply(BigDecimal.valueOf(Integer.parseInt(ConfigConstants.DISCOUNT_20)));
+			result = result.multiply(BigDecimal.valueOf(Double.valueOf(ConfigConstants.DISCOUNT_20)));
 			// the 25% disc is calculated with 5 decimals precision (we don't
 			// want the 4th decimal rounded)
 			diff = result.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
 			diff = diff.add(deltaDiscount);// add delta discount from previous
-						
-			// product
-			discount25 =discount25.add(diff);
-			System.out.println("fucking diff: " + diff);
+											// product
+			System.out.println("that diff: " + diff);
 			// the calculated discount is rounded to 2 decimals- actual discount
 			result = diff.setScale(2, BigDecimal.ROUND_HALF_UP);
 			// the calculated discount is rounded to 4 decimals (expected)
@@ -431,12 +461,116 @@ public class CartDiscountsCalculation {
 			System.out.println("DIF "+diff);
 			result = temp.subtract(result);
 
+
 		}
 		discountAndRemainder[0] = String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_UP));
 		discountAndRemainder[1] = String.valueOf(diff.setScale(4, BigDecimal.ROUND_HALF_UP));
 		discountAndRemainder[2] = String.valueOf(discount25.setScale(2, BigDecimal.ROUND_HALF_UP));
 		discountAndRemainder[3] = String.valueOf(discountJB.setScale(0, BigDecimal.ROUND_HALF_UP));
+		
+		System.out.println("result: "+ result);
+		System.out.println("diff: "+diff);
+		System.out.println("discount25: "+discount25);
+		System.out.println("discountJB: "+ discountJB);
+		
+		return discountAndRemainder;
+	}*/
+	
+	
+	public static String[] calculate25DiscountCartProductFinalPrice(BigDecimal askingPrice, BigDecimal jB,
+			BigDecimal sum25Section, BigDecimal deltaDiscount) {
 
+		System.out.println("sum25Section: "+sum25Section);
+		System.out.println("askingPrice: "+askingPrice);
+		System.out.println("jB"+jB);
+		
+		String[] discountAndRemainder = new String[4];
+
+		BigDecimal result = BigDecimal.ZERO;
+		BigDecimal diff = BigDecimal.ZERO;
+		BigDecimal discount25 = BigDecimal.ZERO;
+		BigDecimal discountJB = BigDecimal.ZERO;
+		BigDecimal askingPrice20 = BigDecimal.ZERO;
+		BigDecimal sum25Section20 = BigDecimal.ZERO;
+
+		askingPrice20=askingPrice.multiply(BigDecimal.valueOf(0.8));
+		sum25Section20=sum25Section.multiply(BigDecimal.valueOf(0.8));
+
+		System.out.println(sum25Section20.compareTo(jB) > 0);
+		if (sum25Section20.compareTo(jB) > 0) {
+
+		/*	result=result.add(jB);
+			System.out.println("1: "+result);
+			result=result.divide(sum25Section, 10, BigDecimal.ROUND_HALF_UP);
+			System.out.println("2: "+result);
+			askingPrice20=askingPrice.multiply(BigDecimal.valueOf(0.8));
+			System.out.println("3: "+askingPrice20);
+			discount25=askingPrice.subtract(askingPrice20);
+			System.out.println("3.1: "+discount25);
+			result=result.multiply(askingPrice20);
+			System.out.println("4: "+result);
+
+			finalValue=finalValue.add(result);
+			System.out.println("5: "+finalValue);
+
+			result=askingPrice.subtract(finalValue);
+			System.out.println("6: "+result);
+
+			
+			System.out.println("result"+result);
+			*/
+					
+					
+	
+			
+			result = result.add(askingPrice20);
+
+			result = result.multiply(BigDecimal.valueOf(100));
+			result = result.divide(sum25Section20, 4, BigDecimal.ROUND_HALF_UP);
+			result = result.divide(BigDecimal.valueOf(100), 10, BigDecimal.ROUND_HALF_UP);
+			
+			result = result.multiply(jB);
+			discountJB=discountJB.add(result);
+			result = askingPrice20.subtract(result);
+			discount25=askingPrice.multiply(BigDecimal.valueOf(0.2));
+			BigDecimal temp = result;
+			System.out.println("temp: "+temp);
+			//result = result.multiply(BigDecimal.valueOf(Double.valueOf(ConfigConstants.DISCOUNT_20)));
+			// the 25% disc is calculated with 5 decimals precision (we don't
+			// want the 4th decimal rounded)
+		//	diff = result.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
+			diff=result.setScale(5,BigDecimal.ROUND_HALF_UP);
+			diff = diff.add(deltaDiscount);// add delta discount from previous
+											// product
+			System.out.println("that diff: " + diff);
+			// the calculated discount is rounded to 2 decimals- actual discount
+			result = diff.setScale(2, BigDecimal.ROUND_HALF_UP);
+			
+			
+			// the calculated discount is rounded to 4 decimals (expected)
+			diff = diff.setScale(4, BigDecimal.ROUND_HALF_UP);
+			// we calculate the remaining discount difference to be applied on
+			// the next product
+			diff = diff.subtract(result);
+			
+		//	System.out.println("DIF "+diff);
+		//	System.out.println("that temp: "+temp);
+		//	System.out.println("that result: "+result);
+		//	result = temp.setScale(2).subtract(result);
+		//	System.out.println("acest result"+result);
+
+
+		}
+		discountAndRemainder[0] = String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_UP));
+		discountAndRemainder[1] = String.valueOf(diff.setScale(4, BigDecimal.ROUND_HALF_UP));
+		discountAndRemainder[2] = String.valueOf(discount25.setScale(2, BigDecimal.ROUND_HALF_UP));
+		discountAndRemainder[3] = String.valueOf(discountJB.setScale(2, BigDecimal.ROUND_HALF_UP));
+		
+		System.out.println("result: "+ result);
+		System.out.println("diff: "+diff);
+		System.out.println("discount25: "+discount25);
+		System.out.println("discountJB: "+ discountJB);
+		
 		return discountAndRemainder;
 	}
 
@@ -471,7 +605,6 @@ public class CartDiscountsCalculation {
 			result = result.divide(sumMarketingMaterial, 2, BigDecimal.ROUND_HALF_UP);
 			result = result.divide(BigDecimal.valueOf(100), 2, BigDecimal.ROUND_HALF_UP);
 			result = result.multiply(marketingDiscount);
-			System.out.println(result);
 			result = askingPrice.subtract(result);
 		}
 		return String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_UP));
@@ -565,9 +698,10 @@ public class CartDiscountsCalculation {
 		CartTotalsCalculation.calculateCartProductsTotals(cartProductsBeta, "150", "0", "19", "3.9",
 				"3.9");*/
 		BigDecimal askingPrice=BigDecimal.valueOf(55.90);
-		BigDecimal jB=BigDecimal.valueOf(30);
+		/*BigDecimal jB=BigDecimal.valueOf(30);
 		BigDecimal sumMarketingMaterial=BigDecimal.valueOf(55.90);
-		BigDecimal deltaDiscount=BigDecimal.valueOf(0);
-		System.out.println(calculate25DiscountCartProductFinalPrice(askingPrice, jB, sumMarketingMaterial, deltaDiscount));
+		BigDecimal deltaDiscount=BigDecimal.valueOf(0);*/
+		//System.out.println(calculate25DiscountCartProductFinalPrice(askingPrice, jB, sumMarketingMaterial, deltaDiscount));
+		System.out.println(calculateSumWithout20Percent(askingPrice));
 	}
 }

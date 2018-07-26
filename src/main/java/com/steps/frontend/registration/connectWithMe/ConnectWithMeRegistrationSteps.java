@@ -15,22 +15,7 @@ public class ConnectWithMeRegistrationSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1L;
 
-	@Step
-	public void navigateToConnectWithMeUnderMasterShop() {
-		navigate(MongoReader.getBaseURL());
-		homePage().clickStylePartyLink();
-	}
-
-	@Step
-	public void navigateToConnectWithMeUnderContext(String context) {
-		navigate(MongoReader.getBaseURL() + context);
-		homePage().clickStylePartyLink();
-	}
-
-	@Step
-	public void loggedInUsernavigatesToConnectWithMeUnderContext(String context) {
-		homePage().clickStylePartyLink();
-	}
+	
 
 	@Step
 	@Title("Fill connect with me form")

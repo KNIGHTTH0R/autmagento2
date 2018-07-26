@@ -3,9 +3,6 @@ package com.pages.backend.orders.details;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
-import org.bouncycastle.asn1.eac.EACObjectIdentifiers;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -15,6 +12,8 @@ import org.openqa.selenium.support.ui.Select;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class RmaItemsPage extends AbstractPage {
 

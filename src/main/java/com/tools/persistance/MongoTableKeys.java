@@ -99,6 +99,7 @@ public class MongoTableKeys {
 	public static final String TOTAL_AMOUNT = "totalAmount";
 	public static final String IP_POINTS = "ipPoints";
 	public static final String DISCOUNT_LIST = "discounts";
+	public static final String TOTAL_DISCOUNT = "totalDiscounts";
 	
 	/// TermPurchaseIpModel
 	public static final String TERM_PURCHASE_IP_MODEL = "TermPurchaseIpModel";
@@ -129,6 +130,10 @@ public class MongoTableKeys {
 	public static final String PRODUCT_EARLIEST_DATE = "earliestDate";
 	public static final String PRODUCT_DELIVERY_DATE = "deliveryDate";
 	public static final String PRODUCT_DISCOUNT_VALUE = "discountValue";
+	public static final String PRODUCT_END_PRICE = "endPrice";
+	public static final String PRODUCT_BONUS_PRICE = "bonusPrice";
+
+
 
 	
 	//vdv
