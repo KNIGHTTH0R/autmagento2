@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ReportsSteps;
@@ -40,7 +40,7 @@ public class US26002ValidateProductsOnStockAvailabilityListTest extends BaseTest
 	@Steps
 	public ReportsSteps reportsSteps;
 	@Steps
-	public CustomerRegistrationSteps frontEndSteps;
+	public UserRegistrationSteps frontEndSteps;
 	@Steps
 	public AvailabilityReportSteps availabilitySteps;
 	@Steps

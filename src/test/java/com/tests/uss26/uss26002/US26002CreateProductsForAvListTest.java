@@ -12,7 +12,7 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.products.BackendProductDetailsSteps;
 import com.steps.backend.products.BackendProductListSteps;
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.constants.SoapKeys;
 import com.tools.data.soap.ProductDetailedModel;
@@ -32,7 +32,7 @@ import net.thucydides.core.annotations.WithTag;
 public class US26002CreateProductsForAvListTest extends BaseTest {
 
 	@Steps
-	public CustomerRegistrationSteps frontEndSteps;
+	public UserRegistrationSteps frontEndSteps;
 	@Steps
 	public BackEndSteps backEndSteps;
 	@Steps

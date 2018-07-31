@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
 
 import com.connectors.PippaDb.VanDelVeldeDBConnection;
 import com.connectors.mongo.MongoConnector;
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyDetailsSteps;
@@ -39,7 +39,7 @@ public class US9002ClosePartyTest extends BaseTest {
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps
-	public CustomerRegistrationSteps customerRegistrationSteps;
+	public UserRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 	public static UrlModel urlModel = new UrlModel();

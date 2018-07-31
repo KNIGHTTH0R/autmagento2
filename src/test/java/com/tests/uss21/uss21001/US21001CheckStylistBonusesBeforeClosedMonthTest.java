@@ -78,7 +78,7 @@ public class US21001CheckStylistBonusesBeforeClosedMonthTest extends BaseTest {
 	@Test
 	public void us21001CheckStylistBonusesBeforeClosedMonthTest() throws ParseException {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		backEndSteps.clickOnCustomers();
+		backEndSteps.openCustomersGrid();
 		backEndSteps.searchForEmail(email);
 		backEndSteps.openCustomerDetails(email);
 		backEndSteps.clickOnRewardsPointsTab();

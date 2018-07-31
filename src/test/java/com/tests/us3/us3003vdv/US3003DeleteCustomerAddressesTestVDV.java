@@ -63,7 +63,7 @@ public class US3003DeleteCustomerAddressesTestVDV extends BaseTest {
 	public void us3003DeleteCustomerAddressesTestVDV() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		backEndSteps.clickOnCustomers();
+		backEndSteps.openCustomersGrid();
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
 		backEndSteps.deleteAllAdresses();

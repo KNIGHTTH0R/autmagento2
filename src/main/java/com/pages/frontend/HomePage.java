@@ -11,15 +11,11 @@ public class HomePage extends AbstractPage {
 
 	@FindBy(css = ".panel.header ul.header a[href*='account/create']")
 	private WebElement createAccountLink;
-
 	
-
 	public void clickOnCreateAccountLink() {
 		element(createAccountLink).waitUntilVisible();
 		createAccountLink.click();
 
 	}
-
-
 
 }

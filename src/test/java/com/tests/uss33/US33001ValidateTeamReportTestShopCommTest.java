@@ -17,7 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
@@ -48,7 +48,7 @@ import net.thucydides.core.annotations.WithTag;
 public class US33001ValidateTeamReportTestShopCommTest extends BaseTest {
 
 	@Steps
-	public CustomerRegistrationSteps frontEndSteps;
+	public UserRegistrationSteps frontEndSteps;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps

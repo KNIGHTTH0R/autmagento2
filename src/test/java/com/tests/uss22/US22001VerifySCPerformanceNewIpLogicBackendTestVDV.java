@@ -102,7 +102,7 @@ public class US22001VerifySCPerformanceNewIpLogicBackendTestVDV extends BaseTest
 	public void us22001VerifySCPerformanceNewIpLogicBackendTestVDV() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		backEndSteps.clickOnCustomers();
+		backEndSteps.openCustomersGrid();
 		backEndSteps.searchForEmail(email);
 		backEndSteps.openCustomerDetails(email);
 		grabbedLoungeIpPerformanceModel = customerDetailsBackendSteps.grabSCPerformanceIpLogicAdmin();

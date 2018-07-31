@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.CustomerFormModel;
@@ -24,7 +24,7 @@ import net.thucydides.core.annotations.WithTag;
 public class UserRegistrationTest extends BaseTest {
 
 	@Steps
-	public CustomerRegistrationSteps customerRegistrationSteps;
+	public UserRegistrationSteps userRegistrationSteps;
 	@Steps
 	public CustomVerification customVerifications;
 
@@ -39,8 +39,8 @@ public class UserRegistrationTest extends BaseTest {
 	@Test
 	public void usUserRegistrationTest() {
 
-		customerRegistrationSteps.fillUserRegistrationForm(dataModel);
-		customerRegistrationSteps.verifyCustomerCreation();
+		userRegistrationSteps.fillUserRegistrationForm(dataModel);
+		userRegistrationSteps.verifyUserCreation(dataModel);
 		customVerifications.printErrors();
 	}
 

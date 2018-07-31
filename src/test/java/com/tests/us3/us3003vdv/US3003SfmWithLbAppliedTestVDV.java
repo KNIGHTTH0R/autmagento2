@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
@@ -52,11 +52,11 @@ import net.thucydides.core.annotations.WithTag;
 @RunWith(SerenityRunner.class)
 public class US3003SfmWithLbAppliedTestVDV extends BaseTest {
 	@Steps
-	public CustomerRegistrationSteps customerRegistrationSteps;
+	public UserRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
-	public CustomerRegistrationSteps frontEndSteps;
+	public UserRegistrationSteps frontEndSteps;
 	@Steps
 	public HomeSteps homeSteps;
 	@Steps

@@ -15,7 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
@@ -34,7 +34,7 @@ import com.workflows.commission.StylecoachPerformanceValidationWorkflow;
 public class US22001VerifySCPerformanceNewIpLogicFrontendTestVDV extends BaseTest {
 
 	@Steps
-	public CustomerRegistrationSteps customerRegistrationSteps;
+	public UserRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public LoungeSteps loungeSteps;
 	@Steps

@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
@@ -73,7 +73,7 @@ public class US9005PlaceHostOrderWithTpAndZeroAmountTest extends BaseTest {
 	@Steps
 	public RegularUserCartSteps regularUserCartSteps;
 	@Steps
-	public CustomerRegistrationSteps customerRegistrationSteps;
+	public UserRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public AddHostProductsWorkflow addHostProductsWorkflow;
 	@Steps

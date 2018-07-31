@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
 import com.connectors.mongo.MongoConnector;
 import com.steps.EmailSteps;
 import com.steps.external.EmailClientSteps;
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.profile.ProfileSteps;
 import com.tests.BaseTest;
@@ -52,7 +52,7 @@ public class US3002ValidateOrderEmailTestVDV extends BaseTest{
 		
 	}
 	@Steps
-	public CustomerRegistrationSteps frontEndSteps;
+	public UserRegistrationSteps frontEndSteps;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps

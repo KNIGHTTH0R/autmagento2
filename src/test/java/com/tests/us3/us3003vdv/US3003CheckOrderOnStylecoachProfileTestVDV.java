@@ -16,7 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.profile.ProfileSteps;
@@ -41,7 +41,7 @@ public class US3003CheckOrderOnStylecoachProfileTestVDV extends BaseTest{
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps
-	public CustomerRegistrationSteps frontEndSteps;
+	public UserRegistrationSteps frontEndSteps;
 	@Steps 
 	public CustomVerification customVerifications;
 	

@@ -15,7 +15,7 @@ public class MagentoLoginPage extends AbstractPage {
 	@FindBy(id = "login")
 	private WebElement userPassInput;
 
-	@FindBy(css = "input[value*='Anmelden']")
+	@FindBy(css = ".action-login.action-primary")
 	private WebElement loginButton;
 
 	public void inputUserName(String userName) {

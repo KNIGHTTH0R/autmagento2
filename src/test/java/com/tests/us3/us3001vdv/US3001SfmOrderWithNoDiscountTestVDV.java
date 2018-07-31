@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
@@ -54,7 +54,7 @@ import net.thucydides.core.annotations.WithTag;
 public class US3001SfmOrderWithNoDiscountTestVDV extends BaseTest {
 
 	@Steps
-	public CustomerRegistrationSteps frontEndSteps;
+	public UserRegistrationSteps frontEndSteps;
 	@Steps
 	public AddProductsWorkflow addProductsWorkflow;
 	@Steps

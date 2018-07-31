@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.connectors.gmail.GmailConnector;
 import com.steps.EmailSteps;
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.profile.ProfileSteps;
 import com.tests.BaseTest;
@@ -38,7 +38,7 @@ import com.tools.requirements.Application;
 public class US9002ValidateOrderEmailTest extends BaseTest{
 	
 	@Steps
-	public CustomerRegistrationSteps frontEndSteps;
+	public UserRegistrationSteps frontEndSteps;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps

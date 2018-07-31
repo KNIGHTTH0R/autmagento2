@@ -25,7 +25,7 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 		
 		
 //		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
-		navigationPage().selectSubmenu("promo_quote");
+		navigationPage().openCustomerMenu("promo_quote");
 		shoppingCartPriceRulesPage().typeRuleName(ruleName);
 		shoppingCartPriceRulesPage().clickOnSearch();
 		shoppingCartPriceRulesPage().openRuleDetails(ruleName);
@@ -46,7 +46,7 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 		
 		
 //		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
-		navigationPage().selectSubmenu("promo_quote");
+		navigationPage().openCustomerMenu("promo_quote");
 		shoppingCartPriceRulesPage().typeRuleName(ruleName);
 		shoppingCartPriceRulesPage().clickOnSearch();
 		shoppingCartPriceRulesPage().openRuleDetails(ruleName);
@@ -62,7 +62,7 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 //		magentoLoginPage().clickOnLogin();
 //		navigationPage().dismissPopUp();
 //		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
-		navigationPage().selectSubmenu("promo_quote");
+		navigationPage().openCustomerMenu("promo_quote");
 		System.out.println("sunt aici");
 		shoppingCartPriceRulesPage().typeRuleCode(couponCode);
 		shoppingCartPriceRulesPage().clickOnSearch();
@@ -81,7 +81,7 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 //		magentoLoginPage().clickOnLogin();
 //		navigationPage().dismissPopUp();
 //		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
-		navigationPage().selectSubmenu("promo_quote");
+		navigationPage().openCustomerMenu("promo_quote");
 		shoppingCartPriceRulesPage().typeRuleCode(couponCode);
 		shoppingCartPriceRulesPage().clickOnSearch();
 		shoppingCartPriceRulesPage().verifyStatusAndOpenRuleDetails("Contact Booster", status);
