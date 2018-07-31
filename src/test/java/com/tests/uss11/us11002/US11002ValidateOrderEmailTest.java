@@ -25,7 +25,7 @@ import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.steps.external.EmailClientSteps;
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.profile.ProfileSteps;
 import com.tests.BaseTest;

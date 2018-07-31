@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
 
 import com.connectors.PippaDb.VanDelVeldeDBConnection;
 import com.connectors.mongo.MongoConnector;
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyDetailsSteps;
@@ -74,7 +74,7 @@ public class US11001PartyHostBuysForCustomerWithNoBonusTestVDV extends BaseTest 
 	@Steps
 	public ShippingPartySectionSteps shippingPartySectionSteps;
 	@Steps
-	public CustomerRegistrationSteps customerRegistrationSteps;
+	public UserRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public AddProductsForCustomerWorkflow addProductsForCustomerWorkflow;
 	@Steps

@@ -23,6 +23,11 @@ public class CustomerListPage extends AbstractPage {
 
 	@FindBy(css = "td.filter-actions > button.task")
 	private WebElement searchButton;
+	
+	@FindBy(css = "div[data-bind*='collapsible'] .data-grid-filters-action-wrap")
+	private WebElement collapseFilters;
+				
+	//continue test
 
 	public void inputEmailFilter(String emailText) {
 		evaluateJavascript("jQuery.noConflict();");
@@ -60,5 +65,11 @@ public class CustomerListPage extends AbstractPage {
 				break theFor;
 			}
 		}
+	}
+
+	public void clickOnFilters() {
+		element(collapseFilters).waitUntilVisible();
+		collapseFilters.click();
+		
 	}
 }

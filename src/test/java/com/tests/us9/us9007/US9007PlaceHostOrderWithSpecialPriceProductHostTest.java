@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
 import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.backend.promotion.ShoppingCartPriceRulesSteps;
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
@@ -75,7 +75,7 @@ public class US9007PlaceHostOrderWithSpecialPriceProductHostTest extends BaseTes
 	@Steps
 	public HostCartSteps hostCartSteps;
 	@Steps
-	public CustomerRegistrationSteps customerRegistrationSteps;
+	public UserRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public AddHostProductsWorkflow addHostProductsWorkflow;
 	@Steps

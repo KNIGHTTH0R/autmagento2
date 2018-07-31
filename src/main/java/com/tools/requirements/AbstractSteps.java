@@ -63,7 +63,7 @@ import com.pages.external.unbounce.UnbounceDykscPage;
 import com.pages.external.unbounce.UnbouncePage;
 import com.pages.external.unbounce.UnbounceRegSuccesPage;
 import com.pages.frontend.ContactDetailsPage;
-import com.pages.frontend.CreateCustomerPage;
+import com.pages.frontend.CreateUserPage;
 import com.pages.frontend.FancyBoxPage;
 import com.pages.frontend.FooterPage;
 import com.pages.frontend.HeaderPage;
@@ -116,6 +116,7 @@ import com.pages.frontend.checkout.wishlist.WishlistPage;
 import com.pages.frontend.invitation.FacebookInvitationPage;
 import com.pages.frontend.invitation.FacebookMessagePage;
 import com.pages.frontend.profile.DashboardPage;
+import com.pages.frontend.profile.MyAccountPage;
 import com.pages.frontend.profile.ProfileHistoryPage;
 import com.pages.frontend.profile.ProfileNavPage;
 import com.pages.frontend.profile.SosPage;
@@ -156,27 +157,27 @@ public class AbstractSteps extends ScenarioSteps {
 	 */
 	@Step
 	public void performLogin(String userName, String userPass) {
-		
-	//	getDriver().navigate().to("http://185.48.116.231:8080/DynamicsNAV90/WebClient/");
 
-	//	System.out.println("eu sunce cel mai tare din parcare");
+		// getDriver().navigate().to("http://185.48.116.231:8080/DynamicsNAV90/WebClient/");
+
+		// System.out.println("eu sunce cel mai tare din parcare");
 		navigate(MongoReader.getBaseURL());
 		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().acceptCookieConsent();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
-		
+
 		loginPage().clickOnLoginButton();
 
 	}
-	
+
 	@Step
-	public void performLoginOnWebsite(String userName, String userPass,String website) {
-//		navigate(MongoReader.getBaseURL()+"/"+website);
-//		navigate(MongoReader.getBaseURL()+"/"+website);
-		navigate("https://staging.pippajean.com/"+website);
-		navigate("https://staging.pippajean.com/"+website);
+	public void performLoginOnWebsite(String userName, String userPass, String website) {
+		// navigate(MongoReader.getBaseURL()+"/"+website);
+		// navigate(MongoReader.getBaseURL()+"/"+website);
+		navigate("https://staging.pippajean.com/" + website);
+		navigate("https://staging.pippajean.com/" + website);
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
@@ -184,13 +185,13 @@ public class AbstractSteps extends ScenarioSteps {
 		waitABit(5000);
 
 	}
-	
+
 	@Step
-	public void performLoginOnWebsiteWithContext(String userName, String userPass,String website,String context) {
-//		navigate(MongoReader.getBaseURL()+"/"+website);
-//		navigate(MongoReader.getBaseURL()+"/"+website);
-		navigate("https://staging.pippajean.com/"+website+"/"+context);
-		navigate("https://staging.pippajean.com/"+website+"/"+context);
+	public void performLoginOnWebsiteWithContext(String userName, String userPass, String website, String context) {
+		// navigate(MongoReader.getBaseURL()+"/"+website);
+		// navigate(MongoReader.getBaseURL()+"/"+website);
+		navigate("https://staging.pippajean.com/" + website + "/" + context);
+		navigate("https://staging.pippajean.com/" + website + "/" + context);
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
@@ -231,8 +232,8 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
-		Assert.assertTrue(
-				getDriver().getCurrentUrl().contains(EnvironmentConstants.SOAP_URL + ContextConstants.NOT_PREFERED_WEBSITE));
+		Assert.assertTrue(getDriver().getCurrentUrl()
+				.contains(EnvironmentConstants.SOAP_URL + ContextConstants.NOT_PREFERED_WEBSITE));
 		footerPage().verifyThatFooterWebsiteIsCorrect(ContextConstants.NOT_PREFERED_WEBSITE);
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
@@ -249,20 +250,19 @@ public class AbstractSteps extends ScenarioSteps {
 		getDriver().manage().window().maximize();
 	}
 
-	
-	public void closeOthersTab(){
+	public void closeOthersTab() {
 		String originalHandle = getDriver().getWindowHandle();
 
-	   
-	    for(String handle : getDriver().getWindowHandles()) {
-	        if (!handle.equals(originalHandle)) {
-	        	getDriver().switchTo().window(handle);
-	        	getDriver().close();
-	        }
-	    }
+		for (String handle : getDriver().getWindowHandles()) {
+			if (!handle.equals(originalHandle)) {
+				getDriver().switchTo().window(handle);
+				getDriver().close();
+			}
+		}
 
-	    getDriver().switchTo().window(originalHandle);
+		getDriver().switchTo().window(originalHandle);
 	}
+
 	@Step
 	public void switchBackToPreviousTab() {
 		Set<String> winSet = getDriver().getWindowHandles();
@@ -272,7 +272,7 @@ public class AbstractSteps extends ScenarioSteps {
 		getDriver().switchTo().window(previousTab);
 		getDriver().manage().window().maximize();
 	}
-	
+
 	@Step
 	public void switchBackToFirstTab() {
 		Set<String> winSet = getDriver().getWindowHandles();
@@ -353,7 +353,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public void findFrame(String frameName) {
 		Set<String> windowsList = getDriver().getWindowHandles();
 		for (String string : windowsList) {
-			
+
 			getDriver().switchTo().window(string);
 			System.out.println(getDriver().getTitle());
 			if (getDriver().getTitle().trim().contains(frameName)) {
@@ -362,7 +362,6 @@ public class AbstractSteps extends ScenarioSteps {
 		}
 	}
 
-
 	@Step
 	public void navigate(String URL) {
 		// failsafe in case of redirects to live
@@ -370,8 +369,8 @@ public class AbstractSteps extends ScenarioSteps {
 			getDriver().manage().timeouts().pageLoadTimeout(3600, TimeUnit.SECONDS);
 			getDriver().get(URL);
 			getDriver().manage().window().maximize();
-//			JavascriptExecutor executor = (JavascriptExecutor)getDriver();
-//			executor.executeScript("document.body.style.zoom = '0.6'");
+			// JavascriptExecutor executor = (JavascriptExecutor)getDriver();
+			// executor.executeScript("document.body.style.zoom = '0.6'");
 		}
 
 	}
@@ -416,7 +415,6 @@ public class AbstractSteps extends ScenarioSteps {
 		return getPages().currentPageAt(ContactListPage.class);
 	}
 
-	
 	public PartyListBackendPage partyListBackendPage() {
 		return getPages().currentPageAt(PartyListBackendPage.class);
 	}
@@ -445,9 +443,10 @@ public class AbstractSteps extends ScenarioSteps {
 		return getPages().currentPageAt(PartyDetailsBackendPage.class);
 	}
 
-	public ImportExportPage importExportPage(){
+	public ImportExportPage importExportPage() {
 		return getPages().currentPageAt(ImportExportPage.class);
 	}
+
 	public CustomerDetailsPage customerDetailsHomePage() {
 		return getPages().currentPageAt(CustomerDetailsPage.class);
 	}
@@ -467,11 +466,10 @@ public class AbstractSteps extends ScenarioSteps {
 	public OrderListPage orderListPage() {
 		return getPages().currentPageAt(OrderListPage.class);
 	}
-	
+
 	public RmaItemsPage rmaItemsPage() {
 		return getPages().currentPageAt(RmaItemsPage.class);
 	}
-	
 
 	public RMAListPage rmaListPage() {
 		return getPages().currentPageAt(RMAListPage.class);
@@ -524,12 +522,17 @@ public class AbstractSteps extends ScenarioSteps {
 	public OrderNotificationPage orderNotificationPage() {
 		return getPages().currentPageAt(OrderNotificationPage.class);
 	}
-	
+
 	public BorrowPage borrowPage() {
 		return getPages().currentPageAt(BorrowPage.class);
 	}
 
 	// -----------------------FE-----------------------------------
+
+	public CreateUserPage createUserPage() {
+		return getPages().currentPageAt(CreateUserPage.class);
+	}
+
 	public LoginPage loginPage() {
 		return getPages().currentPageAt(LoginPage.class);
 	}
@@ -545,7 +548,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public LoungePage loungePage() {
 		return getPages().currentPageAt(LoungePage.class);
 	}
-	
+
 	public ShopPage shopPage() {
 		return getPages().currentPageAt(ShopPage.class);
 	}
@@ -566,7 +569,6 @@ public class AbstractSteps extends ScenarioSteps {
 		return getPages().currentPageAt(StylistRegistrationPage.class);
 	}
 
-	
 	public SingleSignOnPage singleSignOnPage() {
 		return getPages().currentPageAt(SingleSignOnPage.class);
 	}
@@ -587,10 +589,6 @@ public class AbstractSteps extends ScenarioSteps {
 		return getPages().currentPageAt(ConnectSuccesPage.class);
 	}
 
-	public CreateCustomerPage createCustomerPage() {
-		return getPages().currentPageAt(CreateCustomerPage.class);
-	}
-
 	public ReportsPage reportsPage() {
 		return getPages().currentPageAt(ReportsPage.class);
 	}
@@ -601,6 +599,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public RegistrationMessagePage registrationMessagePage() {
 		return getPages().currentPageAt(RegistrationMessagePage.class);
+	}
+	
+	public MyAccountPage myAccountPage() {
+		return getPages().currentPageAt(MyAccountPage.class);
 	}
 
 	public HeaderPage headerPage() {
@@ -638,7 +640,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public PartyDetailsPage partyDetailsPage() {
 		return getPages().currentPageAt(PartyDetailsPage.class);
 	}
-	
+
 	public PartyHostGuestPage partyHostGuestPage() {
 		return getPages().currentPageAt(PartyHostGuestPage.class);
 	}
@@ -678,15 +680,15 @@ public class AbstractSteps extends ScenarioSteps {
 	public UnbounceDykscPage unbounceDykscPage() {
 		return getPages().currentPageAt(UnbounceDykscPage.class);
 	}
-	
+
 	public AcademyPage academyPage() {
 		return getPages().currentPageAt(AcademyPage.class);
 	}
-	
+
 	public AcademyQuizPage academyQuizPage() {
 		return getPages().currentPageAt(AcademyQuizPage.class);
 	}
-	
+
 	public LoginAcademyPage loginAcademyPage() {
 		return getPages().currentPageAt(LoginAcademyPage.class);
 	}
@@ -703,7 +705,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public BorrowCartPage borrowCartPage() {
 		return getPages().currentPageAt(BorrowCartPage.class);
 	}
-	
+
 	public StylistInventoryPage stylistInventoryPage() {
 		return getPages().currentPageAt(StylistInventoryPage.class);
 	}
@@ -799,15 +801,15 @@ public class AbstractSteps extends ScenarioSteps {
 	public FacebookRegistrationFormPage facebookRegistrationFormPage() {
 		return getPages().currentPageAt(FacebookRegistrationFormPage.class);
 	}
-	
+
 	public FacebookInvitationPage facebookInvitationPage() {
 		return getPages().currentPageAt(FacebookInvitationPage.class);
 	}
-	
+
 	public FacebookMessagePage facebookMessagePage() {
 		return getPages().currentPageAt(FacebookMessagePage.class);
 	}
-	
+
 	public FacebookLoginPage facebookLoginPage() {
 		return getPages().currentPageAt(FacebookLoginPage.class);
 	}
@@ -894,35 +896,34 @@ public class AbstractSteps extends ScenarioSteps {
 	public NavisionHomePage navisionHomePage() {
 		return getPages().currentPageAt(NavisionHomePage.class);
 	}
-	
+
 	public NavisionSearchPage navisionSearchPage() {
 		return getPages().currentPageAt(NavisionSearchPage.class);
 	}
-	
+
 	public NavisionSyncDashboardPage navisionSyncDashboardPage() {
 		return getPages().currentPageAt(NavisionSyncDashboardPage.class);
 	}
-	//sos app
+
+	// sos app
 	public SosDetailsBackendPage sosDetailsBackendPage() {
 		return getPages().currentPageAt(SosDetailsBackendPage.class);
 	}
-	
+
 	public SosPage sosPage() {
 		return getPages().currentPageAt(SosPage.class);
 	}
-	
+
 	public OnlineStylePartyManagerPage onlineStylePartyManagerPage() {
 		return getPages().currentPageAt(OnlineStylePartyManagerPage.class);
 	}
-	
+
 	public OnlineStylePartyGuestPage onlineStylePartyGuestPage() {
 		return getPages().currentPageAt(OnlineStylePartyGuestPage.class);
 	}
-	
+
 	public OnlineStylePartyStylistPage onlineStylePartyStylistPage() {
 		return getPages().currentPageAt(OnlineStylePartyStylistPage.class);
 	}
-	
-	
-	
+
 }

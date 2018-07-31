@@ -17,7 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.profile.ProfileNavSteps;
@@ -43,7 +43,7 @@ public class US11001CheckOrderOnStylecoachProfileTest extends BaseTest {
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps
-	public CustomerRegistrationSteps frontEndSteps;
+	public UserRegistrationSteps frontEndSteps;
 	@Steps
 	public CustomVerification customVerifications;
 	@Steps

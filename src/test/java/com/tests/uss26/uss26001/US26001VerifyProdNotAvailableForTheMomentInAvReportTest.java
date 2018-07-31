@@ -18,7 +18,7 @@ import org.junit.runner.RunWith;
 
 import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ReportsSteps;
@@ -45,7 +45,7 @@ public class US26001VerifyProdNotAvailableForTheMomentInAvReportTest extends Bas
 	@Steps
 	public ReportsSteps reportsSteps;
 	@Steps
-	public CustomerRegistrationSteps frontEndSteps;
+	public UserRegistrationSteps frontEndSteps;
 	@Steps
 	public CustomVerification customVerifications;
 

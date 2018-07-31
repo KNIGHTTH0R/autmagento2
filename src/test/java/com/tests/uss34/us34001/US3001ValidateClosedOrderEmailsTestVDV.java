@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
 
 import com.connectors.gmail.GmailConnector;
 import com.steps.EmailSteps;
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.profile.ProfileSteps;
 import com.tests.BaseTest;
@@ -39,7 +39,7 @@ import net.thucydides.core.annotations.WithTag;
 public class US3001ValidateClosedOrderEmailsTestVDV extends BaseTest{
 	
 	@Steps
-	public CustomerRegistrationSteps frontEndSteps;
+	public UserRegistrationSteps frontEndSteps;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps

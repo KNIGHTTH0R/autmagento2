@@ -29,6 +29,13 @@ public class NavigationPage extends AbstractPage {
 	@FindBy(css = "#nav li.parent.level0:nth-child(9)  ")
 	private WebElement systemTab;
 	
+	@FindBy(css = "#nav > li > a")
+	private List<WebElement> listmenu;
+	
+	@FindBy(css = ".item-customer-manage.level-1 a")
+	private WebElement allCustomers;;
+	
+	
 	
 
 	public void dismissPopUp() {
@@ -65,7 +72,7 @@ public class NavigationPage extends AbstractPage {
 	}
 	
 
-	public void selectSubmenu(String submenu) {
+	public void openCustomerMenu(String submenu) {
 		evaluateJavascript("jQuery.noConflict();");
 		element(navigationBar).waitUntilVisible();
 		List<WebElement> menuList = navigationBar.findElements(By.cssSelector("li.parent.level0 ul > li.level1 > a"));
@@ -124,4 +131,20 @@ public class NavigationPage extends AbstractPage {
 		element(systemTab).waitUntilVisible();
 		systemTab.click();
 	}
+
+	public void openMenu(String menuName) {
+		
+		for (WebElement menu : listmenu) {
+			if(menu.getText().contains(menuName)){
+				menu.click();
+			}
+		}
+		
+	}
+	
+	public void openAllCustomers() {
+		element(allCustomers).waitUntilVisible();
+		allCustomers.click();
+	}
+	
 }

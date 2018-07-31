@@ -47,24 +47,6 @@ public class CustomVerification extends AbstractSteps{
 		}
 	}
 	
-	
-	
-//	@Step
-//	public static void verifyTrueForOrderImport(String message, boolean condition) throws StepFailureException{
-//		
-//		try{
-//			Assert.verify(condition,message);
-//		}catch(Exception e){
-//			String incrementid=ImportOrdersSteps.getOrderIncrementId();
-//			errorData.put(Integer.toString(count2++), incrementid+"|"+message );
-//			count++;
-//			verificationMessages.append("\n" + e.getMessage());
-//			LOGGER.info(message);	
-//		}
-//		
-//		
-//	}
-	
 	@Step
 	public static void verifyTrueForOrderImport(String message, boolean condition) throws StepFailureException{
 		

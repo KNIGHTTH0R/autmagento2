@@ -195,7 +195,7 @@
 				</os>
 			</activation>
 			<properties>
-				<webdriver.chrome.path>${basedir}${file.separator}resources${file.separator}chromedriver2</webdriver.chrome.path>
+				<webdriver.chrome.path>${basedir}${file.separator}resources${file.separator}chromedriver.exe</webdriver.chrome.path>
 			</properties>
 		</profile>
 		<profile>

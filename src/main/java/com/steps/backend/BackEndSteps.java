@@ -26,19 +26,7 @@ public class BackEndSteps extends AbstractSteps {
 		magentoLoginPage().inputUserName(userName);
 		magentoLoginPage().inputUserPassword(userPass);
 		magentoLoginPage().clickOnLogin();
-	
 		
-		waitABit(2000);
-		boolean isPresent = isdismissPopUpPresent();
-		
-		if (isPresent == false) {
-			
-			waitABit(3000);
-			magentoLoginPage().inputUserName(userName);
-			magentoLoginPage().inputUserPassword(userPass);
-			magentoLoginPage().clickOnLogin();
-		}
-		dismissPopUp();
 	}
 	
 	@Step
@@ -95,12 +83,13 @@ public class BackEndSteps extends AbstractSteps {
 	// navigationPage().selectMenuFromNavbar("Kunden", "Kunden verwalten");
 	// }
 	@Step
-	public void clickOnCustomers() {
-		navigationPage().selectSubmenu("customer");
+	public void openCustomersGrid() {
+		navigationPage().openMenu("customer");
+		navigationPage().openAllCustomers();
 	}
 	
 	public void clickOnContacts() {
-		navigationPage().selectSubmenu("/admin/contact/index/");
+		navigationPage().openCustomerMenu("/admin/contact/index/");
 	}
 
 	// @Step
@@ -109,7 +98,7 @@ public class BackEndSteps extends AbstractSteps {
 	// }
 	@Step
 	public void clickOnProducts() {
-		navigationPage().selectSubmenu("catalog_product");
+		navigationPage().openCustomerMenu("catalog_product");
 	}
 
 	// @Step
@@ -119,7 +108,7 @@ public class BackEndSteps extends AbstractSteps {
 	// }
 	@Step
 	public void goToNewsletterSubribers() {
-		navigationPage().selectSubmenu("newsletter_subscriber");
+		navigationPage().openCustomerMenu("newsletter_subscriber");
 	}
 
 	// @Step
@@ -128,7 +117,7 @@ public class BackEndSteps extends AbstractSteps {
 	// }
 	@Step
 	public void clickOnStyleParties() {
-		navigationPage().selectSubmenu("party");
+		navigationPage().openCustomerMenu("party");
 	}
 
 	// @Step
@@ -137,7 +126,7 @@ public class BackEndSteps extends AbstractSteps {
 	// }
 	@Step
 	public void clickOnStylecoachList() {
-		navigationPage().selectSubmenu("stylist/index/key/");
+		navigationPage().openCustomerMenu("stylist/index/key/");
 	}
 
 	// @Step
@@ -146,7 +135,7 @@ public class BackEndSteps extends AbstractSteps {
 	// }
 	@Step
 	public void clickOnContactList() {
-		navigationPage().selectSubmenu("contact/index/key/");
+		navigationPage().openCustomerMenu("contact/index/key/");
 	}
 
 	// @Step
@@ -156,7 +145,7 @@ public class BackEndSteps extends AbstractSteps {
 	// }
 	@Step
 	public void clickOnShoppingCartPriceRules() {
-		navigationPage().selectSubmenu("promo_quote");
+		navigationPage().openCustomerMenu("promo_quote");
 	}
 
 	// @Step
@@ -165,22 +154,22 @@ public class BackEndSteps extends AbstractSteps {
 	// }
 	@Step
 	public void clickOnSalesOrders() {
-		navigationPage().selectSubmenu("sales_order");
+		navigationPage().openCustomerMenu("sales_order");
 	}
 	
 	@Step
 	public void clickOnSalesInvoiceOrders() {
-		navigationPage().selectSubmenu("sales_invoice");
+		navigationPage().openCustomerMenu("sales_invoice");
 	}
 	
 	@Step
 	public void clickOnSalesShipmentOrders() {
-		navigationPage().selectSubmenu("sales_shipment");
+		navigationPage().openCustomerMenu("sales_shipment");
 	}
 	
 	@Step
 	public void clickOnSalesCreditOrders() {
-		navigationPage().selectSubmenu("sales_creditmemo");
+		navigationPage().openCustomerMenu("sales_creditmemo");
 	}
 	
 	// @Step
@@ -189,18 +178,18 @@ public class BackEndSteps extends AbstractSteps {
 	// }
 	@Step
 	public void clickOnCreditMemo() {
-		navigationPage().selectSubmenu("sales_creditmemo");
+		navigationPage().openCustomerMenu("sales_creditmemo");
 	}
 
 	@Step
 	public void clickOnTermPurchaseGrid() {
-		navigationPage().selectSubmenu("scheduledorders");
+		navigationPage().openCustomerMenu("scheduledorders");
 	}
 
+	
 	@Step
 	public void searchForEmail(String emailText) {
-		// customerListPage().clickOnResetFilter();
-		// waitABit(3000);
+		customerListPage().clickOnFilters();
 		customerListPage().inputEmailFilter(emailText);
 		customerListPage().clickOnSearch();
 
@@ -520,7 +509,7 @@ public class BackEndSteps extends AbstractSteps {
 
 	@Step
 	public void clickOnSystemConfiguration() {
-		navigationPage().selectSubmenu("system_config");
+		navigationPage().openCustomerMenu("system_config");
 	}
 	
 	

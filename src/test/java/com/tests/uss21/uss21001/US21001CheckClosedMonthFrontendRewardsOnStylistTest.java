@@ -15,7 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -37,7 +37,7 @@ public class US21001CheckClosedMonthFrontendRewardsOnStylistTest extends BaseTes
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps
-	public CustomerRegistrationSteps customerRegistrationSteps;
+	public UserRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public JewelryBonusHistorySteps jewelryBonusHistorySteps;
 	@Steps
