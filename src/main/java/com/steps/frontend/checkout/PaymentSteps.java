@@ -1,5 +1,8 @@
 package com.steps.frontend.checkout;
 
+import org.bson.BasicBSONCallback;
+
+import com.tools.data.frontend.BankTransferPaymentModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ElvPaymentMethodModel;
 import com.tools.data.frontend.SepaPaymentMethodModel;
@@ -63,6 +66,32 @@ public class PaymentSteps extends AbstractSteps {
 		waitABit(2000);
 	}
 
+	
+	@Step
+	@Title("Fill Bank Trasnfer form")
+	public void fillBankTransferForm(BankTransferPaymentModel bankTransferData) {
+		paymentPage().insertCompany(bankTransferData.getCompany());
+		paymentPage().insertStreetAddress(bankTransferData.getStreetAddress());
+		paymentPage().insertCity(bankTransferData.getCity());
+		System.out.println("succes 1");
+		paymentPage().insertState(bankTransferData.getState());
+		System.out.println("succes 2");
+
+		paymentPage().insertPostalCode(bankTransferData.getZip());
+		System.out.println("succes 3");
+
+		paymentPage().insertCountry(bankTransferData.getCountry());
+		System.out.println("succes 4");
+
+		paymentPage().insertPhoneNumber(bankTransferData.getPhoneNo());
+		System.out.println("succes 5");
+		paymentPage().clickUpdateButton();
+		System.out.println("succes 6");
+		waitABit(2000);
+	}
+	
+	
+	
 	@Step
 	@Title("Fill elv form")
 	public void fillElvForm(ElvPaymentMethodModel elvPaymentMethodModel) {

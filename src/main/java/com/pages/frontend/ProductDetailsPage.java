@@ -24,7 +24,7 @@ public class ProductDetailsPage extends AbstractPage {
 	@FindBy(css = "select[id*='attribute']")
 	private WebElement selectInput;
 
-	@FindBy(css = "button#add-to-cart")
+	@FindBy(css = "button#product-addtocart-button")
 	private WebElement addToCartButton;
 	
 	/*@FindBy(css = ".add-to-cart-buttons.add-to-cart a")

@@ -7,10 +7,8 @@ public class GeneralCartSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	public void clearCart() {
-
-		if (!generalCartPage().isCartEmpty()) {
-			generalCartPage().clickClearCart();
-		}
+		generalCartPage().clickClearCart();
+		generalCartPage().verifyIsCartEmpty();
 
 	}
 	public void clearBorrowCart() {

@@ -307,7 +307,7 @@ public class ProductSteps extends AbstractSteps {
 	public RegularBasicProductModel setRegularBasicProductAddToCart(ProductDetailedModel model, String qty, String size,
 			String finalPrice, String ipPoints) {
 		RegularBasicProductModel result = new RegularBasicProductModel();
-		setQuantity(qty);
+	//	setQuantity(qty);
 		
 		System.out.println("finalPrice: "+finalPrice);
 		result.setName(model.getName());
@@ -320,8 +320,8 @@ public class ProductSteps extends AbstractSteps {
 		result.setBunosValue("0");
 		result.setIpPoints(ipPoints);
 
-		setProductColor(model.getColor());
-		setProductSize(model.getProductSize());
+		/*setProductColor(model.getColor());
+		setProductSize(model.getProductSize());*/
 
 		addToCart();
 		waitABit(TimeConstants.TIME_CONSTANT);

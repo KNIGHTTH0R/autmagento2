@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -34,10 +35,13 @@ public class HeaderPage extends AbstractPage {
 	// @FindBy(id = "#add-to-cart")
 	// private WebElement addToCartButton;
 
-	@FindBy(css = "a.btn[href*='cart']")
-	private WebElement goToCartButton;
+	@FindBy(css = "#top-cart-btn-checkout")
+	private WebElement goToCheckout;
+	
+	@FindBy(css = ".action.viewcart")
+	private WebElement goToCart;
 
-	@FindBy(css = "div.top-cart span")
+	@FindBy(css = ".action.showcart")
 	private WebElement shoppingBagButton;
 
 	@FindBy(css = "div#topCartContent p.subtotal span.price")
@@ -52,8 +56,8 @@ public class HeaderPage extends AbstractPage {
 	@FindBy(css = "ul.links li:first-child a")
 	private WebElement wishlist;
 
-	@FindBy(css = "ul.links>.last a")
-	private WebElement anmeldenButton;
+	@FindBy(css = ".panel.header .header.links .authorization-link a")
+	private WebElement signInLink;
 	
 	
 	@FindBy(css = ".footer #select-website li .en")
@@ -90,6 +94,18 @@ public class HeaderPage extends AbstractPage {
 	@FindBy(css = ".links li.last a")
 	private WebElement logOutBtn;
 	
+	@FindBy(css = ".subtitle.empty")
+	private WebElement emptyCartMessage;
+	
+	@FindBy(css = "a[title*='Remove']")
+	private WebElement removeProduct;
+	
+	@FindBy(css = ".action-primary.action-accept span")
+	private WebElement acceptRemove;
+	
+	
+	
+	
 	
 
 	public void selectLanguage(String language) {
@@ -122,8 +138,7 @@ public class HeaderPage extends AbstractPage {
 	}
 
 	public void clickOnSubmitButton() {
-		element(submitSearch).waitUntilVisible();
-		submitSearch.click();
+		searchInput.sendKeys(Keys.RETURN);
 	}
 
 	public void clickOnProfileButton() {
@@ -142,10 +157,18 @@ public class HeaderPage extends AbstractPage {
 	// addToCartButton.click();
 	// }
 
+	public void clickGoToCheckout() {
+		element(goToCheckout).waitUntilVisible();
+		waitFor(ExpectedConditions.elementToBeClickable(goToCheckout));
+		goToCheckout.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
+	}
+	
 	public void clickGoToCart() {
-		element(goToCartButton).waitUntilVisible();
-		waitFor(ExpectedConditions.elementToBeClickable(goToCartButton));
-		goToCartButton.click();
+		element(goToCart).waitUntilVisible();
+		waitFor(ExpectedConditions.elementToBeClickable(goToCart));
+		goToCart.click();
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
 				ContextConstants.LOADING_MESSAGE));
 	}
@@ -157,15 +180,24 @@ public class HeaderPage extends AbstractPage {
 		shoppingBagButton.click();
 		waitABit(1000);
 	}
+	
+	public boolean isEmptyCart() {
+		boolean isEmpty=false;
+		List<WebElement> list=getDriver().findElements(By.cssSelector(".subtitle.empty"));
+		if(list.size()==0) {
+			isEmpty=true;
+		}
+		return isEmpty;
+	}
 
 	public String getShoppingBagTotalSum() {
 		element(cartPreviewPrice).waitUntilVisible();
 		return cartPreviewPrice.getText();
 	}
 
-	public void clickAnmeldenButton() {
-		element(anmeldenButton).waitUntilVisible();
-		anmeldenButton.click();
+	public void clickSignInLink() {
+		element(signInLink).waitUntilVisible();
+		signInLink.click();
 	}
 
 	public void switchDEWebsite() {
@@ -286,5 +318,7 @@ public class HeaderPage extends AbstractPage {
 		element(logOutBtn).waitUntilVisible();
 		logOutBtn.click();
 	}
+
+	
 
 }

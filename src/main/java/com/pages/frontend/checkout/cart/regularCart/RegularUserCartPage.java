@@ -28,10 +28,10 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class RegularUserCartPage extends AbstractPage {
 
-	@FindBy(css = "table.cart-table")
+	@FindBy(css = "#shopping-cart-table")
 	private WebElement cartTable;
 
-	@FindBy(css = "table#shopping-cart-totals-table")
+	@FindBy(css = ".data.table.totals")
 	private WebElement totalsTable;
 
 	@FindBy(id = "coupon_code")
@@ -75,6 +75,9 @@ public class RegularUserCartPage extends AbstractPage {
 
 	@FindBy(css = ".cart-empty a.variable-text")
 	private WebElement searchProductLink;
+	
+	@FindBy(css = ".checkout-methods-items button")
+	private WebElement goToCheckout;
 
 	public void validateThatVoucherCannotBeAppliedMessage() {
 		element(errorMessageContainer).waitUntilVisible();
@@ -460,22 +463,22 @@ public class RegularUserCartPage extends AbstractPage {
 
 	public List<RegularUserCartProductModel> grabProductsDataNoBonus() {
 		element(cartTable).waitUntilVisible();
-		List<WebElement> entryList = getDriver().findElements(By.cssSelector("div.cart table.cart-table tbody > tr"));
+		List<WebElement> entryList = getDriver().findElements(By.cssSelector("#shopping-cart-table .cart.item"));
 
 		List<RegularUserCartProductModel> resultList = new ArrayList<RegularUserCartProductModel>();
 
 		for (WebElement webElementNow : entryList) {
 			RegularUserCartProductModel productNow = new RegularUserCartProductModel();
 
-			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
-			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()
-					.replace(productNow.getName(), "").trim());
+			productNow.setName(webElementNow.findElement(By.cssSelector("td.item .product-item-name a")).getText());
+			/*productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()
+					.replace(productNow.getName(), "").trim());*/
 			productNow.setQuantity(FormatterUtils.parseValueToZeroDecimals(
 					webElementNow.findElement(By.cssSelector("td:nth-child(3) input")).getAttribute("value")));
 			productNow.setUnitPrice(FormatterUtils
-					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(2)")).getText()));
 			productNow.setFinalPrice(FormatterUtils.parseValueToTwoDecimals(
-					webElementNow.findElement(By.cssSelector("td:nth-child(5) span.price")).getText()));
+					webElementNow.findElement(By.cssSelector("td:nth-child(4) span.price")).getText()));
 
 			resultList.add(productNow);
 		}
@@ -496,9 +499,9 @@ public class RegularUserCartPage extends AbstractPage {
 		List<WebElement> valuesList = totalsTable.findElements(By.cssSelector("tr"));
 
 		for (WebElement itemNow : valuesList) {
-			String key = itemNow.findElement(By.cssSelector("td:first-child")).getText();
+			String key = itemNow.findElement(By.cssSelector("th")).getText();
 
-			if (key.contains(ContextConstants.ZWISCHENSUMME)) {
+			/*if (key.contains(ContextConstants.ZWISCHENSUMME)) {
 				valueTransformer = FormatterUtils
 						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setSubtotal(valueTransformer);
@@ -516,7 +519,8 @@ public class RegularUserCartPage extends AbstractPage {
 			if (key.contains(ContextConstants.SCHMUCK_BONUS)) {
 				valueTransformer = FormatterUtils
 						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
-				resultModel.addDiscount(ConfigConstants.JEWELRY_BONUS, valueTransformer);
+				resultModel.addDiscount(ConfigConstants.JEWELR@FindBy(css = "#top-cart-btn-checkout")
+	private WebElement goToCheckout;Y_BONUS, valueTransformer);
 			}
 			if (key.contains(voucherCodeLabel)) {
 				valueTransformer = FormatterUtils
@@ -538,6 +542,17 @@ public class RegularUserCartPage extends AbstractPage {
 				valueTransformer = FormatterUtils
 						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTotalAmount(valueTransformer);
+			}*/
+			if (key.contains("Order Total")) {
+				valueTransformer = FormatterUtils
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				resultModel.setTotalAmount(valueTransformer);
+			}
+			
+			if (key.contains("Subtotal")) {
+				valueTransformer = FormatterUtils
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				resultModel.setSubtotal(valueTransformer);
 			}
 		}
 
@@ -551,6 +566,14 @@ public class RegularUserCartPage extends AbstractPage {
 		kasseButton.click();
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
 				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+	}
+	
+	public void clickGoToCheckout() {
+		element(goToCheckout).waitUntilVisible();
+		waitFor(ExpectedConditions.elementToBeClickable(goToCheckout));
+		goToCheckout.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void clickUpdateCart() {

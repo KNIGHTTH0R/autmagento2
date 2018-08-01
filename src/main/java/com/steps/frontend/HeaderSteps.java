@@ -17,12 +17,20 @@ public class HeaderSteps extends AbstractSteps {
 	@Step
 	public void openCartPreview() {
 		headerPage().clickShoppingBag();
-		// return headerPage().getShoppingBagTotalSum();
+		
+	}
+	public boolean isEmptyCart() {
+		return headerPage().isEmptyCart();
 	}
 
 	@Step
 	public void goToCart() {
 		headerPage().clickGoToCart();
+	}
+	
+	@Step
+	public void goToCheckout() {
+		headerPage().clickGoToCheckout();
 	}
 
 	@Step
@@ -132,7 +140,7 @@ public class HeaderSteps extends AbstractSteps {
 	public void navigateToRegisterForm() {
 		navigate(MongoReader.getBaseURL());
 		navigate(MongoReader.getBaseURL());
-		headerPage().clickAnmeldenButton();
+		headerPage().clickSignInLink();
 		footerPage().clickRegistrierungLink();
 
 	}
@@ -162,7 +170,7 @@ public class HeaderSteps extends AbstractSteps {
 	@StepGroup
 	public void navigateToRegisterFormFromStylistRegistrationLinkAndStarteJetzButton() {
 		navigate(MongoReader.getBaseURL());
-		headerPage().clickAnmeldenButton();
+		headerPage().clickSignInLink();
 		loginPage().clickOnStylistRegistrationLink();
 		stylistCampaignPage().clickStarteJetztButton();
 		starterSetPage().clickOnJetztStyleCoachWerdenButton();
@@ -173,7 +181,7 @@ public class HeaderSteps extends AbstractSteps {
 	public void navigateToRegisterFormAndLogout() {
 		// navigate(MongoReader.getBaseURL());
 		headerPage().clickAbmeldenButton();
-		headerPage().clickAnmeldenButton();
+		headerPage().clickSignInLink();
 		footerPage().clickRegistrierungLink();
 
 	}
@@ -185,7 +193,7 @@ public class HeaderSteps extends AbstractSteps {
 
 	@Step
 	public void clickAnmeldenButton() {
-		headerPage().clickAnmeldenButton();
+		headerPage().clickSignInLink();
 	}
 
 	@Step
@@ -291,5 +299,6 @@ public class HeaderSteps extends AbstractSteps {
 		headerPage().performLogOut();	
 		waitABit(3000);
 	}
+	
 	
 }

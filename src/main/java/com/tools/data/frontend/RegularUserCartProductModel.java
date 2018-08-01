@@ -65,4 +65,13 @@ public class RegularUserCartProductModel {
 		this.bonusType = bonusType;
 	}
 
+	@Override
+	public String toString() {
+		return "RegularUserCartProductModel [name=" + name + ", prodCode=" + prodCode + ", quantity=" + quantity
+				+ ", unitPrice=" + unitPrice + ", finalPrice=" + finalPrice + ", bonusType=" + bonusType + "]";
+	}
+	
+	
+	
+
 }
