@@ -134,6 +134,7 @@ public class FormatterUtils {
 		result = result.replace(",", ".");
 		result = result.replace("-", "");
 		result = result.replace("%", "");
+		result = result.replace("$", "");
 
 		return result;
 	}

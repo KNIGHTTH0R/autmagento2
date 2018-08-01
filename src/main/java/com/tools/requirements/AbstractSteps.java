@@ -158,13 +158,8 @@ public class AbstractSteps extends ScenarioSteps {
 	@Step
 	public void performLogin(String userName, String userPass) {
 
-		// getDriver().navigate().to("http://185.48.116.231:8080/DynamicsNAV90/WebClient/");
-
-		// System.out.println("eu sunce cel mai tare din parcare");
 		navigate(MongoReader.getBaseURL());
-		navigate(MongoReader.getBaseURL());
-		headerPage().clickAnmeldenButton();
-		loginPage().acceptCookieConsent();
+		headerPage().clickSignInLink();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 
@@ -178,7 +173,7 @@ public class AbstractSteps extends ScenarioSteps {
 		// navigate(MongoReader.getBaseURL()+"/"+website);
 		navigate("https://staging.pippajean.com/" + website);
 		navigate("https://staging.pippajean.com/" + website);
-		headerPage().clickAnmeldenButton();
+		headerPage().clickSignInLink();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
@@ -192,7 +187,7 @@ public class AbstractSteps extends ScenarioSteps {
 		// navigate(MongoReader.getBaseURL()+"/"+website);
 		navigate("https://staging.pippajean.com/" + website + "/" + context);
 		navigate("https://staging.pippajean.com/" + website + "/" + context);
-		headerPage().clickAnmeldenButton();
+		headerPage().clickSignInLink();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
@@ -202,7 +197,7 @@ public class AbstractSteps extends ScenarioSteps {
 
 	@Step
 	public void performLoginAfterChangingWebsite(String userName, String userPass) {
-		headerPage().clickAnmeldenButton();
+		headerPage().clickSignInLink();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
@@ -214,7 +209,7 @@ public class AbstractSteps extends ScenarioSteps {
 			String website) {
 		navigate(MongoReader.getBaseURL());
 		navigate(MongoReader.getBaseURL());
-		headerPage().clickAnmeldenButton();
+		headerPage().clickSignInLink();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
@@ -228,14 +223,14 @@ public class AbstractSteps extends ScenarioSteps {
 
 		navigate(MongoReader.getBaseURL());
 		navigate(MongoReader.getBaseURL());
-		headerPage().clickAnmeldenButton();
+		headerPage().clickSignInLink();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
 		Assert.assertTrue(getDriver().getCurrentUrl()
 				.contains(EnvironmentConstants.SOAP_URL + ContextConstants.NOT_PREFERED_WEBSITE));
 		footerPage().verifyThatFooterWebsiteIsCorrect(ContextConstants.NOT_PREFERED_WEBSITE);
-		headerPage().clickAnmeldenButton();
+		headerPage().clickSignInLink();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
@@ -302,7 +297,7 @@ public class AbstractSteps extends ScenarioSteps {
 	@Step
 	public void performLoginUnderContext(String userName, String userPass, String context) {
 		navigate(MongoReader.getBaseURL() + context);
-		headerPage().clickAnmeldenButton();
+		headerPage().clickSignInLink();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
@@ -311,7 +306,7 @@ public class AbstractSteps extends ScenarioSteps {
 	@Step
 	public void navigateToLoginPageAndPerformLogin(String userName, String userPass) {
 		navigate(MongoReader.getBaseURL());
-		headerPage().clickAnmeldenButton();
+		headerPage().clickSignInLink();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();

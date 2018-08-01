@@ -30,14 +30,19 @@ public class RegularUserShippingAndConfirmationWorkflows {
 	@Step
 	public void validateProducts(String message) {
 		System.out.println(message);
+		
+		System.out.println("basicProductsList[] : "+basicProductsList);
+		System.out.println("cartProductsList[] : "+cartProductsList);
+		
+		
 		for (RegularBasicProductModel productNow : basicProductsList) {
-			RegularUserCartProductModel compare = findProduct(productNow.getProdCode(), productNow.getQuantity(), cartProductsList);
+			RegularUserCartProductModel compare = findProduct(productNow.getName(), productNow.getQuantity(), cartProductsList);
 
 			compare.setQuantity(compare.getQuantity().replace("x", "").trim());
 
 			if (compare.getName() != null) {
-			//	checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
-				checkoutValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getUnitPrice());
+				checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
+				checkoutValidationSteps.validateMatchFinalPrice(productNow.getFinalPrice(), compare.getFinalPrice());
 				checkoutValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
 
 			} else {
@@ -59,7 +64,7 @@ public class RegularUserShippingAndConfirmationWorkflows {
 	public RegularUserCartProductModel findProduct(String productCode, String quantity, List<RegularUserCartProductModel> cartProducts) {
 		RegularUserCartProductModel result = new RegularUserCartProductModel();
 		theFor: for (RegularUserCartProductModel cartProductModel : cartProducts) {
-			if (cartProductModel.getProdCode().contains(productCode) && cartProductModel.getQuantity().contentEquals(quantity)) {
+			if (cartProductModel.getName().contains(productCode) && cartProductModel.getQuantity().contentEquals(quantity)) {
 				result = cartProductModel;
 				break theFor;
 			}
@@ -79,8 +84,8 @@ public class RegularUserShippingAndConfirmationWorkflows {
 	public void verifyShippingTotals(String string) {
 		System.out.println(string);
 		verifyTotalAmount(shippingGrabbedModel.getTotalAmount(), shippingCalculatedModel.getTotalAmount());
-		verifyShippingPrice(shippingGrabbedModel.getShippingPrice(), shippingCalculatedModel.getShippingPrice());
-		verifyDiscountsPrice(shippingGrabbedModel.getDiscountPrice(), shippingCalculatedModel.getDiscountPrice());
+	//	verifyShippingPrice(shippingGrabbedModel.getShippingPrice(), shippingCalculatedModel.getShippingPrice());
+	//	verifyDiscountsPrice(shippingGrabbedModel.getDiscountPrice(), shippingCalculatedModel.getDiscountPrice());
 		verifySubTotals(shippingGrabbedModel.getSubTotal(), shippingCalculatedModel.getSubTotal());
 	}
 

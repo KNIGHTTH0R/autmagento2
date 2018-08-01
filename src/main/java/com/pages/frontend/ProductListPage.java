@@ -9,10 +9,11 @@ import org.openqa.selenium.WebElement;
 
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.requirements.AbstractPage;
+import com.tools.utils.FormatterUtils;
 
 public class ProductListPage extends AbstractPage {
 
-	@FindBy(className = "category-products")
+	@FindBy(css = ".products.list.items.product-items")
 	private WebElement productCatalogContainer;
 
 	public ProductBasicModel findProductAndClick(String productName) {
@@ -22,12 +23,12 @@ public class ProductListPage extends AbstractPage {
 		ProductBasicModel resultEntry = new ProductBasicModel();
 
 		theFor: for (WebElement webElement : productsList) {
-			String productText = webElement.findElement(By.cssSelector("a.prod-name")).getText();
+			String productText = webElement.findElement(By.cssSelector(".product-item-name")).getText();
 			if (productText.contains(productName)) {
 				resultEntry.setName(productText);
-				resultEntry.setType(webElement.findElement(By.cssSelector("span.product-cat-code")).getText());
-				resultEntry.setPrice(webElement.findElement(By.cssSelector("span.price")).getText());
-				webElement.findElement(By.cssSelector("a.product-image")).click();
+				//resultEntry.setType(webElement.findElement(By.cssSelector("span.product-cat-code")).getText());
+				resultEntry.setPrice(FormatterUtils.cleanNumberToString(webElement.findElement(By.cssSelector("#product-price-1 span")).getText()));
+				webElement.findElement(By.cssSelector("a.product.photo")).click();
 
 				break theFor;
 			}

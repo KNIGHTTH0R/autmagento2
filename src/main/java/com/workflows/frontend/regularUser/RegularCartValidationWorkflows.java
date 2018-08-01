@@ -105,33 +105,22 @@ public class RegularCartValidationWorkflows {
 		regularUserCartWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList,
 				RegularUserDataGrabber.grabbedRegularCartProductsList);
 		regularUserCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
+		
+		regularUserCartWorkflows.setVerifyTotalsDiscount(RegularUserDataGrabber.regularUserGrabbedCartTotals,
+				RegularUserCartCalculator.calculatedTotalsDiscounts);
+		regularUserCartWorkflows.verifyCartTotals("CART TOTALS ");
 
 		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList,
 				RegularUserDataGrabber.grabbedRegularShippingProductsList);
 		regularUserShippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
 
-		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList,
-				RegularUserDataGrabber.grabbedRegularConfirmationProductsList);
-		regularUserShippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+		
 
 		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
 				RegularUserDataGrabber.regularUserShippingTotals, RegularUserCartCalculator.shippingCalculatedModel);
 		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 
-		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
-				RegularUserDataGrabber.regularUserConfirmationTotals,
-				RegularUserCartCalculator.shippingCalculatedModel);
-		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
-
-		adyenWorkflows.setVerifyAdyenTotals(RegularUserDataGrabber.orderModel,
-				RegularUserCartCalculator.shippingCalculatedModel.getTotalAmount());
-		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
-
-		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
-		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
-
-		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
-		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		
 	}
 
 	@StepGroup

@@ -24,7 +24,7 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class SurveyPage extends AbstractPage {
 
-	@FindBy(css = "div#cart-section-1 div.checkout-totals-section")
+	@FindBy(css = ".data.table.table-totals tbody")
 	private WebElement surveyTotalsContainer;
 
 	@FindBy(css = "div#cart-section-2 div.checkout-totals-section")
@@ -40,7 +40,7 @@ public class SurveyPage extends AbstractPage {
 	@FindBy(css = "button#submit-step")
 	private WebElement toPaymentButton;
 
-	@FindBy(css = "div#cart-section-1 div.items-section")
+	@FindBy(css = ".content.minicart-items ")
 	private WebElement productListContainer;
 
 	@FindBy(css = "div#cart-section-2 div.items-section")
@@ -63,10 +63,10 @@ public class SurveyPage extends AbstractPage {
 		ShippingModel result = new ShippingModel();
 		//element(element).waitUntilVisible();
 		waitABit(3000);
-		result.setSubTotal(FormatterUtils.parseValueToTwoDecimals(element.findElement(By.cssSelector("tr:nth-child(1) td.a-right")).getText()));
-		result.setDiscountPrice(FormatterUtils.parseValueToTwoDecimals("-" + element.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
-		result.setShippingPrice(FormatterUtils.parseValueToTwoDecimals(element.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
-		result.setTotalAmount(FormatterUtils.parseValueToTwoDecimals(element.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
+		result.setSubTotal(FormatterUtils.parseValueToTwoDecimals(element.findElement(By.cssSelector("tr.totals.sub td")).getText()));
+		/*result.setDiscountPrice(FormatterUtils.parseValueToTwoDecimals("-" + element.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
+		result.setShippingPrice(FormatterUtils.parseValueToTwoDecimals(element.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));*/
+		result.setTotalAmount(FormatterUtils.parseValueToTwoDecimals(element.findElement(By.cssSelector("tr.grand.totals td")).getText()));
 
 		DataGrabber.shippingTotals = result;
 		return result;
@@ -201,20 +201,19 @@ public class SurveyPage extends AbstractPage {
 	public List<RegularUserCartProductModel> grabRegularProductsList(WebElement element) {
 
 		element(element).waitUntilVisible();
-		List<WebElement> entryList = element.findElements(By.cssSelector("tbody > tr"));
+		List<WebElement> entryList = element.findElements(By.cssSelector(".minicart-items >li"));
 		List<RegularUserCartProductModel> resultList = new ArrayList<RegularUserCartProductModel>();
 
 		for (WebElement webElementNow : entryList) {
 			RegularUserCartProductModel productNow = new RegularUserCartProductModel();
 
-			String parseQty = FormatterUtils.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+			String parseQty = FormatterUtils.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector(".details-qty .value")).getText());
 			parseQty = parseQty.replace("x", "").trim();
 
-			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
-			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
+			productNow.setName(webElementNow.findElement(By.cssSelector(".product-item-name-block strong")).getText());
 			productNow.setQuantity(parseQty);
-			productNow.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
-			productNow.setFinalPrice("");
+		//	productNow.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setFinalPrice(FormatterUtils.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector(".price")).getText()));
 			resultList.add(productNow);
 
 		}

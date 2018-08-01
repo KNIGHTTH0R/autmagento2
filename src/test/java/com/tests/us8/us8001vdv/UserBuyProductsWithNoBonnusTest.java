@@ -15,11 +15,11 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.backend.ImportExport.ImportExportSteps;
-import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
 import com.steps.frontend.SearchSteps;
+import com.steps.frontend.UserRegistrationSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
@@ -32,15 +32,13 @@ import com.tools.CustomVerification;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
-import com.tools.data.frontend.CreditCardModel;
+import com.tools.data.frontend.BankTransferPaymentModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandler.DataGrabber;
 import com.tools.datahandler.RegularUserDataGrabber;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
@@ -52,7 +50,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US8.1 Customer Buy With Product withoud any bonuses", type = "Scenarios")
 @Story(Application.RegularCart.US8_1.class)
 @RunWith(SerenityRunner.class)
-public class US8001CustomerBuyProductsWithNoBonnusTestVDV extends BaseTest {
+public class UserBuyProductsWithNoBonnusTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -89,27 +87,26 @@ public class US8001CustomerBuyProductsWithNoBonnusTestVDV extends BaseTest {
 
 	private String username, password;
 	private String discountClass;
-	private String billingAddress;
 	private String shippingValue;
 	private String voucherCode;
 	private String voucherValue;
 	private ProductDetailedModel genProduct1;
-	private ProductDetailedModel genProduct2;
-	private ProductDetailedModel genProduct3;
+	
 	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
-	private CreditCardModel creditCardData = new CreditCardModel();
+	private BankTransferPaymentModel backTransferData = new BankTransferPaymentModel();
 
 	@Before
 	public void setUp() throws Exception {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
+		createdProductsList = MongoReader.grabProductDetailedModel("M2CreateProductsTestRegularCart" + SoapKeys.GRAB);
 
-        createdProductsList = MongoReader.grabProductDetailedModel("VdVCreateProductsTestRegularCart" + SoapKeys.GRAB);
-		
 		genProduct1 = createdProductsList.get(0);
-		genProduct2 = createdProductsList.get(1);
-		genProduct3 = createdProductsList.get(2);
+		/*
+		 * genProduct2 = createdProductsList.get(1); genProduct3 =
+		 * createdProductsList.get(2);
+		 */
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -122,7 +119,6 @@ public class US8001CustomerBuyProductsWithNoBonnusTestVDV extends BaseTest {
 			password = prop.getProperty("password");
 
 			discountClass = prop.getProperty("discountClass");
-			billingAddress = prop.getProperty("billingAddress");
 			shippingValue = prop.getProperty("shippingValue");
 
 			voucherCode = prop.getProperty("voucherCode");
@@ -145,27 +141,23 @@ public class US8001CustomerBuyProductsWithNoBonnusTestVDV extends BaseTest {
 	}
 
 	@Test
-	public void us8001CustomerBuyProductsWithNoBonnusTestVDV() {
+	public void userBuyProductsWithNoBonnusTest() {
 		customerRegistrationSteps.performLogin(username, password);
-		if (!headerSteps.succesfullLogin()) {
-			System.out.println("Logged in VDV ");
+		//check correct login in 
+		if (!headerSteps.isEmptyCart()) {
+			headerSteps.openCartPreview();
+			headerSteps.goToCart();
+			generalCartSteps.clearCart();
 		}
-	
-		headerSteps.openCartPreview();
-		headerSteps.goToCart();
-		generalCartSteps.clearCart();
 
-		headerSteps.waitABit(7000);
 		RegularBasicProductModel productData;
 
-		searchSteps.navigateToProductPage(genProduct1.getParentProductSku());
-		//product 1,2,3  children of getParentProductSku()
-		productData = addRegularProductsWorkflow.setChildProductToCart(genProduct1, "1", "0");
+		searchSteps.searchProduct(genProduct1.getSku());
+		searchSteps.selectProduct(genProduct1.getName());
+
+		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
 		RegularUserCartCalculator.allProductsList.add(productData);
-		productData = addRegularProductsWorkflow.setChildProductToCart(genProduct2, "1", "0");
-		RegularUserCartCalculator.allProductsList.add(productData);
-		productData = addRegularProductsWorkflow.setChildProductToCart(genProduct3, "4", "0");
-		RegularUserCartCalculator.allProductsList.add(productData);
+		//check add to cart message
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -176,39 +168,21 @@ public class US8001CustomerBuyProductsWithNoBonnusTestVDV extends BaseTest {
 		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList,
 				discountClass, shippingValue, voucherValue);
 
-		regularUserCartSteps.clickGoToShipping();
-		shippingPartySectionSteps.clickPartyNoOption();
-		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(true);
+		regularUserCartSteps.clickGoToCheckout();
+
+		paymentSteps.expandBankTransferForm();
+		paymentSteps.fillBankTransferForm(backTransferData);
 
 		RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
 
 		RegularUserDataGrabber.regularUserShippingTotals = shippingSteps.grabSurveyData();
 
-		shippingSteps.goToPaymentMethod();
-
-		String url = shippingSteps.grabUrl();
-		DataGrabber.urlModel.setName("Payment URL");
-		DataGrabber.urlModel.setUrl(url);
-		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
-		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
-
-		 paymentSteps.expandCreditCardForm();
-		 paymentSteps.fillCreditCardForm(creditCardData);
 		
-
-		confirmationSteps.grabRegularProductsList();
-
-		RegularUserDataGrabber.regularUserConfirmationTotals = confirmationSteps.grabConfirmationTotals();
-
-		confirmationSteps.grabBillingData();
-		confirmationSteps.grabSippingData();
+		///submit order 
+		//check success order message
+		//grab order id from succec message
 		
-		importExportSteps.createOrderFile(FormatterUtils.extractOrderIDFromURL(url));
 		
-		confirmationSteps.agreeAndCheckout();
-
-		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		regularCartValidationWorkflows.performCartValidations();
 
 		customVerifications.printErrors();

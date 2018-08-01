@@ -36,9 +36,13 @@ public class RegularUserCartWorkflows {
 	@Step
 	public void validateProducts(String message) {
 		System.out.println(message);
+		
+		System.out.println("basicProductsList[] : "+basicProductsList);
+		System.out.println("cartProductsList[] : "+cartProductsList);
+
 
 		for (RegularBasicProductModel productNow : basicProductsList) {
-			RegularUserCartProductModel compare = findProduct(productNow.getProdCode(), productNow.getQuantity(), cartProductsList);
+			RegularUserCartProductModel compare = findProduct(productNow.getName(), productNow.getQuantity(), cartProductsList);
 
 			if (compare != null) {
 				try {
@@ -73,7 +77,7 @@ public class RegularUserCartWorkflows {
 	public RegularUserCartProductModel findProduct(String productCode, String quantity, List<RegularUserCartProductModel> cartProducts) {
 		RegularUserCartProductModel result = new RegularUserCartProductModel();
 		theFor: for (RegularUserCartProductModel cartProductModel : cartProducts) {
-			if (cartProductModel.getProdCode().contains(productCode) && cartProductModel.getQuantity().contentEquals(quantity)) {
+			if (cartProductModel.getName().contains(productCode) && cartProductModel.getQuantity().contentEquals(quantity)) {
 				result = cartProductModel;
 				break theFor;
 			}
@@ -179,6 +183,13 @@ public class RegularUserCartWorkflows {
 	@Step
 	public void verifyIsPom(String grabbedIsPom, String expectedIsPom) {
 		CustomVerification.verifyTrue("Failure: Discounts Price dont match Grabbed: " + grabbedIsPom + " Expected: " + expectedIsPom, grabbedIsPom.contains(expectedIsPom));
+	}
+
+	public void verifyCartTotals(String string) {
+		System.out.println(string);
+		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
+		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
+		
 	}
 	
 }

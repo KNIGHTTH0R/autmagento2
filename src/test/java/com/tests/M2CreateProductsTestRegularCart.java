@@ -24,7 +24,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US3.1 Shop for myself VAT valid and no SMB billing and shipping AT", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(SerenityRunner.class)
-public class VdVCreateProductsTestRegularCart extends BaseTest {
+public class M2CreateProductsTestRegularCart extends BaseTest {
 
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
@@ -47,16 +47,14 @@ public class VdVCreateProductsTestRegularCart extends BaseTest {
 	}
 
 	@Test
-	public void createProductsTest() {
+	public void m2CreateProductsTestRegularCart() {
 		
 		////vdv
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("33.95");
-		genProduct1.setSku("0541220PCS38");
-		genProduct1.setColor("peachy skin");
-		genProduct1.setProductSize("38");
-		genProduct1.setIp("29");
-		genProduct1.setParentProductSku("primadonna-twist-happiness-slip-0541220");
+		genProduct1.setPrice("599.00 ");
+		genProduct1.setSku("search");
+		genProduct1.setIp("0");
+		genProduct1.setName("Search Extension");
 		productsList.add(genProduct1);
 		
 		genProduct2 = MagentoProductCalls.createProductModel();

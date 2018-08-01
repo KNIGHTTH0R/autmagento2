@@ -171,6 +171,11 @@ public class RegularUserCartSteps extends AbstractSteps {
 	public void clickGoToShipping() {
 		regularUserCartPage().clickToShipping();
 	}
+	
+	@Step
+	public void clickGoToCheckout() {
+		regularUserCartPage().clickGoToCheckout();
+	}
 
 	@Step
 	public void updateCart() {
