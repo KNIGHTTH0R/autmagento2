@@ -50,15 +50,16 @@ public class CheckUserRegistrationOnAdmin extends BaseTest {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.openCustomersGrid();
-		backEndSteps.searchForEmail(userEmail);
-		backEndSteps.openCustomerDetails(userEmail);
-
-		StylistPropertiesModel afterLinkConfirmationStylistProperties = backEndSteps.grabCustomerConfiguration();
-
-		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(afterLinkConfirmationStylistProperties, afterLinkConfirmationStylistExpectedProperties);
-		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER CONFIRMATION LINK");
-		
-		customVerifications.printErrors();
+		backEndSteps.openFilters();
+//		backEndSteps.searchForEmail(userEmail);
+//		backEndSteps.openCustomerDetails(userEmail);
+//
+//		StylistPropertiesModel afterLinkConfirmationStylistProperties = backEndSteps.grabCustomerConfiguration();
+//
+//		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(afterLinkConfirmationStylistProperties, afterLinkConfirmationStylistExpectedProperties);
+//		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER CONFIRMATION LINK");
+//		
+//		customVerifications.printErrors();
 	}
 
 }

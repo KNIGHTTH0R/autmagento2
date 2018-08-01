@@ -21,27 +21,27 @@ public class BackEndSteps extends AbstractSteps {
 	private static final long serialVersionUID = 6989975368757184274L;
 
 	@Step
-	public void performAdminLogin(String userName, String userPass)  {
+	public void performAdminLogin(String userName, String userPass) {
 		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(userName);
 		magentoLoginPage().inputUserPassword(userPass);
 		magentoLoginPage().clickOnLogin();
-		
+
 	}
-	
+
+	/////////////
 	@Step
-	public void performStagingAdminLogin(String userName, String userPass)  {
+	public void performStagingAdminLogin(String userName, String userPass) {
 		navigate("https://staging.pippajean.com" + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(userName);
 		magentoLoginPage().inputUserPassword(userPass);
 		magentoLoginPage().clickOnLogin();
-	
-		
+
 		waitABit(2000);
 		boolean isPresent = isdismissPopUpPresent();
-		
+
 		if (isPresent == false) {
-			
+
 			waitABit(3000);
 			magentoLoginPage().inputUserName(userName);
 			magentoLoginPage().inputUserPassword(userPass);
@@ -87,7 +87,7 @@ public class BackEndSteps extends AbstractSteps {
 		navigationPage().openMenu("customer");
 		navigationPage().openAllCustomers();
 	}
-	
+
 	public void clickOnContacts() {
 		navigationPage().openCustomerMenu("/admin/contact/index/");
 	}
@@ -156,22 +156,22 @@ public class BackEndSteps extends AbstractSteps {
 	public void clickOnSalesOrders() {
 		navigationPage().openCustomerMenu("sales_order");
 	}
-	
+
 	@Step
 	public void clickOnSalesInvoiceOrders() {
 		navigationPage().openCustomerMenu("sales_invoice");
 	}
-	
+
 	@Step
 	public void clickOnSalesShipmentOrders() {
 		navigationPage().openCustomerMenu("sales_shipment");
 	}
-	
+
 	@Step
 	public void clickOnSalesCreditOrders() {
 		navigationPage().openCustomerMenu("sales_creditmemo");
 	}
-	
+
 	// @Step
 	// public void clickOnCreditMemo() {
 	// navigationPage().selectMenuFromNavbar("Verkäufe", "Gutschriften");
@@ -186,23 +186,24 @@ public class BackEndSteps extends AbstractSteps {
 		navigationPage().openCustomerMenu("scheduledorders");
 	}
 
-	
+	@Step
+	public void openFilters() {
+		navigationPage().clickOnFilters();
+	}
+
 	@Step
 	public void searchForEmail(String emailText) {
-		customerListPage().clickOnFilters();
 		customerListPage().inputEmailFilter(emailText);
 		customerListPage().clickOnSearch();
 
 	}
-	
-	
+
 	@StepGroup
 	public void searchForContactEmail(String emailText) {
 		contactListPage().inputEmailFilter(emailText);
 		contactListPage().clickOnSearch();
 	}
 
-	
 	@Step
 	public void searchOrderByName(String name) {
 		orderListPage().inputOrderName(name);
@@ -216,7 +217,7 @@ public class BackEndSteps extends AbstractSteps {
 		orderListPage().clickOnSearch();
 		waitABit(2000);
 	}
-	
+
 	@Step
 	public void searchRMAByOrderId(String orderId) {
 		rmaListPage().inputOderId(orderId);
@@ -230,28 +231,26 @@ public class BackEndSteps extends AbstractSteps {
 		orderListPage().clickOnInvoiceSearch();
 		waitABit(2000);
 	}
-	
+
 	@Step
 	public void searchShipmentByOrderId(String orderId) {
 		orderListPage().inputShipmentOderId(orderId);
 		orderListPage().clickOnShipmentSearch();
 		waitABit(2000);
 	}
-	
+
 	@Step
 	public void searchCreditMemoByOrderId(String orderId) {
 		orderListPage().inputCreditMemoOderId(orderId);
 		orderListPage().clickOnCreditMemoSearch();
 		waitABit(2000);
 	}
-	
 
-	
 	@Step
 	public void openOrderDetails(String name) {
 		orderListPage().openOrderDetails(name);
 	}
-	
+
 	@Step
 	public void openRMADetails(String name) {
 		rmaListPage().openRMADetails(name);
@@ -266,21 +265,18 @@ public class BackEndSteps extends AbstractSteps {
 	public void openShipmentDetails(String name) {
 		orderListPage().openShipmentDetails(name);
 	}
-	
+
 	@Step
 	public void openCreditMemoDetails(String name) {
 		orderListPage().openCreditMemoDetails(name);
 	}
-	
-	
+
 	@Step
 	public void searchCreditMemoByorderId(String orderId) {
 		creditMemoListPage().inputCreditMemoOrderId(orderId);
 		creditMemoListPage().clickOnSearch();
 		waitABit(2000);
 	}
-
-	
 
 	@Step
 	public void cancelCreditMemo() {
@@ -295,22 +291,18 @@ public class BackEndSteps extends AbstractSteps {
 		refresh();
 		return getDriver().getCurrentUrl();
 	}
-	
+
 	@Step
 	public boolean selectContact1(String emailText) {
 		return contactListPage().findContactAndCheckIt(emailText);
-		
+
 	}
-	
+
 	@Step
 	public boolean selectContact(String emailText) {
 		return contactListPage().selectContact(emailText);
-		
-	}
-	
-	
-	
 
+	}
 
 	@Step
 	public void clickOnAddressesTab() {
@@ -446,7 +438,7 @@ public class BackEndSteps extends AbstractSteps {
 	public void deleteCustomer() {
 		customerDetailsHomePage().deleteCustomer();
 	}
-	
+
 	@Step
 	public void deleteContact() {
 		contactListPage().deleteContact();
@@ -511,9 +503,6 @@ public class BackEndSteps extends AbstractSteps {
 	public void clickOnSystemConfiguration() {
 		navigationPage().openCustomerMenu("system_config");
 	}
-	
-	
-
 
 	@Step
 	public void goToHomePage() {
@@ -534,7 +523,7 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().saveAndContinueEdit();
 
 	}
-	
+
 	public void updateKloutScore(String kloutScore) {
 		customerDetailsHomePage().clickOnStylecoachProfileTab();
 		customerDetailsHomePage().inputKloutScore(kloutScore);
@@ -550,19 +539,19 @@ public class BackEndSteps extends AbstractSteps {
 
 	public void clickOnSystemTab() {
 		navigationPage().clickOnSystemTab();
-		
+
 	}
-	
+
 	@Step
 	public void clickOnPippajeanStylistTab() {
 		systemConfigurationPage().clickOnDesiredTab1("Stylistin");
-		
+
 	}
-	
+
 	@Step
 	public void expendCustomerDistributionTab() {
 		systemConfigurationPage().expendCustomerDistributionTab();
-		
+
 	}
 
 	@Step
@@ -570,15 +559,12 @@ public class BackEndSteps extends AbstractSteps {
 		// TODO Auto-generated method stub
 		systemConfigurationPage().selectDistributedOnSpecificSc(string);
 
-		
-		
 	}
-	
-	
+
 	@Step
 	public void saveConfiguration() {
 		systemConfigurationPage().saveConfiguration();
-		
+
 	}
 
 	public void selectSpecifiSC(String scEmail) {
@@ -588,7 +574,7 @@ public class BackEndSteps extends AbstractSteps {
 
 	public void clickOnRMA() {
 		navigationPage().selectSubmenuLevel2("/rma/");
-		
+
 	}
 
 	// @Step

@@ -35,9 +35,10 @@ public class NavigationPage extends AbstractPage {
 	@FindBy(css = ".item-customer-manage.level-1 a")
 	private WebElement allCustomers;;
 	
+	@FindBy(css = "div[data-bind*='collapsible'] .data-grid-filters-action-wrap")
+	private WebElement collapseFilters;
 	
 	
-
 	public void dismissPopUp() {
 		
 		evaluateJavascript("jQuery.noConflict();");
@@ -133,13 +134,11 @@ public class NavigationPage extends AbstractPage {
 	}
 
 	public void openMenu(String menuName) {
-		
 		for (WebElement menu : listmenu) {
-			if(menu.getText().contains(menuName)){
+			if(menu.getText().toLowerCase().contains(menuName)){
 				menu.click();
 			}
 		}
-		
 	}
 	
 	public void openAllCustomers() {
@@ -147,4 +146,9 @@ public class NavigationPage extends AbstractPage {
 		allCustomers.click();
 	}
 	
+	public void clickOnFilters() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(collapseFilters).waitUntilVisible();
+		clickElement(collapseFilters);
+	}
 }

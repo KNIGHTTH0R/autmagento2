@@ -33,7 +33,6 @@ public class MagentoLoginPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(loginButton).waitUntilVisible();
 		loginButton.click();
-
 	}
 
 }
